@@ -112,6 +112,8 @@
     <Compile Include="Models\CreditCard.cs" />
     <Compile Include="Models\Currency.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\Abstractions\ICurrenciesRepository.cs" />
+    <Compile Include="Repositories\CurrenciesRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -124,7 +126,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Repositories\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
