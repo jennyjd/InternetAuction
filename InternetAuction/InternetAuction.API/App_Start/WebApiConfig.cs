@@ -11,6 +11,8 @@ namespace InternetAuction.API
         {
             // Web API configuration and services
 
+            config.Formatters.Remove(config.Formatters.XmlFormatter);
+
             config.EnableCors();
 
             // Web API routes
