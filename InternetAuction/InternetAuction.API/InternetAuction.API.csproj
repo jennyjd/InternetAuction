@@ -146,10 +146,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\CorsConfig.cs" />
+    <Compile Include="App_Start\DependencyResolverConfig.cs" />
     <Compile Include="App_Start\FormattersConfig.cs" />
     <Compile Include="App_Start\RoutesConfig.cs" />
     <Compile Include="Controllers\TestApiController.cs" />
     <Compile Include="DbContext\InternetAuctionDatabaseContext.cs" />
+    <Compile Include="Infrastructure\NinjectResolver.cs" />
     <Compile Include="Models\Client.cs" />
     <Compile Include="Models\CreditCard.cs" />
     <Compile Include="Models\Currency.cs" />

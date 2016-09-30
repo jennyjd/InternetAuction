@@ -10,6 +10,7 @@ namespace InternetAuction.API
             GlobalConfiguration.Configure(RoutesConfig.RegisterRoutes);
             GlobalConfiguration.Configure(FormattersConfig.RegisterFormatters);
             GlobalConfiguration.Configure(CorsConfig.RegisterCors);
+            GlobalConfiguration.Configure(DependencyResolverConfig.RegisterCors);
         }
     }
 }
