@@ -1,12 +1,14 @@
 ﻿using System.Collections.Generic;
 using InternetAuction.API.DbContext;
 using InternetAuction.API.Models;
+using InternetAuction.API.Repositories.Abstractions;
 
 namespace InternetAuction.API.Repositories
 {
-    public class CurrenciesRepository
+    public class CurrenciesRepository : ICurrenciesRepository
     {
         private readonly InternetAuctionDatabaseContext _context;
+
 
         public CurrenciesRepository()
         {
@@ -14,6 +16,9 @@ namespace InternetAuction.API.Repositories
         }
 
 
-        public IEnumerable<Currency> GetCurrencies => _context.Currencies;
+        public IEnumerable<Currency> GetCurrencies()
+        {
+            return _context.Currencies;
+        }
     }
 }
