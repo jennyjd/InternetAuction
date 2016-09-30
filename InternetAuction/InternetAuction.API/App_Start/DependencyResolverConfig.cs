@@ -5,7 +5,7 @@ namespace InternetAuction.API
 {
     public class DependencyResolverConfig
     {
-        public static void RegisterCors(HttpConfiguration config)
+        public static void RegisterDependencyResolver(HttpConfiguration config)
         {
             config.DependencyResolver = new NinjectResolver();
         }

@@ -7,12 +7,12 @@ namespace InternetAuction.API.Repositories
 {
     public class CurrenciesRepository : ICurrenciesRepository
     {
-        private readonly InternetAuctionDatabaseContext _context;
+        private readonly InternetAuctionDbContext _context;
 
 
         public CurrenciesRepository()
         {
-            _context = new InternetAuctionDatabaseContext();
+            _context = new InternetAuctionDbContext();
         }
 
 

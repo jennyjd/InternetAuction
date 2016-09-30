@@ -3,9 +3,9 @@ using InternetAuction.API.Models;
 
 namespace InternetAuction.API.DbContext
 {
-    public class InternetAuctionDatabaseContext : System.Data.Entity.DbContext
+    public class InternetAuctionDbContext : System.Data.Entity.DbContext
     {
-        public InternetAuctionDatabaseContext() : base("name=InternetAuction")
+        public InternetAuctionDbContext() : base("name=InternetAuction")
         {
         }
 
@@ -17,7 +17,9 @@ namespace InternetAuction.API.DbContext
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-
+            MapClients(modelBuilder);
+            MapCreditCards(modelBuilder);
+            MapCurrencies(modelBuilder);
         }
 
 

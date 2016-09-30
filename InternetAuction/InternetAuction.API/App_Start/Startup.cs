@@ -1,4 +1,9 @@
 ﻿using System.Web.Http;
+using InternetAuction.API.DbContext;
+using InternetAuction.API.Infrastructure;
+using Microsoft.AspNet.Identity;
+using Microsoft.Owin;
+using Microsoft.Owin.Security.Cookies;
 using Owin;
 
 namespace InternetAuction.API
@@ -10,7 +15,15 @@ namespace InternetAuction.API
             GlobalConfiguration.Configure(RoutesConfig.RegisterRoutes);
             GlobalConfiguration.Configure(FormattersConfig.RegisterFormatters);
             GlobalConfiguration.Configure(CorsConfig.RegisterCors);
-            GlobalConfiguration.Configure(DependencyResolverConfig.RegisterCors);
+            GlobalConfiguration.Configure(DependencyResolverConfig.RegisterDependencyResolver);
+
+            app.CreatePerOwinContext(InternetAuctionIdentityDbContext.Create);
+            app.CreatePerOwinContext<InternetAuctionUserManager>(InternetAuctionUserManager.Create);
+            app.UseCookieAuthentication(new CookieAuthenticationOptions
+            {
+                AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
+                LoginPath = new PathString("/Account/Login"),
+            });
         }
     }
 }
