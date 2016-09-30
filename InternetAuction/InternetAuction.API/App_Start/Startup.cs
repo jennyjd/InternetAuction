@@ -1,4 +1,5 @@
-﻿using Owin;
+﻿using System.Web.Http;
+using Owin;
 
 namespace InternetAuction.API
 {
@@ -6,6 +7,9 @@ namespace InternetAuction.API
     {
         public void Configuration(IAppBuilder app)
         {
+            GlobalConfiguration.Configure(RoutesConfig.RegisterRoutes);
+            GlobalConfiguration.Configure(FormattersConfig.RegisterFormatters);
+            GlobalConfiguration.Configure(CorsConfig.RegisterCors);
         }
     }
 }
