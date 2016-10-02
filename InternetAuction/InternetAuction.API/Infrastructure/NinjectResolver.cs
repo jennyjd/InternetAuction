@@ -60,6 +60,7 @@ namespace InternetAuction.API.Infrastructure
         private IKernel AddRequestBindings(IKernel kernel)
         {
             kernel.Bind<ICurrenciesRepository>().To<CurrenciesRepository>().InSingletonScope();
+            kernel.Bind<IClientRepository>().To<ClientRepository>().InSingletonScope();
             return kernel;
         }
     }
