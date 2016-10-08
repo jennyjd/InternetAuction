@@ -1,4 +1,5 @@
 ﻿using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace InternetAuction.API
 {
@@ -6,7 +7,7 @@ namespace InternetAuction.API
     {
         public static void RegisterCors(HttpConfiguration config)
         {
-            config.EnableCors();
+            config.EnableCors(new EnableCorsAttribute("*", "*", "*"));
         }
     }
 }

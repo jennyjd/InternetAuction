@@ -18,7 +18,6 @@ namespace InternetAuction.API.Controllers
 
 
         [HttpGet]
-        [EnableCors("http://localhost:21611/", "*", "*")]
         public ICollection<Currency> Test1()
         {
             var users = HttpContext.Current.GetOwinContext().GetUserManager<InternetAuctionUserManager>().Users.ToList();

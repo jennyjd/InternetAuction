@@ -2,7 +2,6 @@
 using InternetAuction.API.DbContext;
 using InternetAuction.API.Infrastructure;
 using Microsoft.AspNet.Identity;
-using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
 
@@ -21,8 +20,7 @@ namespace InternetAuction.API
             app.CreatePerOwinContext<InternetAuctionUserManager>(InternetAuctionUserManager.Create);
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
-                AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-                LoginPath = new PathString("/api/Account/Login")
+                AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie
             });
         }
     }
