@@ -1,0 +1,14 @@
+﻿md-card {
+    width: 200px;
+    box-sizing: border-box;
+    margin: 30px;
+}
+
+.card-container {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+md-input {
+    width: 35px;
+}
