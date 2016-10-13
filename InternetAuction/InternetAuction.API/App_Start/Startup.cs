@@ -1,8 +1,4 @@
 ﻿using System.Web.Http;
-using InternetAuction.API.DbContext;
-using InternetAuction.API.Infrastructure;
-using Microsoft.AspNet.Identity;
-using Microsoft.Owin.Security.Cookies;
 using Owin;
 
 namespace InternetAuction.API
@@ -16,12 +12,7 @@ namespace InternetAuction.API
             GlobalConfiguration.Configure(CorsConfig.RegisterCors);
             GlobalConfiguration.Configure(DependencyResolverConfig.RegisterDependencyResolver);
 
-            app.CreatePerOwinContext(InternetAuctionIdentityDbContext.Create);
-            app.CreatePerOwinContext<InternetAuctionUserManager>(InternetAuctionUserManager.Create);
-            app.UseCookieAuthentication(new CookieAuthenticationOptions
-            {
-                AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie
-            });
+            IdentityConfig.RegisterIdentity(app);
         }
     }
 }
