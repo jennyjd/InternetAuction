@@ -1,6 +1,9 @@
 ﻿import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+
 import { AppComponent } from './app.component';
+import { LotComponent } from './lot/lot.component'
+import { LotListComponent } from './lot/lot-list/lot-list.component'
 
 import { MdCardModule } from '@angular2-material/card';
 import { MdButtonModule } from '@angular2-material/button';
@@ -15,7 +18,7 @@ import { MdIconRegistry } from '@angular2-material/icon';
 @NgModule({
     imports: [BrowserModule, MdCardModule, MdButtonModule, MdIconModule, MdSidenavModule, MdToolbarModule,
         MdListModule, MdInputModule],
-    declarations: [AppComponent],
+    declarations: [AppComponent, LotComponent, LotListComponent],
     bootstrap: [AppComponent],
     providers: [MdIconRegistry]
 })

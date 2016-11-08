@@ -11,6 +11,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var app_component_1 = require('./app.component');
+var lot_component_1 = require('./lot/lot.component');
+var lot_list_component_1 = require('./lot/lot-list/lot-list.component');
 var card_1 = require('@angular2-material/card');
 var button_1 = require('@angular2-material/button');
 var icon_1 = require('@angular2-material/icon');
@@ -26,7 +28,7 @@ var AppModule = (function () {
         core_1.NgModule({
             imports: [platform_browser_1.BrowserModule, card_1.MdCardModule, button_1.MdButtonModule, icon_1.MdIconModule, sidenav_1.MdSidenavModule, toolbar_1.MdToolbarModule,
                 list_1.MdListModule, input_1.MdInputModule],
-            declarations: [app_component_1.AppComponent],
+            declarations: [app_component_1.AppComponent, lot_component_1.LotComponent, lot_list_component_1.LotListComponent],
             bootstrap: [app_component_1.AppComponent],
             providers: [icon_2.MdIconRegistry]
         }), 

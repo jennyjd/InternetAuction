@@ -1,0 +1,44 @@
+﻿import { Component } from '@angular/core'
+import { LotComponent } from '../lot.component'
+import { Lot } from '../lot'
+
+@Component({
+    selector: 'lot-list',
+    templateUrl: './app/lot/lot-list/lot-list.component.html',
+    styleUrls: ['./app/lot/lot-list/lot-list.component.css'],
+    entryComponents: [LotComponent]
+})
+
+export class LotListComponent {
+    lots = LOTS;
+}
+
+let LOTS: Lot[] = [
+    {
+        id: 1,
+        title: "Комод",
+        description: "Очень хороший комод",
+        starting_price: 2,
+        picture_url: "http://www.mebelminsk.by/assets/images/company/moyamebel/4/komod%20julietta-1.jpg"
+    },
+    {
+        id: 2,
+        title: "Стул",
+        description: "Очень хороший стул",
+        starting_price: 10,
+        picture_url: "https://ae01.alicdn.com/kf/HTB1678NLXXXXXaVXVXXq6xXFXXXA/The-Nordic-imported-white-oak-butterfly-font-b-chair-b-font-dining-font-b-chair-b.jpg"
+    },
+    {
+        id: 3,
+        title: "Шкаф",
+        description: "Очень хороший шкаф",
+        starting_price: 4,
+        picture_url: "http://howmeb.com/wp-content/uploads/2015/09/Paks-Uglovoy.jpg"
+    },
+    {
+        id: 4,
+        title: "Ваза",
+        description: "Очень хорошая ваза",
+        starting_price: 7,
+        picture_url: "http://img.alicdn.com/imgextra/i1/T16fqKXnRyXXXmHsw9_102642.jpg"
+    }]

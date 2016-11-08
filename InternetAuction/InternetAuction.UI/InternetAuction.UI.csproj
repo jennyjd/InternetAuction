@@ -62,6 +62,10 @@
   <ItemGroup>
     <Content Include="app\app.component.css" />
     <Content Include="app\app.component.html" />
+    <Content Include="app\lot\lot-list\lot-list.component.css" />
+    <Content Include="app\lot\lot-list\lot-list.component.html" />
+    <Content Include="app\lot\lot.component.css" />
+    <Content Include="app\lot\lot.component.html" />
     <Content Include="index.html" />
     <Content Include="package.json" />
     <Content Include="style.css" />
@@ -92,6 +96,9 @@
   <ItemGroup>
     <TypeScriptCompile Include="app\app.component.ts" />
     <TypeScriptCompile Include="app\app.module.ts" />
+    <TypeScriptCompile Include="app\lot\lot-list\lot-list.component.ts" />
+    <TypeScriptCompile Include="app\lot\lot.component.ts" />
+    <TypeScriptCompile Include="app\lot\lot.ts" />
     <TypeScriptCompile Include="app\main.ts" />
   </ItemGroup>
   <ItemGroup>

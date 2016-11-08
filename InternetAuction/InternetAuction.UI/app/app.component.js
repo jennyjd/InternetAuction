@@ -9,6 +9,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var lot_component_1 = require('./lot/lot.component');
+var lot_list_component_1 = require('./lot/lot-list/lot-list.component');
 var AppComponent = (function () {
     function AppComponent() {
     }
@@ -16,7 +18,8 @@ var AppComponent = (function () {
         core_1.Component({
             selector: 'my-app',
             templateUrl: './app/app.component.html',
-            styleUrls: ['./app/app.component.css']
+            styleUrls: ['./app/app.component.css'],
+            entryComponents: [lot_component_1.LotComponent, lot_list_component_1.LotListComponent]
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);
