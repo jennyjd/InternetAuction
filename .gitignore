@@ -265,6 +265,6 @@ __pycache__/
 
 
 #FRONTEND
-typings/
+**/typings
 InternetAuction/InternetAuction.UI/app/**/*.js
 InternetAuction/InternetAuction.UI/app/**/*.map

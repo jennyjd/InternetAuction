@@ -1,0 +1,9 @@
+﻿<md-list-item>
+    <md-card *ngIf="selected === lotitem.category || selected == 'none'">
+        <div class="content">
+            <img src="{{lotitem.picture_url}}" class="md-card-image">
+            <md-card-title>{{lotitem.title}}</md-card-title>
+            <md-card-content>{{lotitem.description}}</md-card-content>
+        </div>
+    </md-card>
+</md-list-item>

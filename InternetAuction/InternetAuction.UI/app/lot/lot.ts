@@ -4,4 +4,5 @@
     description: string;
     starting_price: number;
     picture_url: string;
+    category: string;
 }

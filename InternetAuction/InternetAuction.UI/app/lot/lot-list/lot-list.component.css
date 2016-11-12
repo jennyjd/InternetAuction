@@ -1,5 +1,10 @@
 ﻿.card-container {
     display: flex;
     flex-flow: row wrap;
-    margin: 50px 80px 25px 80px;
+    margin: 30px 60px 25px 60px;
+}
+
+lot {
+    width:100%;
+    margin: 10px;
 }

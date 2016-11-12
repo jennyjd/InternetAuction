@@ -1,0 +1,19 @@
+﻿.content {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+md-list-item {
+    width: 100%;
+    margin:10px;
+    height: 150px;
+}
+
+md-card {
+    padding:0;
+}
+
+img {
+    height: 150px;
+}
+
