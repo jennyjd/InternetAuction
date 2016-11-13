@@ -79,7 +79,7 @@ namespace InternetAuction.API.DbContext
                 .IsRequired();
 
             modelBuilder.Entity<CreditCard>()
-                .Property(x => x.CurrensyId)
+                .Property(x => x.CurrencyId)
                 .HasColumnName("CurrensyId")
                 .IsRequired();
 
@@ -114,7 +114,7 @@ namespace InternetAuction.API.DbContext
             modelBuilder.Entity<Currency>()
                 .HasMany(x => x.CreditCards)
                 .WithRequired(x => x.Currency)
-                .HasForeignKey(x => x.CurrensyId);
+                .HasForeignKey(x => x.CurrencyId);
         }
     }
 }
