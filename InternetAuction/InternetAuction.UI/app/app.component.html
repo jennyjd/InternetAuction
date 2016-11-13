@@ -1,37 +1,7 @@
 ﻿    <md-toolbar color="primary">
-        <span>Auction</span>
+        <a routerLink="/">Auction</a>
+        <a routerLink="/login">LogIn</a>
     </md-toolbar>
-<md-sidenav-layout>
-    <md-sidenav mode="side" opened="true">
-        <!--<md-list *ngFor="let option of options">
-            <md-list-item><a class="md-button md-ink-ripple"> {{option}} </a></md-list-item>
-        </md-list>-->
 
-        <ul>
-            <li *ngFor="let menuel of menu" class="parent-list-item">
-                <button md-button md-raised md-ink-ripple (click)="toggle(menuel)">
-                    <div flex layout="row">
-                        <b>{{menuel.category}}</b>
-                        <md-icon>keyboard_arrow_down</md-icon>
-                    </div>
-                </button>
-                <ul *ngIf="menuel.status == false">
-                    <li *ngFor="let sub of menuel.sub">
-                        <button md-button focus md-ink-ripple md-raised class="subcategory" (click)="selectCategory(sub)">
-                            <div flex layout="row">
-                                {{sub}}
-                            </div>
-                        </button>
-                    </li>
-                </ul>
-            </li>
-        </ul>
+    <router-outlet></router-outlet>
 
-    </md-sidenav>
-
-
-    <div class="content">
-        <lot-list class="card-container" [selected] ="selected_category">
-        </lot-list>
-    </div>
-</md-sidenav-layout>

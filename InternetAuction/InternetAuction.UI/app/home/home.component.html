@@ -1,0 +1,28 @@
+﻿<md-sidenav-layout>
+    <md-sidenav mode="side" opened="true">
+        <ul>
+            <li *ngFor="let menuel of menu" class="parent-list-item">
+                <button md-button md-raised md-ink-ripple (click)="toggle(menuel)">
+                    <div flex layout="row">
+                        <b>{{menuel.category}}</b>
+                        <md-icon>keyboard_arrow_down</md-icon>
+                    </div>
+                </button>
+                <ul *ngIf="menuel.status == false">
+                    <li *ngFor="let sub of menuel.sub">
+                        <button md-button focus md-ink-ripple md-raised class="subcategory" (click)="selectCategory(sub)">
+                            <div flex layout="row">
+                                {{sub}}
+                            </div>
+                        </button>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </md-sidenav>
+    <div class="content">
+        <lot-list class="card-container" [selected]="selected_category">
+        </lot-list>
+    </div>
+</md-sidenav-layout>
+
