@@ -11,7 +11,7 @@ Post-Deployment Script Template
 */
 
 GO
-SET IDENTITY_INSERT AuctionCategories OFF
+SET IDENTITY_INSERT AuctionCategories ON
 
 INSERT INTO AuctionCategories 
 (Id, Name, AuctionCategoryId)
