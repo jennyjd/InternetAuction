@@ -3,8 +3,8 @@ import { Lot } from './lot';
 
 @Component({
     selector: 'lot',
-    templateUrl: './app/lot/lot-list-view.component.html',
-    styleUrls: ['./app/lot/lot-list-view.component.css']
+    templateUrl: './app/lot/lot.component.html',
+    styleUrls: ['./app/lot/lot.component.css']
 })
 
 export class LotComponent {

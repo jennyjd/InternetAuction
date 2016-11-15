@@ -105,10 +105,12 @@
     <TypeScriptCompile Include="app\app.routing.ts" />
     <TypeScriptCompile Include="app\home\home.component.ts" />
     <TypeScriptCompile Include="app\login\login.component.ts" />
+    <TypeScriptCompile Include="app\login\login.service.ts" />
     <TypeScriptCompile Include="app\lot\lot-list\lot-list.component.ts" />
     <TypeScriptCompile Include="app\lot\lot.component.ts" />
     <TypeScriptCompile Include="app\lot\lot.ts" />
     <TypeScriptCompile Include="app\main.ts" />
+    <TypeScriptCompile Include="app\user\user.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
