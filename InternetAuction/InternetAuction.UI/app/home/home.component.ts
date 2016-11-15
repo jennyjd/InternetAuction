@@ -1,4 +1,5 @@
 ﻿import { Component } from '@angular/core';
+
 import { LotListComponent } from '../lot/lot-list/lot-list.component'
 
 @Component({

@@ -12,12 +12,14 @@ import { User } from '../user/user'
 })
 
 export class LoginComponent {
+    model: any = {};
+    loading = false;
 
     constructor(private router: Router, private loginService: LoginService) {}
 
-    loginUser(user:string, password:string) {
-        console.log(user, password);
-        this.loginService.login(user, password).subscribe(result => {
+    loginUser() {
+        console.log(this.model.username, this.model.password);
+        this.loginService.login(this.model).subscribe(result => {
             console.log(result)
         });
     }

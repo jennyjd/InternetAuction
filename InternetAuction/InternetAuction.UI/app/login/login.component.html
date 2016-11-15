@@ -1,6 +1,9 @@
 ﻿<md-card>
-    <h2>Login</h2>
-    <md-input placeholder="Имя пользователя" #login></md-input>
-    <md-input type="password" placeholder="Пароль" #password></md-input>
-    <button md-raised-button (click) ="loginUser(login.value, password.value)">Войти в систему</button>
+    <form (ngSubmit)="loginUser()">
+        <h2>Login</h2>
+        <md-input placeholder="Имя пользователя" [(ngModel)]="model.username" #username name="username"></md-input>
+        <md-input type="password" placeholder="Пароль" [(ngModel)]="model.password" #password name="password"></md-input>
+        <button md-raised-button type="submit">Войти в систему</button>
+        <button md-raised-button routerLink="/registration">Регистрация</button>
+    </form>
 </md-card>

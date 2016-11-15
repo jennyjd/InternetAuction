@@ -1,0 +1,9 @@
+﻿<md-card>
+    <h2>Register</h2>
+    <form (ngSubmit)="register()">
+        <md-input placeholder="Имя" [(ngModel)]="model.firstName" #firstName required name="firstName"></md-input>
+        <md-input placeholder="Фамилия" [(ngModel)]="model.lastName" #lastName required name="lastName"></md-input>
+        <md-input type="password" placeholder="Пароль" [(ngModel)]="model.password" #password required name="password"></md-input>
+        <button md-raised-button  type="submit">Зарегистрироваться</button>
+    </form>
+</md-card>
