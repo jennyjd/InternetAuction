@@ -14,13 +14,21 @@ import { User } from '../user/user'
 export class LoginComponent {
     model: any = {};
     loading = false;
+    errorMessage: string;
 
-    constructor(private router: Router, private loginService: LoginService) {}
+    constructor(private router: Router, private loginService: LoginService) { }
 
     loginUser() {
+        this.errorMessage = '';
         console.log(this.model.username, this.model.password);
-        this.loginService.login(this.model).subscribe(result => {
-            console.log(result)
-        });
+        this.loginService.login(this.model)
+                         .subscribe(
+                            res => {
+                                localStorage.setItem('currentUser', JSON.stringify({ username: this.model.username }));
+                                this.router.navigate(['/']);
+                            },
+                            error => {
+                                this.errorMessage = error;
+                            });
     }
 }

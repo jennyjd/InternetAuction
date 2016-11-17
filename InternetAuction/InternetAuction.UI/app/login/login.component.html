@@ -5,5 +5,6 @@
         <md-input type="password" placeholder="Пароль" [(ngModel)]="model.password" #password name="password"></md-input>
         <button md-raised-button type="submit">Войти в систему</button>
         <button md-raised-button routerLink="/registration">Регистрация</button>
+        <span *ngIf="errorMessage == 'Server error'">Введены неверные данные</span>
     </form>
 </md-card>

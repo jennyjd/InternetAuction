@@ -30,11 +30,12 @@
     <my-app>Loading...</my-app>
     <script>
         $.ajax({
-            url: 'http://localhost:21561/api/testapi/test1',
-            type: "GET",
+            url: 'http://localhost:21561/api/account/login',
+            type: "POST",
+            data: {"username":"Jenny", "password":"InternetAuction"},
             dataType: "json",
             success: function (data) {
-                console.log(data);
+                console.log("КУ ГИ");
             }
         });
     </script>
