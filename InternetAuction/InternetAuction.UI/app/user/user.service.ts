@@ -16,4 +16,8 @@ export class UserService {
                 console.log("Response:" + response.json());
             });
     }
+
+    getCurrentUser() {
+        return JSON.parse(localStorage.getItem('currentUser'));
+    }
 }

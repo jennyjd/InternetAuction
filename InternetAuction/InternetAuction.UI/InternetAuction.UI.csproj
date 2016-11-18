@@ -74,6 +74,8 @@
     <Content Include="app\lot\lot.component.html" />
     <Content Include="app\registration\registration.component.css" />
     <Content Include="app\registration\registration.component.html" />
+    <Content Include="app\user\user-detail\user-detail.component.css" />
+    <Content Include="app\user\user-detail\user-detail.component.html" />
     <Content Include="index.html" />
     <Content Include="package.json" />
     <Content Include="style.css" />
@@ -113,6 +115,7 @@
     <TypeScriptCompile Include="app\lot\lot.ts" />
     <TypeScriptCompile Include="app\main.ts" />
     <TypeScriptCompile Include="app\registration\registration.component.ts" />
+    <TypeScriptCompile Include="app\user\user-detail\user-detail.component.ts" />
     <TypeScriptCompile Include="app\user\user.service.ts" />
     <TypeScriptCompile Include="app\user\user.ts" />
   </ItemGroup>

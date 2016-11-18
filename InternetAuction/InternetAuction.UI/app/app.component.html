@@ -1,7 +1,12 @@
 ﻿<md-toolbar color="primary">
     <a routerLink="/">Auction</a>
-    <a routerLink="/login">LogIn</a>
-    <a *ngIf="currentUser != null"(click) ="logout()">LogOut</a>
+    <button md-button routerLink="/login" *ngIf="!isUserHere()">LogIn</button>
+    <button md-button (click) ="logout()" *ngIf="isUserHere()">LogOut</button>
+    <!--<md-icon *ngIf="isUserHere()" (click)="selectUser()">face</md-icon>-->
+    <button md-mini-fab style="background-color:white" *ngIf="isUserHere()" (click)="selectUser()">
+        <md-icon style="color:black">person</md-icon>
+    </button>
+    <!--<button md-button *ngIf="isUserHere()" (click)="selectUser()">User Details</button>-->
 </md-toolbar>
 <router-outlet></router-outlet>
 

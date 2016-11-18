@@ -1,4 +1,5 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit, DoCheck } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { User } from './user/user';
 import { UserService } from './user/user.service';
@@ -10,19 +11,26 @@ import { LoginService } from './login/login.service';
     styleUrls: ['./app/app.component.css'],
 })
 
-export class AppComponent implements OnInit{
-    currentUser: User;
+export class AppComponent{
+    currentUser: any;
     title: "Auction";
 
-    constructor(private userService: UserService, private loginService: LoginService) {
+    constructor(private userService: UserService, private loginService: LoginService, private router: Router) {
     }
 
-    ngOnInit() {
-        this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        console.log("CURRENT USER = " + this.currentUser);
+    isUserHere() {
+        if (this.userService.getCurrentUser() == null) {
+            return false
+        }
+        return true
     }
 
     logout() {
         this.loginService.logout();
+    }
+
+    selectUser() {
+        console.log("SELECTION Current User" + this.userService.getCurrentUser());
+        this.router.navigate(['/userdetail']);
     }
 }
