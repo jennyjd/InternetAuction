@@ -9,13 +9,13 @@ namespace InternetAuctionTests
     [TestClass]
     public class ClientsRepositoryTests
     {
-        public IClientRepository ClientRepository { get; set; } 
+        public IClientsRepository ClientRepository { get; set; } 
 
 
         [TestInitialize]
         public void TestInit()
         {
-            ClientRepository = new ClientRepository();
+            ClientRepository = new ClientsRepository();
         }
 
 

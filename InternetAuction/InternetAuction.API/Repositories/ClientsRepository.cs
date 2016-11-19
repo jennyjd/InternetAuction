@@ -7,12 +7,12 @@ using InternetAuction.API.ViewModels;
 
 namespace InternetAuction.API.Repositories
 {
-    public class ClientRepository : IClientRepository
+    public class ClientsRepository : IClientsRepository
     {
         private readonly InternetAuctionDbContext _context;
 
 
-        public ClientRepository()
+        public ClientsRepository()
         {
             _context = new InternetAuctionDbContext();
         }
