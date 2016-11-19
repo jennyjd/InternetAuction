@@ -14,7 +14,7 @@ GO
 SET IDENTITY_INSERT AuctionCategories ON
 
 INSERT INTO AuctionCategories 
-(Id, Name, AuctionCategoryId)
+(Id, Name, ParentAuctionCategoryId)
 VALUES 
 (1, N'Category1', NULL),
 (2, N'Category2', NULL),

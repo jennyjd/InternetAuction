@@ -4,7 +4,7 @@ using InternetAuction.API.ViewModels;
 
 namespace InternetAuction.API.Repositories.Abstractions
 {
-    public interface IClientRepository
+    public interface IClientsRepository
     {
         Task<Client> Add(ClientSignUpModel clientSignUpModel);
     }

@@ -13,6 +13,7 @@ namespace InternetAuction.API.DbContext
         public DbSet<Client> Clients { get; set; }
         public DbSet<CreditCard> CreditCards { get; set; }
         public DbSet<Currency> Currencies { get; set; }
+        public DbSet<AuctionCategory> AuctionCategories { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -20,6 +21,7 @@ namespace InternetAuction.API.DbContext
             MapClients(modelBuilder);
             MapCreditCards(modelBuilder);
             MapCurrencies(modelBuilder);
+            MapAuctionCategories(modelBuilder);
         }
 
 
@@ -115,6 +117,33 @@ namespace InternetAuction.API.DbContext
                 .HasMany(x => x.CreditCards)
                 .WithRequired(x => x.Currency)
                 .HasForeignKey(x => x.CurrencyId);
+        }
+
+
+        private void MapAuctionCategories(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<AuctionCategory>()
+                .ToTable("AuctionCategories");
+
+            modelBuilder.Entity<AuctionCategory>()
+                .HasKey(x => x.Id)
+                .HasEntitySetName("Id");
+
+            modelBuilder.Entity<AuctionCategory>()
+                .Property(x => x.Name)
+                .HasMaxLength(50)
+                .HasColumnName("Name")
+                .IsRequired();
+
+            modelBuilder.Entity<AuctionCategory>()
+                .Property(x => x.ParentAuctionCategoryId)
+                .HasColumnName("ParentAuctionCategoryId")
+                .IsOptional();
+
+            modelBuilder.Entity<AuctionCategory>()
+                .HasMany(x => x.SubAuctionCategories)
+                .WithOptional(x => x.ParentAuctionCategory)
+                .HasForeignKey(x => x.ParentAuctionCategoryId);
         }
     }
 }
