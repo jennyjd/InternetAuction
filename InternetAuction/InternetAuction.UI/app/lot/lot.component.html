@@ -1,10 +1,17 @@
 ﻿<md-card *ngIf="selected === lotitem.category || selected == 'none'">
-    <img src="{{lotitem.picture_url}}" class="md-card-image">
+    <div class="image_container">
+        <img src="{{lotitem.picture_url}}" class="md-card-image">
+    </div>
     <div class="content">
         <md-card-title>{{lotitem.title}}</md-card-title>
         <md-card-content>{{lotitem.description}}</md-card-content>
-        <!--<md-card-actions align="end">
-            
+        <md-card-actions align="end">
+            <button md-icon-button class="md-mini md-primary" aria-label="view" (click)="view_details(lotitem)">
+                <md-icon>visibility</md-icon>
+            </button>
+        </md-card-actions>
+            <!--<md-card-actions align="end">
+
             <button md-icon-button class="md-mini md-primary" aria-label="Minus">
                 <md-icon>remove</md-icon>
             </button>
@@ -13,6 +20,6 @@
                 <md-icon>add</md-icon>
             </button>
         </md-card-actions>-->
-    </div>
+</div>
 </md-card>
 

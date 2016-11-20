@@ -11,6 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { UserDetailsComponent } from './user/user-detail/user-detail.component';
 import { LotCreateComponent } from './lot/lot-create/lot-create.component';
+import { LotDetailComponent } from './lot/lot-detail/lot-detail.component';
 
 import { UserService } from './user/user.service';
 import { LoginService } from './login/login.service';
@@ -33,7 +34,7 @@ import { routing, appRoutingProviders } from './app.routing'
     imports: [BrowserModule, MdCardModule, MdButtonModule, MdIconModule, MdSidenavModule, MdToolbarModule,
         MdListModule, MdInputModule, routing, FormsModule, MdRadioModule, ImageUploadModule.forRoot()],
     declarations: [AppComponent, LotComponent, LotListComponent, LoginComponent, HomeComponent, RegistrationComponent,
-        UserDetailsComponent, LotCreateComponent],
+        UserDetailsComponent, LotCreateComponent, LotDetailComponent],
     bootstrap: [AppComponent],
     providers: [MdIconRegistry, OVERLAY_PROVIDERS, appRoutingProviders, UserService, LoginService]
 })

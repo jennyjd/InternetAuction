@@ -6,6 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { UserDetailsComponent } from './user/user-detail/user-detail.component';
 import { LotCreateComponent } from './lot/lot-create/lot-create.component';
+import { LotDetailComponent } from './lot/lot-detail/lot-detail.component';
 
 
 const appRoutes: Routes = [
@@ -28,6 +29,10 @@ const appRoutes: Routes = [
     {
         path: 'createlot',
         component: LotCreateComponent
+    },
+    {
+        path: 'lotdetail/:id',
+        component: LotDetailComponent
     }
 ];
 

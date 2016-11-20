@@ -1,4 +1,5 @@
 ﻿import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { Lot } from './lot';
 
 @Component({
@@ -10,4 +11,10 @@ import { Lot } from './lot';
 export class LotComponent {
     @Input() selected: string;
     @Input() lotitem: Lot;
+
+    constructor(private router: Router) { }
+
+    view_details(lotitem: Lot) {
+        this.router.navigate(['/lotdetail', lotitem.id]);
+    }
 }

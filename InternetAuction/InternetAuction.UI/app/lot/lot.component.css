@@ -1,9 +1,28 @@
 ﻿md-card {
-    width: 230px;
+    width: 180px;
     box-sizing: border-box;
     margin: 10px;
     padding: 0;
-    height: 350px;
+    height: 310px;
+}
+
+.image_container {
+    width: inherit;
+    height: 180px;
+}
+
+md-card-actions {
+    padding:8px;
+}
+
+md-card-title {
+    font-size:18px;
+    font-weight:bold;
+    margin-bottom: 7px;
+}
+
+md-card-content {
+    font-size: 13px;
 }
 
 img {
