@@ -8,20 +8,20 @@ using InternetAuction.API.DbContext;
 
 namespace InternetAuction.API.Repositories
 {
-    public class AuctionCategoriesRepository : IAuctionCategoriesRepository
+    public class AuctionsRepository : IAuctionsRepository
     {
         private readonly InternetAuctionDbContext _context;
 
 
-        public AuctionCategoriesRepository()
+        public AuctionsRepository()
         {
             _context = new InternetAuctionDbContext();
         }
 
 
-        public IEnumerable<AuctionCategory> GetAuctionCategories()
+        public IEnumerable<Auction> GetAuctions()
         {
-            return _context.AuctionCategories;
+            return _context.Auctions;
         }
     }
 }

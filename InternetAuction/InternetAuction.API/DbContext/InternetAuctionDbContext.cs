@@ -13,7 +13,8 @@ namespace InternetAuction.API.DbContext
         public DbSet<Client> Clients { get; set; }
         public DbSet<CreditCard> CreditCards { get; set; }
         public DbSet<Currency> Currencies { get; set; }
-        public DbSet<AuctionCategory> AuctionCategories { get; set; }
+        public DbSet<AuctionCategory> AuctionsCategories { get; set; }
+        public DbSet<Auction> Auctions { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -21,7 +22,8 @@ namespace InternetAuction.API.DbContext
             MapClients(modelBuilder);
             MapCreditCards(modelBuilder);
             MapCurrencies(modelBuilder);
-            MapAuctionCategories(modelBuilder);
+            MapAuctionsCategories(modelBuilder);
+            MapAuctions(modelBuilder);
         }
 
 
@@ -120,10 +122,10 @@ namespace InternetAuction.API.DbContext
         }
 
 
-        private void MapAuctionCategories(DbModelBuilder modelBuilder)
+        private void MapAuctionsCategories(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<AuctionCategory>()
-                .ToTable("AuctionCategories");
+                .ToTable("AuctionsCategories");
 
             modelBuilder.Entity<AuctionCategory>()
                 .HasKey(x => x.Id)
@@ -144,6 +146,74 @@ namespace InternetAuction.API.DbContext
                 .HasMany(x => x.SubAuctionCategories)
                 .WithOptional(x => x.ParentAuctionCategory)
                 .HasForeignKey(x => x.ParentAuctionCategoryId);
+        }
+
+
+        private void MapAuctions(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Auction>()
+                .ToTable("Auctions");
+
+            modelBuilder.Entity<Auction>()
+                .HasKey(x => x.Id)
+                .HasEntitySetName("Id");
+
+            modelBuilder.Entity<Auction>()
+                .Property(x => x.Name)
+                .HasMaxLength(50)
+                .HasColumnName("Name")
+                .IsRequired();
+
+            modelBuilder.Entity<Auction>()
+                .Property(x => x.Description)
+                .HasMaxLength(1000)
+                .HasColumnName("Description")
+                .IsOptional();
+
+            modelBuilder.Entity<Auction>()
+                .Property(x => x.StartPrice)
+                .HasColumnName("StartPrice")
+                .IsRequired();
+
+            modelBuilder.Entity<Auction>()
+                .Property(x => x.PriceOfFastSell)
+                .HasColumnName("PriceOfFastSell")
+                .IsOptional();
+
+            modelBuilder.Entity<Auction>()
+                .Property(x => x.CategoryId)
+                .HasColumnName("CategoryId")
+                .IsRequired();
+
+            modelBuilder.Entity<Auction>()
+                .Property(x => x.StartDate)
+                .HasColumnName("StartDate")
+                .IsRequired();
+
+            modelBuilder.Entity<Auction>()
+                .Property(x => x.EndDate)
+                .HasColumnName("EndDate")
+                .IsRequired();
+
+            modelBuilder.Entity<Auction>()
+               .Property(x => x.CurrencyId)
+               .HasColumnName("CurrencyId")
+               .IsRequired();
+
+            modelBuilder.Entity<Auction>()
+               .Property(x => x.ClientId)
+               .HasColumnName("ClientId")
+               .IsRequired();
+
+            //modelBuilder.Entity<AuctionCategory>()
+            //    .Property(x => x.ParentAuctionCategoryId)
+            //    .HasColumnName("ParentAuctionCategoryId")
+            //    .IsOptional();
+
+            //modelBuilder.Entity<AuctionCategory>()
+            //    .HasMany(x => x.SubAuctionCategories)
+            //    .WithOptional(x => x.ParentAuctionCategory)
+            //    .HasForeignKey(x => x.ParentAuctionCategoryId);
         }
     }
 }

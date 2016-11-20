@@ -2,12 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace InternetAuction.API.Repositories.Abstractions
 {
-    public interface IAuctionCategoriesRepository
+    public interface IAuctionsRepository
     {
-        IEnumerable<AuctionCategory> GetAuctionCategories();
+        IEnumerable<Auction> GetAuctions();
     }
 }

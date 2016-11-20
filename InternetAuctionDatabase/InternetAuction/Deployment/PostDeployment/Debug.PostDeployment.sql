@@ -11,13 +11,29 @@ Post-Deployment Script Template
 */
 
 GO
-SET IDENTITY_INSERT AuctionCategories ON
+DELETE FROM AuctionsCategories
+DELETE FROM Currencies
 
-INSERT INTO AuctionCategories 
+GO
+SET IDENTITY_INSERT AuctionsCategories ON
+
+INSERT INTO AuctionsCategories 
 (Id, Name, ParentAuctionCategoryId)
 VALUES 
 (1, N'Category1', NULL),
 (2, N'Category2', NULL),
 (3, N'Category3', 1)
 
-SET IDENTITY_INSERT AuctionCategories OFF
+SET IDENTITY_INSERT AuctionsCategories OFF
+
+GO
+SET IDENTITY_INSERT Currencies ON
+
+INSERT INTO Currencies 
+(Id, Name, ShortName)
+VALUES 
+(1, N'BLR', N'BLR'),
+(2, N'US', N'US'),
+(3, N'EUR', N'EUR')
+
+SET IDENTITY_INSERT Currencies OFF
