@@ -10,5 +10,7 @@ namespace InternetAuction.API.Repositories.Abstractions
     public interface IAuctionsRepository
     {
         IEnumerable<Auction> GetAuctions();
+        Auction GetAuction(int id);
+        Auction AddAuction(Auction auction);
     }
 }
