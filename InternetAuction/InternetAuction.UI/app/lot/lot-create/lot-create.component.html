@@ -1,0 +1,34 @@
+﻿<md-card>
+    <form (ngSubmit)="createLot()">
+        <md-input placeholder="Название лота" [(ngModel)]="lot.name" name="name"></md-input>
+
+        <div class="image_uploader">
+            <div class="separator">
+                <div class="image_viewer">
+                </div>
+                <div class="other_images_container">
+                    <div *ngFor="let image of [1,2,3,4,5]" class="other_images"></div>
+                </div>
+            </div>
+            <div class="separator">
+                <image-upload [max]="5"
+                              [url]="'example.com/images/upload'"
+                              [buttonCaption]="'Добавить фото'"
+                              [dropBoxMessage]="'Перетащите ваши фото сюда'"
+                              (onFileUploadFinish)="imageUploaded($event)"
+                              (onRemove)="imageRemoved($event)"
+                              (isPending)="disableSendButton($event)">
+                </image-upload>
+            </div>
+        </div>
+
+        <md-radio-group [(ngModel)]="lot.state" name="state">
+            <md-radio-button value="new">новый</md-radio-button>
+            <md-radio-button value="used">б/y</md-radio-button>
+        </md-radio-group>
+
+        <h3>Описание лота</h3>
+
+        <button md-button type="submit">Добавить лот</button>
+    </form>
+</md-card>

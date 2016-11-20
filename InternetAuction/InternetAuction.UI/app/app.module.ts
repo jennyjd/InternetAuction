@@ -10,6 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { UserDetailsComponent } from './user/user-detail/user-detail.component';
+import { LotCreateComponent } from './lot/lot-create/lot-create.component';
 
 import { UserService } from './user/user.service';
 import { LoginService } from './login/login.service';
@@ -22,14 +23,17 @@ import { MdToolbarModule } from '@angular2-material/toolbar';
 import { MdListModule } from '@angular2-material/list';
 import { MdInputModule } from '@angular2-material/input';
 import { MdIconRegistry } from '@angular2-material/icon';
+import { MdRadioModule } from '@angular2-material/radio';
+
+import { ImageUploadModule } from 'angular2-image-upload';
 
 import { routing, appRoutingProviders } from './app.routing'
 
 @NgModule({
     imports: [BrowserModule, MdCardModule, MdButtonModule, MdIconModule, MdSidenavModule, MdToolbarModule,
-        MdListModule, MdInputModule, routing, FormsModule],
+        MdListModule, MdInputModule, routing, FormsModule, MdRadioModule, ImageUploadModule.forRoot()],
     declarations: [AppComponent, LotComponent, LotListComponent, LoginComponent, HomeComponent, RegistrationComponent,
-        UserDetailsComponent],
+        UserDetailsComponent, LotCreateComponent],
     bootstrap: [AppComponent],
     providers: [MdIconRegistry, OVERLAY_PROVIDERS, appRoutingProviders, UserService, LoginService]
 })

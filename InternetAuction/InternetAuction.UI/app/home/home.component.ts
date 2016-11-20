@@ -1,17 +1,31 @@
 ﻿import { Component } from '@angular/core';
 
-import { LotListComponent } from '../lot/lot-list/lot-list.component'
+import { LotListComponent } from '../lot/lot-list/lot-list.component';
+import { CategoryService } from './category.service';
 
 @Component({
     selector: 'home-page',
     templateUrl: './app/home/home.component.html',
     styleUrls: ['./app/home/home.component.css'],
-    entryComponents: [LotListComponent]
+    entryComponents: [LotListComponent],
+    providers: [CategoryService]
 })
 
 export class HomeComponent {
-    menu = MENU;
+    menu: any[] = [];
+    errorMessage: any;
     selected_category = "none";
+
+    constructor(private categoryService: CategoryService) {
+        this.categoryService.getCategories()
+            .subscribe(res => {
+                for (let cat of res) {
+                    cat.status = true
+                    this.menu.push(cat)
+                }
+            },
+            error => this.errorMessage = <any>error);
+    }
 
     toggle(menu_element) {
         menu_element.status = !menu_element.status
@@ -30,20 +44,3 @@ export class HomeComponent {
     }
 }
 
-let MENU = [
-    {
-        category: "Монеты",
-        sub: ["Россия", "Беларусь", "СССР"],
-        status: true
-    },
-    {
-        category: "Книги",
-        sub: ["Фантастика", "Учебная литература", "Детские книги", "Художественная"],
-        status: true
-    },
-    {
-        category: "Исскуство",
-        sub: ["Скульптура", "Живопись", " Икона", "Антикварные карты"],
-        status: true
-    }
-]

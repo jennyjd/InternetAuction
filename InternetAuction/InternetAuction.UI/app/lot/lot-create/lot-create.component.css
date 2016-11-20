@@ -1,0 +1,49 @@
+﻿md-card{
+    width: 750px;
+    margin: 15px;
+    margin:0 auto;
+}
+
+.image_uploader {
+    display: flex;
+    margin-top: 20px;
+}
+
+.separator {
+    width:50%;
+    margin: 0px 5px 0px 5px;
+    flex-flow: row wrap;
+}
+
+.other_images_container {
+    margin-left: 10px;
+    margin-top: 2px;
+    display:flex;
+}
+
+.image_viewer {
+    margin: 0px 50px;
+    height: 267px;
+    border: 1px dashed grey;
+}
+
+.other_images {
+    width: 60px;
+    height: 60px;
+    margin: 3px;
+    border: 1px solid blue;
+}
+
+md-card > * {
+    display:block;
+}
+
+md-input {
+    padding-top: 1px;
+    width:50%;
+    margin: 0;
+}
+
+md-radio-button {
+    margin-right: 20px;
+}

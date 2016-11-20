@@ -4,15 +4,15 @@
             <li *ngFor="let menuel of menu" class="parent-list-item">
                 <button md-button md-raised md-ink-ripple (click)="toggle(menuel)">
                     <div flex layout="row">
-                        <b>{{menuel.category}}</b>
+                        <b>{{menuel.Name}}</b>
                         <md-icon>keyboard_arrow_down</md-icon>
                     </div>
                 </button>
                 <ul *ngIf="menuel.status == false">
-                    <li *ngFor="let sub of menuel.sub">
+                    <li *ngFor="let sub of menuel.SubAuctionCategories">
                         <button md-button focus md-ink-ripple md-raised class="subcategory" (click)="selectCategory(sub)">
                             <div flex layout="row">
-                                {{sub}}
+                                {{sub.Name}}
                             </div>
                         </button>
                     </li>

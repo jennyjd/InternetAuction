@@ -32,6 +32,8 @@
             '@angular2-material/toolbar': 'npm:@angular2-material/toolbar/toolbar.umd.js',
             '@angular2-material/list': 'npm:@angular2-material/list/list.umd.js',
             '@angular2-material/input': 'npm:@angular2-material/input/input.umd.js',
+            '@angular2-material/radio': 'npm:@angular2-material/radio/radio.umd.js',
+            'angular2-image-upload': 'npm:angular2-image-upload'
         },
         // packages tells the System loader how to load when no filename and/or no extension
         packages: {
@@ -45,7 +47,11 @@
             'angular-in-memory-web-api': {
                 main: './index.js',
                 defaultExtension: 'js'
-            }
+            },
+            'angular2-image-upload': {
+                main: './index.js',
+                defaultExtension: 'js'
+            },
         }
     });
 })(this);
