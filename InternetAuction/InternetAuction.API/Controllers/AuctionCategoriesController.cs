@@ -13,13 +13,13 @@ namespace InternetAuction.API.Controllers
     public class AuctionCategoriesController : ApiController
     {
         [Inject]
-        public IAuctionCategoriesRepository AuctionCategoriesRepository { get; set; }
+        public IAuctionsCategoriesRepository AuctionsCategoriesRepository { get; set; }
 
 
         [HttpGet]
-        public IEnumerable<object> GetAuctionCategories()
+        public IEnumerable<AuctionCategory> GetAuctionCategories()
         {
-            return AuctionCategoriesRepository.GetAuctionCategories().ToList();
+            return AuctionsCategoriesRepository.GetAuctionCategories().ToList();
         }
     }
 }

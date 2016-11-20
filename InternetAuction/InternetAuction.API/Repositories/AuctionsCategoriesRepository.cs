@@ -8,12 +8,12 @@ using InternetAuction.API.DbContext;
 
 namespace InternetAuction.API.Repositories
 {
-    public class AuctionCategoriesRepository : IAuctionCategoriesRepository
+    public class AuctionsCategoriesRepository : IAuctionsCategoriesRepository
     {
         private readonly InternetAuctionDbContext _context;
 
 
-        public AuctionCategoriesRepository()
+        public AuctionsCategoriesRepository()
         {
             _context = new InternetAuctionDbContext();
         }
@@ -21,7 +21,7 @@ namespace InternetAuction.API.Repositories
 
         public IEnumerable<AuctionCategory> GetAuctionCategories()
         {
-            return _context.AuctionCategories;
+            return _context.AuctionsCategories;
         }
     }
 }

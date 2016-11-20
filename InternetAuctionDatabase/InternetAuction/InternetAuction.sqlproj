@@ -67,10 +67,10 @@
     <Build Include="dbo\Tables\Currencies.sql" />
     <Build Include="dbo\Tables\CreditCards.sql" />
     <Build Include="dbo\Tables\Clients.sql" />
-    <PostDeploy Include="Deployment\PostDeployment\Script.PostDeployment1.sql" />
+    <PostDeploy Include="Deployment\PostDeployment\Debug.PostDeployment.sql" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\Tables\AuctionCategories.sql" />
-    <Build Include="dbo\Tables\Auction.sql" />
+    <Build Include="dbo\Tables\AuctionsCategories.sql" />
+    <Build Include="dbo\Tables\Auctions.sql" />
   </ItemGroup>
 </Project>

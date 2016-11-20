@@ -6,7 +6,7 @@ using System.Web;
 
 namespace InternetAuction.API.Repositories.Abstractions
 {
-    public interface IAuctionCategoriesRepository
+    public interface IAuctionsCategoriesRepository
     {
         IEnumerable<AuctionCategory> GetAuctionCategories();
     }
