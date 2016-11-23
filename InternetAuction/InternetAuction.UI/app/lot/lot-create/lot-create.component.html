@@ -27,6 +27,35 @@
             <md-radio-button value="used">б/y</md-radio-button>
         </md-radio-group>
 
+        <h3>Выбор категорий</h3>
+        <div class="select_categories">
+            <md-card class="category_wrap">
+                <ul>
+                    <li *ngFor="let category of categories" class="parent-list-item">
+                        <div *ngIf="isNotSubcategory(category)">
+                            <button md-button md-raised md-ink-ripple (click)="toggle(category)">
+                                <div flex layout="row">
+                                    <b>{{category.Name}}</b>
+                                    <md-icon>keyboard_arrow_right</md-icon>
+                                </div>
+                            </button>
+                        </div>
+                    </li>
+               </ul>
+            </md-card>
+            <md-card class="subcategory_wrap">
+                <ul *ngIf="ifCategoryIsSelected()">
+                    <li *ngFor="let sub of selected_category.SubAuctionCategories">
+                        <button md-button focus md-ink-ripple md-raised class="subcategory">
+                            <div flex layout="row">
+                                {{sub.Name}}
+                            </div>
+                        </button>
+                    </li>
+                </ul>
+            </md-card>
+        </div>
+
         <h3>Описание лота</h3>
 
         <button md-button type="submit">Добавить лот</button>

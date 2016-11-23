@@ -15,6 +15,51 @@
     flex-flow: row wrap;
 }
 
+.select_categories {
+    min-height: 250px;
+    display: flex;
+    width: 100%;
+}
+
+.select_categories > * {
+    background-color: #f8f8ff;
+}
+
+.select_categories button {
+    width: 100%;
+    line-height: 28px;
+}
+
+.category_wrap {
+    width: 35%;
+    padding: 10px 0px;
+}
+
+.category_wrap button {
+    text-align: right;
+}
+
+.subcategory_wrap button {
+    text-align: left;
+}
+
+.subcategory_wrap {
+    width: 65%;
+    padding: 10px 0px;
+}
+
+ul {
+    padding-left:0;
+}
+
+li {
+    list-style-type: none;
+}
+
+md-icon {
+    vertical-align:middle;
+}
+
 .other_images_container {
     margin-left: 10px;
     margin-top: 2px;

@@ -29,11 +29,16 @@ export class HomeComponent {
 
     toggle(menu_element) {
         menu_element.status = !menu_element.status
-        console.log(menu_element.status)
     }
 
     selectCategory(category) {
         this.selected_category = category;
+    }
+
+    isNotSubcategory(category) {
+        console.log(category.ParentAuctionCategoryId === null);
+        if (category.ParentAuctionCategoryId === null) { return true }
+        return false
     }
 
     isCategorySelected(category) {
