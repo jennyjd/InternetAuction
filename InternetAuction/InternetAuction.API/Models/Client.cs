@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using InternetAuction.API.ViewModels;
 
 namespace InternetAuction.API.Models
@@ -12,13 +13,17 @@ namespace InternetAuction.API.Models
 
 
         public int Id { get; set; }
+
         public string FirstName { get; set; }
+
         public string LastName { get; set; }
+
         public string Patronymic { get; set; }
+
         public ICollection<CreditCard> CreditCards { get; set; }
 
 
-        public static explicit operator Client(ClientSignUpModel client)
+        public static explicit operator Client(ClientSignUpVM client)
         {
             return new Client
             {

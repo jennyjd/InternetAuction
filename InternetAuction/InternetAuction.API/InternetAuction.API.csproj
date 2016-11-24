@@ -159,9 +159,9 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RoutesConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\AuctionCategoriesController.cs" />
+    <Compile Include="Controllers\AuctionsCategoriesController.cs" />
     <Compile Include="Controllers\AuctionsController.cs" />
-    <Compile Include="Controllers\SignUpController.cs" />
+    <Compile Include="Controllers\ClientsController.cs" />
     <Compile Include="Controllers\TestApiController.cs" />
     <Compile Include="DbContext\InternetAuctionIdentityDbContext.cs" />
     <Compile Include="DbContext\InternetAuctionDbContext.cs" />
@@ -179,15 +179,19 @@
     <Compile Include="Repositories\Abstractions\IAuctionsCategoriesRepository.cs" />
     <Compile Include="Repositories\Abstractions\IAuctionsRepository.cs" />
     <Compile Include="Repositories\Abstractions\IClientsRepository.cs" />
+    <Compile Include="Repositories\Abstractions\ICreditCardsRepository.cs" />
     <Compile Include="Repositories\Abstractions\ICurrenciesRepository.cs" />
     <Compile Include="Repositories\AuctionsCategoriesRepository.cs" />
     <Compile Include="Repositories\AuctionsRepository.cs" />
     <Compile Include="Repositories\ClientsRepository.cs" />
+    <Compile Include="Repositories\CreditCardsRepository.cs" />
     <Compile Include="Repositories\CurrenciesRepository.cs" />
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Services\Constants.cs" />
-    <Compile Include="ViewModels\ClientSignUpModel.cs" />
-    <Compile Include="ViewModels\LoginModel.cs" />
+    <Compile Include="ViewModels\AdministratorVM.cs" />
+    <Compile Include="ViewModels\ClientSignUpVM.cs" />
+    <Compile Include="ViewModels\LoginModelVM.cs" />
+    <Compile Include="ViewModels\ClientVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

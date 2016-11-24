@@ -80,7 +80,7 @@ namespace InternetAuction.API.DbContext
                 .Property(x => x.Cash)
                 .HasPrecision(10, 10)
                 .HasColumnName("Cash")
-                .IsRequired();
+                .IsOptional();
 
             modelBuilder.Entity<CreditCard>()
                 .Property(x => x.CurrencyId)

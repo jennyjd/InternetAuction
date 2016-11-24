@@ -2,7 +2,7 @@
 (
 	[Id] INT IDENTITY(1,1) NOT NULL,
 	[Number] NVARCHAR(50) NOT NULL,
-	[Cash] DECIMAL(10, 10) NOT NULL,
+	[Cash] DECIMAL(10, 10) NULL,
 	[CurrencyId] TINYINT NOT NULL,
 	[UserId] INT NOT NULL,
 

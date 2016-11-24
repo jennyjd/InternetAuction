@@ -22,7 +22,7 @@ namespace InternetAuctionTests
         [TestMethod]
         public async Task AddClientTest()
         {
-            var clientSignUpModel = new ClientSignUpModel
+            var clientSignUpModel = new ClientSignUpVM
             {
                 Email = "test@test.com",
                 FirstName = "FirstName",
@@ -31,7 +31,7 @@ namespace InternetAuctionTests
                 Password = "h7g3qhgn29tg35yj"
             };
 
-            var client = await ClientRepository.Add(clientSignUpModel);
+            var client = await ClientRepository.AddClient(clientSignUpModel);
 
             Assert.IsNotNull(client);
         }
