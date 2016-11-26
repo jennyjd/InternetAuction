@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Ninject;
 using InternetAuction.API.Repositories.Abstractions;
+using InternetAuction.API.ViewModels.Clients;
 
 namespace InternetAuction.API.Controllers
 {

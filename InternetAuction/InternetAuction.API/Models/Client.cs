@@ -21,16 +21,5 @@ namespace InternetAuction.API.Models
         public string Patronymic { get; set; }
 
         public ICollection<CreditCard> CreditCards { get; set; }
-
-
-        public static explicit operator Client(ClientSignUpVM client)
-        {
-            return new Client
-            {
-                FirstName = client.FirstName,
-                LastName = client.LastName,
-                Patronymic = client.Patronymic
-            };
-        }
     }
 }

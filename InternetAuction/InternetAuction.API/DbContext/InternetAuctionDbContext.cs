@@ -84,8 +84,8 @@ namespace InternetAuction.API.DbContext
 
             modelBuilder.Entity<CreditCard>()
                 .Property(x => x.CurrencyId)
-                .HasColumnName("CurrensyId")
-                .IsRequired();
+                .HasColumnName("CurrencyId")
+                .IsOptional();
 
             modelBuilder.Entity<CreditCard>()
                 .Property(x => x.UserId)

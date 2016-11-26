@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace InternetAuction.API.ViewModels
+namespace InternetAuction.API.ViewModels.Clients
 {
-    public class ClientVM
+    public class ClientVM : ClientBase
     {
         public string FirstName { get; set; }
 

@@ -6,12 +6,16 @@ using InternetAuction.API.Repositories.Abstractions;
 using InternetAuction.API.ViewModels;
 using System.Linq;
 using Ninject;
+using InternetAuction.API.ViewModels.Clients;
+using InternetAuction.API.Factories.Abstractions;
+using InternetAuction.API.Factories;
 
 namespace InternetAuction.API.Repositories
 {
     public class ClientsRepository : IClientsRepository
     {
         private readonly InternetAuctionDbContext _context;
+        private readonly ClientFactoryBase _clientFactory;
 
 
         [Inject]
@@ -21,6 +25,7 @@ namespace InternetAuction.API.Repositories
         public ClientsRepository()
         {
             _context = new InternetAuctionDbContext();
+            _clientFactory = new ClientSignUpFactory();
         }
 
 
@@ -36,13 +41,13 @@ namespace InternetAuction.API.Repositories
         }
 
 
-        public async Task<Client> AddClient(ClientSignUpVM clientSignUpModel)
+        public Client AddClient(ClientSignUpVM clientSignUpModel)
         {
-            var client = (Client) clientSignUpModel;
+            var client = _clientFactory.CreateClient(clientSignUpModel);
             _context.Clients.Add(client);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
 
-            foreach(var creditCard in clientSignUpModel.CreditCards)
+            foreach (var creditCard in clientSignUpModel.CreditCards)
             {
                 creditCard.UserId = client.Id;
             }

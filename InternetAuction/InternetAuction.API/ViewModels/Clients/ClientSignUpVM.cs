@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace InternetAuction.API.ViewModels
+namespace InternetAuction.API.ViewModels.Clients
 {
-    public class ClientSignUpVM
+    public class ClientSignUpVM : ClientBase
     {
         [Required]
         public string FirstName { get; set; }

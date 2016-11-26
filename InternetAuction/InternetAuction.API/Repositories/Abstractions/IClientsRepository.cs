@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using InternetAuction.API.Models;
-using InternetAuction.API.ViewModels;
 using System.Collections.Generic;
+using InternetAuction.API.ViewModels.Clients;
 
 namespace InternetAuction.API.Repositories.Abstractions
 {
@@ -9,7 +9,7 @@ namespace InternetAuction.API.Repositories.Abstractions
     {
         IEnumerable<Client> GetClients();
 
-        Task<Client> AddClient(ClientSignUpVM clientSignUpModel);
+        Client AddClient(ClientSignUpVM clientSignUpModel);
 
         Client GetClient(int clientId);
     }

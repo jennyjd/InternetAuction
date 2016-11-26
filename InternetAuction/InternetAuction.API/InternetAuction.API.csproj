@@ -170,9 +170,15 @@
     <Compile Include="Controllers\TestApiController.cs" />
     <Compile Include="DbContext\InternetAuctionIdentityDbContext.cs" />
     <Compile Include="DbContext\InternetAuctionDbContext.cs" />
+    <Compile Include="Factories\Abstractions\ClientFactoryBase.cs" />
+    <Compile Include="Factories\ClientSignUpFactory.cs" />
     <Compile Include="Infrastructure\InternetAuctionRoleManager.cs" />
     <Compile Include="Infrastructure\NinjectResolver.cs" />
     <Compile Include="Infrastructure\InternetAuctionUserManager.cs" />
+    <Compile Include="Infrastructure\Swagger\ExamplesOperationFilter.cs" />
+    <Compile Include="Infrastructure\Swagger\Examples\ClientExample.cs" />
+    <Compile Include="Infrastructure\Swagger\SwaggerRequestExamplesAttribute.cs" />
+    <Compile Include="Infrastructure\Swagger\SwaggerResponseExamplesAttribute.cs" />
     <Compile Include="Models\Auction.cs" />
     <Compile Include="Models\AuctionCategory.cs" />
     <Compile Include="Models\InternetAuctionRole.cs" />
@@ -194,9 +200,10 @@
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Services\Constants.cs" />
     <Compile Include="ViewModels\AdministratorVM.cs" />
-    <Compile Include="ViewModels\ClientSignUpVM.cs" />
+    <Compile Include="ViewModels\Clients\ClientBase.cs" />
+    <Compile Include="ViewModels\Clients\ClientSignUpVM.cs" />
     <Compile Include="ViewModels\LoginModelVM.cs" />
-    <Compile Include="ViewModels\ClientVM.cs" />
+    <Compile Include="ViewModels\Clients\ClientVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -237,6 +244,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\InternetAuction.API.XML</DocumentationFile>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />

@@ -8,7 +8,7 @@
 
         public decimal? Cash { get; set; }
 
-        public byte CurrencyId { get; set; }
+        public byte? CurrencyId { get; set; }
 
         public int UserId { get; set; }
 
