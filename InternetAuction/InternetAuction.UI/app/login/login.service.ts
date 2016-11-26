@@ -12,7 +12,7 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class LoginService {
-    private loginUrl = 'http://localhost:21561/api/account/login';
+    private loginUrl = 'http://localhost:21561/api/account/signin';
     public token: string;
 
     constructor(private http: Http, private router: Router,) {

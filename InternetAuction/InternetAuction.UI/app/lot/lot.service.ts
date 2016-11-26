@@ -11,8 +11,7 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class LotService {
-    private getLotsUrl = 'http://localhost:21561/api/auctions/getAuction';
-    private getAllLots = 'http://localhost:21561/api/auctions/getAuctions';
+    private getLotsUrl = 'http://localhost:21561/api/Auctions';
 
     constructor(private http: Http) {
     }
@@ -24,7 +23,7 @@ export class LotService {
     }
 
     getLots() {
-        return this.http.get(this.getAllLots)
+        return this.http.get(this.getLotsUrl)
             .map(response => response.json())
             .catch(this.handleError);
     }

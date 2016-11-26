@@ -11,7 +11,7 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class CategoryService {
-    private categoryUrl = 'http://localhost:21561/api/auctionCategories/GetAuctionCategories';
+    private categoryUrl = 'http://localhost:21561/api/AuctionsCategories';
 
     constructor(private http: Http) {
     }
