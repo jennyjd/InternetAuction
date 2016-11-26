@@ -3,6 +3,9 @@
 	[Id] INT IDENTITY(1,1) NOT NULL,
 	[Number] NVARCHAR(50) NOT NULL,
 	[Cash] DECIMAL(10, 10) NULL,
+	[ValidTo] DATETIME NOT NULL,
+	[OwnerFirstName] NVARCHAR(50) NOT NULL,
+	[OwnerLastName] NVARCHAR(50) NOT NULL,
 	[CurrencyId] TINYINT NULL,
 	[UserId] INT NOT NULL,
 

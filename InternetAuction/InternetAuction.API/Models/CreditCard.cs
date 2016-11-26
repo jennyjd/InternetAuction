@@ -1,4 +1,6 @@
-﻿namespace InternetAuction.API.Models
+﻿using System;
+
+namespace InternetAuction.API.Models
 {
     public class CreditCard
     {
@@ -7,6 +9,12 @@
         public string Number { get; set; }
 
         public decimal? Cash { get; set; }
+
+        public DateTime ValidTo { get; set; }
+
+        public string OwnerFirstName { get; set; }
+
+        public string OwnerLastName { get; set; }
 
         public byte? CurrencyId { get; set; }
 

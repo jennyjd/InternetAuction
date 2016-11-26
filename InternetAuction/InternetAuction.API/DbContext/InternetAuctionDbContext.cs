@@ -83,6 +83,23 @@ namespace InternetAuction.API.DbContext
                 .IsOptional();
 
             modelBuilder.Entity<CreditCard>()
+                .Property(x => x.ValidTo)
+                .HasColumnName("ValidTo")
+                .IsRequired();
+
+            modelBuilder.Entity<CreditCard>()
+                .Property(x => x.OwnerFirstName)
+                .HasMaxLength(50)
+                .HasColumnName("OwnerFirstName")
+                .IsRequired();
+
+            modelBuilder.Entity<CreditCard>()
+                .Property(x => x.OwnerFirstName)
+                .HasMaxLength(50)
+                .HasColumnName("OwnerLastName")
+                .IsRequired();
+
+            modelBuilder.Entity<CreditCard>()
                 .Property(x => x.CurrencyId)
                 .HasColumnName("CurrencyId")
                 .IsOptional();
