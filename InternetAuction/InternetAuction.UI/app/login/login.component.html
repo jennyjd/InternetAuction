@@ -1,6 +1,6 @@
-﻿<md-card>
+﻿<md-card class="login_wrap">
     <form (ngSubmit)="loginUser()">
-        <h2>Login</h2>
+        <h2>Войти</h2>
         <md-input placeholder="Имя пользователя" [(ngModel)]="model.username" #username name="username"></md-input>
         <md-input type="password" placeholder="Пароль" [(ngModel)]="model.password" #password name="password"></md-input>
         <button md-raised-button type="submit">Войти в систему</button>

@@ -16,7 +16,6 @@ export class RegistrationComponent {
     constructor(private router: Router, private userService: UserService) { }
 
     register() {
-        console.log("REGISTER");
         this.loading = true;
         this.userService.create(this.model)
             .subscribe(

@@ -4,8 +4,8 @@
             <li *ngFor="let menuel of menu" class="parent-list-item">
                 <div *ngIf="isNotSubcategory(menuel)">
                     <button md-button md-raised md-ink-ripple (click)="toggle(menuel)">
-                        <div flex layout="row">
-                            <b>{{menuel.Name}}</b>
+                        <div flex layout="row" class="menu_list">
+                            {{menuel.Name}}
                             <md-icon>keyboard_arrow_down</md-icon>
                         </div>
                     </button>

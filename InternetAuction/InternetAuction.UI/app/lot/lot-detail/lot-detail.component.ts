@@ -12,15 +12,19 @@ import { LotService } from '../lot.service';
 })
 
 export class LotDetailComponent implements OnInit {
+    selected_lot: any = {};
     errorMessage: any;
+    model: any = {};
 
-    constructor(private route: ActivatedRoute, private router: Router, private lotservise: LotService) { }
+    constructor(private route: ActivatedRoute, private router: Router, private lotservise: LotService) {
+    }
 
     ngOnInit() {
         this.route.params
             .switchMap((params: Params) => this.lotservise.getLotById(+params['id']))
             .subscribe(res => {
                 console.log(res);
+                this.selected_lot = res;
             },
             error => this.errorMessage = <any>error);
     }

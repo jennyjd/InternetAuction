@@ -1,10 +1,15 @@
-﻿<md-card>
+﻿<md-card class="create_wrap">
     <form (ngSubmit)="createLot()">
-        <md-input placeholder="Название лота" [(ngModel)]="lot.name" name="name"></md-input>
+        <div class="name_wrap">
+            <md-input placeholder="Название лота" maxlength="30" [(ngModel)]="lot.name" name="name" #name>
+                <md-hint align="end">{{name.characterCount}} / 30</md-hint>
+            </md-input>
+        </div>
 
         <div class="image_uploader">
             <div class="separator">
                 <div class="image_viewer">
+                    <span></span><img src="http://designmyhome.ru/sites/default/files/images/mebel_ikea_03.jpg"/>
                 </div>
                 <div class="other_images_container">
                     <div *ngFor="let image of [1,2,3,4,5]" class="other_images"></div>
@@ -56,6 +61,9 @@
             </md-card>
         </div>
 
+        <h3>Начальная цена</h3>
+        <md-input></md-input>
+        <h3>Город или что то такое</h3>
         <h3>Описание лота</h3>
 
         <button md-button type="submit">Добавить лот</button>

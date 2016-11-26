@@ -1,1 +1,26 @@
-﻿
+﻿<div class="lot_detail_wrap">
+    <div class="lot_information">
+        <md-card class="lotname">
+            <h2>{{selected_lot.Name}}</h2>
+        </md-card>
+        <md-card class="content">
+            <div class="images_wrap">
+                <h3>ФОТОГРАФИИ</h3>
+            </div>
+            <div class="bet_wrap">
+                <md-input placeholder="Ставка" [(ngModel)]="model.bet" #bet name="bet"></md-input>
+                <button md-icon-button class="md-mini md-primary" aria-label="view">
+                    <md-icon>gavel</md-icon>
+                </button>
+                <h3>Описание</h3>
+                <p>{{selected_lot.Description}}</p>
+                <h3>Дата окончания аукциона</h3>
+                <p>{{selected_lot.EndDate}}</p>
+            </div>
+        </md-card>
+    </div>
+
+    <md-card class="seller_information">
+        <h3>Информация об аукционисте</h3>
+    </md-card>
+</div>

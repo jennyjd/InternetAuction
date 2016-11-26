@@ -1,6 +1,5 @@
 ﻿import { Component } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
-import 'rxjs/add/operator/switchMap';
+import { Router} from '@angular/router';
 
 import { User } from '../user';
 import { UserService } from '../user.service';
@@ -15,6 +14,6 @@ import { UserService } from '../user.service';
 export class UserDetailsComponent {
     currentUser: User;
 
-    constructor(private route: ActivatedRoute, private router: Router, private userService: UserService) { }
+    constructor(private userService: UserService) { }
 
 }

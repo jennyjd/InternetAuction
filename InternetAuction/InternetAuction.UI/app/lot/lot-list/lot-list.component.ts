@@ -37,7 +37,7 @@ let LOTS: Lot[] = [
         description: "Очень хороший шкаф",
         starting_price: 4,
         category: "Фантастика",
-        picture_url: "http://howmeb.com/wp-content/uploads/2015/09/Paks-Uglovoy.jpg"
+        picture_url: "http://s.4pda.to/vePhL20ONebGKbOrDQSyOBC2od4N.jpg"
     },
     {
         id: 4,

@@ -1,8 +1,8 @@
 ﻿<md-toolbar color="primary">
     <a routerLink="/">Auction</a>
     <button md-button routerLink="/createlot" *ngIf="isUserHere()">Добавить лот</button>
-    <button md-button routerLink="/login" *ngIf="!isUserHere()">LogIn</button>
-    <button md-button (click) ="logout()" *ngIf="isUserHere()">LogOut</button>
+    <button md-button routerLink="/login" *ngIf="!isUserHere()">Войти</button>
+    <button md-button (click) ="logout()" *ngIf="isUserHere()">Выход</button>
     <!--<md-icon *ngIf="isUserHere()" (click)="selectUser()">face</md-icon>-->
     <button md-mini-fab style="background-color:white" *ngIf="isUserHere()" (click)="selectUser()">
         <md-icon style="color:black">person</md-icon>

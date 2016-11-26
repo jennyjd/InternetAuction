@@ -1,12 +1,30 @@
 ﻿md-card{
-    width: 350px;
+    width: 650px;
     margin: 15px;
     margin:0 auto;
 }
 
-md-card > * {
-    display:block;
+.information{
+    width:50%;
+    margin: 0 15px;
 }
+
+.content {
+    display:flex;
+}
+
+.registr_wrap{
+    margin-top:16px;
+}
+
+.validThru {
+    flex-flow: row wrap;
+}
+
+.validThru md-input {
+    width: 40px;
+}
+
 md-input {
     padding-top: 1px;
     width: 100%;

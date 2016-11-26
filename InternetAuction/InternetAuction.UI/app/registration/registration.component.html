@@ -1,9 +1,29 @@
-﻿<md-card>
-    <h2>Register</h2>
-    <form (ngSubmit)="register()">
-        <md-input placeholder="Имя" [(ngModel)]="model.firstName" #firstName required name="firstName"></md-input>
-        <md-input placeholder="Фамилия" [(ngModel)]="model.lastName" #lastName required name="lastName"></md-input>
-        <md-input type="password" placeholder="Пароль" [(ngModel)]="model.password" #password required name="password"></md-input>
-        <button md-raised-button  type="submit">Зарегистрироваться</button>
+﻿<md-card class="registr_wrap">
+    <form (ngSubmit)="register()" class="registr_form">
+        <div class="content">
+            <div class="information">
+                <h2>Личные данные</h2>
+                <md-input placeholder="Имя" [(ngModel)]="model.firstName" #firstName required name="firstName"></md-input>
+                <md-input placeholder="Фамилия" [(ngModel)]="model.lastName" #lastName required name="lastName"></md-input>
+                <md-input placeholder="Отчество" [(ngModel)]="model.patronymic" #patronymic required name="patronymic"></md-input>
+                <md-input type="tel" placeholder="Контактный телефон" [(ngModel)]="model.tel" #tel required name="tel"></md-input>
+                <md-input type="email" placeholder="Адрес электронной почты" [(ngModel)]="model.email" #email required name="email"></md-input>
+                <md-input type="password" placeholder="Пароль" [(ngModel)]="model.password" #password required name="password"></md-input>
+                <md-input type="password" placeholder="Повторите пароль" [(ngModel)]="model.password2" #password2 required name="password2"></md-input>
+            </div>
+            <div class="information">
+                <h2>Данные банковской карты</h2>
+                <md-input placeholder="Имя держателя карты" [(ngModel)]="model.cardHolderName" #cardHolderName required name="cardHolderName"></md-input>
+                <md-input placeholder="Номер карты" [(ngModel)]="model.cardNumber" #cardNumber required name="cardNumber">
+                    <md-hint>#### #### #### ####</md-hint>
+                </md-input>
+                <div class="validThru">
+                    <span>Срок действия: </span>
+                    <md-input placeholder="MM" [(ngModel)]="model.cardValidMonth" #cardValidMonth required name="cardValidMonth"></md-input> /
+                    <md-input placeholder="YY" [(ngModel)]="model.cardValidDay" #cardValidDay required name="cardValidDay"></md-input>
+                </div>
+            </div>
+        </div>
+        <button md-raised-button type="submit">Зарегистрироваться</button>
     </form>
 </md-card>

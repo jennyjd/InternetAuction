@@ -17,8 +17,15 @@ export class LotCreateComponent {
     lot: any = {};
 
     constructor(private categoryService: CategoryService) {
+        console.log("HGFHJDF");
+        this.checkImage('http://mebsam.com/wp-content/uploads/2015/10/spalni-ikea.jpg');
         this.getCategories();
         console.log(this.categories);
+    }
+
+    checkImage(img) {
+        console.log("skdfjlksdf");
+        console.log(img.width);
     }
 
     getCategories() {

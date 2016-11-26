@@ -7,8 +7,21 @@
 }
 
 .image_container {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
     width: inherit;
     height: 180px;
+}
+.image_container * {
+    vertical-align: middle;
+}
+
+.image_container img{
+    height: auto; 
+    width: auto; 
+    max-width: 180px; 
+    max-height: 180px;
 }
 
 md-card-actions {
@@ -16,13 +29,13 @@ md-card-actions {
 }
 
 md-card-title {
-    font-size:18px;
+    font-size:19px;
     font-weight:bold;
     margin-bottom: 7px;
 }
 
 md-card-content {
-    font-size: 13px;
+    font-size: 14px;
 }
 
 img {

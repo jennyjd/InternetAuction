@@ -19,6 +19,11 @@ button {
     text-align:left;
 }
 
+.menu_list {
+    font-size: 18px;
+    font-weight:normal;
+}
+
 .subcategory {
     padding-left:25px;
 }

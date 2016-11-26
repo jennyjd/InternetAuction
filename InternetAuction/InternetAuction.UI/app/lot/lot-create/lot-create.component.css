@@ -9,10 +9,24 @@
     margin-top: 20px;
 }
 
+.name_wrap {
+    text-align: center;
+}
+
+.name_wrap md-input {
+    width: 270px;
+}
+
 .separator {
     width:50%;
     margin: 0px 5px 0px 5px;
     flex-flow: row wrap;
+    display: inline-block;
+    text-align: -webkit-center;
+}
+
+.separator * {
+    text-align: center;
 }
 
 .select_categories {
@@ -60,23 +74,42 @@ md-icon {
     vertical-align:middle;
 }
 
+.create_wrap {
+    margin-top: 16px;
+    margin-bottom:36px; 
+}
+
 .other_images_container {
-    margin-left: 10px;
-    margin-top: 2px;
-    display:flex;
+    display:inline-flex;
 }
 
 .image_viewer {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
     margin: 0px 50px;
     height: 267px;
-    border: 1px dashed grey;
+    width: 267px;
+    border: 1px solid lightgrey;
+    border-radius: 3px;
+}
+
+.image_viewer * {
+    vertical-align: middle;
+}
+
+.image_viewer img {
+    height: auto; 
+    width: auto; 
+    max-width: 267px; 
+    max-height: 267px;
 }
 
 .other_images {
     width: 60px;
     height: 60px;
     margin: 3px;
-    border: 1px solid blue;
+    border: 1px solid lightgrey;
 }
 
 md-card > * {
