@@ -37,7 +37,7 @@ namespace InternetAuction.API.Controllers
         /// <param name="client">Represents client model with his credit cards</param>
         /// <returns>Returns created client</returns>
         [SwaggerResponse(HttpStatusCode.OK, Type = typeof(Client))]
-        [SwaggerRequestExamples(typeof(ClientSignUpVM), typeof(ClientExample))]
+        //[SwaggerRequestExamples(typeof(ClientSignUpVM), typeof(ClientExample))]
         //[SwaggerResponseExamples(typeof(Client), typeof(ClientExample))]
         [AllowAnonymous]
         [HttpPost]
