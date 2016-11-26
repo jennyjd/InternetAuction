@@ -37,7 +37,7 @@ namespace InternetAuction.API.Repositories
 
         public Client GetClient(int clientId)
         {
-            return _context.Clients.SingleOrDefault(client => client.Id == clientId);
+            return _context.Clients.Include("CreditCards").SingleOrDefault(client => client.Id == clientId);
         }
 
 

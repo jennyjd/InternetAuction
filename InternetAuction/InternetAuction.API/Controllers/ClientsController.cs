@@ -24,10 +24,10 @@ namespace InternetAuction.API.Controllers
 
 
         [HttpGet]
-        [Route()]
-        public IHttpActionResult Get()
+        [Route("{clientId}")]
+        public IHttpActionResult Get(int clientId)
         {
-            throw new NotImplementedException();
+            return Ok(ClientsRepository.GetClient(clientId));
         }
 
 

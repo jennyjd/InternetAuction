@@ -94,7 +94,7 @@ namespace InternetAuction.API.DbContext
                 .IsRequired();
 
             modelBuilder.Entity<CreditCard>()
-                .Property(x => x.OwnerFirstName)
+                .Property(x => x.OwnerLastName)
                 .HasMaxLength(50)
                 .HasColumnName("OwnerLastName")
                 .IsRequired();
