@@ -10,16 +10,18 @@ using System.Web.Http;
 
 namespace InternetAuction.API.Controllers
 {
-    public class AuctionCategoriesController : ApiController
+    [RoutePrefix("api/AuctionsCategories")]
+    public class AuctionsCategoriesController : ApiController
     {
         [Inject]
         public IAuctionsCategoriesRepository AuctionsCategoriesRepository { get; set; }
 
 
         [HttpGet]
-        public IEnumerable<AuctionCategory> GetAuctionCategories()
+        [Route()]
+        public IHttpActionResult Get()
         {
-            return AuctionsCategoriesRepository.GetAuctionCategories().ToList();
+            return Ok(AuctionsCategoriesRepository.GetAuctionCategories().ToList());
         }
     }
 }

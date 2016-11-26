@@ -12,6 +12,7 @@ namespace InternetAuction.API
             //GlobalConfiguration.Configure(CorsConfig.RegisterCors);
             app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
             GlobalConfiguration.Configure(DependencyResolverConfig.RegisterDependencyResolver);
+            GlobalConfiguration.Configure(SwaggerConfig.RegisterSwagger);
 
             IdentityConfig.RegisterIdentity(app);
         }

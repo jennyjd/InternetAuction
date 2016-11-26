@@ -80,12 +80,29 @@ namespace InternetAuction.API.DbContext
                 .Property(x => x.Cash)
                 .HasPrecision(10, 10)
                 .HasColumnName("Cash")
+                .IsOptional();
+
+            modelBuilder.Entity<CreditCard>()
+                .Property(x => x.ValidTo)
+                .HasColumnName("ValidTo")
+                .IsRequired();
+
+            modelBuilder.Entity<CreditCard>()
+                .Property(x => x.OwnerFirstName)
+                .HasMaxLength(50)
+                .HasColumnName("OwnerFirstName")
+                .IsRequired();
+
+            modelBuilder.Entity<CreditCard>()
+                .Property(x => x.OwnerLastName)
+                .HasMaxLength(50)
+                .HasColumnName("OwnerLastName")
                 .IsRequired();
 
             modelBuilder.Entity<CreditCard>()
                 .Property(x => x.CurrencyId)
-                .HasColumnName("CurrensyId")
-                .IsRequired();
+                .HasColumnName("CurrencyId")
+                .IsOptional();
 
             modelBuilder.Entity<CreditCard>()
                 .Property(x => x.UserId)

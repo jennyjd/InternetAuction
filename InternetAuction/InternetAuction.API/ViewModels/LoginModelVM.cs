@@ -2,7 +2,7 @@
 
 namespace InternetAuction.API.ViewModels
 {
-    public class LoginModel
+    public class LoginModelVM
     {
         [Required]
         public string UserName { get; set; }
