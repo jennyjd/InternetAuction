@@ -1,20 +1,39 @@
 ﻿import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 
+import { Observable } from 'rxjs/Observable';
+
+import 'rxjs/add/observable/throw';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+
 @Injectable()
 export class UserService {
-    private createURL = ''
+    private createURL = 'http://localhost:21561/api/clients'
     constructor(private http: Http) { }
 
-    create(user) {
-        let JSONstr = JSON.stringify({ firstname: user.firstName, lastname: user.lastName, password: user.password });
-        console.log("json = " + JSONstr);
+    create(user, credit) {
+
+        let UserJSON = JSON.stringify({
+            FirstName: user.firstName, LastName: user.lastName, Login: user.login,
+            Password: user.password, Email: user.email, CreditCards: [{
+                Number: credit.Number, ValidTo: credit.validThru,
+                OwnerFirstName: credit.userFirstName, OwnerLastName: credit.userLastName
+            }]
+        });
+
+        console.log("json = " + UserJSON);
+
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
-        return this.http.post(this.createURL, JSONstr, { headers: headers })
-            .map((response: Response) => {
-                console.log("Response:" + response.json());
-            });
+        return this.http.post(this.createURL, UserJSON, { headers: headers })
+            .map(res => res.ok)
+            .catch(this.handleError);
+    }
+
+    public handleError(error: Response) {
+        console.error(error);
+        return Observable.throw(error.json().error || 'Server error');
     }
 
     getCurrentUser() {
