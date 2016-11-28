@@ -13,19 +13,18 @@ import { CategoryService } from '../../home/category.service';
 export class LotCreateComponent {
     categories: any[] = [];
     errorMessage: any;
+    mainPicture = 'http://designmyhome.ru/sites/default/files/images/mebel_ikea_03.jpg';
     selected_category = null;
     lot: any = {};
 
-    constructor(private categoryService: CategoryService) {
-        console.log("HGFHJDF");
-        this.checkImage('http://mebsam.com/wp-content/uploads/2015/10/spalni-ikea.jpg');
-        this.getCategories();
-        console.log(this.categories);
-    }
+    pictures =
+       ['https://s-media-cache-ak0.pinimg.com/736x/bb/bf/58/bbbf58c0716c059fa378d419defa0f05.jpg',
+        'http://cliqueimg.com/cache/posts/169114/how-to-style-ikea-for-a-stunning-high-low-mix-1495982.640x0c.jpg',
+        'http://houseplanning.ru/sites/default/files/images/ikea_4.jpg',
+        'http://lookathome.ru/wp-content/uploads/2013/10/LookAtHome.ru_Mebel_IKEA_v_interiere-foto-3.jpeg']
 
-    checkImage(img) {
-        console.log("skdfjlksdf");
-        console.log(img.width);
+    constructor(private categoryService: CategoryService) {
+        this.getCategories();
     }
 
     getCategories() {
@@ -51,6 +50,10 @@ export class LotCreateComponent {
 
     selectCategory(category) {
         this.selected_category = category;
+    }
+
+    changeMainPicture(picture) {
+        this.mainPicture = picture;
     }
 
     ifCategoryIsSelected() {

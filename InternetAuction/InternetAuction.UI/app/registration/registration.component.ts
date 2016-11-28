@@ -24,6 +24,7 @@ export class RegistrationComponent {
             .subscribe(
             res => {
                 console.log("OK");
+                console.log(res);
                 this.router.navigate(['/login']);
             },
             error => {

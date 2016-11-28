@@ -27,7 +27,7 @@ export class UserService {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
         return this.http.post(this.createURL, UserJSON, { headers: headers })
-            .map(res => res.ok)
+            .map(res => res)
             .catch(this.handleError);
     }
 

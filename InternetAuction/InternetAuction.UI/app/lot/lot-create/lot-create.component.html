@@ -1,21 +1,24 @@
 ﻿<md-card class="create_wrap">
     <form (ngSubmit)="createLot()">
-        <div class="name_wrap">
-            <md-input placeholder="Название лота" maxlength="30" [(ngModel)]="lot.name" name="name" #name>
-                <md-hint align="end">{{name.characterCount}} / 30</md-hint>
-            </md-input>
-        </div>
-
+        
         <div class="image_uploader">
             <div class="separator">
-                <div class="image_viewer">
-                    <span></span><img src="http://designmyhome.ru/sites/default/files/images/mebel_ikea_03.jpg"/>
+                <div class="image_viewer center_image">
+                    <span></span><img src={{mainPicture}}/>
                 </div>
+                <!--solve vertical align problem (display:inline-flex)-->
                 <div class="other_images_container">
-                    <div *ngFor="let image of [1,2,3,4,5]" class="other_images"></div>
+                    <div *ngFor="let image of pictures" class="other_images center_image" (click)="changeMainPicture(image)">
+                        <span></span><img src={{image}}/>
+                    </div>
                 </div>
             </div>
             <div class="separator">
+                <div class="name_wrap">
+                    <md-input placeholder="Название лота" maxlength="30" [(ngModel)]="lot.name" name="name" #name>
+                        <md-hint align="end">{{name.characterCount}} / 30</md-hint>
+                    </md-input>
+                </div>
                 <image-upload [max]="5"
                               [url]="'example.com/images/upload'"
                               [buttonCaption]="'Добавить фото'"
@@ -24,9 +27,15 @@
                               (onRemove)="imageRemoved($event)"
                               (isPending)="disableSendButton($event)">
                 </image-upload>
+                <div>
+                    <button md-icon-button class="md-mini md-primary" aria-label="view">
+                        <md-icon>delete forever</md-icon>
+                    </button>
+                </div>
             </div>
         </div>
 
+        <h3>Сщстояние</h3>
         <md-radio-group [(ngModel)]="lot.state" name="state">
             <md-radio-button value="new">новый</md-radio-button>
             <md-radio-button value="used">б/y</md-radio-button>
@@ -34,7 +43,7 @@
 
         <h3>Выбор категорий</h3>
         <div class="select_categories">
-            <md-card class="category_wrap">
+            <div class="category_wrap">
                 <ul>
                     <li *ngFor="let category of categories" class="parent-list-item">
                         <div *ngIf="isNotSubcategory(category)">
@@ -47,8 +56,8 @@
                         </div>
                     </li>
                </ul>
-            </md-card>
-            <md-card class="subcategory_wrap">
+            </div>
+            <div class="subcategory_wrap">
                 <ul *ngIf="ifCategoryIsSelected()">
                     <li *ngFor="let sub of selected_category.SubAuctionCategories">
                         <button md-button focus md-ink-ripple md-raised class="subcategory">
@@ -58,13 +67,15 @@
                         </button>
                     </li>
                 </ul>
-            </md-card>
+            </div>
         </div>
 
         <h3>Начальная цена</h3>
         <md-input></md-input>
-        <h3>Город или что то такое</h3>
+        <h3>Доставка</h3>
+
         <h3>Описание лота</h3>
+        <textarea></textarea>
 
         <button md-button type="submit">Добавить лот</button>
     </form>
