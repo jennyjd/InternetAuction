@@ -7,6 +7,8 @@ namespace InternetAuction.API.ViewModels.Clients
 {
     public class ClientVM : ClientBase
     {
+        public int ClientId { get; set; }
+
         public string FirstName { get; set; }
 
         public string LastName { get; set; }

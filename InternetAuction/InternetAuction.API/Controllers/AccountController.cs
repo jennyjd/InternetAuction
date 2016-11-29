@@ -32,6 +32,7 @@ namespace InternetAuction.API.Controllers
                 var client = ClientsRepository.GetClient(user.ClientId.Value);
                 return Ok(new ClientVM
                 {
+                    ClientId = client.Id,
                     FirstName = client.FirstName,
                     LastName = client.LastName,
                     Patronymic = client.Patronymic,
@@ -42,6 +43,7 @@ namespace InternetAuction.API.Controllers
             {
                 return Ok(new AdministratorVM
                 {
+                    Id = user.Id,
                     UserName = user.UserName,
                     Email = user.Email
                 });

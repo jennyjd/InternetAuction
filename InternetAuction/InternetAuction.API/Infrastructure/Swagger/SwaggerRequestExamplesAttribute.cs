@@ -2,8 +2,7 @@
 
 namespace InternetAuction.API.Infrastructure.Swagger
 {
-    [AttributeUsage(AttributeTargets.Method)]
-    public sealed class SwaggerRequestExamplesAttribute : Attribute
+    public class SwaggerRequestExamplesAttribute : Attribute
     {
         public Type ExamplesType { get; private set; }
 

@@ -19,20 +19,17 @@ namespace InternetAuction.API.Infrastructure.Swagger.Examples
         {
             return new ClientSignUpVM
             {
-                FirstName = "FirstName",
-                LastName = "LastName",
-                Patronymic = null,
-                Login = "NewLogin",
-                Password = "Password",
-                Email = "Email",
-                CreditCards = new List<CreditCard>
-                {
-                    new CreditCard
-                    {
-                        Number = "1234567890"
-                    }
-                }
+                FirstName = "FirstName"
             };
+            //return new ClientSignUpVM
+            //{
+            //    FirstName = "FirstName",
+            //    LastName = "LastName",
+            //    Patronymic = null,
+            //    Login = "NewLogin",
+            //    Password = "Password",
+            //    Email = "Email"
+            //};
         }
     }
 }
