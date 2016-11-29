@@ -3,6 +3,7 @@ using InternetAuction.API.Repositories;
 using InternetAuction.API.Repositories.Abstractions;
 using InternetAuction.API.ViewModels;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using InternetAuction.API.ViewModels.Clients;
 
 namespace InternetAuctionTests
 {
@@ -31,7 +32,7 @@ namespace InternetAuctionTests
                 Password = "h7g3qhgn29tg35yj"
             };
 
-            var client = await ClientRepository.AddClient(clientSignUpModel);
+            var client = ClientRepository.AddClient(clientSignUpModel);
 
             Assert.IsNotNull(client);
         }

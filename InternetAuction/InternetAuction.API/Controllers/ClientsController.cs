@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Ninject;
 using Swashbuckle.Swagger.Annotations;
 using System;
+using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Http;
@@ -38,21 +39,27 @@ namespace InternetAuction.API.Controllers
         /// <returns>Returns created client</returns>
         [SwaggerResponse(HttpStatusCode.OK, Type = typeof(Client))]
         [SwaggerRequestExamples(typeof(ClientSignUpVM), typeof(ClientExample))]
-        //[SwaggerResponseExamples(typeof(Client), typeof(ClientExample))]
+        //[SwaggerResponseExamples(typeof(ClientSignUpVM), typeof(ClientExample))]
         [AllowAnonymous]
         [HttpPost]
         [Route()]
         public IHttpActionResult Post(ClientSignUpVM client)
         {
-            // throw error if login or email exists
+            // TODO: throw error if login or email exists
             var userManager = HttpContext.Current.GetOwinContext().GetUserManager<InternetAuctionUserManager>();
-            var roleManager = HttpContext.Current.GetOwinContext().Get<InternetAuctionRoleManager>();
 
-            userManager.Create(new InternetAuctionUser
+            var identityResult = userManager.Create(new InternetAuctionUser
             {
                 UserName = client.Login,
                 Email = client.Email
             }, client.Password);
+
+            if (identityResult.Errors.Any())
+            {
+                // TODO: handle identity errors
+                throw new Exception("Identity error");
+            }
+
             userManager.AddToRole(userManager.FindByName(client.Login).Id, "Client");
 
             return Ok(ClientsRepository.AddClient(client));
