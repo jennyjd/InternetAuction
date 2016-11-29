@@ -5,4 +5,5 @@
     starting_price: number;
     picture_url: string;
     category: string;
+    visible_items: boolean;
 }

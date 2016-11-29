@@ -15,6 +15,18 @@ export class LotComponent {
     constructor(private router: Router) { }
 
     view_details(lotitem: Lot) {
+        lotitem.visible_items = false;
         this.router.navigate(['/lotdetail', lotitem.id]);
     }
+
+    over(lotitem) {
+        console.log("Over " + lotitem.title)
+        lotitem.visible_items = true;
+    }
+
+    out(lotitem) {
+        console.log("Out " + lotitem.title)
+        lotitem.visible_items = false;
+    }
+
 }

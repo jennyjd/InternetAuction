@@ -1,6 +1,6 @@
 ﻿<md-sidenav-layout>
     <md-sidenav mode="side" opened="true" style="background-color:#424242; color:#FAFAFA;">
-        <ul>
+        <!--<ul>
             <li *ngFor="let menuel of menu" class="parent-list-item">
                 <div *ngIf="isNotSubcategory(menuel)">
                     <button md-button md-raised md-ink-ripple (click)="toggle(menuel)">
@@ -20,7 +20,19 @@
                     </li>
                 </ul>
             </li>
-        </ul>
+        </ul>-->
+
+        <md2-accordion [multiple]="multiple" *ngFor="let menuel of menu">
+            <md2-accordion-tab *ngIf="isNotSubcategory(menuel)">
+                <md2-accordion-header>{{menuel.Name}}</md2-accordion-header>
+                <li *ngFor="let sub of menuel.SubAuctionCategories">
+                    <button md-button focus md-ink-ripple md-raised class="subcategory" (click)="selectCategory(sub)">
+                        {{sub.Name}}
+                     </button>
+                </li>
+            </md2-accordion-tab>
+        </md2-accordion>
+
     </md-sidenav>
     <div class="content">
         <lot-list class="card-container" [selected]="selected_category">

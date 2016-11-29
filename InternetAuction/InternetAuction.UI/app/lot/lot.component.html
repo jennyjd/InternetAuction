@@ -1,25 +1,37 @@
-﻿<md-card *ngIf="selected === lotitem.category || selected == 'none'">
-    <div class="image_container">
-        <span></span> <img src="{{lotitem.picture_url}}" class="md-card-image">
-    </div>
-    <div class="content">
-        <md-card-title>{{lotitem.title}}</md-card-title>
-        <md-card-content>{{lotitem.description}}</md-card-content>
-        <md-card-actions align="end">
-            <button md-icon-button class="md-mini md-primary" aria-label="view" (click)="view_details(lotitem)">
-                <md-icon>visibility</md-icon>
-            </button>
-        </md-card-actions>
+﻿<div class="full_width_wrap">
+    <md-card *ngIf="selected === lotitem.category || selected == 'none'" (mouseenter)="over(lotitem)" (mouseleave)="out(lotitem)">
+        <div class="image_container">
+            <span></span> <img src="{{lotitem.picture_url}}" class="md-card-image" (click)="view_details(lotitem)">
+        </div>
+        <button md-mini-fab style="background-color:white" class="lot_details" (click)="view_details(lotitem)" tooltip="Подробнее" tooltip-position="below">
+            <md-icon style="color:black">visibility</md-icon>
+        </button>
+        <div class="content">
+            <md-card-title>{{lotitem.title}}</md-card-title>
+            <md-card-content>
+                {{lotitem.description}}
+                <div *ngIf="lotitem.visible_items == true" class="more_inf">
+                    <p>login</p>
+                    <p>10 декабря 2016</p>
+                    <p>5 ставок</p>
+                </div>
+            </md-card-content>
+           <!-- <md-card-actions align="end">
+                <button md-icon-button class="md-mini md-primary" aria-label="view" (click)="view_details(lotitem)" tooltip="Подробнее" tooltip-position="below">
+                    <md-icon>visibility</md-icon>
+                </button>
+            </md-card-actions>-->
             <!--<md-card-actions align="end">
 
-            <button md-icon-button class="md-mini md-primary" aria-label="Minus">
-                <md-icon>remove</md-icon>
-            </button>
-            <md-input class="demo-full-width" placeholder="Ставка" value={{lotitem.starting_price}}></md-input>
-            <button md-icon-button class="md-mini md-primary" aria-label="Plus">
-                <md-icon>add</md-icon>
-            </button>
-        </md-card-actions>-->
+                <button md-icon-button class="md-mini md-primary" aria-label="Minus">
+                    <md-icon>remove</md-icon>
+                </button>
+                <md-input class="demo-full-width" placeholder="Ставка" value={{lotitem.starting_price}}></md-input>
+                <button md-icon-button class="md-mini md-primary" aria-label="Plus">
+                    <md-icon>add</md-icon>
+                </button>
+            </md-card-actions>-->
+        </div>
+    </md-card>
 </div>
-</md-card>
 

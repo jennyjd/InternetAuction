@@ -15,8 +15,8 @@
             </div>
             <div class="separator">
                 <div class="name_wrap">
-                    <md-input placeholder="Название лота" maxlength="30" [(ngModel)]="lot.name" name="name" #name>
-                        <md-hint align="end">{{name.characterCount}} / 30</md-hint>
+                    <md-input placeholder="Название лота" maxlength="40" [(ngModel)]="lot.name" name="name" #name>
+                        <md-hint align="end">{{name.characterCount}} / 40</md-hint>
                     </md-input>
                 </div>
                 <image-upload [max]="5"
@@ -73,6 +73,9 @@
         <h3>Начальная цена</h3>
         <md-input></md-input>
         <h3>Доставка</h3>
+        <md2-select>
+            <md2-option >re</md2-option>
+        </md2-select>
 
         <h3>Описание лота</h3>
         <textarea></textarea>

@@ -1,2 +1,18 @@
-﻿body {
+﻿.personal_cabinet {
+    width: 700px;
+    min-width: 700px;
+    margin: 20px auto;
+}
+
+.separator{
+    flex-flow: row wrap;
+}
+
+.private_inf {
+    width: 50%;
+    border-right: 1px solid lightgrey;
+}
+
+.cards_inf{
+    width:50%;
 }
