@@ -11,7 +11,7 @@ import { Lot } from '../lot'
 
 export class LotListComponent {
     lots = LOTS;
-    @Input() selected: string;
+    //@Input() selected: string;
 }
 
 let LOTS: Lot[] = [

@@ -1,4 +1,4 @@
-﻿<md-sidenav-layout>
+﻿<!--<md-sidenav-layout>
     <md-sidenav mode="side" opened="true" style="background-color:#424242; color:#FAFAFA;">
         <!--<ul>
             <li *ngFor="let menuel of menu" class="parent-list-item">
@@ -20,7 +20,7 @@
                     </li>
                 </ul>
             </li>
-        </ul>-->
+        </ul>
 
         <md2-accordion [multiple]="multiple" *ngFor="let menuel of menu">
             <md2-accordion-tab *ngIf="isNotSubcategory(menuel)">
@@ -33,10 +33,11 @@
             </md2-accordion-tab>
         </md2-accordion>
 
-    </md-sidenav>
+    </md-sidenav>-->
     <div class="content">
-        <lot-list class="card-container" [selected]="selected_category">
+        <!--[selected]="selected_category"-->
+        <lot-list class="card-container">
         </lot-list>
     </div>
-</md-sidenav-layout>
+<!--</md-sidenav-layout>-->
 

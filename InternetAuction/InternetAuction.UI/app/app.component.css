@@ -1,3 +1,50 @@
 ﻿md-toolbar button {
     font-size: 20px;
 }
+
+.logo_wrap{
+    width: 90%;
+    padding: 20px 10px;
+    border-bottom: 1px solid #333333;
+}
+
+md-sidenav {
+    width: 200px;
+    height: 100%;
+}
+
+md2-accordion-tab {
+    border-style:none;
+}
+
+md2-accordion-header {
+    color: white;
+}
+
+md-icon {
+    vertical-align:middle;
+}
+
+md2-accordion button {
+    padding-left: 10px;
+    width: 200px;
+    text-align:left;
+}
+
+.menu_list {
+    font-size: 18px;
+    font-weight:normal;
+}
+
+.subcategory {
+    padding-left:25px;
+}
+
+ul {
+    padding-left:0;
+}
+
+li {
+    list-style-type: none; 
+    margin: -16px;
+}

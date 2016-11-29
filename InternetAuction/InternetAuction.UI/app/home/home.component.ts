@@ -1,23 +1,24 @@
-﻿import { Component } from '@angular/core';
+﻿import { Component, DoCheck } from '@angular/core';
 
 import { LotListComponent } from '../lot/lot-list/lot-list.component';
 import { CategoryService } from './category.service';
 import { LotService } from '../lot/lot.service';
+import { SharedService } from '../shared.service';
 
 @Component({
     selector: 'home-page',
     templateUrl: './app/home/home.component.html',
     styleUrls: ['./app/home/home.component.css'],
     entryComponents: [LotListComponent],
-    providers: [CategoryService, LotService]
+    providers: [CategoryService, LotService, SharedService]
 })
 
-export class HomeComponent {
+export class HomeComponent{
     menu: any[] = [];
     errorMessage: any;
     selected_category = "none";
 
-    constructor(private categoryService: CategoryService, private lotService: LotService) {
+    constructor(private categoryService: CategoryService, private lotService: LotService, private sharedService: SharedService) {
         this.getCategories();
         this.getLots();
     }

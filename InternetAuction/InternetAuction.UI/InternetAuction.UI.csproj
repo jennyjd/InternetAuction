@@ -80,6 +80,7 @@
     <Content Include="app\registration\registration.component.html" />
     <Content Include="app\user\user-detail\user-detail.component.css" />
     <Content Include="app\user\user-detail\user-detail.component.html" />
+    <Content Include="images\logo.png" />
     <Content Include="index.html" />
     <Content Include="package.json" />
     <Content Include="style.css" />
@@ -123,6 +124,7 @@
     <TypeScriptCompile Include="app\lot\lot.ts" />
     <TypeScriptCompile Include="app\main.ts" />
     <TypeScriptCompile Include="app\registration\registration.component.ts" />
+    <TypeScriptCompile Include="app\shared.service.ts" />
     <TypeScriptCompile Include="app\user\user-detail\user-detail.component.ts" />
     <TypeScriptCompile Include="app\user\user.service.ts" />
     <TypeScriptCompile Include="app\user\user.ts" />

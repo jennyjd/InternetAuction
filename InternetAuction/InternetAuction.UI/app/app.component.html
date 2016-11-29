@@ -1,13 +1,54 @@
-﻿<md-toolbar color="primary">
-    <button routerLink="/">Auction</button>
-    <button md-button routerLink="/createlot" *ngIf="isUserHere()">Добавить лот</button>
-    <button md-button routerLink="/login" *ngIf="!isUserHere()">Войти</button>
-    <button md-button (click) ="logout()" *ngIf="isUserHere()">Выход</button>
-    <!--<md-icon *ngIf="isUserHere()" (click)="selectUser()">face</md-icon>-->
-    <button md-mini-fab style="background-color:white" *ngIf="isUserHere()" (click)="selectUser()" tooltip="Личный кабинет" tooltip-position="below">
-        <md-icon style="color:black">person</md-icon>
-    </button>
-    <!--<button md-button *ngIf="isUserHere()" (click)="selectUser()">User Details</button>-->
-</md-toolbar>
-<router-outlet></router-outlet>
+﻿<md-sidenav-layout>
+    <md-toolbar color="primary">
+        <button md-icon-button (click)="changeSidnav()">
+            <md-icon>menu</md-icon>
+        </button>
+        <button md-button routerLink="/createlot" *ngIf="isUserHere()">Добавить лот</button>
+        <button md-button routerLink="/login" *ngIf="!isUserHere()">Войти</button>
+        <button md-button (click)="logout()" *ngIf="isUserHere()">Выход</button>
+        <button md-mini-fab style="background-color:white" *ngIf="isUserHere()" (click)="selectUser()" tooltip="Личный кабинет" tooltip-position="below">
+            <md-icon style="color:black">person</md-icon>
+        </button>
+    </md-toolbar>
+    <router-outlet></router-outlet>
+    <md-sidenav mode="side" opened={{opened_sidebar}} style="background-color:#424242; color:#FAFAFA;">
+        <div class="logo_wrap" (click)="redirect_main()">
+            <img src="../images/logo.png" />
+        </div>
+        <!--<ul>
+            <li *ngFor="let menuel of menu" class="parent-list-item">
+                <div *ngIf="isNotSubcategory(menuel)">
+                    <button md-button md-raised md-ink-ripple (click)="toggle(menuel)">
+                        <div flex layout="row" class="menu_list">
+                            {{menuel.Name}}
+                            <md-icon>keyboard_arrow_down</md-icon>
+                        </div>
+                    </button>
+                </div>
+                <ul *ngIf="menuel.status == false">
+                    <li *ngFor="let sub of menuel.SubAuctionCategories">
+                        <button md-button focus md-ink-ripple md-raised class="subcategory" (click)="selectCategory(sub)">
+                            <div flex layout="row">
+                                {{sub.Name}}
+                            </div>
+                        </button>
+                    </li>
+                </ul>
+            </li>
+        </ul>-->
+
+        <md2-accordion [multiple]="multiple" *ngFor="let menuel of menu">
+            <md2-accordion-tab *ngIf="isNotSubcategory(menuel)">
+                <md2-accordion-header>{{menuel.Name}}</md2-accordion-header>
+                <li *ngFor="let sub of menuel.SubAuctionCategories">
+                    <button md-button focus md-ink-ripple md-raised class="subcategory" (click)="selectCategory(sub.Name)">
+                        {{sub.Name}}
+                    </button>
+                </li>
+            </md2-accordion-tab>
+        </md2-accordion>
+
+    </md-sidenav>
+</md-sidenav-layout>
+
 
