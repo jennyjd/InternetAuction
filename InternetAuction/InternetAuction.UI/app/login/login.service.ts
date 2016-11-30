@@ -15,7 +15,7 @@ export class LoginService {
     private loginUrl = 'http://localhost:21561/api/account/signin';
     public token: string;
 
-    constructor(private http: Http, private router: Router,) {
+    constructor(private http: Http, private router: Router) {
         var currentUser = JSON.parse(localStorage.getItem('currentUser'));
         console.log("Current user: " + currentUser)
     }

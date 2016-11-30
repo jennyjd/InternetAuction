@@ -1,11 +1,13 @@
 ﻿.personal_cabinet {
-    width: 700px;
-    min-width: 700px;
+    width: 800px;
+    min-width: 800px;
     margin: 20px auto;
 }
 
 .separator{
-    flex-flow: row wrap;
+    display: flex;
+    text-align: -webkit-center;
+    border-bottom: 1px solid lightgrey;
 }
 
 .private_inf {
@@ -13,6 +15,39 @@
     border-right: 1px solid lightgrey;
 }
 
+.labels_wrap {
+    width:35%;
+}
+
+.header {
+    height: 50px;
+}
+
+.but {
+    position: relative;
+    top: -40px;
+    right: -160px;
+    background-color:#D95154
+}
+
+md2-accordion {
+    width:200%;
+}
+
+.value_wrap {
+    width:65%;
+}
+
+.mar_divs {
+    padding: 16px 0px;
+}
+
 .cards_inf{
     width:50%;
+    padding-left:24px;
+}
+
+.content {
+    display: flex;
+    text-align: left;
 }

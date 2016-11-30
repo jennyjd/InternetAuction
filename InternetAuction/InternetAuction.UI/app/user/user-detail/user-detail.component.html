@@ -1,12 +1,55 @@
 ﻿<md-card class="personal_cabinet">
-    <h2>Личный кабинет</h2>
     <div class="separator">
         <div class="private_inf">
-            <h3>Персональные данные</h3>
-            <button md-button>Изменить личные данные</button>
+            <div class="header">
+                <h2>Личные данные</h2>
+                <button md-mini-fab class="but" *ngIf="!editPersonalInf" (click)="editPersonalInf = true" tooltip="Изменить" tooltip-position="below">
+                    <md-icon style="color:white">create</md-icon>
+                </button>
+            </div>
+            <div class="content">
+                <div class="labels_wrap">
+                    <div *ngFor="let label of personalLabels" class="mar_divs">{{label}}</div>
+                </div>
+                <div class="value_wrap">
+                    <div *ngIf="!editPersonalInf">
+                        <div *ngFor="let inf of personalInf" class="mar_divs">{{inf}}</div>
+                    </div>
+                    <div *ngIf="editPersonalInf">
+                        <form>
+                            <md-input value={{inf}} *ngFor="let inf of personalInf"></md-input>
+                            <button md-mini-fab style="background-color:#D95154" type="submit" *ngIf="editPersonalInf" tooltip="Сохранить" tooltip-position="below">
+                                <md-icon style="color:white">done</md-icon>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="cards_inf">
-            <h3>Данные о банковских картах</h3>
-        </div>
+            <div class="header">
+                <h2>Банковские карты</h2>
+                <button md-mini-fab class="but" tooltip="Добавить" tooltip-position="below">
+                    <md-icon style="color:white">add</md-icon>
+                </button>
+             </div>
+
+            <div class="content">
+                <div class="card_handler">
+                    <md2-accordion [multiple]="multiple" *ngFor="let card of cards">
+                        <md2-accordion-tab>
+                            <md2-accordion-header>
+                                <md-icon>payment</md-icon>
+                                {{card.number}}
+                            </md2-accordion-header>
+                                <div class="labels_wrap">
+                                    <div *ngFor="let label of cardLabels" class="mar_divs">{{label}}</div>
+                                </div>
+                        </md2-accordion-tab>
+                    </md2-accordion>
+                </div>
+        
+            </div>
+         </div>
     </div>
 </md-card>

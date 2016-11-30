@@ -11,20 +11,31 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class LotService {
-    private getLotsUrl = 'http://localhost:21561/api/Auctions';
+    private lotsUrl = 'http://localhost:21561/api/Auctions';
 
     constructor(private http: Http) {
     }
 
     getLotById(id) {
-        return this.http.get(`${this.getLotsUrl}/${id}`)
+        return this.http.get(`${this.lotsUrl}/${id}`)
             .map(response => response.json())
             .catch(this.handleError);
     }
 
     getLots() {
-        return this.http.get(this.getLotsUrl)
+        return this.http.get(this.lotsUrl)
             .map(response => response.json())
+            .catch(this.handleError);
+    }
+
+    createLot(lot) {
+        let JSONstr = JSON.stringify({ username: lot.name, password: lot.state });
+        console.log("json = " + JSONstr)
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+
+        return this.http.post(this.lotsUrl, JSONstr, { headers: headers })
+            .map(res => res.ok)
             .catch(this.handleError);
     }
 

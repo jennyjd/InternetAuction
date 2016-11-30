@@ -15,6 +15,7 @@ export class SharedService {
     saveOpened(str) {
         localStorage.setItem('opened_sidenav', JSON.stringify({ opened: str }));
     }
+
     getOpened() {
         let sel = JSON.parse(localStorage.getItem('opened_sidenav'));
         return sel.opened

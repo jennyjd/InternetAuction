@@ -16,7 +16,7 @@
             <div class="separator">
                 <div class="name_wrap">
                     <md-input placeholder="Название лота" maxlength="40" [(ngModel)]="lot.name" name="name" #name>
-                        <md-hint align="end">{{name.characterCount}} / 40</md-hint>
+                        <md-hint>{{name.characterCount}} / 40</md-hint>
                     </md-input>
                 </div>
                 <image-upload [max]="5"
@@ -35,11 +35,22 @@
             </div>
         </div>
 
-        <h3>Сщстояние</h3>
-        <md-radio-group [(ngModel)]="lot.state" name="state">
-            <md-radio-button value="new">новый</md-radio-button>
-            <md-radio-button value="used">б/y</md-radio-button>
-        </md-radio-group>
+        <h3>Состояние</h3>
+        <md2-select [(ngModel)]="lot.state" name="state" #state>
+            <md2-option>Хорошее</md2-option>
+            <md2-option>Среднее</md2-option>
+            <md2-option>Плохое</md2-option>
+        </md2-select>
+
+        <h3>Дата окончания аукциона</h3>
+        <md2-datepicker [(ngModel)]="lot.Enddate"
+                        name="Enddate"
+                        #Enddate
+                        type="date"
+                        placeholder="Дата окончания аукциона"
+                        format="MM/DD/YYYY">
+        </md2-datepicker>
+
 
         <h3>Выбор категорий</h3>
         <div class="select_categories">
@@ -60,7 +71,7 @@
             <div class="subcategory_wrap">
                 <ul *ngIf="ifCategoryIsSelected()">
                     <li *ngFor="let sub of selected_category.SubAuctionCategories">
-                        <button md-button focus md-ink-ripple md-raised class="subcategory">
+                        <button md-button focus md-ink-ripple md-raised class="subcategory" value="{{sub.Name}}" name="category" #category (click)="chooseCategory(sub.Id)">
                             <div flex layout="row">
                                 {{sub.Name}}
                             </div>
@@ -70,12 +81,17 @@
             </div>
         </div>
 
-        <h3>Начальная цена</h3>
-        <md-input></md-input>
-        <h3>Доставка</h3>
-        <md2-select>
-            <md2-option >re</md2-option>
+        <h3>Валюта</h3>
+        <md2-select [(ngModel)]="lot.currencyId" name="currencyId" #currencyId>
+            <md2-option>BY</md2-option>
+            <md2-option>USD</md2-option>
+            <md2-option>EUR</md2-option>
         </md2-select>
+
+        <h3>Начальная цена</h3>
+        <md-input placeholder="Начальная цена" [(ngModel)]="lot.startPrice" name="startPrice" #startPrice>
+            <span md-suffix></span>
+        </md-input>
 
         <h3>Описание лота</h3>
         <textarea></textarea>

@@ -10,10 +10,18 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 @Injectable()
-export class CategoryService {
+export class GeneralService {
     private categoryUrl = 'http://localhost:21561/api/AuctionsCategories';
+    private getCurrencyUrl = '';
 
-    constructor(private http: Http) {
+
+    constructor(private http: Http, private router: Router) {
+    }
+
+    getCurrency() {
+        return this.http.get(this.getCurrencyUrl)
+            .map(response => response.json())
+            .catch(this.handleError);
     }
 
     getCategories() {
@@ -26,4 +34,4 @@ export class CategoryService {
         console.error(error);
         return Observable.throw(error.json().error || 'Server error');
     }
-}
+} 

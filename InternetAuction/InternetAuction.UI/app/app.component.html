@@ -6,8 +6,8 @@
         <button md-button routerLink="/createlot" *ngIf="isUserHere()">Добавить лот</button>
         <button md-button routerLink="/login" *ngIf="!isUserHere()">Войти</button>
         <button md-button (click)="logout()" *ngIf="isUserHere()">Выход</button>
-        <button md-mini-fab style="background-color:white" *ngIf="isUserHere()" (click)="selectUser()" tooltip="Личный кабинет" tooltip-position="below">
-            <md-icon style="color:black">person</md-icon>
+        <button md-mini-fab style="background-color:#F3A15C" *ngIf="isUserHere()" (click)="selectUser()" tooltip="Личный кабинет" tooltip-position="below">
+            <md-icon style="color:white">person</md-icon>
         </button>
     </md-toolbar>
     <router-outlet></router-outlet>

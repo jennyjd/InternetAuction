@@ -1,17 +1,18 @@
 ﻿import { Component } from '@angular/core';
 import { MdUniqueSelectionDispatcher } from '@angular2-material/core';
 
-import { CategoryService } from '../../home/category.service';
+import { GeneralService } from '../../general.service';
 
 @Component({
     selector: 'lot-create-form',
     templateUrl: './app/lot/lot-create/lot-create.component.html',
     styleUrls: ['./app/lot/lot-create/lot-create.component.css'],
-    providers: [MdUniqueSelectionDispatcher, CategoryService]
+    providers: [MdUniqueSelectionDispatcher, GeneralService]
 })
 
 export class LotCreateComponent {
     categories: any[] = [];
+    currency: any[] = [];
     errorMessage: any;
     mainPicture = 'http://designmyhome.ru/sites/default/files/images/mebel_ikea_03.jpg';
     selected_category = null;
@@ -23,17 +24,27 @@ export class LotCreateComponent {
         'http://houseplanning.ru/sites/default/files/images/ikea_4.jpg',
         'http://lookathome.ru/wp-content/uploads/2013/10/LookAtHome.ru_Mebel_IKEA_v_interiere-foto-3.jpeg']
 
-    constructor(private categoryService: CategoryService) {
+    constructor(private generalService: GeneralService) {
         this.getCategories();
+        this.getCurrency();
     }
 
     getCategories() {
-        this.categoryService.getCategories()
+        this.generalService.getCategories()
             .subscribe(res => {
                 for (let cat of res) {
                     cat.status = true
                     this.categories.push(cat)
                 }
+            },
+            error => this.errorMessage = <any>error);
+    }
+
+    getCurrency() {
+        this.generalService.getCurrency()
+            .subscribe(res => {
+                console.log("GET CUREENCY");
+                console.log(res);
             },
             error => this.errorMessage = <any>error);
     }
@@ -62,6 +73,10 @@ export class LotCreateComponent {
     }
 
     createLot() {
-        console.log("Name: " + this.lot.name + "\nState: " + this.lot.state);
+        console.log(this.lot);
+    }
+
+    chooseCategory(category) {
+        this.lot.category = category;
     }
 }

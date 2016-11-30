@@ -1,16 +1,16 @@
 ﻿import { Component, DoCheck } from '@angular/core';
 
 import { LotListComponent } from '../lot/lot-list/lot-list.component';
-import { CategoryService } from './category.service';
 import { LotService } from '../lot/lot.service';
 import { SharedService } from '../shared.service';
+import { GeneralService } from '../general.service';
 
 @Component({
     selector: 'home-page',
     templateUrl: './app/home/home.component.html',
     styleUrls: ['./app/home/home.component.css'],
     entryComponents: [LotListComponent],
-    providers: [CategoryService, LotService, SharedService]
+    providers: [LotService, SharedService, GeneralService]
 })
 
 export class HomeComponent{
@@ -18,7 +18,10 @@ export class HomeComponent{
     errorMessage: any;
     selected_category = "none";
 
-    constructor(private categoryService: CategoryService, private lotService: LotService, private sharedService: SharedService) {
+    constructor(private lotService: LotService,
+        private sharedService: SharedService,
+        private generalService: GeneralService) {
+
         this.getCategories();
         this.getLots();
     }
@@ -32,7 +35,7 @@ export class HomeComponent{
     }
 
     getCategories() {
-        this.categoryService.getCategories()
+        this.generalService.getCategories()
             .subscribe(res => {
                 for (let cat of res) {
                     cat.status = true
