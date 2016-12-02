@@ -10,6 +10,7 @@
 	[EndDate] DATETIME NOT NULL,
 	[CurrencyId] TINYINT NOT NULL,
 	[ClientId] INT NOT NULL,
+	[GoodStateId] INT NOT NULL,
 
 	CONSTRAINT primaryAuctionsKey PRIMARY KEY ([Id]),
 	CONSTRAINT foreignAuctionsToCategoriesKey FOREIGN KEY ([CategoryId])
@@ -17,5 +18,7 @@
 	CONSTRAINT foreignAuctionsToClientsKey FOREIGN KEY ([ClientId])
 		REFERENCES Clients ([Id]),
 	CONSTRAINT foreignAuctionsToCurrenciesKey FOREIGN KEY ([CurrencyId])
-		REFERENCES Currencies ([Id])
+		REFERENCES Currencies ([Id]),
+	CONSTRAINT foreignAuctionsToGoodsStateKey FOREIGN KEY ([GoodStateId])
+		REFERENCES GoodsState ([Id])
 )

@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using InternetAuction.API.Models;
 
 namespace InternetAuction.API.DbContext
@@ -24,6 +25,7 @@ namespace InternetAuction.API.DbContext
             MapCurrencies(modelBuilder);
             MapAuctionsCategories(modelBuilder);
             MapAuctions(modelBuilder);
+            MapGoodStates(modelBuilder);
         }
 
 
@@ -222,6 +224,11 @@ namespace InternetAuction.API.DbContext
                .HasColumnName("ClientId")
                .IsRequired();
 
+            modelBuilder.Entity<Auction>()
+               .Property(x => x.GoodStateId)
+               .HasColumnName("GoodStateId")
+               .IsRequired();
+
             //modelBuilder.Entity<AuctionCategory>()
             //    .Property(x => x.ParentAuctionCategoryId)
             //    .HasColumnName("ParentAuctionCategoryId")
@@ -231,6 +238,23 @@ namespace InternetAuction.API.DbContext
             //    .HasMany(x => x.SubAuctionCategories)
             //    .WithOptional(x => x.ParentAuctionCategory)
             //    .HasForeignKey(x => x.ParentAuctionCategoryId);
+        }
+
+
+        private void MapGoodStates(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<GoodsState>()
+                .ToTable("GoodsState");
+
+            modelBuilder.Entity<GoodsState>()
+                .HasKey(x => x.Id)
+                .HasEntitySetName("Id");
+
+            modelBuilder.Entity<GoodsState>()
+                .Property(x => x.Name)
+                .HasMaxLength(20)
+                .HasColumnName("Name")
+                .IsRequired();
         }
     }
 }
