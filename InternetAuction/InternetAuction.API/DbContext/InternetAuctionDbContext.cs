@@ -255,6 +255,11 @@ namespace InternetAuction.API.DbContext
                 .HasMaxLength(20)
                 .HasColumnName("Name")
                 .IsRequired();
+
+            modelBuilder.Entity<GoodsState>()
+                .HasMany(x => x.Auctions)
+                .WithRequired(x => x.GoodsState)
+                .HasForeignKey(x => x.GoodStateId);
         }
     }
 }

@@ -38,7 +38,7 @@ namespace InternetAuction.API.Controllers
         [Route("GetByClient/{clientId}")]
         public IHttpActionResult GetByClient(int clientId)
         {
-            return Ok(AuctionsRepository.GetAuction(auctionId));
+            return Ok(AuctionsRepository.GetAuctionsByClientId(clientId));
         }
 
 
