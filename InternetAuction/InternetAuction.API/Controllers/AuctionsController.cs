@@ -34,6 +34,14 @@ namespace InternetAuction.API.Controllers
         }
 
 
+        [HttpGet]
+        [Route("GetByClient/{clientId}")]
+        public IHttpActionResult GetByClient(int clientId)
+        {
+            return Ok(AuctionsRepository.GetAuction(auctionId));
+        }
+
+
         [Authorize(Roles = "Client")]
         [HttpPost]
         [Route()]
