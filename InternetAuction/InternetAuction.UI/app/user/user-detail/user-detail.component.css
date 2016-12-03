@@ -30,8 +30,32 @@
     background-color:#D95154
 }
 
-md2-accordion {
-    width:200%;
+.validThru {
+    flex-flow: row wrap;
+}
+
+.validThru md-input {
+    width: 40px;
+}
+
+.addCardForm {
+    display: flex;
+    text-align: left;
+}
+
+.addCardButton {
+    position:absolute;
+    right: 30px;
+    background-color:#D95154
+}
+
+.card-icon {
+    position:absolute;
+    top: 10px;
+}
+
+.card_number {
+    padding-left: 35px;
 }
 
 .value_wrap {
@@ -40,6 +64,10 @@ md2-accordion {
 
 .mar_divs {
     padding: 16px 0px;
+}
+
+.card_handler {
+    width:100%;
 }
 
 .cards_inf{
