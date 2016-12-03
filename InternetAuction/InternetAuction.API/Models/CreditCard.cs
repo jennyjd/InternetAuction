@@ -18,7 +18,7 @@ namespace InternetAuction.API.Models
 
         public byte? CurrencyId { get; set; }
 
-        public int UserId { get; set; }
+        public int ClientId { get; set; }
 
         public Client Client { get; set; }
 

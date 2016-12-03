@@ -49,7 +49,7 @@ namespace InternetAuction.API.Repositories
 
             foreach (var creditCard in clientSignUpModel.CreditCards)
             {
-                creditCard.UserId = client.Id;
+                creditCard.ClientId = client.Id;
             }
             client.CreditCards = CreditCardsRepository.AddCreditCards(clientSignUpModel.CreditCards);
 

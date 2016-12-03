@@ -26,5 +26,9 @@ namespace InternetAuction.API.Models
         public byte CurrencyId { get; set; }
 
         public int ClientId { get; set; }
+
+        public int GoodStateId { get; set; }
+
+        public GoodsState GoodsState { get; set; }
     }
 }

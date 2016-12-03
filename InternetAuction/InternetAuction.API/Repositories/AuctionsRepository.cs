@@ -30,12 +30,19 @@ namespace InternetAuction.API.Repositories
             return _context.Auctions.SingleOrDefault(x => x.Id == auctionId);
         }
 
+
         public Auction AddAuction(Auction auction)
         {
             auction.StartDate = DateTime.UtcNow;
             _context.Auctions.Add(auction);
             _context.SaveChanges();
             return auction;
+        }
+
+
+        public IEnumerable<Auction> GetAuctionsByClientId(int clientId)
+        {
+            return _context.Auctions.Where(x => x.ClientId == clientId);
         }
     }
 }

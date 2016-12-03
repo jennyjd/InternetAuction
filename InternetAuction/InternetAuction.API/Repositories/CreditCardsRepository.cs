@@ -19,6 +19,12 @@ namespace InternetAuction.API.Repositories
         }
 
 
+        public ICollection<CreditCard> GetCreditCards()
+        {
+            return _context.CreditCards.ToList();
+        }
+
+
         public ICollection<CreditCard> AddCreditCards(IEnumerable<CreditCard> creditCards)
         {
             _context.CreditCards.AddRange(creditCards);

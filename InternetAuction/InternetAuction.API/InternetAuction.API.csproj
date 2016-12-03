@@ -167,6 +167,8 @@
     <Compile Include="Controllers\AuctionsCategoriesController.cs" />
     <Compile Include="Controllers\AuctionsController.cs" />
     <Compile Include="Controllers\ClientsController.cs" />
+    <Compile Include="Controllers\CreditCardsController.cs" />
+    <Compile Include="Controllers\CurrenciesController.cs" />
     <Compile Include="Controllers\TestApiController.cs" />
     <Compile Include="DbContext\InternetAuctionIdentityDbContext.cs" />
     <Compile Include="DbContext\InternetAuctionDbContext.cs" />
@@ -181,6 +183,7 @@
     <Compile Include="Infrastructure\Swagger\SwaggerResponseExamplesAttribute.cs" />
     <Compile Include="Models\Auction.cs" />
     <Compile Include="Models\AuctionCategory.cs" />
+    <Compile Include="Models\GoodsState.cs" />
     <Compile Include="Models\InternetAuctionRole.cs" />
     <Compile Include="Models\InternetAuctionUser.cs" />
     <Compile Include="Models\Client.cs" />

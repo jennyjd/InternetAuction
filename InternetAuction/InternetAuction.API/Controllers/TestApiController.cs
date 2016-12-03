@@ -12,6 +12,9 @@ using System.Net.Http;
 using System.IO;
 using System.Net;
 using System.Net.Http.Headers;
+using InternetAuction.API.Infrastructure.Swagger;
+using InternetAuction.API.Infrastructure.Swagger.Examples;
+using Swashbuckle.Swagger.Annotations;
 
 namespace InternetAuction.API.Controllers
 {

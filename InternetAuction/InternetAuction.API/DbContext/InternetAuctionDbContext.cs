@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using InternetAuction.API.Models;
 
 namespace InternetAuction.API.DbContext
@@ -24,6 +25,7 @@ namespace InternetAuction.API.DbContext
             MapCurrencies(modelBuilder);
             MapAuctionsCategories(modelBuilder);
             MapAuctions(modelBuilder);
+            MapGoodStates(modelBuilder);
         }
 
 
@@ -57,7 +59,7 @@ namespace InternetAuction.API.DbContext
             modelBuilder.Entity<Client>()
                 .HasMany(x => x.CreditCards)
                 .WithRequired(x => x.Client)
-                .HasForeignKey(x => x.UserId);
+                .HasForeignKey(x => x.ClientId);
         }
 
 
@@ -72,7 +74,7 @@ namespace InternetAuction.API.DbContext
 
             modelBuilder.Entity<CreditCard>()
                 .Property(x => x.Number)
-                .HasMaxLength(50)
+                .HasMaxLength(16)
                 .HasColumnName("Number")
                 .IsRequired();
 
@@ -105,8 +107,8 @@ namespace InternetAuction.API.DbContext
                 .IsOptional();
 
             modelBuilder.Entity<CreditCard>()
-                .Property(x => x.UserId)
-                .HasColumnName("UserId")
+                .Property(x => x.ClientId)
+                .HasColumnName("ClientId")
                 .IsRequired();
         }
 
@@ -222,6 +224,11 @@ namespace InternetAuction.API.DbContext
                .HasColumnName("ClientId")
                .IsRequired();
 
+            modelBuilder.Entity<Auction>()
+               .Property(x => x.GoodStateId)
+               .HasColumnName("GoodStateId")
+               .IsRequired();
+
             //modelBuilder.Entity<AuctionCategory>()
             //    .Property(x => x.ParentAuctionCategoryId)
             //    .HasColumnName("ParentAuctionCategoryId")
@@ -231,6 +238,28 @@ namespace InternetAuction.API.DbContext
             //    .HasMany(x => x.SubAuctionCategories)
             //    .WithOptional(x => x.ParentAuctionCategory)
             //    .HasForeignKey(x => x.ParentAuctionCategoryId);
+        }
+
+
+        private void MapGoodStates(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<GoodsState>()
+                .ToTable("GoodsState");
+
+            modelBuilder.Entity<GoodsState>()
+                .HasKey(x => x.Id)
+                .HasEntitySetName("Id");
+
+            modelBuilder.Entity<GoodsState>()
+                .Property(x => x.Name)
+                .HasMaxLength(20)
+                .HasColumnName("Name")
+                .IsRequired();
+
+            modelBuilder.Entity<GoodsState>()
+                .HasMany(x => x.Auctions)
+                .WithRequired(x => x.GoodsState)
+                .HasForeignKey(x => x.GoodStateId);
         }
     }
 }
