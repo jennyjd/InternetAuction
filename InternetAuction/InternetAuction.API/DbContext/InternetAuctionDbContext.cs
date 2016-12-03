@@ -59,7 +59,7 @@ namespace InternetAuction.API.DbContext
             modelBuilder.Entity<Client>()
                 .HasMany(x => x.CreditCards)
                 .WithRequired(x => x.Client)
-                .HasForeignKey(x => x.UserId);
+                .HasForeignKey(x => x.ClientId);
         }
 
 
@@ -74,7 +74,7 @@ namespace InternetAuction.API.DbContext
 
             modelBuilder.Entity<CreditCard>()
                 .Property(x => x.Number)
-                .HasMaxLength(50)
+                .HasMaxLength(16)
                 .HasColumnName("Number")
                 .IsRequired();
 
@@ -107,8 +107,8 @@ namespace InternetAuction.API.DbContext
                 .IsOptional();
 
             modelBuilder.Entity<CreditCard>()
-                .Property(x => x.UserId)
-                .HasColumnName("UserId")
+                .Property(x => x.ClientId)
+                .HasColumnName("ClientId")
                 .IsRequired();
         }
 

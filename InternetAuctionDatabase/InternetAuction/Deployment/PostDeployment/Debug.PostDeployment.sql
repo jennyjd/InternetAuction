@@ -10,12 +10,17 @@ Post-Deployment Script Template
 --------------------------------------------------------------------------------------
 */
 
+
 GO
 DELETE FROM AspNetUserRoles
 DELETE FROM AspNetUsers
 DELETE FROM AspNetRoles
 DELETE FROM AuctionsCategories
 DELETE FROM Currencies
+DELETE FROM Clients
+DELETE FROM CreditCards
+DELETE FROM GoodsState
+
 
 GO
 INSERT AspNetRoles 
@@ -24,21 +29,28 @@ VALUES
 (N'0a1fcb13-3dc5-4313-8693-5b91ccec84ec', N'Client', N'InternetAuctionRole'),
 (N'4acfc82d-9387-4d7c-bf77-ff859cff3193', N'Administrator', N'InternetAuctionRole')
 
+
 GO
 INSERT AspNetUsers 
 ([Id], [ClientId], [Email], [EmailConfirmed], [PasswordHash], [SecurityStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEndDateUtc], [LockoutEnabled], [AccessFailedCount], [UserName]) 
 VALUES 
-(N'98ae62c3-9538-4f0a-a2f1-162cb6cc2945', 1, N'client@ia.com', 0, N'AK/CGl6c8mFKGn5vC0kghZpwNaht5Vh2sQ3IMv1/dfCaHQAoyvsi0oUJEeFd9AZdng==', N'793f96a7-07cd-4e2a-b166-5c5ab18f0a2b', NULL, 0, 0, NULL, 0, 0, N'Client'),
 (N'9c9862f5-bc3b-40a9-aeb0-7e1272049ad6', NULL, N'jan@ia.com', 0, N'AK/zw7Fk73J+po05igd28Ycjqq5BGsPMO8RYRjK5LchHNETX58crclMddraexWOdpA==', N'47563f1c-34e4-44d9-8f47-216b260307a5', NULL, 0, 0, NULL, 0, 0, N'Jan'),
-(N'ecb08b9a-91f3-43e0-87eb-8109126c4882', NULL, N'jenny@ia.com', 0, N'AAosuaEci3D4SeD+jm7ge15ES3xU13p2MNjETC/ozISdGMK0Yw14S9TO8Mqhr4WdYA==', N'420338c1-e932-4dac-80ef-bd43ab0baa9d', NULL, 0, 0, NULL, 0, 0, N'Jenny')
+(N'ecb08b9a-91f3-43e0-87eb-8109126c4882', NULL, N'jenny@ia.com', 0, N'AAosuaEci3D4SeD+jm7ge15ES3xU13p2MNjETC/ozISdGMK0Yw14S9TO8Mqhr4WdYA==', N'420338c1-e932-4dac-80ef-bd43ab0baa9d', NULL, 0, 0, NULL, 0, 0, N'Jenny'),
+(N'bb23ed2d-31ac-4fd0-a918-addc403c111f', 1, N'ivan.ivanov@ia.com', 0, N'AHyhUxeVdAeiNsfTy0MTRvU+ssma6g1v3K46waW3mBFOl/Dwy9AYsQ3JQjg9PP87fg==', N'4a8a5186-d268-42d8-abf9-3430e5bedb90', NULL, 0, 0, NULL, 0, 0, N'Ivan'),
+(N'425cf06d-33ec-4e48-813b-bc87a302a5a7', 2, N'peter.petrov@ia.com', 0, N'AJR9yk0/Z6mL6TaMRQqcMDpwdagtA90lPNJ3CtMOZ0u+9KvH6Mv8Z+XD6WYkfsMWbg==', N'16cfa0ff-3598-4ed0-9d02-efa0763e9de6', NULL, 0, 0, NULL, 0, 0, N'Peter'),
+(N'fa3b93fd-a441-44f9-bc8d-bd3aed756817', 3, N'andrey.andreeysky@ia.com', 0, N'AB5wMn//oGZKsxUBqGBQo2AiyVCVUlN0opPuXfPD7Si0Wz5nYb6mYrxtdEObPjIItA==', N'61ebb229-189e-413a-aa5a-05e6e9215365', NULL, 0, 0, NULL, 0, 0, N'Andrey')
+
 
 GO
 INSERT AspNetUserRoles 
 ([UserId], [RoleId]) 
 VALUES 
-(N'98ae62c3-9538-4f0a-a2f1-162cb6cc2945', N'0a1fcb13-3dc5-4313-8693-5b91ccec84ec'),
 (N'9c9862f5-bc3b-40a9-aeb0-7e1272049ad6', N'4acfc82d-9387-4d7c-bf77-ff859cff3193'),
-(N'ecb08b9a-91f3-43e0-87eb-8109126c4882', N'4acfc82d-9387-4d7c-bf77-ff859cff3193')
+(N'ecb08b9a-91f3-43e0-87eb-8109126c4882', N'4acfc82d-9387-4d7c-bf77-ff859cff3193'),
+(N'425cf06d-33ec-4e48-813b-bc87a302a5a7', N'0a1fcb13-3dc5-4313-8693-5b91ccec84ec'),
+(N'bb23ed2d-31ac-4fd0-a918-addc403c111f', N'0a1fcb13-3dc5-4313-8693-5b91ccec84ec'),
+(N'fa3b93fd-a441-44f9-bc8d-bd3aed756817', N'0a1fcb13-3dc5-4313-8693-5b91ccec84ec')
+
 
 GO
 SET IDENTITY_INSERT AuctionsCategories ON
@@ -46,11 +58,14 @@ SET IDENTITY_INSERT AuctionsCategories ON
 INSERT INTO AuctionsCategories 
 (Id, Name, ParentAuctionCategoryId)
 VALUES 
-(1, N'Category1', NULL),
-(2, N'Category2', NULL),
-(3, N'Category3', 1)
+(1, N'Коллекционирование', NULL),
+(2, N'Мебель', NULL),
+(3, N'Одежда', NULL),
+(4, N'Монеты', 1),
+(5, N'Марки', 1)
 
 SET IDENTITY_INSERT AuctionsCategories OFF
+
 
 GO
 SET IDENTITY_INSERT Currencies ON
@@ -63,3 +78,46 @@ VALUES
 (3, N'EUR', N'EUR')
 
 SET IDENTITY_INSERT Currencies OFF
+
+
+GO
+SET IDENTITY_INSERT Clients ON
+
+INSERT INTO Clients 
+(Id, FirstName, LastName, Patronymic)
+VALUES 
+(1, N'Иван', N'Иванов', NULL),
+(2, N'Пётр', N'Петров', NULL),
+(3, N'Андрей', N'Андреевский', NULL)
+
+SET IDENTITY_INSERT Clients OFF
+
+
+GO
+SET IDENTITY_INSERT CreditCards ON
+
+INSERT INTO CreditCards 
+(Id, Number, Cash, ValidTo, OwnerFirstName, OwnerLastName, CurrencyId, ClientId)
+VALUES 
+(1, N'1282237041056833', NULL, N'2021-08-11', N'Иван', N'Иванов', NULL, 1),
+(2, N'7309400641159165', NULL, N'2018-05-21', N'Иван', N'Иванов', NULL, 1),
+(3, N'6246746369166353', NULL, N'2019-01-07', N'Пётр', N'Петров', NULL, 2),
+(4, N'3047580553634127', NULL, N'2021-08-11', N'Андрей', N'Андреевский', NULL, 3),
+(5, N'1736656025872241', NULL, N'2020-08-09', N'Андрей', N'Андреевский', NULL, 3),
+(6, N'8722173641054006', NULL, N'2018-10-25', N'Андрей', N'Андреевский', NULL, 3)
+
+SET IDENTITY_INSERT CreditCards OFF
+
+
+GO
+SET IDENTITY_INSERT GoodsState ON
+
+INSERT INTO GoodsState 
+(Id, Name)
+VALUES 
+(1, N'Отличное'),
+(2, N'Хорошее'),
+(3, N'Нормальное'),
+(4, N'Плохое')
+
+SET IDENTITY_INSERT GoodsState OFF

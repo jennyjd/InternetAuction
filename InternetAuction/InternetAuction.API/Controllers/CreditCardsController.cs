@@ -1,4 +1,5 @@
-﻿using InternetAuction.API.Repositories.Abstractions;
+﻿using InternetAuction.API.Models;
+using InternetAuction.API.Repositories.Abstractions;
 using Ninject;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,18 @@ namespace InternetAuction.API.Controllers
         public IHttpActionResult Get()
         {
             return Ok(CreditCardsRepository.GetCreditCards());
+        }
+
+
+        [HttpPost]
+        [Route("{clientId}")]
+        public IHttpActionResult Post(int clientId, [FromBody]IEnumerable<CreditCard> creditCards)
+        {
+            foreach (var creditCard in creditCards)
+            {
+                creditCard.ClientId = clientId;
+            }
+            return Ok(CreditCardsRepository.AddCreditCards(creditCards));
         }
     }
 }
