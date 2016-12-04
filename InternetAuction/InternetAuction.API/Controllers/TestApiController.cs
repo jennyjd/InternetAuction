@@ -15,6 +15,7 @@ using System.Net.Http.Headers;
 using InternetAuction.API.Infrastructure.Swagger;
 using InternetAuction.API.Infrastructure.Swagger.Examples;
 using Swashbuckle.Swagger.Annotations;
+using Microsoft.AspNet.Identity;
 
 namespace InternetAuction.API.Controllers
 {
@@ -22,6 +23,23 @@ namespace InternetAuction.API.Controllers
     {
         [Inject]
         public ICurrenciesRepository CurrenciesRepository { get; set; }
+
+
+        [HttpGet]
+        public async System.Threading.Tasks.Task<InternetAuctionUser> GetCurrentUser()
+        {
+            var authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
+            var userManager = HttpContext.Current.GetOwinContext().GetUserManager<InternetAuctionUserManager>();
+            var user1 = await userManager.FindAsync("xcv", "1234567");
+            authenticationManager.SignOut();
+            authenticationManager.SignIn(await userManager.CreateIdentityAsync(user1, DefaultAuthenticationTypes.ApplicationCookie));
+
+            InternetAuctionUser user = HttpContext.Current.GetOwinContext()
+                .GetUserManager<InternetAuctionUserManager>()
+                .FindById(HttpContext.Current.User.Identity.GetUserId());
+
+            return (user);
+        }
 
 
         [HttpGet]

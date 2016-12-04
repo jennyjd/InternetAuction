@@ -25,6 +25,7 @@ namespace InternetAuction.API.Controllers
             var authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
             var userManager = HttpContext.Current.GetOwinContext().GetUserManager<InternetAuctionUserManager>();
             var user = await userManager.FindAsync(loginModel.UserName, loginModel.Password);
+            authenticationManager.SignOut();
             authenticationManager.SignIn(await userManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie));
 
             if (user.ClientId.HasValue)
