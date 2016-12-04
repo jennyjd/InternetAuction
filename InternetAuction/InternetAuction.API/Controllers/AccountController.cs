@@ -55,9 +55,10 @@ namespace InternetAuction.API.Controllers
         [Authorize]
         [HttpGet]
         [Route("SignOut")]
-        public void SignOut()
+        public IHttpActionResult SignOut()
         {
             HttpContext.Current.GetOwinContext().Authentication.SignOut();
+            return Ok("SignOut");
         }
     }
 }
