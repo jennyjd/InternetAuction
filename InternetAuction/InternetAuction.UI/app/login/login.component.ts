@@ -24,8 +24,9 @@ export class LoginComponent {
         this.loginService.login(this.model)
                          .subscribe(
                             res => {
-                                console.log(res.Id);
-                                localStorage.setItem('currentUserId', JSON.stringify({ Id: res.Id }));
+                                console.log("Вы вошли в систему");
+                                console.log(res.ClientId);
+                                localStorage.setItem('currentUserId', JSON.stringify({ Id: res.ClientId }));
                                 this.router.navigate(['/']);
                             },
                             error => {

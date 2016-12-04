@@ -23,6 +23,11 @@
             console.error(err);
         });
     </script>
+    <script>
+        $.get("http://localhost:21561/api/testapi/TestAuthorize", function (data) {
+            alert("Data Loaded: " + data);
+        });
+    </script>
     <base href="/" />
 </head>
 <!-- 3. Display the application -->

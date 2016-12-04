@@ -86,7 +86,13 @@ export class AppComponent{
     }
 
     logout() {
-        this.loginService.logout();
+        this.loginService.logout().subscribe(res => {
+            console.log(res);
+            console.log("YOU WERE LOGOUTED");
+            localStorage.removeItem('currentUserId');
+            this.router.navigate(['/']);
+        },
+            error => this.errorMessage = <any>error);
     }
 
     selectUser() {

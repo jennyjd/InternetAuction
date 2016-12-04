@@ -13,7 +13,7 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class LoginService {
     private loginUrl = 'http://localhost:21561/api/account/signin';
-    public token: string;
+    private logoutUrl = 'http://localhost:21561/api/account/signout';
 
     constructor(private http: Http, private router: Router) {
         let currentUserId = JSON.parse(localStorage.getItem('currentUserId'));
@@ -31,15 +31,14 @@ export class LoginService {
             .catch(this.handleError);
     }
 
+    logout() {
+        return this.http.get('http://localhost:21561/api/account/signout')
+            .map(response => response.json())
+            .catch(this.handleError);
+    }
+
     public handleError(error: Response) {
         console.error(error);
         return Observable.throw(error.json().error || 'Server error');
-    }
-
-
-    logout() {
-        console.log("YOU WERE LOGOUTED");
-        localStorage.removeItem('currentUserId');
-        this.router.navigate(['/']);
     }
 }
