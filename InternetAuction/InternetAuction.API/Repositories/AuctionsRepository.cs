@@ -27,7 +27,7 @@ namespace InternetAuction.API.Repositories
 
         public Auction GetAuction(int auctionId)
         {
-            return _context.Auctions.SingleOrDefault(x => x.Id == auctionId);
+            return _context.Auctions.Include("GoodsState").Include("Currency").SingleOrDefault(x => x.Id == auctionId);
         }
 
 
@@ -36,7 +36,7 @@ namespace InternetAuction.API.Repositories
             auction.StartDate = DateTime.UtcNow;
             _context.Auctions.Add(auction);
             _context.SaveChanges();
-            return auction;
+            return GetAuction(auction.Id);
         }
 
 

@@ -46,12 +46,15 @@ namespace InternetAuction.API.Controllers
         public IHttpActionResult Post(ClientSignUpVM client)
         {
             // TODO: throw error if login or email exists
+
+            var newClient = ClientsRepository.AddClient(client);
             var userManager = HttpContext.Current.GetOwinContext().GetUserManager<InternetAuctionUserManager>();
 
             var identityResult = userManager.Create(new InternetAuctionUser
             {
                 UserName = client.Login,
-                Email = client.Email
+                Email = client.Email,
+                ClientId = newClient.Id
             }, client.Password);
 
             if (identityResult.Errors.Any())
@@ -62,7 +65,7 @@ namespace InternetAuction.API.Controllers
 
             userManager.AddToRole(userManager.FindByName(client.Login).Id, "Client");
 
-            return Ok(ClientsRepository.AddClient(client));
+            return Ok(newClient);
         }
     }
 }
