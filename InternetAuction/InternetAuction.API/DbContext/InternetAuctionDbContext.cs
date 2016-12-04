@@ -138,6 +138,11 @@ namespace InternetAuction.API.DbContext
                 .HasMany(x => x.CreditCards)
                 .WithRequired(x => x.Currency)
                 .HasForeignKey(x => x.CurrencyId);
+
+            modelBuilder.Entity<Currency>()
+                .HasMany(x => x.Auctions)
+                .WithRequired(x => x.Currency)
+                .HasForeignKey(x => x.CurrencyId);
         }
 
 
