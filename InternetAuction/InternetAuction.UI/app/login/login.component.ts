@@ -24,7 +24,8 @@ export class LoginComponent {
         this.loginService.login(this.model)
                          .subscribe(
                             res => {
-                                localStorage.setItem('currentUser', JSON.stringify({ username: this.model.username }));
+                                console.log(res.Id);
+                                localStorage.setItem('currentUserId', JSON.stringify({ Id: res.Id }));
                                 this.router.navigate(['/']);
                             },
                             error => {

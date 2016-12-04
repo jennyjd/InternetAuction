@@ -25,6 +25,10 @@
     text-align: -webkit-center;
 }
 
+.subcategory:focus {
+    background-color: lightgrey;
+}
+
 .separator * {
    
 }

@@ -12,7 +12,8 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class GeneralService {
     private categoryUrl = 'http://localhost:21561/api/AuctionsCategories';
-    private getCurrencyUrl = '';
+    private getCurrencyUrl = 'http://localhost:21561/api/Currencies';
+    private getLotStateUrl = '';
 
 
     constructor(private http: Http, private router: Router) {
@@ -26,6 +27,12 @@ export class GeneralService {
 
     getCategories() {
         return this.http.get(this.categoryUrl)
+            .map(response => response.json())
+            .catch(this.handleError);
+    }
+
+    getLotState() {
+        return this.http.get('')
             .map(response => response.json())
             .catch(this.handleError);
     }

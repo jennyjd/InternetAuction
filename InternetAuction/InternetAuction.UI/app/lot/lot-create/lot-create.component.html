@@ -36,16 +36,16 @@
         </div>
 
         <h3>Состояние</h3>
-        <md2-select [(ngModel)]="lot.state" name="state" #state>
-            <md2-option>Хорошее</md2-option>
-            <md2-option>Среднее</md2-option>
-            <md2-option>Плохое</md2-option>
+        <md2-select [(ngModel)]="lot.stateId" name="stateId" #stateId>
+            <md2-option [value]="st.Id" *ngFor="let st of lotState">{{st.Name}}</md2-option>
         </md2-select>
 
         <h3>Дата окончания аукциона</h3>
-        <md2-datepicker [(ngModel)]="lot.Enddate"
-                        name="Enddate"
-                        #Enddate
+        <md2-datepicker [(ngModel)]="lot.endDate"
+                        name="endDate"
+                        #endDate
+                        [min]=""
+                        [max]=""
                         type="date"
                         placeholder="Дата окончания аукциона"
                         format="MM/DD/YYYY">
@@ -58,7 +58,7 @@
                 <ul>
                     <li *ngFor="let category of categories" class="parent-list-item">
                         <div *ngIf="isNotSubcategory(category)">
-                            <button md-button md-raised md-ink-ripple (click)="toggle(category)">
+                            <button type="button" md-button focus (click)="toggle(category)">
                                 <div flex layout="row">
                                     <b>{{category.Name}}</b>
                                     <md-icon>keyboard_arrow_right</md-icon>
@@ -71,7 +71,7 @@
             <div class="subcategory_wrap">
                 <ul *ngIf="ifCategoryIsSelected()">
                     <li *ngFor="let sub of selected_category.SubAuctionCategories">
-                        <button md-button focus md-ink-ripple md-raised class="subcategory" value="{{sub.Name}}" name="category" #category (click)="chooseCategory(sub.Id)">
+                        <button type="button" md-button class="subcategory" value="{{sub.Name}}" (click)="chooseCategory(sub.Id)">
                             <div flex layout="row">
                                 {{sub.Name}}
                             </div>
@@ -83,9 +83,7 @@
 
         <h3>Валюта</h3>
         <md2-select [(ngModel)]="lot.currencyId" name="currencyId" #currencyId>
-            <md2-option>BY</md2-option>
-            <md2-option>USD</md2-option>
-            <md2-option>EUR</md2-option>
+            <md2-option *ngFor="let curr of currency" [value]="curr.Id">{{curr.ShortName}}</md2-option>
         </md2-select>
 
         <h3>Начальная цена</h3>
@@ -94,7 +92,7 @@
         </md-input>
 
         <h3>Описание лота</h3>
-        <textarea></textarea>
+        <textarea [(ngModel)]="lot.description" name="description" #description></textarea>
 
         <button md-button type="submit">Добавить лот</button>
     </form>

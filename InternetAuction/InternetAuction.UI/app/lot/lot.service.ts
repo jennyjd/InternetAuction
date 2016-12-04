@@ -29,7 +29,10 @@ export class LotService {
     }
 
     createLot(lot) {
-        let JSONstr = JSON.stringify({ username: lot.name, password: lot.state });
+        let JSONstr = JSON.stringify({
+            Name: lot.name, Description: lot.description, StartPrice: lot.startPrice, 
+            PriceOfFastSell: null, CategoryId: lot.categoryId, EndDate: "12-07-2016", 
+            CurrencyId: lot.currencyID, ClientId: 4, GoodStateId: lot.stateId});
         console.log("json = " + JSONstr)
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');

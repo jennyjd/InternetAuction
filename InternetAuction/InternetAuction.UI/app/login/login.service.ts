@@ -16,8 +16,8 @@ export class LoginService {
     public token: string;
 
     constructor(private http: Http, private router: Router) {
-        var currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        console.log("Current user: " + currentUser)
+        let currentUserId = JSON.parse(localStorage.getItem('currentUserId'));
+        console.log("Current user Id: " + currentUserId)
     }
 
     login(model) {
@@ -27,7 +27,7 @@ export class LoginService {
         headers.append('Content-Type', 'application/json');
 
         return this.http.post(this.loginUrl, JSONstr, { headers: headers })
-            .map(res => res.ok)
+            .map((res: Response) => res.json())
             .catch(this.handleError);
     }
 
@@ -39,7 +39,7 @@ export class LoginService {
 
     logout() {
         console.log("YOU WERE LOGOUTED");
-        localStorage.removeItem('currentUser');
-        this.router.navigate(['/login']);
+        localStorage.removeItem('currentUserId');
+        this.router.navigate(['/']);
     }
 }

@@ -90,7 +90,7 @@ export class AppComponent{
     }
 
     selectUser() {
-        console.log("SELECTION Current User" + this.userService.getCurrentUser());
+        console.log("SELECTION Current User ID" + this.userService.getCurrentUser());
         this.router.navigate(['/userdetail']);
     }
 
