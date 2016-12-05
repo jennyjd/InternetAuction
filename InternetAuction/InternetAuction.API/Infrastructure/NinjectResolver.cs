@@ -64,6 +64,7 @@ namespace InternetAuction.API.Infrastructure
             kernel.Bind<IAuctionsCategoriesRepository>().To<AuctionsCategoriesRepository>().InSingletonScope();
             kernel.Bind<IAuctionsRepository>().To<AuctionsRepository>().InSingletonScope();
             kernel.Bind<ICreditCardsRepository>().To<CreditCardsRepository>().InSingletonScope();
+            kernel.Bind<IGoodsSateRepository>().To<GoodsSateRepository>().InSingletonScope();
             return kernel;
         }
     }

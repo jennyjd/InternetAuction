@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InternetAuction.UI", "Inter
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InternetAuctionTests", "InternetAuctionTests\InternetAuctionTests.csproj", "{6FBFC939-D5DB-4489-9453-5AF54FDB5C97}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bank.API", "Bank.API\Bank.API.csproj", "{4A2DA1F7-EDC1-49DE-811F-3489A226E7A7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,14 @@ Global
 		{6FBFC939-D5DB-4489-9453-5AF54FDB5C97}.Debug-Jenny|Any CPU.Build.0 = Debug-Jenny|Any CPU
 		{6FBFC939-D5DB-4489-9453-5AF54FDB5C97}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6FBFC939-D5DB-4489-9453-5AF54FDB5C97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A2DA1F7-EDC1-49DE-811F-3489A226E7A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A2DA1F7-EDC1-49DE-811F-3489A226E7A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A2DA1F7-EDC1-49DE-811F-3489A226E7A7}.Debug-Jan|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A2DA1F7-EDC1-49DE-811F-3489A226E7A7}.Debug-Jan|Any CPU.Build.0 = Debug|Any CPU
+		{4A2DA1F7-EDC1-49DE-811F-3489A226E7A7}.Debug-Jenny|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A2DA1F7-EDC1-49DE-811F-3489A226E7A7}.Debug-Jenny|Any CPU.Build.0 = Debug|Any CPU
+		{4A2DA1F7-EDC1-49DE-811F-3489A226E7A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A2DA1F7-EDC1-49DE-811F-3489A226E7A7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

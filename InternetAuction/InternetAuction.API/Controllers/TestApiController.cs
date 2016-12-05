@@ -26,19 +26,19 @@ namespace InternetAuction.API.Controllers
 
 
         [HttpGet]
-        public async System.Threading.Tasks.Task<InternetAuctionUser> GetCurrentUser()
+        public IHttpActionResult GetCurrentUser()
         {
             var authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
             var userManager = HttpContext.Current.GetOwinContext().GetUserManager<InternetAuctionUserManager>();
-            var user1 = await userManager.FindAsync("xcv", "1234567");
+            var user1 = userManager.Find("xcv", "1234567");
             authenticationManager.SignOut();
-            authenticationManager.SignIn(await userManager.CreateIdentityAsync(user1, DefaultAuthenticationTypes.ApplicationCookie));
+            authenticationManager.SignIn(userManager.CreateIdentity(user1, DefaultAuthenticationTypes.ApplicationCookie));
 
             InternetAuctionUser user = HttpContext.Current.GetOwinContext()
                 .GetUserManager<InternetAuctionUserManager>()
                 .FindById(HttpContext.Current.User.Identity.GetUserId());
 
-            return (user);
+            return Ok(user);
         }
 
 

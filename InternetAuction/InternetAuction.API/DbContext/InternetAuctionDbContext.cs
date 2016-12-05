@@ -16,6 +16,7 @@ namespace InternetAuction.API.DbContext
         public DbSet<Currency> Currencies { get; set; }
         public DbSet<AuctionCategory> AuctionsCategories { get; set; }
         public DbSet<Auction> Auctions { get; set; }
+        public DbSet<GoodsState> GoodStates { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -25,7 +26,7 @@ namespace InternetAuction.API.DbContext
             MapCurrencies(modelBuilder);
             MapAuctionsCategories(modelBuilder);
             MapAuctions(modelBuilder);
-            MapGoodStates(modelBuilder);
+            MapGoodsStates(modelBuilder);
         }
 
 
@@ -246,7 +247,7 @@ namespace InternetAuction.API.DbContext
         }
 
 
-        private void MapGoodStates(DbModelBuilder modelBuilder)
+        private void MapGoodsStates(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<GoodsState>()
                 .ToTable("GoodsState");
