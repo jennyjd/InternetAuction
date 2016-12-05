@@ -4,23 +4,43 @@
             <h2>{{selected_lot.Name}}</h2>
         </md-card>
         <md-card class="content">
-            <div class="images_wrap">
-                <h3>ФОТОГРАФИИ</h3>
+            <div class="main_information">
+                <div class="images_wrap">
+                    <div class="separator">
+                        <div class="image_viewer center_image">
+                            <span></span><img src={{mainPicture}} />
+                        </div>
+                        <!--solve vertical align problem (display:inline-flex)-->
+                        <div class="other_images_container">
+                            <!--*ngFor="let image of pictures"-->
+                            <div class="other_images center_image" (click)="changeMainPicture(image)">
+                                <span></span><img src={{image}} />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bet_wrap">
+                    <h3>Текущая цена:</h3>
+                    <!--изменить на текущую цену-->
+                    {{selected_lot.StartPrice}}
+                    <md-input placeholder="Ставка" [(ngModel)]="model.bet" #bet name="bet"></md-input>
+                    <button md-icon-button class="md-mini md-primary" aria-label="view">
+                        <md-icon>gavel</md-icon>
+                    </button>
+                    <h3>Дата окончания аукциона</h3>
+                    <p>{{selected_lot.EndDate}}</p>
+                </div>
             </div>
-            <div class="bet_wrap">
-                <md-input placeholder="Ставка" [(ngModel)]="model.bet" #bet name="bet"></md-input>
-                <button md-icon-button class="md-mini md-primary" aria-label="view">
-                    <md-icon>gavel</md-icon>
-                </button>
+            <div class="description">
                 <h3>Описание</h3>
                 <p>{{selected_lot.Description}}</p>
-                <h3>Дата окончания аукциона</h3>
-                <p>{{selected_lot.EndDate}}</p>
             </div>
         </md-card>
     </div>
 
     <md-card class="seller_information">
         <h3>Информация об аукционисте</h3>
+        <p>{{userInformation.FirstName}}</p>
+        <p>{{userInformation.LastName}}</p>
     </md-card>
 </div>

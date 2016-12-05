@@ -11,6 +11,11 @@
     min-height: 350px;
 }
 
+md-card-title {
+    margin: 7px 0px;
+    font-size: 15px !important;
+}
+
 .lot_details{
     position: absolute;
     right: 5%;
@@ -46,7 +51,7 @@ md-card:hover{
 .image_container img{
     height: auto; 
     width: auto; 
-    max-width: 190px; 
+    max-width: 188px; 
     max-height: 190px;
 }
 

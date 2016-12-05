@@ -12,19 +12,19 @@ import { SharedService } from '../shared.service';
 
 export class LotComponent implements DoCheck {
     //@Input() selected: string;
-    @Input() lotitem: Lot;
-    selected = "none";
+    @Input() lotitem: any;
+    selectedCategoryId = "none";
 
     constructor(private router: Router, private sharedService: SharedService) {
     }
 
     ngDoCheck() {
-        this.selected = this.sharedService.getSelected();
+        this.selectedCategoryId = this.sharedService.getSelected();
     }
 
-    view_details(lotitem: Lot) {
+    view_details(lotitem) {
         lotitem.visible_items = false;
-        this.router.navigate(['/lotdetail', lotitem.id]);
+        this.router.navigate(['/lotdetail', lotitem.Id]);
     }
 
     over(lotitem) {

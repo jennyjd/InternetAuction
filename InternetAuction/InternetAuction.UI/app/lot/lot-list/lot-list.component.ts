@@ -2,19 +2,52 @@
 import { LotComponent } from '../lot.component'
 import { Lot } from '../lot'
 
+import { LotService } from '../lot.service';
+import { UserService } from '../../user/user.service';;
+
 @Component({
     selector: 'lot-list',
     templateUrl: './app/lot/lot-list/lot-list.component.html',
     styleUrls: ['./app/lot/lot-list/lot-list.component.css'],
-    entryComponents: [LotComponent]
+    entryComponents: [LotComponent],
+    providers: [LotService, UserService]
 })
 
 export class LotListComponent {
-    lots = LOTS;
+    //lots = LOTS;
+    errorMessage: any;
+    lots: any[] = [];
     //@Input() selected: string;
+
+    constructor(private lotService: LotService, private userService: UserService) {
+        this.getLots();
+        console.log(this.lots);
+    }
+
+    getLots() {
+        this.lotService.getLots()
+            .subscribe(res => {
+                console.log(res);
+                this.addData(res);
+            },
+            error => this.errorMessage = <any>error);
+    }
+
+    addData(res) {
+        for (let lot of res) {
+            this.userService.getUserById(lot.ClientId)
+                .subscribe(res => {
+                    console.log(res);
+                    lot.userLogin = res.FirstName;
+                    lot.mainPicture = "https://pp.vk.me/c419225/v419225009/6e41/vv2MqgXalNw.jpg";
+                    this.lots.push(lot);    
+                },
+                error => this.errorMessage = <any>error)
+        }; 
+    }
 }
 
-let LOTS: Lot[] = [
+/*let LOTS: Lot[] = [
     {
         id: 1,
         title: "Комод",
@@ -77,4 +110,4 @@ let LOTS: Lot[] = [
         category: "Скульптура",
         visible_items: false,
         picture_url: "http://img.alicdn.com/imgextra/i1/T16fqKXnRyXXXmHsw9_102642.jpg"
-    }]
+    }]*/

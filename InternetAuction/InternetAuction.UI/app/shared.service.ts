@@ -4,9 +4,10 @@
 @Injectable()
 export class SharedService {
 
-    saveSelected(str) {
-        localStorage.setItem('selected_category', JSON.stringify({ selected: str }));
+    saveSelected(categoryId) {
+        localStorage.setItem('selected_category', JSON.stringify({ selected: categoryId }));
     }
+
     getSelected() {
         let sel = JSON.parse(localStorage.getItem('selected_category'));
         return sel.selected

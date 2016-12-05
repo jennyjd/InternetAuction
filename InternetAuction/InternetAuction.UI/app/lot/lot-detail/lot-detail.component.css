@@ -5,22 +5,29 @@
     margin: 16px auto;
     padding:0;
     display: flex;
-    width: 80%;
-    min-width: 900px;
+    width: 70%;
+    min-width: 940px;
 }
 
 .content {
     display:flex;
     min-height: 350px;
+    flex-flow: row wrap;
 }
 
 .images_wrap {
-    width:60%;
-    border: 1px solid red;
+    width:50%;
+}
+
+.main_information {
+    width: 100%;
+    height: 375px;
+    display: inline-flex;
+    border-bottom: 1px solid lightgrey;
 }
 
 .bet_wrap {
-    width: 40%;
+    width: 50%;
     padding: 0px 24px;
 }
 
@@ -33,10 +40,48 @@
     margin-bottom:3px;
     padding: 8px 24px;
     min-height: 50px;
-    font-size: 25px;
+    font-size: 18px;
+    text-align:end;
 }
 
 .seller_information {
     width:25%;
     min-height: 300px;
+}
+
+.separator {
+    margin: 0px 5px 0px 5px;
+    flex-flow: row wrap;
+    text-align: -webkit-center;
+}
+
+.other_images_container {
+    display:inline-flex;
+}
+
+.center_image {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.center_image *{
+    vertical-align: middle;
+}
+
+.center_image img {
+    height: auto;
+    width: auto;
+}
+
+.image_viewer {
+    margin: 0px 50px;
+    height: 267px;
+    width: 267px;
+    border: 1px solid lightgrey;
+    border-radius: 3px;
+}
+
+.image_viewer * {
+    vertical-align: middle;
 }

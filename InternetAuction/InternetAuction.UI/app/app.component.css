@@ -5,11 +5,12 @@
 .logo_wrap{
     width: 90%;
     padding: 20px 10px;
+    text-align: center;
     border-bottom: 1px solid #333333;
 }
 
 md-sidenav {
-    width: 200px;
+    width: 225px;
     height: 100%;
 }
 

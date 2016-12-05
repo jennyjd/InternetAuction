@@ -23,15 +23,6 @@ export class HomeComponent{
         private generalService: GeneralService) {
 
         this.getCategories();
-        this.getLots();
-    }
-
-    getLots() {
-        this.lotService.getLots()
-            .subscribe(res => {
-                console.log(res);
-            },
-            error => this.errorMessage = <any>error);
     }
 
     getCategories() {

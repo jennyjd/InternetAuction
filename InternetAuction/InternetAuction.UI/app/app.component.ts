@@ -18,7 +18,7 @@ import { GeneralService } from './general.service';
 export class AppComponent{
     menu: any[] = [];
     errorMessage: any;
-    selected_category = "none";
+    selectedCategoryId = "none";
     opened_sidebar: boolean;
 
     currentUser: any;
@@ -64,9 +64,9 @@ export class AppComponent{
         menu_element.status = !menu_element.status
     }
 
-    selectCategory(category) {
-        this.selected_category = category;
-        this.sharedService.saveSelected(category);
+    selectCategory(categoryId) {
+        this.selectedCategoryId = categoryId;
+        this.sharedService.saveSelected(this.selectedCategoryId);
     }
 
     isNotSubcategory(category) {
@@ -76,13 +76,6 @@ export class AppComponent{
 
     changeSidnav() {
         this.opened_sidebar = !this.opened_sidebar;
-    }
-
-    isCategorySelected(category) {
-        if (this.selected_category == category) {
-            return true
-        }
-        return false
     }
 
     logout() {

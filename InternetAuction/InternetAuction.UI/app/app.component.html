@@ -41,7 +41,7 @@
             <md2-accordion-tab *ngIf="isNotSubcategory(menuel)">
                 <md2-accordion-header>{{menuel.Name}}</md2-accordion-header>
                 <li *ngFor="let sub of menuel.SubAuctionCategories">
-                    <button md-button focus md-ink-ripple md-raised class="subcategory" (click)="selectCategory(sub.Name)">
+                    <button md-button focus md-ink-ripple md-raised class="subcategory" (click)="selectCategory(sub.Id)">
                         {{sub.Name}}
                     </button>
                 </li>
