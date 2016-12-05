@@ -18,7 +18,7 @@ namespace InternetAuction.API.Controllers
 
 
         [HttpGet]
-        [Route()]
+        [Route]
         public IHttpActionResult Get()
         {
             return Ok(AuctionsCategoriesRepository.GetAuctionCategories().ToList());

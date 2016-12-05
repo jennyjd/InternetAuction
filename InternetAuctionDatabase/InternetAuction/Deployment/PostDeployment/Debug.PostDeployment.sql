@@ -15,6 +15,7 @@ GO
 DELETE FROM AspNetUserRoles
 DELETE FROM AspNetUsers
 DELETE FROM AspNetRoles
+DELETE FROM Auctions
 DELETE FROM AuctionsCategories
 DELETE FROM Currencies
 DELETE FROM Clients

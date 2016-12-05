@@ -9,8 +9,8 @@ using System.Web.Http;
 
 namespace InternetAuction.API.Controllers
 {
-    [RoutePrefix("api/GoodsSate")]
-    public class GoodsSateController : ApiController
+    [RoutePrefix("api/GoodsState")]
+    public class GoodsStateController : ApiController
     {
         [Inject]
         public IGoodsSateRepository GoodsSateRepository { get; set; }

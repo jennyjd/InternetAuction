@@ -29,6 +29,8 @@ namespace InternetAuction.API.Models
 
         public int GoodStateId { get; set; }
 
+        public bool IsCompleted { get; set; }
+
         public GoodsState GoodsState { get; set; }
 
         public Currency Currency { get; set; }

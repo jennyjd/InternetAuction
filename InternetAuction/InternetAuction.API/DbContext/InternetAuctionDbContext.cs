@@ -235,6 +235,11 @@ namespace InternetAuction.API.DbContext
                .HasColumnName("GoodStateId")
                .IsRequired();
 
+            modelBuilder.Entity<Auction>()
+               .Property(x => x.IsCompleted)
+               .HasColumnName("IsCompleted")
+               .IsRequired();
+
             //modelBuilder.Entity<AuctionCategory>()
             //    .Property(x => x.ParentAuctionCategoryId)
             //    .HasColumnName("ParentAuctionCategoryId")
