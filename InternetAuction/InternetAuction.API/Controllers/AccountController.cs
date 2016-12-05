@@ -37,7 +37,8 @@ namespace InternetAuction.API.Controllers
                     FirstName = client.FirstName,
                     LastName = client.LastName,
                     Patronymic = client.Patronymic,
-                    Email = user.Email
+                    Email = user.Email,
+                    UserName = user.UserName
                 });
             }
             else

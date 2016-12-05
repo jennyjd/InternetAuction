@@ -32,6 +32,22 @@ namespace InternetAuction.API.Controllers
         }
 
 
+        [HttpGet]
+        [Route("GetClientAccount/{clientId}")]
+        public IHttpActionResult GetClientAccount(int clientId)
+        {
+            var userManager = HttpContext.Current.GetOwinContext().GetUserManager<InternetAuctionUserManager>();
+            var user = userManager.Users.SingleOrDefault(x => x.ClientId == clientId);
+
+            return Ok(new
+            {
+                ClientId = user.ClientId,
+                Email = user.Email,
+                UserName = user.UserName
+            });
+        }
+
+
         /// <summary>
         /// Used for clients registration in the system
         /// </summary>

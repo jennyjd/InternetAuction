@@ -4,6 +4,7 @@ using InternetAuction.API.Repositories.Abstractions;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Ninject;
+using System;
 using System.Linq;
 using System.Net.Http;
 using System.Web;
@@ -47,13 +48,18 @@ namespace InternetAuction.API.Controllers
         [Route]
         public IHttpActionResult Post(Auction auction)
         {
-            InternetAuctionUser user = HttpContext.Current.GetOwinContext()
-                .GetUserManager<InternetAuctionUserManager>()
-                .FindById(HttpContext.Current.User.Identity.GetUserId());
+            if (auction.EndDate > DateTime.Now)
+            {
+                InternetAuctionUser user = HttpContext.Current.GetOwinContext()
+                    .GetUserManager<InternetAuctionUserManager>()
+                    .FindById(HttpContext.Current.User.Identity.GetUserId());
 
-            auction.ClientId = user.ClientId.Value;
+                auction.ClientId = user.ClientId.Value;
 
-            return Ok(AuctionsRepository.AddAuction(auction));
+                return Ok(AuctionsRepository.AddAuction(auction));
+            }
+
+            return BadRequest("Invalid Data");
         }
     }
 }

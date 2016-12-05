@@ -33,6 +33,7 @@ namespace InternetAuction.API.Repositories
 
         public Auction AddAuction(Auction auction)
         {
+            auction.IsCompleted = false;
             auction.StartDate = DateTime.UtcNow;
             _context.Auctions.Add(auction);
             _context.SaveChanges();

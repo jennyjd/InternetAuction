@@ -11,6 +11,7 @@
 	[CurrencyId] TINYINT NOT NULL,
 	[ClientId] INT NOT NULL,
 	[GoodStateId] INT NOT NULL,
+	[IsCompleted] BIT NOT NULL
 
 	CONSTRAINT primaryAuctionsKey PRIMARY KEY ([Id]),
 	CONSTRAINT foreignAuctionsToCategoriesKey FOREIGN KEY ([CategoryId])
