@@ -19,14 +19,31 @@ namespace InternetAuction.API.Repositories
         }
 
 
+        private void CheckIfAuctionsCompleted(IEnumerable<Auction> auctions)
+        {
+            foreach(var auction in auctions)
+            {
+                // TODO: check winner
+                if (auction.EndDate >= DateTime.Now)
+                {
+                    auction.IsCompleted = true;
+                }
+            }
+        }
+
+
         public IEnumerable<Auction> GetAuctions()
         {
+            CheckIfAuctionsCompleted(_context.Auctions);
+            _context.SaveChanges();
             return _context.Auctions;
         }
 
 
         public Auction GetAuction(int auctionId)
         {
+            CheckIfAuctionsCompleted(_context.Auctions);
+            _context.SaveChanges();
             return _context.Auctions.Include("GoodsState").Include("Currency").SingleOrDefault(x => x.Id == auctionId);
         }
 
@@ -43,6 +60,8 @@ namespace InternetAuction.API.Repositories
 
         public IEnumerable<Auction> GetAuctionsByClientId(int clientId)
         {
+            CheckIfAuctionsCompleted(_context.Auctions);
+            _context.SaveChanges();
             return _context.Auctions.Where(x => x.ClientId == clientId);
         }
     }
