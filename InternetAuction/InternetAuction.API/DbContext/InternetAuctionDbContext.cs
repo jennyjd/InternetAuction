@@ -17,6 +17,7 @@ namespace InternetAuction.API.DbContext
         public DbSet<AuctionCategory> AuctionsCategories { get; set; }
         public DbSet<Auction> Auctions { get; set; }
         public DbSet<GoodsState> GoodStates { get; set; }
+        public DbSet<AuctionHistory> AuctionsHistory { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -27,6 +28,7 @@ namespace InternetAuction.API.DbContext
             MapAuctionsCategories(modelBuilder);
             MapAuctions(modelBuilder);
             MapGoodsStates(modelBuilder);
+            MapAuctionsHistory(modelBuilder);
         }
 
 
@@ -271,6 +273,47 @@ namespace InternetAuction.API.DbContext
                 .HasMany(x => x.Auctions)
                 .WithRequired(x => x.GoodsState)
                 .HasForeignKey(x => x.GoodStateId);
+        }
+
+
+        private void MapAuctionsHistory(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<AuctionHistory>()
+                .ToTable("AuctionsHistory");
+
+            modelBuilder.Entity<AuctionHistory>()
+                .HasKey(x => x.Id)
+                .HasEntitySetName("Id");
+
+            modelBuilder.Entity<AuctionHistory>()
+                .Property(x => x.ClientId)
+                .HasColumnName("ClientId")
+                .IsRequired();
+
+            modelBuilder.Entity<AuctionHistory>()
+                .Property(x => x.AuctionId)
+                .HasColumnName("AuctionId")
+                .IsRequired();
+
+            modelBuilder.Entity<AuctionHistory>()
+               .Property(x => x.CreditCardId)
+               .HasColumnName("CreditCardId")
+               .IsRequired();
+
+            modelBuilder.Entity<AuctionHistory>()
+               .Property(x => x.CurrencyId)
+               .HasColumnName("CurrencyId")
+               .IsRequired();
+
+            modelBuilder.Entity<AuctionHistory>()
+               .Property(x => x.Sum)
+               .HasColumnName("Sum")
+               .IsRequired();
+
+            modelBuilder.Entity<AuctionHistory>()
+               .Property(x => x.Date)
+               .HasColumnName("Date")
+               .IsRequired();
         }
     }
 }

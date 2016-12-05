@@ -1,5 +1,6 @@
 ﻿using InternetAuction.API.Models;
 using InternetAuction.API.Repositories.Abstractions;
+using InternetAuction.API.ViewModels;
 using Ninject;
 using System;
 using System.Collections.Generic;

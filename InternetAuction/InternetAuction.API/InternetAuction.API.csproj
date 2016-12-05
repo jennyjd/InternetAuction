@@ -184,6 +184,7 @@
     <Compile Include="Infrastructure\Swagger\SwaggerResponseExamplesAttribute.cs" />
     <Compile Include="Models\Auction.cs" />
     <Compile Include="Models\AuctionCategory.cs" />
+    <Compile Include="Models\AuctionHistory.cs" />
     <Compile Include="Models\GoodsState.cs" />
     <Compile Include="Models\InternetAuctionRole.cs" />
     <Compile Include="Models\InternetAuctionUser.cs" />
@@ -192,12 +193,14 @@
     <Compile Include="Models\Currency.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Abstractions\IAuctionsCategoriesRepository.cs" />
+    <Compile Include="Repositories\Abstractions\IAuctionsHistoryRepository.cs" />
     <Compile Include="Repositories\Abstractions\IAuctionsRepository.cs" />
     <Compile Include="Repositories\Abstractions\IClientsRepository.cs" />
     <Compile Include="Repositories\Abstractions\ICreditCardsRepository.cs" />
     <Compile Include="Repositories\Abstractions\ICurrenciesRepository.cs" />
     <Compile Include="Repositories\Abstractions\IGoodsSateRepository.cs" />
     <Compile Include="Repositories\AuctionsCategoriesRepository.cs" />
+    <Compile Include="Repositories\AuctionsHistoryRepository.cs" />
     <Compile Include="Repositories\AuctionsRepository.cs" />
     <Compile Include="Repositories\ClientsRepository.cs" />
     <Compile Include="Repositories\CreditCardsRepository.cs" />
@@ -206,6 +209,8 @@
     <Compile Include="Repositories\GoodsSateRepository.cs" />
     <Compile Include="Services\Constants.cs" />
     <Compile Include="ViewModels\AdministratorVM.cs" />
+    <Compile Include="ViewModels\BetResponseVM.cs" />
+    <Compile Include="ViewModels\BetVM.cs" />
     <Compile Include="ViewModels\Clients\ClientBase.cs" />
     <Compile Include="ViewModels\Clients\ClientSignUpVM.cs" />
     <Compile Include="ViewModels\LoginModelVM.cs" />
@@ -213,6 +218,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+    <None Include="Properties\PublishProfiles\InternetAuction.pubxml" />
     <None Include="Web.Debug-Jan.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

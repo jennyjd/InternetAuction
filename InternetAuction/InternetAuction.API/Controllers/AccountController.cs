@@ -25,31 +25,36 @@ namespace InternetAuction.API.Controllers
             var authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
             var userManager = HttpContext.Current.GetOwinContext().GetUserManager<InternetAuctionUserManager>();
             var user = await userManager.FindAsync(loginModel.UserName, loginModel.Password);
-            authenticationManager.SignOut();
-            authenticationManager.SignIn(await userManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie));
+            if (user != null)
+            {
+                authenticationManager.SignOut();
+                authenticationManager.SignIn(await userManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie));
 
-            if (user.ClientId.HasValue)
-            {
-                var client = ClientsRepository.GetClient(user.ClientId.Value);
-                return Ok(new ClientVM
+                if (user.ClientId.HasValue)
                 {
-                    ClientId = client.Id,
-                    FirstName = client.FirstName,
-                    LastName = client.LastName,
-                    Patronymic = client.Patronymic,
-                    Email = user.Email,
-                    UserName = user.UserName
-                });
-            }
-            else
-            {
-                return Ok(new AdministratorVM
+                    var client = ClientsRepository.GetClient(user.ClientId.Value);
+                    return Ok(new ClientVM
+                    {
+                        ClientId = client.Id,
+                        FirstName = client.FirstName,
+                        LastName = client.LastName,
+                        Patronymic = client.Patronymic,
+                        Email = user.Email,
+                        UserName = user.UserName
+                    });
+                }
+                else
                 {
-                    Id = user.Id,
-                    UserName = user.UserName,
-                    Email = user.Email
-                });
+                    return Ok(new AdministratorVM
+                    {
+                        Id = user.Id,
+                        UserName = user.UserName,
+                        Email = user.Email
+                    });
+                }
             }
+
+            return BadRequest("Invalid UserName or Password");
         }
 
 
