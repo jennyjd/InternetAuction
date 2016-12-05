@@ -18,8 +18,8 @@ DELETE FROM AspNetRoles
 DELETE FROM Auctions
 DELETE FROM AuctionsCategories
 DELETE FROM Currencies
-DELETE FROM Clients
 DELETE FROM CreditCards
+DELETE FROM Clients
 DELETE FROM GoodsState
 
 
