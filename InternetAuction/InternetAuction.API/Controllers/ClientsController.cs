@@ -42,7 +42,7 @@ namespace InternetAuction.API.Controllers
         //[SwaggerResponseExamples(typeof(ClientSignUpVM), typeof(ClientExample))]
         [AllowAnonymous]
         [HttpPost]
-        [Route()]
+        [Route]
         public IHttpActionResult Post(ClientSignUpVM client)
         {
             // TODO: throw error if login or email exists

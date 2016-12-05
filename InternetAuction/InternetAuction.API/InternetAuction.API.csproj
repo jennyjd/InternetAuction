@@ -169,7 +169,7 @@
     <Compile Include="Controllers\ClientsController.cs" />
     <Compile Include="Controllers\CreditCardsController.cs" />
     <Compile Include="Controllers\CurrenciesController.cs" />
-    <Compile Include="Controllers\GoodsSateController.cs" />
+    <Compile Include="Controllers\GoodsStateController.cs" />
     <Compile Include="Controllers\TestApiController.cs" />
     <Compile Include="DbContext\InternetAuctionIdentityDbContext.cs" />
     <Compile Include="DbContext\InternetAuctionDbContext.cs" />

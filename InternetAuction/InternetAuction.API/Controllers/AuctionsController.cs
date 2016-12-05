@@ -19,7 +19,7 @@ namespace InternetAuction.API.Controllers
 
 
         [HttpGet]
-        [Route()]
+        [Route]
         public IHttpActionResult Get()
         {
             return Ok(AuctionsRepository.GetAuctions().ToList());
@@ -44,7 +44,7 @@ namespace InternetAuction.API.Controllers
 
         [Authorize(Roles = "Client")]
         [HttpPost]
-        [Route()]
+        [Route]
         public IHttpActionResult Post(Auction auction)
         {
             InternetAuctionUser user = HttpContext.Current.GetOwinContext()
