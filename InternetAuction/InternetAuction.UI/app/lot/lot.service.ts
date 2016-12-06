@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Headers, RequestOptions, RequestMethod, Request} from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
+import { Constant } from '../globals';
 
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/map';
@@ -11,7 +12,7 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class LotService {
-    private lotsUrl = 'http://localhost:21561/api/Auctions';
+    private lotsUrl = `${Constant.apiEndpoint}/Auctions`;
 
     constructor(private http: Http) {
     }

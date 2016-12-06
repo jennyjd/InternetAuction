@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Headers, RequestOptions } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
+import { Constant } from './globals';
 
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/map';
@@ -11,8 +12,8 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class GeneralService {
-    private categoryUrl = 'http://localhost:21561/api/AuctionsCategories';
-    private getCurrencyUrl = 'http://localhost:21561/api/Currencies';
+    private categoryUrl = `${Constant.apiEndpoint}/AuctionsCategories`;
+    private getCurrencyUrl = `${Constant.apiEndpoint}/Currencies`;
     private getLotStateUrl = '';
 
 

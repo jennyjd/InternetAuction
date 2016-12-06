@@ -5,6 +5,7 @@ import { Headers, RequestOptions } from '@angular/http';
 
 import { User } from '../user/user';
 import { Observable } from 'rxjs/Observable';
+import { Constant } from '../globals';
 
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/map';
@@ -12,8 +13,8 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class LoginService {
-    private loginUrl = 'http://localhost:21561/api/account/signin';
-    private logoutUrl = 'http://localhost:21561/api/account/signout';
+    private loginUrl = `${Constant.apiEndpoint}/account/signin`;
+    private logoutUrl = `${Constant.apiEndpoint}/account/signout`;
 
     constructor(private http: Http, private router: Router) {
         let currentUserId = JSON.parse(localStorage.getItem('currentUserId'));

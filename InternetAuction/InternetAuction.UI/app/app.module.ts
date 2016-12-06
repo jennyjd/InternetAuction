@@ -24,7 +24,6 @@ import { MdToolbarModule } from '@angular2-material/toolbar';
 import { MdListModule } from '@angular2-material/list';
 import { MdInputModule } from '@angular2-material/input';
 import { MdIconRegistry } from '@angular2-material/icon';
-import { MdRadioModule } from '@angular2-material/radio';
 import { Md2Module } from 'md2';
 
 import { ImageUploadModule } from 'angular2-image-upload';
@@ -33,7 +32,7 @@ import { routing, appRoutingProviders } from './app.routing'
 
 @NgModule({
     imports: [BrowserModule, MdCardModule, MdButtonModule, MdIconModule, MdSidenavModule, MdToolbarModule,
-        MdListModule, MdInputModule, routing, FormsModule, MdRadioModule, ImageUploadModule.forRoot(), Md2Module.forRoot()],
+        MdListModule, MdInputModule, routing, FormsModule, ImageUploadModule.forRoot(), Md2Module.forRoot()],
     declarations: [AppComponent, LotComponent, LotListComponent, LoginComponent, HomeComponent, RegistrationComponent,
         UserDetailsComponent, LotCreateComponent, LotDetailComponent],
     bootstrap: [AppComponent],

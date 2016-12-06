@@ -2,6 +2,7 @@
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
+import { Constant } from '../globals';
 
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/map';
@@ -9,8 +10,8 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class UserService {
-    private createURL = 'http://localhost:21561/api/clients';
-    private getUserURL = 'http://localhost:21561/api/clients/GetClientAccount';
+    private createURL = `${Constant.apiEndpoint}/clients`;
+    private getUserURL = `${Constant.apiEndpoint}/clients/GetClientAccount`;
     constructor(private http: Http) { }
 
     create(user, credit) {
