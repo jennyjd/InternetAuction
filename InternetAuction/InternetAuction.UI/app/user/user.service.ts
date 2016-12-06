@@ -10,8 +10,8 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class UserService {
-    private createURL = `${Constant.apiEndpoint}/clients`;
-    private getUserURL = `${Constant.apiEndpoint}/clients/GetClientAccount`;
+    private userURL = `${Constant.apiEndpoint}/clients`;
+    private getAccountURL = `${Constant.apiEndpoint}/clients/GetClientAccount`;//?
     constructor(private http: Http) { }
 
     create(user, credit) {
@@ -28,13 +28,19 @@ export class UserService {
 
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
-        return this.http.post(this.createURL, UserJSON, { headers: headers })
+        return this.http.post(this.userURL, UserJSON, { headers: headers })
             .map(res => res)
             .catch(this.handleError);
     }
 
     getUserById(id) {
-        return this.http.get(`${this.getUserURL}/${id}`)
+        return this.http.get(`${this.userURL}/${id}`)
+            .map(response => response.json())
+            .catch(this.handleError);
+    }
+
+    getUserAccountById(id) {
+        return this.http.get(`${this.getAccountURL}/${id}`)
             .map(response => response.json())
             .catch(this.handleError);
     }

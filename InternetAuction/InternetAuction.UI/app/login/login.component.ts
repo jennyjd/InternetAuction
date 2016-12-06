@@ -22,15 +22,15 @@ export class LoginComponent {
         this.errorMessage = '';
         console.log(this.model.username, this.model.password);
         this.loginService.login(this.model)
-                         .subscribe(
-                            res => {
-                                console.log("Вы вошли в систему");
-                                console.log(res.ClientId);
-                                localStorage.setItem('currentUserId', JSON.stringify({ Id: res.ClientId }));
-                                this.router.navigate(['/']);
-                            },
-                            error => {
-                                this.errorMessage = error;
-                            });
+            .subscribe(
+            res => {
+                console.log("Вы вошли в систему");
+                console.log(res.ClientId);
+                localStorage.setItem('currentUserId', JSON.stringify({ Id: res.ClientId }));
+                this.router.navigate(['/']);
+            },
+            error => {
+                this.errorMessage = error;
+            });
     }
 }

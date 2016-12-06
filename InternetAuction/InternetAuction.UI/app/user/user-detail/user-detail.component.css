@@ -51,7 +51,7 @@
 
 .card-icon {
     position:absolute;
-    top: 10px;
+    top: 7px;
 }
 
 .card_number {
@@ -62,7 +62,7 @@
     width:65%;
 }
 
-.mar_divs {
+.mar_divs{
     padding: 16px 0px;
 }
 

@@ -112,6 +112,8 @@
     <TypeScriptCompile Include="app\app.component.ts" />
     <TypeScriptCompile Include="app\app.module.ts" />
     <TypeScriptCompile Include="app\app.routing.ts" />
+    <TypeScriptCompile Include="app\credit-card\credit-card.service.ts" />
+    <TypeScriptCompile Include="app\credit-card\credit-card.ts" />
     <TypeScriptCompile Include="app\general.service.ts" />
     <TypeScriptCompile Include="app\globals.ts" />
     <TypeScriptCompile Include="app\home\home.component.ts" />

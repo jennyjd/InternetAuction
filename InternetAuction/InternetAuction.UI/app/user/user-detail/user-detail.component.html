@@ -14,13 +14,22 @@
                 </div>
                 <div class="value_wrap">
                     <div *ngIf="!editPersonalInf">
-                        <div *ngFor="let inf of personalInf" class="mar_divs" style="color:grey">{{inf}}</div>
+                        <!--<div *ngFor="let inf of personalInf" class="mar_divs" style="color:grey">{{inf}}</div>-->
+                        <div class="mar_divs">{{currentUser.Login}}</div>
+                        <div class="mar_divs">{{currentUser.LastName}}</div>
+                        <div class="mar_divs">{{currentUser.FirstName}}</div>
+                        <div class="mar_divs">{{currentUser.Patronymic}}</div>
+                        <div class="mar_divs">{{currentUser.Email}}</div>
                     </div>
 
                     <!------------------ФОРМА ИЗМЕНЕНИЯ ЛИЧНЫХ ДАННЫХ КЛИЕНТА---------------->
                     <div *ngIf="editPersonalInf">
-                        <form>
-                            <md-input value={{inf}} *ngFor="let inf of personalInf"></md-input>
+                        <form (ngSubmit)="changeUserInf()">
+                            <div class="mar_divs">{{currentUser.Login}}</div>
+                            <md-input value={{currentUser.LastName}}></md-input>
+                            <md-input value={{currentUser.FirstName}}></md-input>
+                            <md-input value={{currentUser.Patronymic}}></md-input>
+                            <md-input value={{currentUser.Email}}></md-input>
                             <button md-mini-fab style="background-color:#D95154" type="submit" *ngIf="editPersonalInf" tooltip="Сохранить" tooltip-position="below">
                                 <md-icon style="color:white">done</md-icon>
                             </button>
@@ -46,7 +55,7 @@
                 </div>
                 <div class="value_wrap">
                     <md-input placeholder="Номер карты" maxlength="19" required [(ngModel)]="newCardModel.number" #number name="number" (ngModelChange)="validate(number.value)"></md-input>
-                    <md-input placeholder="Имя владельца" required [(ngModel)]="newCardModel.userName" #userName name="userName"></md-input>
+                    <md-input placeholder="Имя владельца" required [(ngModel)]="newCardModel.ownerName" #userName name="userName"></md-input>
                     <div class="validThru">
                         <md-input placeholder="MM" maxlength="2" required [(ngModel)]="newCardModel.validMonth" #validMonth name="validMonth"></md-input>/
                         <md-input placeholder="YY" maxlength="2" required [(ngModel)]="newCardModel.validYear" #validYear name="validYear"></md-input>
@@ -60,7 +69,7 @@
             <!------------------ДАННЫЕ ПО КАРТАМ КЛИЕНТА---------------->
             <div class="content">
                 <div class="card_handler">
-                    <md2-accordion [multiple]="multiple" *ngFor="let card of cards">
+                    <md2-accordion *ngFor="let card of userCreditCards">
                         <md2-accordion-tab>
                             <md2-accordion-header>
                                 <div class="card-icon">
@@ -75,8 +84,8 @@
                                     <div *ngFor="let label of cardLabels" class="mar_divs">{{label}}</div>
                                 </div>
                                 <div class="value_wrap">
-                                    <div class="mar_divs">{{card.name}}</div>
-                                    <div class="mar_divs">{{card.date}}</div>
+                                    <div class="mar_divs">{{card.owner}}</div>
+                                    <div class="mar_divs">{{card.validMonth}}/{{card.validYear}}</div>
                                 </div>
                             </div>
                         </md2-accordion-tab>
