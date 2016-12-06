@@ -14,17 +14,19 @@ import { CreditCardService } from '../../credit-card/credit-card.service';
 })
 
 export class UserDetailsComponent {
-    //currentUser: User;
-    editPersonalInf: boolean = false;
     personalLabels: string[] = ["Логин", "Фамилия", "Имя", "Отчество", "Почта"];
     cardLabels: string[] = ["Владелец", "Срок действия"];
     addCardLabels: string[] = ["Номер", "Владелец", "Срок действия"];
 
+    editPersonalInf: boolean = false;
     addNewCard: boolean = false;
-    newCardModel: any = {};
+
     editUserModel: any = {};
     currentUser: any = {};
+
+    newCardModel: any = {};
     userCreditCards: CreditCard[] = [];
+
     errorMessage: any;
 
     constructor(private userService: UserService, private creditService: CreditCardService) {

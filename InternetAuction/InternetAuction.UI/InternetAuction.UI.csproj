@@ -64,6 +64,8 @@
     <Content Include="app\app.component.html" />
     <Content Include="app\home\home.component.css" />
     <Content Include="app\home\home.component.html" />
+    <Content Include="app\loading\loading.component.css" />
+    <Content Include="app\loading\loading.component.html" />
     <Content Include="app\login\login.component.css" />
     <Content Include="app\login\login.component.html" />
     <Content Include="app\lot\lot-create\lot-create.component.css" />
@@ -117,6 +119,7 @@
     <TypeScriptCompile Include="app\general.service.ts" />
     <TypeScriptCompile Include="app\globals.ts" />
     <TypeScriptCompile Include="app\home\home.component.ts" />
+    <TypeScriptCompile Include="app\loading\loading.component.ts" />
     <TypeScriptCompile Include="app\login\login.component.ts" />
     <TypeScriptCompile Include="app\login\login.service.ts" />
     <TypeScriptCompile Include="app\lot\lot-create\lot-create.component.ts" />

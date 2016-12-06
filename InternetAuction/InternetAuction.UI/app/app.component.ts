@@ -6,19 +6,21 @@ import { UserService } from './user/user.service';
 import { LoginService } from './login/login.service';
 import { SharedService } from './shared.service';
 import { GeneralService } from './general.service';
+import { LoadingComponent } from './loading/loading.component';
 
 @Component({
     selector: 'my-app',
     templateUrl: './app/app.component.html',
     styleUrls: ['./app/app.component.css'],
-    providers: [SharedService, GeneralService]
-    
+    providers: [SharedService, GeneralService],
+    entryComponents: [LoadingComponent]
 })
 
 export class AppComponent{
     menu: any[] = [];
     lotStates: any;
     errorMessage: any;
+    loading: boolean = true;
     selectedCategoryId = "none";
     opened_sidebar: boolean;
 
@@ -76,6 +78,7 @@ export class AppComponent{
                     cat.status = true
                     this.menu.push(cat)
                 }
+                this.loading = false;
             },
             error => this.errorMessage = <any>error);
     }
