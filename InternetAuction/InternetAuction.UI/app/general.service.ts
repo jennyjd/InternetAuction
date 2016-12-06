@@ -14,8 +14,7 @@ import 'rxjs/add/operator/catch';
 export class GeneralService {
     private categoryUrl = `${Constant.apiEndpoint}/AuctionsCategories`;
     private getCurrencyUrl = `${Constant.apiEndpoint}/Currencies`;
-    private getLotStateUrl = '';
-
+    private getLotStateUrl = `${Constant.apiEndpoint}/GoodsState`;
 
     constructor(private http: Http, private router: Router) {
     }
@@ -26,6 +25,19 @@ export class GeneralService {
             .catch(this.handleError);
     }
 
+    getCurrencyFromStorage() {
+        return JSON.parse(localStorage.getItem('currency'));
+    }
+
+    getCurrencyById(id) {
+        let currency = this.getCurrencyFromStorage();
+        for (let curr of currency) {
+            if (curr.Id == id) {
+                return curr;
+            }
+        }
+    }
+
     getCategories() {
         return this.http.get(this.categoryUrl)
             .map(response => response.json())
@@ -33,9 +45,22 @@ export class GeneralService {
     }
 
     getLotState() {
-        return this.http.get('')
+        return this.http.get(this.getLotStateUrl)
             .map(response => response.json())
             .catch(this.handleError);
+    }
+
+    getLotStateFromStorage() {
+        return JSON.parse(localStorage.getItem('lotStates'));
+    }
+
+    getLotStateById(id) {
+        let lotStates = this.getLotStateFromStorage()
+        for (let state of lotStates) {
+            if (state.Id == id) {
+                return state;
+            }
+        }
     }
 
     public handleError(error: Response) {

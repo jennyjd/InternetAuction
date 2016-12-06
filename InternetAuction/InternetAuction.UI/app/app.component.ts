@@ -17,6 +17,7 @@ import { GeneralService } from './general.service';
 
 export class AppComponent{
     menu: any[] = [];
+    lotStates: any;
     errorMessage: any;
     selectedCategoryId = "none";
     opened_sidebar: boolean;
@@ -32,11 +33,14 @@ export class AppComponent{
 
         this.opened_sidebar = true;
         localStorage.setItem("selected_category", JSON.stringify({ selected: "none" }));
+
         this.getCategories();
+        this.getLotStates();
+        this.getCurrency();
+
         router.events.subscribe((val) => {
             this.opened_sidebar = true;
             if (val.url != '/') {
-                console.log(val);
                 this.opened_sidebar = false;
             }
         });
@@ -47,6 +51,22 @@ export class AppComponent{
             return false
         }
         return true
+    }
+
+    getCurrency() {
+        this.generalService.getCurrency()
+            .subscribe(res => {
+                localStorage.setItem('currency', JSON.stringify(res));
+            },
+            error => this.errorMessage = <any>error);
+    }
+
+    getLotStates() {
+        this.generalService.getLotState()
+            .subscribe(res => {
+                localStorage.setItem('lotStates', JSON.stringify(res));
+            },
+            error => this.errorMessage = <any>error);
     }
 
     getCategories() {
@@ -79,12 +99,13 @@ export class AppComponent{
     }
 
     logout() {
-        this.loginService.logout().subscribe(res => {
-            console.log(res);
-            console.log("YOU WERE LOGOUTED");
-            localStorage.removeItem('currentUserId');
-            this.router.navigate(['/']);
-        },
+        this.loginService.logout()
+            .subscribe(res => {
+                console.log(res);
+                console.log("YOU WERE LOGOUTED");
+                localStorage.removeItem('currentUserId');
+                this.router.navigate(['/']);
+            },
             error => this.errorMessage = <any>error);
     }
 
