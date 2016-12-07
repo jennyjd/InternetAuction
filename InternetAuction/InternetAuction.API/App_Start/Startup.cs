@@ -7,10 +7,11 @@ namespace InternetAuction.API
     {
         public void Configuration(IAppBuilder app)
         {
+            //app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
             GlobalConfiguration.Configure(RoutesConfig.RegisterRoutes);
             GlobalConfiguration.Configure(FormattersConfig.RegisterFormatters);
-            //GlobalConfiguration.Configure(CorsConfig.RegisterCors);
-            app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
+            GlobalConfiguration.Configure(CorsConfig.RegisterCors);
+            //app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
             GlobalConfiguration.Configure(DependencyResolverConfig.RegisterDependencyResolver);
             //GlobalConfiguration.Configure(SwaggerConfig.RegisterSwagger);
 

@@ -7,7 +7,7 @@ namespace InternetAuction.API
     {
         public static void RegisterCors(HttpConfiguration config)
         {
-            config.EnableCors(new EnableCorsAttribute("*", "*", "*"));
+            config.EnableCors(new EnableCorsAttribute("*", "*", "*") { SupportsCredentials = true});
         }
     }
 }

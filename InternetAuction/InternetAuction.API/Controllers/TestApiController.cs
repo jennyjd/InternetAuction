@@ -30,7 +30,7 @@ namespace InternetAuction.API.Controllers
         {
             var authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
             var userManager = HttpContext.Current.GetOwinContext().GetUserManager<InternetAuctionUserManager>();
-            var user1 = userManager.Find("xcv", "1234567");
+            var user1 = userManager.Find("Ivan", "IvanIvan");
             authenticationManager.SignOut();
             authenticationManager.SignIn(userManager.CreateIdentity(user1, DefaultAuthenticationTypes.ApplicationCookie));
 
@@ -55,6 +55,13 @@ namespace InternetAuction.API.Controllers
         public string TestAuthorize()
         {
             return "Hello from TestAuthorize";
+        }
+
+
+        [HttpGet]
+        public string TestMsg()
+        {
+            return "Hello from TestMsg";
         }
 
 
