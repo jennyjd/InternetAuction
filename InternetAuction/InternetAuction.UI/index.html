@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+    <script>
+        $.ajax({
+            url: "http://localhost:21561/api/TestApi/TestMsg",
+            success: function(result){console.log(result)}
+            //xhrFields: {
+            //    withCredentials: true
+            //}
+        });
+
+        $.ajax({
+            url: "http://localhost:21561/api/TestApi/GetCurrentUser",
+            success: function (result) { console.log(result) },
+            xhrFields: {
+                withCredentials: true
+            }
+        });
+
+        $.ajax({
+            url: "http://localhost:21561/api/TestApi/TestAuthorize",
+            success: function (result) { console.log(result) },
+            xhrFields: {
+                withCredentials: true
+            }
+        });
+        </script>
+</head>
+<body>
+    Hello
+</body>
+</html>
