@@ -30,15 +30,17 @@ export class LotService {
     }
 
     createLot(lot) {
+        console.log(lot);
+        console.log(lot.currencyId);
         let JSONstr = JSON.stringify({
             Name: lot.name, Description: lot.description, StartPrice: lot.startPrice, 
-            PriceOfFastSell: null, CategoryId: lot.categoryId, EndDate: "12-07-2016", 
-            CurrencyId: lot.currencyID, ClientId: 4, GoodStateId: lot.stateId});
+            PriceOfFastSell: null, CategoryId: lot.categoryId, EndDate: lot.endDate, 
+            GoodStateId: lot.stateId, CurrencyId: lot.currencyId});
         console.log("json = " + JSONstr)
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
 
-        return this.http.post(this.lotsUrl, JSONstr, { headers: headers })
+        return this.http.post(this.lotsUrl, JSONstr, { headers: headers, withCredentials: true })
             .map(res => res.ok)
             .catch(this.handleError);
     }

@@ -107,8 +107,6 @@ export class LotCreateComponent {
     lotDataChange() {
         let date = this.lot.endDate.split("-");
         this.lot.endDate = date[1] + "-" + date[2] + "-" + date[0];
-        //заглушка
-        this.lot.stateId = 1;
     }
 
     chooseCategory(category) {

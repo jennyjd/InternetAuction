@@ -27,13 +27,13 @@ export class LoginService {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
 
-        return this.http.post(this.loginUrl, JSONstr, { headers: headers })
+        return this.http.post(this.loginUrl, JSONstr, { headers: headers, withCredentials: true})
             .map((res: Response) => res.json())
             .catch(this.handleError);
     }
 
     logout() {
-        return this.http.get('http://localhost:21561/api/account/signout')
+        return this.http.get('http://localhost:21561/api/account/signout', { withCredentials: true })
             .map(response => response.json())
             .catch(this.handleError);
     }
