@@ -20,6 +20,6 @@ namespace InternetAuction.API.ViewModels
 
         public Auction Auction { get; set; }
 
-        public float CurrentBet { get; set; }
+        public decimal CurrentBet { get; set; }
     }
 }

@@ -9,7 +9,7 @@ namespace InternetAuction.API.ViewModels
     {
         public int CreditCardId { get; set; }
 
-        public float Sum { get; set; }
+        public decimal Sum { get; set; }
 
         public string Cvv { get; set; }
     }

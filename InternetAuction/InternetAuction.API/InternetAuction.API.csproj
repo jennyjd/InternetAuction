@@ -169,6 +169,7 @@
     <Compile Include="Controllers\ClientsController.cs" />
     <Compile Include="Controllers\CreditCardsController.cs" />
     <Compile Include="Controllers\CurrenciesController.cs" />
+    <Compile Include="Controllers\CurrenciesConversionsController.cs" />
     <Compile Include="Controllers\GoodsStateController.cs" />
     <Compile Include="Controllers\TestApiController.cs" />
     <Compile Include="DbContext\InternetAuctionIdentityDbContext.cs" />
@@ -185,6 +186,7 @@
     <Compile Include="Models\Auction.cs" />
     <Compile Include="Models\AuctionCategory.cs" />
     <Compile Include="Models\AuctionHistory.cs" />
+    <Compile Include="Models\CurrencyConversion.cs" />
     <Compile Include="Models\GoodsState.cs" />
     <Compile Include="Models\InternetAuctionRole.cs" />
     <Compile Include="Models\InternetAuctionUser.cs" />
@@ -197,6 +199,7 @@
     <Compile Include="Repositories\Abstractions\IAuctionsRepository.cs" />
     <Compile Include="Repositories\Abstractions\IClientsRepository.cs" />
     <Compile Include="Repositories\Abstractions\ICreditCardsRepository.cs" />
+    <Compile Include="Repositories\Abstractions\ICurrenciesConversionsRepository.cs" />
     <Compile Include="Repositories\Abstractions\ICurrenciesRepository.cs" />
     <Compile Include="Repositories\Abstractions\IGoodsSateRepository.cs" />
     <Compile Include="Repositories\AuctionsCategoriesRepository.cs" />
@@ -204,6 +207,7 @@
     <Compile Include="Repositories\AuctionsRepository.cs" />
     <Compile Include="Repositories\ClientsRepository.cs" />
     <Compile Include="Repositories\CreditCardsRepository.cs" />
+    <Compile Include="Repositories\CurrenciesConversionsRepository.cs" />
     <Compile Include="Repositories\CurrenciesRepository.cs" />
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Repositories\GoodsSateRepository.cs" />

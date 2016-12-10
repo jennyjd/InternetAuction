@@ -17,6 +17,7 @@ DELETE FROM AspNetUsers
 DELETE FROM AspNetRoles
 DELETE FROM Auctions
 DELETE FROM AuctionsCategories
+DELETE FROM CurrenciesConversions
 DELETE FROM Currencies
 DELETE FROM CreditCards
 DELETE FROM Clients
@@ -79,6 +80,22 @@ VALUES
 (3, N'EUR', N'EUR')
 
 SET IDENTITY_INSERT Currencies OFF
+
+
+GO
+SET IDENTITY_INSERT CurrenciesConversions ON
+
+INSERT INTO CurrenciesConversions 
+(Id, FromCurrencyId, ToCurrencyId, Rate)
+VALUES 
+(1, 1, 2, 1.967),
+(2, 1, 3, 2.080),
+(3, 2, 1, 0.51),
+(4, 2, 3, 0.95),
+(5, 3, 1, 0.48),
+(6, 3, 2, 1.0617)
+
+SET IDENTITY_INSERT CurrenciesConversions OFF
 
 
 GO

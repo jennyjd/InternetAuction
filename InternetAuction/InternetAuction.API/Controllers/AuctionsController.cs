@@ -112,13 +112,12 @@ namespace InternetAuction.API.Controllers
             // TODO: check CreditCard
 
             /*
-             * 1. Check creditCard
-             * 2. Get possible currencies
-             * 3. Convert to some of them
-             * 4. Request money
+             * 1. ConvertSum
+             * 2. Check creditCard
+             * 3. Request money
              */
 
-            // TODO: return blocked sum and additioanl info (Currency of CreditCard)
+            // TODO: return blocked sum and additioanl info (Currency of CreditCard) and error if we can not convert currency
 
 
             AuctionsHistoryRepository.AddBet(new AuctionHistory
@@ -126,7 +125,7 @@ namespace InternetAuction.API.Controllers
                 AuctionId = auction.Id,
                 ClientId = user.ClientId.Value,
                 CreditCardId = bet.CreditCardId,
-                CurrencyId = 1,  // TODO: use real from Bank response
+                CurrencyId = 1,  // TODO: use value from bank
                 Sum = requestedSumFromBank,
                 Date = DateTime.Now
             });
