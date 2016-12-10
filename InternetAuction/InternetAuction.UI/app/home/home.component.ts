@@ -4,11 +4,12 @@ import { LotListComponent } from '../lot/lot-list/lot-list.component';
 import { LotService } from '../lot/lot.service';
 import { SharedService } from '../shared.service';
 import { GeneralService } from '../general.service';
+import { Constant } from '../globals';
 
 @Component({
     selector: 'home-page',
-    templateUrl: './app/home/home.component.html',
-    styleUrls: ['./app/home/home.component.css'],
+    templateUrl: `${Constant.appPath}app/home/home.component.html`,
+    styleUrls: [`${Constant.appPath}app/home/home.component.css`],
     entryComponents: [LotListComponent],
     providers: [LotService, SharedService, GeneralService]
 })

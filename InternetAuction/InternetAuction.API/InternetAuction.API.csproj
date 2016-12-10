@@ -219,6 +219,7 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Properties\PublishProfiles\InternetAuction.pubxml" />
+    <None Include="Properties\PublishProfiles\InternetAuctionAPI.pubxml" />
     <None Include="Web.Debug-Jan.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

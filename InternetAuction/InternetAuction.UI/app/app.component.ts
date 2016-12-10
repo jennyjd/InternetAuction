@@ -7,11 +7,12 @@ import { LoginService } from './login/login.service';
 import { SharedService } from './shared.service';
 import { GeneralService } from './general.service';
 import { LoadingComponent } from './loading/loading.component';
+import { Constant } from './globals';
 
 @Component({
-    selector: 'my-app',
-    templateUrl: './app/app.component.html',
-    styleUrls: ['./app/app.component.css'],
+    selector: 'my-app', 
+    templateUrl: `${Constant.appPath}app/app.component.html`,
+    styleUrls: [`${Constant.appPath}app/app.component.css`],
     providers: [SharedService, GeneralService],
     entryComponents: [LoadingComponent]
 })
@@ -35,6 +36,7 @@ export class AppComponent{
 
         this.opened_sidebar = true;
         localStorage.setItem("selected_category", JSON.stringify({ selected: "none" }));
+        localStorage.setItem("loading", JSON.stringify(true));
 
         this.getCategories();
         this.getLotStates();

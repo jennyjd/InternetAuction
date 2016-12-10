@@ -89,6 +89,7 @@
     <Content Include="typings.json" />
     <Content Include="tsconfig.json" />
     <Content Include="packages.config" />
+    <None Include="Properties\PublishProfiles\InternetAuctionUI.pubxml" />
     <None Include="Web.Debug-Jan.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

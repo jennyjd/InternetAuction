@@ -5,11 +5,12 @@ import { User } from '../user';
 import { UserService } from '../user.service';
 import { CreditCard } from '../../credit-card/credit-card';
 import { CreditCardService } from '../../credit-card/credit-card.service';
+import { Constant } from '../../globals';
 
 @Component({
     selector: 'user-details',
-    templateUrl: './app/user/user-detail/user-detail.component.html',
-    styleUrls: ['./app/user/user-detail/user-detail.component.css'],
+    templateUrl: `${Constant.appPath}app/user/user-detail/user-detail.component.html`,
+    styleUrls: [`${Constant.appPath}app/user/user-detail/user-detail.component.css`],
     providers: [UserService, CreditCardService]
 })
 

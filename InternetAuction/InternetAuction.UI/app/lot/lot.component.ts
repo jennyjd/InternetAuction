@@ -2,11 +2,12 @@
 import { Router } from '@angular/router';
 import { Lot } from './lot';
 import { SharedService } from '../shared.service';
+import { Constant } from '../globals';
 
 @Component({
     selector: 'lot',
-    templateUrl: './app/lot/lot.component.html',
-    styleUrls: ['./app/lot/lot.component.css'],
+    templateUrl: `${Constant.appPath}app/lot/lot.component.html`,
+    styleUrls: [`${Constant.appPath}app/lot/lot.component.css`],
     providers: [SharedService]
 })
 

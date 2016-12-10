@@ -21,4 +21,12 @@ export class SharedService {
         let sel = JSON.parse(localStorage.getItem('opened_sidenav'));
         return sel.opened
     }
+
+    getLoading() {
+        return JSON.parse(localStorage.getItem('loading'));
+    }
+
+    setLoading(bool) {
+        localStorage.setItem('loading', JSON.stringify(bool));
+    }
 } 

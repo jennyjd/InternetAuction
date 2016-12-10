@@ -4,11 +4,12 @@ import { MdUniqueSelectionDispatcher } from '@angular2-material/core';
 
 import { GeneralService } from '../../general.service';
 import { LotService } from '../lot.service';
+import { Constant } from '../../globals';
 
 @Component({
     selector: 'lot-create-form',
-    templateUrl: './app/lot/lot-create/lot-create.component.html',
-    styleUrls: ['./app/lot/lot-create/lot-create.component.css'],
+    templateUrl: `${Constant.appPath}app/lot/lot-create/lot-create.component.html`,
+    styleUrls: [`${Constant.appPath}app/lot/lot-create/lot-create.component.css`],
     providers: [MdUniqueSelectionDispatcher, GeneralService, LotService]
 })
 

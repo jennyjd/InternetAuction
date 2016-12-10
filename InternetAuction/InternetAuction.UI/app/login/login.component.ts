@@ -3,11 +3,12 @@ import { Router } from '@angular/router';
 
 import { LoginService } from './login.service'
 import { User } from '../user/user'
+import { Constant } from '../globals';
 
 @Component({
     selector: 'login',
-    templateUrl: './app/login/login.component.html',
-    styleUrls: ['./app/login/login.component.css'],
+    templateUrl: `${Constant.appPath}app/login/login.component.html`,
+    styleUrls: [`${Constant.appPath}app/login/login.component.css`],
     providers: [LoginService]
 })
 

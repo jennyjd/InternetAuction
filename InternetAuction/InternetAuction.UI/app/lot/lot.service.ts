@@ -34,7 +34,7 @@ export class LotService {
         console.log(lot.currencyId);
         let JSONstr = JSON.stringify({
             Name: lot.name, Description: lot.description, StartPrice: lot.startPrice, 
-            PriceOfFastSell: null, CategoryId: lot.categoryId, EndDate: lot.endDate, 
+            PriceOfFastSell: lot.fastSell, CategoryId: lot.categoryId, EndDate: lot.endDate, 
             GoodStateId: lot.stateId, CurrencyId: lot.currencyId});
         console.log("json = " + JSONstr)
         let headers = new Headers();

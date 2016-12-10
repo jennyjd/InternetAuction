@@ -20,13 +20,18 @@
                     </div>
                 </div>
                 <div class="bet_wrap">
-                    <h3>Текущая цена:</h3>
+                    <h3>Текущая цена: {{selected_lot.StartPrice}} {{currency}}</h3>
                     <!--изменить на текущую цену-->
-                    {{selected_lot.StartPrice}}
-                    <md-input placeholder="Ставка" [(ngModel)]="model.bet" #bet name="bet"></md-input>
-                    <button md-icon-button class="md-mini md-primary" aria-label="view">
+                    <md-input placeholder="Ставка" [(ngModel)]="model.bet" #bet name="bet" value={{selected_lot.StartPrice}}></md-input>
+                    <button md-mini-fab style="background-color:#D95154" tooltip="Сделать ставку" tooltip-position="below">
                         <md-icon>gavel</md-icon>
                     </button>
+
+                    <div *ngIf="checkFastSell(selected_lot)">
+                        {{selected_lot.PriceOfFastSell}} {{currency}}
+                        <button md-raised-button>Выкупить</button>
+                    </div>
+
                     <h3>Дата окончания аукциона</h3>
                     <p>{{selected_lot.EndDate}}</p>
                 </div>
@@ -34,6 +39,7 @@
             <div class="description">
                 <h3>Описание</h3>
                 <p>{{selected_lot.Description}}</p>
+                <h3>Состояние: {{lotState}}</h3>
             </div>
         </md-card>
     </div>

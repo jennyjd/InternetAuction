@@ -91,6 +91,11 @@
             <span md-suffix></span>
         </md-input>
 
+        <h3>Стоимость выкупа</h3>
+        <md-input placeholder="Стоимость выкупа" [(ngModel)]="lot.fastSell" name="fastSell" #fastSell>
+            <span md-suffix></span>
+        </md-input>
+
         <h3>Описание лота</h3>
         <textarea [(ngModel)]="lot.description" name="description" #description></textarea>
 

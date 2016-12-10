@@ -3,14 +3,16 @@ import { LotComponent } from '../lot.component'
 import { Lot } from '../lot'
 
 import { LotService } from '../lot.service';
-import { UserService } from '../../user/user.service';;
+import { UserService } from '../../user/user.service';
+import { SharedService } from '../../shared.service';
+import { Constant } from '../../globals';
 
 @Component({
     selector: 'lot-list',
-    templateUrl: './app/lot/lot-list/lot-list.component.html',
-    styleUrls: ['./app/lot/lot-list/lot-list.component.css'],
+    templateUrl: `${Constant.appPath}app/lot/lot-list/lot-list.component.html`,
+    styleUrls: [`${Constant.appPath}app/lot/lot-list/lot-list.component.css`],
     entryComponents: [LotComponent],
-    providers: [LotService, UserService]
+    providers: [LotService, UserService, SharedService]
 })
 
 export class LotListComponent {
@@ -19,7 +21,7 @@ export class LotListComponent {
     lots: any[] = [];
     //@Input() selected: string;
 
-    constructor(private lotService: LotService, private userService: UserService) {
+    constructor(private lotService: LotService, private userService: UserService, private sharedService: SharedService) {
         this.getLots();
         console.log(this.lots);
     }
@@ -40,7 +42,8 @@ export class LotListComponent {
                     console.log(res);
                     lot.userLogin = res.FirstName;
                     lot.mainPicture = "https://pp.vk.me/c419225/v419225009/6e41/vv2MqgXalNw.jpg";
-                    this.lots.push(lot);    
+                    this.lots.push(lot);  
+                    this.sharedService.setLoading(false);  
                 },
                 error => this.errorMessage = <any>error)
         }; 

@@ -1,12 +1,13 @@
 ﻿import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { Constant } from '../globals';
 import { UserService } from '../user/user.service'
 
 @Component({
     selector: 'registration',
-    templateUrl: './app/registration/registration.component.html',
-    styleUrls: ['./app/registration/registration.component.css']
+    templateUrl: `${Constant.appPath}app/registration/registration.component.html`,
+    styleUrls: [`${Constant.appPath}app/registration/registration.component.css`]
 })
 
 export class RegistrationComponent {
