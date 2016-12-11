@@ -6,12 +6,14 @@ import { LotService } from '../lot.service';
 import { UserService } from '../../user/user.service';
 import { GeneralService } from '../../general.service';
 import { Constant } from '../../globals';
+import { ModalPickCardComponent } from '../../credit-card/pick-card-modal.component';
 
 @Component({
     selector: 'lot-detail',
     templateUrl: `${Constant.appPath}app/lot/lot-detail/lot-detail.component.html`,
     styleUrls: [`${Constant.appPath}app/lot/lot-detail/lot-detail.component.css`],
-    providers: [LotService, UserService, GeneralService]
+    providers: [LotService, UserService, GeneralService],
+    entryComponents: [ModalPickCardComponent]
 })
 
 export class LotDetailComponent implements OnInit {
@@ -21,6 +23,7 @@ export class LotDetailComponent implements OnInit {
     model: any = {};
     lotState: string = '';
     currency: string = '';
+    modal: boolean = false;
 
     constructor(
         private route: ActivatedRoute,
@@ -41,6 +44,14 @@ export class LotDetailComponent implements OnInit {
                 this.getUserInf();
             },
             error => this.errorMessage = <any>error);
+    }
+
+    changeModal() {
+        this.modal = true;
+    }
+
+    onCloseModal(state: boolean): void {
+        this.modal = false;
     }
 
     getUserInf() {

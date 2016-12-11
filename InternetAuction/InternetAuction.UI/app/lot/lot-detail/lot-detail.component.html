@@ -1,4 +1,6 @@
-﻿<div class="lot_detail_wrap">
+﻿<pick-modal *ngIf="modal" (closeModalEvent)="onCloseModal($event)"></pick-modal>
+
+<div class="lot_detail_wrap">
     <div class="lot_information">
         <md-card class="lotname">
             <h2>{{selected_lot.Name}}</h2>
@@ -23,7 +25,7 @@
                     <h3>Текущая цена: {{selected_lot.StartPrice}} {{currency}}</h3>
                     <!--изменить на текущую цену-->
                     <md-input placeholder="Ставка" [(ngModel)]="model.bet" #bet name="bet" value={{selected_lot.StartPrice}}></md-input>
-                    <button md-mini-fab style="background-color:#D95154" tooltip="Сделать ставку" tooltip-position="below">
+                    <button md-mini-fab style="background-color:#D95154" tooltip="Сделать ставку" tooltip-position="below" (click)="changeModal()">
                         <md-icon>gavel</md-icon>
                     </button>
 

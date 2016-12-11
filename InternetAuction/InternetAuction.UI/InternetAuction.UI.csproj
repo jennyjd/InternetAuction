@@ -62,6 +62,8 @@
   <ItemGroup>
     <Content Include="app\app.component.css" />
     <Content Include="app\app.component.html" />
+    <Content Include="app\credit-card\pick-card-modal.component.css" />
+    <Content Include="app\credit-card\pick-card-modal.component.html" />
     <Content Include="app\home\home.component.css" />
     <Content Include="app\home\home.component.html" />
     <Content Include="app\loading\loading.component.css" />
@@ -117,6 +119,7 @@
     <TypeScriptCompile Include="app\app.routing.ts" />
     <TypeScriptCompile Include="app\credit-card\credit-card.service.ts" />
     <TypeScriptCompile Include="app\credit-card\credit-card.ts" />
+    <TypeScriptCompile Include="app\credit-card\pick-card-modal.component.ts" />
     <TypeScriptCompile Include="app\general.service.ts" />
     <TypeScriptCompile Include="app\globals.ts" />
     <TypeScriptCompile Include="app\home\home.component.ts" />
