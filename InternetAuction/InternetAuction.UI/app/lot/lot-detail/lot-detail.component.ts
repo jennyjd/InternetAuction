@@ -24,6 +24,7 @@ export class LotDetailComponent implements OnInit {
     lotState: string = '';
     currency: string = '';
     modal: boolean = false;
+    isUserAuth: boolean;
 
     constructor(
         private route: ActivatedRoute,
@@ -31,6 +32,8 @@ export class LotDetailComponent implements OnInit {
         private lotservise: LotService,
         private userServise: UserService,
         private generalServise: GeneralService) {
+
+        this.isUserAuth = this.isUserAuthorized()
     }
 
     ngOnInit() {
@@ -47,11 +50,16 @@ export class LotDetailComponent implements OnInit {
     }
 
     changeModal() {
-        this.modal = true;
+        this.modal = !this.modal;
     }
 
     onCloseModal(state: boolean): void {
         this.modal = false;
+    }
+
+    isUserAuthorized() {
+        if (this.userServise.getCurrentUser() == null) { return false; }
+        return true;
     }
 
     getUserInf() {

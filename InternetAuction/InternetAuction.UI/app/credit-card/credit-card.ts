@@ -22,7 +22,7 @@
 
     splitNumber(num) {
         //return (num.substring(0, 4) + ' ' + num.substring(4, 8) + ' ' + num.substring(8, 12) + ' ' + num.substring(12, 16))
-        return ('****-****-****-' + num.substring(12, 16))
+        return ('**** **** **** ' + num.substring(12, 16))
     }
 
     combineName(firstName, lastName) {

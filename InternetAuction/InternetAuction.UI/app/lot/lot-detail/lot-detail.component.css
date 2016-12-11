@@ -1,4 +1,29 @@
-﻿body {
+﻿#overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background:  grey;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+    z-index: 50;
+}
+
+.close_button {
+    min-width: 24px;
+    padding: 0;
+    position: absolute;
+    right: 16px;
+    top: 16px;
+}
+
+.modal {
+    position: absolute;
+    top: 25%;
+    left: 40%;
+    margin: -28px 0 0 -25px;
+    z-index: 999;
 }
 
 .lot_detail_wrap {

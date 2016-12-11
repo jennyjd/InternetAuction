@@ -1,4 +1,19 @@
-﻿<pick-modal *ngIf="modal" (closeModalEvent)="onCloseModal($event)"></pick-modal>
+﻿<pick-modal *ngIf="modal && isUserAuth" (closeModalEvent)="onCloseModal($event)"></pick-modal>
+
+<div *ngIf="modal && !isUserAuth">
+    <div id="overlay">
+    </div>
+    <md-card class="modal">
+        <button md-button class="close_button" (click)="changeModal()">
+            <img src="../../assets/icons/clear.svg" />
+        </button>
+        <md-card-title>Вам необходимо <br/>авторизироваться <br/>в системе</md-card-title>
+        <md-card-content layout="row">
+            <button md-raised-button routerLink="/login">Вход</button>
+            <button md-raised-button routerLink="/registration">Регистрация</button>
+        </md-card-content>
+</md-card>
+</div>
 
 <div class="lot_detail_wrap">
     <div class="lot_information">
