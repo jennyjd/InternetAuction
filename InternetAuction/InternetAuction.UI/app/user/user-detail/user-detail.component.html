@@ -5,7 +5,7 @@
                 <!------------------ЛИЧНЫЕ ДАННЫЕ---------------->
                 <h2>Личные данные</h2>
                 <button md-mini-fab class="but" *ngIf="!editPersonalInf" (click)="editPersonalInf = true" tooltip="Изменить" tooltip-position="below">
-                    <md-icon style="color:white">create</md-icon>
+                    <img src="../../../assets/icons/create-white.svg" style="color:white"/>
                 </button>
             </div>
             <div class="content">
@@ -31,7 +31,7 @@
                             <md-input value={{currentUser.Patronymic}}></md-input>
                             <md-input value={{currentUser.Email}}></md-input>
                             <button md-mini-fab style="background-color:#D95154" type="submit" *ngIf="editPersonalInf" tooltip="Сохранить" tooltip-position="below">
-                                <md-icon style="color:white">done</md-icon>
+                                <img src="../../../assets/icons/done-white.svg"/>
                             </button>
                         </form>
                     </div>
@@ -44,7 +44,7 @@
             <div class="header">
                 <h2>Банковские карты</h2>
                 <button md-mini-fab class="but" tooltip="Добавить" tooltip-position="below" *ngIf="!addNewCard" (click)="addNewCard = true">
-                    <md-icon style="color:white">add</md-icon>
+                    <img src="../../../assets/icons/add-white.svg" />
                 </button>
             </div>
 
@@ -60,7 +60,7 @@
                         <md-input placeholder="MM" maxlength="2" required [(ngModel)]="newCardModel.validMonth" #validMonth name="validMonth"></md-input>/
                         <md-input placeholder="YY" maxlength="2" required [(ngModel)]="newCardModel.validYear" #validYear name="validYear"></md-input>
                         <button md-mini-fab tooltip="Сохранить" tooltip-position="below" *ngIf="addNewCard" class="addCardButton" type="submit">
-                            <md-icon style="color:white">done</md-icon>
+                            <img src="../../../assets/icons/done-white.svg" />
                         </button>
                     </div>
                 </div>
@@ -73,7 +73,7 @@
                         <md2-accordion-tab>
                             <md2-accordion-header>
                                 <div class="card-icon">
-                                    <md-icon>payment</md-icon>
+                                    <img src="../../../assets/icons/payment-black.svg"/>
                                 </div>
                                 <div class="card_number">
                                     {{card.number}}

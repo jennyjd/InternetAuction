@@ -26,7 +26,7 @@
                     <!--изменить на текущую цену-->
                     <md-input placeholder="Ставка" [(ngModel)]="model.bet" #bet name="bet" value={{selected_lot.StartPrice}}></md-input>
                     <button md-mini-fab style="background-color:#D95154" tooltip="Сделать ставку" tooltip-position="below" (click)="changeModal()">
-                        <md-icon>gavel</md-icon>
+                        <img src="../../../assets/icons/gavel-white.svg"/>
                     </button>
 
                     <div *ngIf="checkFastSell(selected_lot)">

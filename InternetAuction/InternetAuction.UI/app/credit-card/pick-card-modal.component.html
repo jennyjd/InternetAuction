@@ -2,7 +2,7 @@
 </div>
 <md-card *ngIf="!nullUser" class="modal">
     <button md-button class="close_button" (click)="closeModal()">
-        <md-icon>clear</md-icon>
+        <img src="../../assets/icons/clear.svg"/>
     </button>
     <md-card-title>Выберите карту для ставки</md-card-title>
     <md-card-content>
@@ -10,7 +10,7 @@
                 <li *ngFor="let card of userCreditCards" class="parent-list-item">
                     <button md-button class="cardButton" (click)="chooseCard(card)">                          
                         <div class="fix_height">
-                            <md-icon class="card-icon">payment</md-icon>
+                            <img class="card-icon" src="../../assets/icons/payment-black.svg"/>
                             <div class="cardNum"><b>{{card.number}}</b></div>
                         </div>
                         <div class="cardInf fix_height">
