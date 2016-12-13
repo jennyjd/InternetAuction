@@ -19,7 +19,9 @@ export class ModalPickCardComponent {
     nullUser: boolean = false;
     userCreditCards: CreditCard[] = [];
     choosedCard: any = {};
+    model: any = {};
     isDisabled: boolean = true;
+    cardFocus: Array<boolean> = [];
 
     constructor(private userService: UserService) {
         this.getCards();
@@ -46,8 +48,16 @@ export class ModalPickCardComponent {
         this.closeModalEvent.emit(true);
     }
 
+    makeBet() {
+        console.log(this.model);
+        console.log(this.choosedCard);
+    }
+
     chooseCard(card) {
         this.isDisabled = false;
         this.choosedCard = card;
+
+        this.cardFocus = [];
+        this.cardFocus[card.id] = !this.cardFocus[card.id];
     }
 }

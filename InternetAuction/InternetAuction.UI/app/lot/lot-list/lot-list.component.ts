@@ -37,13 +37,18 @@ export class LotListComponent {
 
     addData(res) {
         for (let lot of res) {
-            this.userService.getUserById(lot.ClientId)
+            this.userService.getUserAccountById(lot.ClientId)
                 .subscribe(res => {
                     console.log(res);
-                    lot.userLogin = res.FirstName;
+                    lot.userLogin = res.UserName;
+
+                    lot.EndDate = new Date((Date.parse(lot.EndDate)));
+                    lot.EndDate.setHours(lot.EndDate.getHours() - 3);//GMT+03
+
+                    console.log(lot.EndDate);
                     lot.mainPicture = "https://pp.vk.me/c419225/v419225009/6e41/vv2MqgXalNw.jpg";
                     this.lots.push(lot);  
-                    this.sharedService.setLoading(false);  
+                    console.log(lot);
                 },
                 error => this.errorMessage = <any>error)
         }; 

@@ -6,23 +6,26 @@
     </button>
     <md-card-title>Выберите карту для ставки</md-card-title>
     <md-card-content>
-            <ul>
-                <li *ngFor="let card of userCreditCards" class="parent-list-item">
-                    <button md-button class="cardButton" (click)="chooseCard(card)">                          
-                        <div class="fix_height">
-                            <img class="card-icon" src="../../assets/icons/payment-black.svg"/>
-                            <div class="cardNum"><b>{{card.number}}</b></div>
-                        </div>
-                        <div class="cardInf fix_height">
-                            {{card.owner}}
-                            {{card.validMonth}}/ {{card.validYear}}
-                        </div>
-                    </button>
-                </li>
-            </ul>
+        <ul>
+            <li *ngFor="let card of userCreditCards" class="parent-list-item">
+                <button md-button class="cardButton" [class.focus]="cardFocus[card.id]" (click)="chooseCard(card)">
+                    <div class="fix_height">
+                        <img class="card-icon" src="../../assets/icons/payment-black.svg" />
+                        <div class="cardNum"><b>{{card.number}}</b></div>
+                    </div>
+                    <div class="cardInf fix_height">
+                        {{card.owner}}
+                        {{card.validMonth}}/ {{card.validYear}}
+                    </div>
+                </button>
+            </li>
+        </ul>
     </md-card-content>
-    <md-card-actions layout="row">
-        <button md-raised-button [disabled]="isDisabled">Сделать ставку</button>
-    </md-card-actions>
+    <form (ngSubmit)="makeBet()">
+        <md-card-actions layout="row">
+            <md-input *ngIf="!isDisabled" class="cvv_input" placeholder="CVV" [(ngModel)]="model.cvv" #cvv name="cvv" maxlength="3" minlength="3" required></md-input>
+            <button md-raised-button [disabled]="isDisabled" type="submit">Сделать ставку</button>
+        </md-card-actions>
+    </form>
 </md-card>
 <login *ngIf="nullUser" class="modal"></login>

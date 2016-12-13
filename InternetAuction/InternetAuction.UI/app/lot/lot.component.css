@@ -11,6 +11,12 @@
     background-color: var(--red);
 }
 
+.bottom_inf {
+    position: absolute;
+    bottom: 0;
+    padding: 7px 0px;
+}
+
 .full_width_wrap {
     min-height: 350px;
 }

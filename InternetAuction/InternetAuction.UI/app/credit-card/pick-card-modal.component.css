@@ -58,16 +58,15 @@ ul {
     padding-left:0;
 }
 
+.cvv_input {
+    width: 46px;
+}
+
 li {
     list-style-type: none;
 }
 
-.cardButton:hover {
-    background-color: white;
-}
-
-
-.cardButton:focus {
+.focus {
     background-color: #D95154;
     color: white;
 }

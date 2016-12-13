@@ -59,7 +59,8 @@ export class LotDetailComponent implements OnInit {
 
     getTimeLeft() {
         let currentDate = new Date();
-        let ourDate = new Date(Date.parse(this.selected_lot.EndDate))
+        let ourDate = new Date(Date.parse(this.selected_lot.EndDate));
+        ourDate.setHours(ourDate.getHours() - 3);//GMT +03
         console.log(ourDate);
         this.selected_lot.timeLeft = ourDate;
     }
