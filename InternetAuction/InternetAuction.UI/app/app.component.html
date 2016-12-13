@@ -1,13 +1,16 @@
 ﻿<loading *ngIf="loading"></loading>
 <md-sidenav-layout>
     <md-toolbar color="primary">
-        <button md-icon-button (click)="changeSidnav()">
+        <!--<button md-icon-button (click)="changeSidnav()">
             <md-icon>menu</md-icon>
+        </button>-->
+        <button md-mini-fab routerLink="/" tooltip="На главную" tooltip-position="below">
+            <img src="../assets/icons/home-white.svg" />
         </button>
         <button md-button routerLink="/createlot" *ngIf="isUserHere()">Добавить лот</button>
         <button md-button routerLink="/login" *ngIf="!isUserHere()">Войти</button>
         <button md-button (click)="logout()" *ngIf="isUserHere()">Выход</button>
-        <button md-mini-fab style="background-color:#F3A15C" *ngIf="isUserHere()" (click)="selectUser()" tooltip="Личный кабинет" tooltip-position="below">
+        <button md-mini-fab class="orange_button" *ngIf="isUserHere()" (click)="selectUser()" tooltip="Личный кабинет" tooltip-position="below">
             <img src="../assets/icons/person-white.svg"/>
         </button>
     </md-toolbar>
@@ -22,7 +25,7 @@
             <md2-accordion-tab *ngIf="isNotSubcategory(menuel)">
                 <md2-accordion-header>{{menuel.Name}}</md2-accordion-header>
                 <li *ngFor="let sub of menuel.SubAuctionCategories">
-                    <button md-button focus md-ink-ripple md-raised class="subcategory" (click)="selectCategory(sub.Id)">
+                    <button md-button class="subcategory" [class.focus]="categoryFocus[sub.Id]" (click)="selectCategory(sub.Id)">
                         {{sub.Name}}
                     </button>
                 </li>

@@ -40,17 +40,15 @@
             <md2-option [value]="st.Id" *ngFor="let st of lotState">{{st.Name}}</md2-option>
         </md2-select>
 
-        <h3>Дата окончания аукциона</h3>
+        <h3>Дата и время окончания аукциона</h3>
         <md2-datepicker [(ngModel)]="lot.endDate"
                         name="endDate"
                         #endDate
-                        [min]=""
+                        [min]="minDate"
                         [max]=""
-                        type="date"
-                        placeholder="Дата окончания аукциона"
-                        format="MM/DD/YYYY">
+                        type="datetime"
+                        format="DD/MM/YYYY HH:mm">
         </md2-datepicker>
-
 
         <h3>Выбор категорий</h3>
         <div class="select_categories">

@@ -36,6 +36,8 @@
             '@angular2-material/progress-circle': 'npm:@angular2-material/progress-circle/progress-circle.umd.js',
             'angular2-image-upload': 'npm:angular2-image-upload',
             'md2': 'node_modules/md2',
+            'angular2-moment': 'npm:angular2-moment',
+            'moment': 'npm:moment'
         },
         // packages tells the System loader how to load when no filename and/or no extension
         packages: {
@@ -57,6 +59,14 @@
             'md2': {
                 format: 'cjs',
                 main: 'md2.umd.js'
+            },
+            'moment': {
+                main: './moment.js',
+                defaultExtension: 'js'
+            },
+            'angular2-moment': {
+                main: './index.js',
+                defaultExtension: 'js'
             }
         }
     });

@@ -25,6 +25,7 @@ export class LotDetailComponent implements OnInit {
     currency: string = '';
     modal: boolean = false;
     isUserAuth: boolean;
+    myDate = new Date();
 
     constructor(
         private route: ActivatedRoute,
@@ -41,6 +42,9 @@ export class LotDetailComponent implements OnInit {
             .switchMap((params: Params) => this.lotservise.getLotById(+params['id']))
             .subscribe(res => {
                 this.selected_lot = res;
+
+                this.getTimeLeft();
+
                 console.log(this.selected_lot);
                 this.lotState = this.selected_lot.GoodsState.Name;
                 this.currency = this.selected_lot.Currency.ShortName;
@@ -51,6 +55,13 @@ export class LotDetailComponent implements OnInit {
 
     changeModal() {
         this.modal = !this.modal;
+    }
+
+    getTimeLeft() {
+        let currentDate = new Date();
+        let ourDate = new Date(Date.parse(this.selected_lot.EndDate))
+        console.log(ourDate);
+        this.selected_lot.timeLeft = ourDate;
     }
 
     onCloseModal(state: boolean): void {

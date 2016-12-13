@@ -3,7 +3,7 @@
         <div class="image_container">
             <span></span> <img src="{{lotitem.mainPicture}}" class="md-card-image" (click)="view_details(lotitem)">
         </div>
-        <button md-mini-fab style="background-color:#D95154" class="lot_details" (click)="view_details(lotitem)" tooltip="Подробнее" tooltip-position="below">
+        <button md-mini-fab class="lot_details red_button" (click)="view_details(lotitem)" tooltip="Подробнее" tooltip-position="below">
             <img src="../../assets/icons/visibility-white.svg"/>
         </button>
         <div class="content">
@@ -12,7 +12,7 @@
                 <div *ngIf="lotitem.visible_items == true" class="more_inf">
                     <div>login: {{lotitem.userLogin}}</div>
                     <div>10 декабря 2016</div>
-                    <div style="color:#F3A15C">{{lotitem.PriceOfFastSell}}</div>
+                    <div style="color:var(--red)">{{lotitem.PriceOfFastSell}}</div>
                 </div>
             </md-card-content>
         </div>

@@ -29,6 +29,7 @@ import { MdIconRegistry } from '@angular2-material/icon';
 import { MdProgressCircleModule } from '@angular2-material/progress-circle';
 import { Md2Module } from 'md2';
 
+import { MomentModule } from 'angular2-moment';
 import { ImageUploadModule } from 'angular2-image-upload';
 
 import { routing, appRoutingProviders } from './app.routing'
@@ -36,7 +37,7 @@ import { routing, appRoutingProviders } from './app.routing'
 @NgModule({
     imports: [BrowserModule, MdCardModule, MdButtonModule, MdIconModule, MdSidenavModule, MdToolbarModule,
         MdListModule, MdInputModule, routing, FormsModule, ImageUploadModule.forRoot(), Md2Module.forRoot(),
-        MdProgressCircleModule],
+        MdProgressCircleModule, MomentModule],
     declarations: [AppComponent, LotComponent, LotListComponent, LoginComponent, HomeComponent, RegistrationComponent,
         UserDetailsComponent, LotCreateComponent, LotDetailComponent, LoadingComponent, ModalPickCardComponent],
     bootstrap: [AppComponent],

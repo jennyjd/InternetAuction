@@ -85,11 +85,14 @@
     <Content Include="app\user\user-detail\user-detail.component.css" />
     <Content Include="app\user\user-detail\user-detail.component.html" />
     <Content Include="assets\icons\add-white.svg" />
+    <Content Include="assets\icons\autorenew-black.svg" />
+    <Content Include="assets\icons\autorenew-white.svg" />
     <Content Include="assets\icons\clear-white.svg" />
     <Content Include="assets\icons\clear.svg" />
     <Content Include="assets\icons\create-white.svg" />
     <Content Include="assets\icons\done-white.svg" />
     <Content Include="assets\icons\gavel-white.svg" />
+    <Content Include="assets\icons\home-white.svg" />
     <Content Include="assets\icons\keyboard_arrow_down-black.svg" />
     <Content Include="assets\icons\payment-black.svg" />
     <Content Include="assets\icons\payment-white.svg" />

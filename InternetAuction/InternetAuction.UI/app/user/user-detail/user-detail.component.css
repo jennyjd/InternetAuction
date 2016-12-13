@@ -10,6 +10,14 @@
     border-bottom: 1px solid lightgrey;
 }
 
+.red_button {
+    background-color: var(--red);
+}
+
+.orange_button {
+    background-color: var(--orange);
+}
+
 .private_inf {
     width: 50%;
     border-right: 1px solid lightgrey;
@@ -27,7 +35,6 @@
     position: relative;
     top: -40px;
     right: -160px;
-    background-color:#D95154
 }
 
 .validThru {
@@ -46,7 +53,6 @@
 .addCardButton {
     position:absolute;
     right: 30px;
-    background-color:#D95154
 }
 
 .card-icon {

@@ -24,6 +24,7 @@ export class AppComponent{
     loading: boolean = true;
     selectedCategoryId = "none";
     opened_sidebar: boolean;
+    categoryFocus: Array<boolean> = [];
 
     currentUser: any;
     title: "Auction";
@@ -90,6 +91,15 @@ export class AppComponent{
     }
 
     selectCategory(categoryId) {
+        if (typeof this.categoryFocus[categoryId] != 'undefined') {
+            console.log("djfh");
+            this.categoryFocus = [];
+            localStorage.setItem("selected_category", JSON.stringify({ selected: "none" }));
+            return;
+        }
+        this.categoryFocus = [];
+        this.categoryFocus[categoryId] = !this.categoryFocus[categoryId];
+        console.log(this.categoryFocus);
         this.selectedCategoryId = categoryId;
         this.sharedService.saveSelected(this.selectedCategoryId);
     }

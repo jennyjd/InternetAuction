@@ -2,6 +2,10 @@
     font-size: 20px;
 }
 
+.orange_button {
+    background-color: var(--orange);
+}
+
 .logo_wrap{
     width: 90%;
     padding: 20px 10px;
@@ -38,6 +42,12 @@ md2-accordion button {
 
 .subcategory {
     padding-left:25px;
+    width: 100% !important;
+}
+
+.focus {
+    background-color: var(--red);
+    color: white;
 }
 
 ul {
@@ -46,5 +56,4 @@ ul {
 
 li {
     list-style-type: none; 
-    margin: -16px;
 }

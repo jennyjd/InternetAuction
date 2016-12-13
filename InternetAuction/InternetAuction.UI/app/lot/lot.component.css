@@ -7,6 +7,10 @@
     border: 1px solid white;
 }
 
+.red_button {
+    background-color: var(--red);
+}
+
 .full_width_wrap {
     min-height: 350px;
 }

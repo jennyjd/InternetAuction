@@ -49,8 +49,9 @@
                         <button md-raised-button>Выкупить</button>
                     </div>
 
-                    <h3>Дата окончания аукциона</h3>
-                    <p>{{selected_lot.EndDate}}</p>
+                    <h3>Осталось: </h3>
+                    <span>{{selected_lot.timeLeft | amDifference: today: 'days'}} дн. 
+                    {{(selected_lot.timeLeft | amDifference: today: 'hours') - (selected_lot.timeLeft | amDifference: today: 'days')*24}} ч.</span>
                 </div>
             </div>
             <div class="description">

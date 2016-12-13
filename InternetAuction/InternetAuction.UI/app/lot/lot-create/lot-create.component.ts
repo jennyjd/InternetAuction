@@ -21,6 +21,7 @@ export class LotCreateComponent {
     mainPicture = 'http://designmyhome.ru/sites/default/files/images/mebel_ikea_03.jpg';
     selected_category = null;
     lot: any = {};
+    minDate = new Date();
 
     pictures =
        ['https://s-media-cache-ak0.pinimg.com/736x/bb/bf/58/bbbf58c0716c059fa378d419defa0f05.jpg',
@@ -93,7 +94,6 @@ export class LotCreateComponent {
     }
 
     createLot() {
-        this.lotDataChange();
         console.log(this.lot);
         this.lotService.createLot(this.lot)
             .subscribe(
@@ -103,11 +103,6 @@ export class LotCreateComponent {
                 this.router.navigate(['/']);
             },
             error => this.errorMessage = <any>error);
-    }
-
-    lotDataChange() {
-        let date = this.lot.endDate.split("-");
-        this.lot.endDate = date[1] + "-" + date[2] + "-" + date[0];
     }
 
     chooseCategory(category) {
