@@ -10,6 +10,7 @@ namespace InternetAuction.API.ViewModels
     {
         AuctionCompleted,
         SmallBet,
+        InvalidCreditCardData,
         BetAccepted
     }
 

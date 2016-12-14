@@ -19,6 +19,12 @@ namespace InternetAuction.API.Repositories
         }
 
 
+        public CreditCard GetCreditCard(int creditCardId)
+        {
+            return _context.CreditCards.Single(x => x.Id == creditCardId);
+        }
+
+
         public ICollection<CreditCard> GetCreditCards()
         {
             return _context.CreditCards.ToList();

@@ -1,4 +1,5 @@
-﻿using InternetAuction.API.Infrastructure;
+﻿using Bank.API;
+using InternetAuction.API.Infrastructure;
 using InternetAuction.API.Models;
 using InternetAuction.API.Repositories.Abstractions;
 using InternetAuction.API.ViewModels;
@@ -21,6 +22,12 @@ namespace InternetAuction.API.Controllers
 
         [Inject]
         public IAuctionsHistoryRepository AuctionsHistoryRepository { get; set; }
+
+        [Inject]
+        public ICreditCardsRepository CreditCardsRepository { get; set; }
+
+        [Inject]
+        public ICreditCardsRepository CreditCardsRepository { get; set; }
 
 
         [HttpGet]
@@ -95,7 +102,7 @@ namespace InternetAuction.API.Controllers
                     CurrentBet = currentBet
                 });
             }
-            if (bet.Sum <= currentBet)
+            if (bet.Sum <= currentBet || bet.Sum < auction.StartPrice)
             {
                 return Ok(new BetResponseVM
                 {
@@ -105,8 +112,19 @@ namespace InternetAuction.API.Controllers
                 });
             }
 
-            var currentUserBet = AuctionsHistoryRepository.CheckCurrentUserBet(auctionId, user.ClientId.Value);
+            var creditCard = CreditCardsRepository.GetCreditCard(bet.CreditCardId);
+            var bankCardCurrency = CreditCardsOperations.GetCreditCardCurrency(creditCard.Number, bet.Cvv);
+            if (bankCardCurrency == null)
+            {
+                return Ok(new BetResponseVM
+                {
+                    Auction = auction,
+                    State = BetState.InvalidCreditCardData,
+                    CurrentBet = currentBet
+                });
+            }
 
+            var currentUserBet = AuctionsHistoryRepository.CheckCurrentUserBet(auctionId, user.ClientId.Value);
             var requestedSumFromBank = bet.Sum - currentUserBet;
 
             // TODO: check CreditCard
@@ -125,7 +143,7 @@ namespace InternetAuction.API.Controllers
                 AuctionId = auction.Id,
                 ClientId = user.ClientId.Value,
                 CreditCardId = bet.CreditCardId,
-                CurrencyId = 1,  // TODO: use value from bank
+                CurrencyId = bankCardCurrency.Value,
                 Sum = requestedSumFromBank,
                 Date = DateTime.Now
             });
