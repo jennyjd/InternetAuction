@@ -15,7 +15,7 @@
             </div>
             <div class="separator">
                 <div class="name_wrap">
-                    <md-input placeholder="Название лота" maxlength="40" [(ngModel)]="lot.name" name="name" #name>
+                    <md-input placeholder="Название лота" maxlength="40" [(ngModel)]="lot.name" name="name" #name required>
                         <md-hint>{{name.characterCount}} / 40</md-hint>
                     </md-input>
                 </div>
@@ -27,28 +27,44 @@
                               (onRemove)="imageRemoved($event)"
                               (isPending)="disableSendButton($event)">
                 </image-upload>
-                <div>
+                <!--<div>
                     <button md-icon-button class="md-mini md-primary" aria-label="view">
                         <md-icon>delete forever</md-icon>
                     </button>
-                </div>
+                </div>-->
             </div>
         </div>
 
-        <h3>Состояние</h3>
-        <md2-select [(ngModel)]="lot.stateId" name="stateId" #stateId>
-            <md2-option [value]="st.Id" *ngFor="let st of lotState">{{st.Name}}</md2-option>
-        </md2-select>
+        <div class="main_inf">
+            <h3>Основная информация</h3>
+            <md-input placeholder="Начальная цена" [(ngModel)]="lot.startPrice" name="startPrice" #startPrice required>
+                <span md-suffix></span>
+            </md-input>
 
-        <h3>Дата и время окончания аукциона</h3>
-        <md2-datepicker [(ngModel)]="lot.endDate"
-                        name="endDate"
-                        #endDate
-                        [min]="minDate"
-                        [max]=""
-                        type="datetime"
-                        format="DD/MM/YYYY HH:mm">
-        </md2-datepicker>
+            <md-input placeholder="Стоимость выкупа" [(ngModel)]="lot.fastSell" name="fastSell" #fastSell>
+                <span md-suffix></span>
+            </md-input>
+
+            <md2-select [(ngModel)]="lot.stateId" placeholder="Состояние" name="stateId" #stateId required>
+                <md2-option [value]="st.Id" *ngFor="let st of lotState">{{st.Name}}</md2-option>
+            </md2-select>
+
+            <md2-select [(ngModel)]="lot.currencyId" placeholder="Валюта" name="currencyId" #currencyId required>
+                <md2-option *ngFor="let curr of currency" [value]="curr.Id">{{curr.ShortName}}</md2-option>
+            </md2-select>
+
+            <md2-datepicker [(ngModel)]="lot.endDate"
+                            name="endDate"
+                            placeholder="Время окончания"
+                            #endDate
+                            [min]="minDate"
+                            [max]=""
+                            type="datetime"
+                            style="width: 95%"
+                            format="DD/MM/YYYY HH:mm"
+                            required>
+            </md2-datepicker>
+        </div>
 
         <h3>Выбор категорий</h3>
         <div class="select_categories">
@@ -59,12 +75,12 @@
                             <button type="button" md-button focus (click)="toggle(category)">
                                 <div flex layout="row">
                                     <b>{{category.Name}}</b>
-                                    <img src="../../../assets/icons/keyboard_arrow_down-black.svg"/>
+                                    <img src="../../../assets/icons/keyboard_arrow_down-black.svg" />
                                 </div>
                             </button>
                         </div>
                     </li>
-               </ul>
+                </ul>
             </div>
             <div class="subcategory_wrap">
                 <ul *ngIf="ifCategoryIsSelected()">
@@ -79,24 +95,11 @@
             </div>
         </div>
 
-        <h3>Валюта</h3>
-        <md2-select [(ngModel)]="lot.currencyId" name="currencyId" #currencyId>
-            <md2-option *ngFor="let curr of currency" [value]="curr.Id">{{curr.ShortName}}</md2-option>
-        </md2-select>
-
-        <h3>Начальная цена</h3>
-        <md-input placeholder="Начальная цена" [(ngModel)]="lot.startPrice" name="startPrice" #startPrice>
-            <span md-suffix></span>
-        </md-input>
-
-        <h3>Стоимость выкупа</h3>
-        <md-input placeholder="Стоимость выкупа" [(ngModel)]="lot.fastSell" name="fastSell" #fastSell>
-            <span md-suffix></span>
-        </md-input>
-
         <h3>Описание лота</h3>
-        <textarea [(ngModel)]="lot.description" name="description" #description></textarea>
+        <textarea [(ngModel)]="lot.description" name="description" #description required></textarea>
 
-        <button md-button type="submit">Добавить лот</button>
+        <md-card-actions layout="row">
+            <button md-raised-button type="submit">Добавить лот</button>
+        </md-card-actions>
     </form>
 </md-card>

@@ -6,15 +6,34 @@
 
 .image_uploader {
     display: flex;
-    margin-top: 20px;
+    padding: 20px 0px;
+    border-bottom: 1px solid lightgrey;
 }
 
 .name_wrap {
     margin-bottom: 20px;
 }
 
+.main_inf {
+    padding: 15px 0px;
+}
+
 .name_wrap md-input {
     width: 340px;
+}
+
+md2-select {
+    width: 95%;
+}
+
+div.md2-datepicker-input-container {
+    width: 100%;
+}
+
+textarea{
+    width: 95%;
+    height: 150px;
+    resize:none;
 }
 
 .separator {
@@ -136,7 +155,7 @@ md-card > * {
 
 md-input {
     padding-top: 1px;
-    width:50%;
+    width:95%;
     margin: 0;
 }
 
