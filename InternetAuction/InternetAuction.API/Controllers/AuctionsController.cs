@@ -27,7 +27,7 @@ namespace InternetAuction.API.Controllers
         public ICreditCardsRepository CreditCardsRepository { get; set; }
 
         [Inject]
-        public ICreditCardsRepository CreditCardsRepository { get; set; }
+        public ICurrenciesConversionsRepository CurrenciesConversionsRepository { get; set; }
 
 
         [HttpGet]
@@ -124,18 +124,12 @@ namespace InternetAuction.API.Controllers
                 });
             }
 
+            var currencyConversion = CurrenciesConversionsRepository.GetCurrencyConversion(auction.CurrencyId, bankCardCurrency.Value);
             var currentUserBet = AuctionsHistoryRepository.CheckCurrentUserBet(auctionId, user.ClientId.Value);
-            var requestedSumFromBank = bet.Sum - currentUserBet;
+            var newAddedSum = bet.Sum - currentUserBet;
+            var requestedSumFromBank = newAddedSum * currencyConversion.Rate;
 
-            // TODO: check CreditCard
-
-            /*
-             * 1. ConvertSum
-             * 2. Check creditCard
-             * 3. Request money
-             */
-
-            // TODO: return blocked sum and additioanl info (Currency of CreditCard) and error if we can not convert currency
+            // TODO: request money from bank
 
 
             AuctionsHistoryRepository.AddBet(new AuctionHistory
@@ -144,7 +138,7 @@ namespace InternetAuction.API.Controllers
                 ClientId = user.ClientId.Value,
                 CreditCardId = bet.CreditCardId,
                 CurrencyId = bankCardCurrency.Value,
-                Sum = requestedSumFromBank,
+                Sum = newAddedSum,
                 Date = DateTime.Now
             });
 
