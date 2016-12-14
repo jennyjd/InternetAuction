@@ -2,7 +2,7 @@
 (
 	[Id] INT IDENTITY(1,1) NOT NULL,
 	[Number] NVARCHAR(16) NOT NULL,
-	[Cash] DECIMAL(10, 10) NULL,
+	[Cash] DECIMAL(10, 8) NULL,
 	[ValidTo] DATETIME NOT NULL,
 	[OwnerFirstName] NVARCHAR(50) NOT NULL,
 	[OwnerLastName] NVARCHAR(50) NOT NULL,

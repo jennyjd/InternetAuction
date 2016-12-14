@@ -24,7 +24,7 @@ namespace InternetAuction.API.Repositories
             foreach(var auction in auctions)
             {
                 // TODO: check winner
-                if (auction.EndDate >= DateTime.Now)
+                if (auction.EndDate <= DateTime.Now && !auction.IsCompleted)
                 {
                     auction.IsCompleted = true;
                 }

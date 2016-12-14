@@ -9,9 +9,9 @@ namespace InternetAuction.API.Repositories.Abstractions
 {
     public interface IAuctionsHistoryRepository
     {
-        float CheckCurrentMaxBet(int auctionId);
+        decimal CheckCurrentMaxBet(int auctionId);
 
-        float CheckCurrentUserBet(int auctionId, int clientId);
+        decimal CheckCurrentUserBet(int auctionId, int clientId);
 
         AuctionHistory AddBet(AuctionHistory auctionHistory);
     }

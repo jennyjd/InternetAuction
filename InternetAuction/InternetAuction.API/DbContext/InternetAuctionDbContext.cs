@@ -18,6 +18,7 @@ namespace InternetAuction.API.DbContext
         public DbSet<Auction> Auctions { get; set; }
         public DbSet<GoodsState> GoodStates { get; set; }
         public DbSet<AuctionHistory> AuctionsHistory { get; set; }
+        public DbSet<CurrencyConversion> CurrenciesConversions { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -29,6 +30,7 @@ namespace InternetAuction.API.DbContext
             MapAuctions(modelBuilder);
             MapGoodsStates(modelBuilder);
             MapAuctionsHistory(modelBuilder);
+            MapCurrenciesConversions(modelBuilder);
         }
 
 
@@ -273,6 +275,32 @@ namespace InternetAuction.API.DbContext
                 .HasMany(x => x.Auctions)
                 .WithRequired(x => x.GoodsState)
                 .HasForeignKey(x => x.GoodStateId);
+        }
+
+
+        private void MapCurrenciesConversions(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<CurrencyConversion>()
+                .ToTable("CurrenciesConversions");
+
+            modelBuilder.Entity<CurrencyConversion>()
+                .HasKey(x => x.Id)
+                .HasEntitySetName("Id");
+
+            modelBuilder.Entity<CurrencyConversion>()
+                .Property(x => x.FromCurrencyId)
+                .HasColumnName("FromCurrencyId")
+                .IsRequired();
+
+            modelBuilder.Entity<CurrencyConversion>()
+                .Property(x => x.ToCurrencyId)
+                .HasColumnName("ToCurrencyId")
+                .IsRequired();
+
+            modelBuilder.Entity<CurrencyConversion>()
+               .Property(x => x.Rate)
+               .HasColumnName("Rate")
+               .IsRequired();
         }
 
 

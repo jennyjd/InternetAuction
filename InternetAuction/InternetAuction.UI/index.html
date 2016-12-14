@@ -23,16 +23,18 @@
             }
         });
 
-        $.ajax({
-            url: "http://localhost:21561/api/TestApi/TestAuthorize",
-            success: function (result) { console.log(result) },
-            xhrFields: {
-                withCredentials: true
-            }
-        });
+        function func() {
+            $.ajax({
+                url: "http://localhost:21561/api/TestApi/TestAuthorize",
+                success: function (result) { console.log(result) },
+                xhrFields: {
+                    withCredentials: true
+                }
+            });
+        }
         </script>
 </head>
 <body>
-    Hello
+    <button onclick="func()">Hello</button>
 </body>
 </html>
