@@ -146,8 +146,9 @@ namespace InternetAuction.API.Controllers
                 AuctionId = auction.Id,
                 ClientId = user.ClientId.Value,
                 CreditCardId = bet.CreditCardId,
-                CurrencyId = bankCardCurrency.Value,
-                Sum = newAddedSum,
+                CreditCardCurrencyId = bankCardCurrency.Value,
+                CreditCardSum = requestedSumFromBank,
+                BetSum = newAddedSum,
                 Date = DateTime.Now
             });
 

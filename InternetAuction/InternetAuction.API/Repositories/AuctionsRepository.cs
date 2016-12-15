@@ -26,6 +26,11 @@ namespace InternetAuction.API.Repositories
                 // TODO: check winner
                 if (auction.EndDate <= DateTime.Now && !auction.IsCompleted)
                 {
+                    /*
+                     * clientId
+                     * creditCardId
+                     * SumId
+                     */
                     auction.IsCompleted = true;
                 }
             }

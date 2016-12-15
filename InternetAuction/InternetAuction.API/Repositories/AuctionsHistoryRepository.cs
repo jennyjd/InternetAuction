@@ -30,7 +30,7 @@ namespace InternetAuction.API.Repositories
         public decimal CheckCurrentMaxBet(int auctionId)
         {
             var lastBet = _context.AuctionsHistory.Where(x => x.AuctionId == auctionId).OrderBy(x => x.Date).AsEnumerable().LastOrDefault();
-            return lastBet == null ? 0 : _context.AuctionsHistory.Where(x => x.ClientId == lastBet.ClientId && x.AuctionId == auctionId).Sum(x => x.Sum);
+            return lastBet == null ? 0 : _context.AuctionsHistory.Where(x => x.ClientId == lastBet.ClientId && x.AuctionId == auctionId).Sum(x => x.BetSum);
         }
 
 
@@ -39,7 +39,7 @@ namespace InternetAuction.API.Repositories
             var auctionHistory = _context.AuctionsHistory.Where(x => x.ClientId == clientId && x.AuctionId == auctionId);
             if (auctionHistory.Any())
             {
-                return auctionHistory.Sum(x => x.Sum);
+                return auctionHistory.Sum(x => x.BetSum);
             }
             return 0;
         }
