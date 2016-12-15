@@ -1,4 +1,5 @@
-﻿using InternetAuction.API.Infrastructure;
+﻿using Bank.API;
+using InternetAuction.API.Infrastructure;
 using InternetAuction.API.Models;
 using InternetAuction.API.Repositories.Abstractions;
 using InternetAuction.API.ViewModels;
@@ -21,6 +22,12 @@ namespace InternetAuction.API.Controllers
 
         [Inject]
         public IAuctionsHistoryRepository AuctionsHistoryRepository { get; set; }
+
+        [Inject]
+        public ICreditCardsRepository CreditCardsRepository { get; set; }
+
+        [Inject]
+        public ICurrenciesConversionsRepository CurrenciesConversionsRepository { get; set; }
 
 
         [HttpGet]
@@ -95,7 +102,7 @@ namespace InternetAuction.API.Controllers
                     CurrentBet = currentBet
                 });
             }
-            if (bet.Sum <= currentBet)
+            if (bet.Sum <= currentBet || bet.Sum < auction.StartPrice)
             {
                 return Ok(new BetResponseVM
                 {
@@ -105,20 +112,24 @@ namespace InternetAuction.API.Controllers
                 });
             }
 
+            var creditCard = CreditCardsRepository.GetCreditCard(bet.CreditCardId);
+            var bankCardCurrency = CreditCardsOperations.GetCreditCardCurrency(creditCard.Number, bet.Cvv);
+            if (bankCardCurrency == null)
+            {
+                return Ok(new BetResponseVM
+                {
+                    Auction = auction,
+                    State = BetState.InvalidCreditCardData,
+                    CurrentBet = currentBet
+                });
+            }
+
+            var currencyConversion = CurrenciesConversionsRepository.GetCurrencyConversion(auction.CurrencyId, bankCardCurrency.Value);
             var currentUserBet = AuctionsHistoryRepository.CheckCurrentUserBet(auctionId, user.ClientId.Value);
+            var newAddedSum = bet.Sum - currentUserBet;
+            var requestedSumFromBank = newAddedSum * currencyConversion.Rate;
 
-            var requestedSumFromBank = bet.Sum - currentUserBet;
-
-            // TODO: check CreditCard
-
-            /*
-             * 1. Check creditCard
-             * 2. Get possible currencies
-             * 3. Convert to some of them
-             * 4. Request money
-             */
-
-            // TODO: return blocked sum and additioanl info (Currency of CreditCard)
+            // TODO: request money from bank
 
 
             AuctionsHistoryRepository.AddBet(new AuctionHistory
@@ -126,8 +137,8 @@ namespace InternetAuction.API.Controllers
                 AuctionId = auction.Id,
                 ClientId = user.ClientId.Value,
                 CreditCardId = bet.CreditCardId,
-                CurrencyId = 1,  // TODO: use real from Bank response
-                Sum = requestedSumFromBank,
+                CurrencyId = bankCardCurrency.Value,
+                Sum = newAddedSum,
                 Date = DateTime.Now
             });
 

@@ -10,6 +10,7 @@ namespace InternetAuction.API.ViewModels
     {
         AuctionCompleted,
         SmallBet,
+        InvalidCreditCardData,
         BetAccepted
     }
 
@@ -20,6 +21,6 @@ namespace InternetAuction.API.ViewModels
 
         public Auction Auction { get; set; }
 
-        public float CurrentBet { get; set; }
+        public decimal CurrentBet { get; set; }
     }
 }

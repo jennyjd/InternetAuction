@@ -17,7 +17,7 @@ namespace InternetAuction.API.Models
 
         public byte CurrencyId { get; set; }
 
-        public float Sum { get; set; }
+        public decimal Sum { get; set; }
 
         public DateTime Date { get; set; }
     }

@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InternetAuctionTests", "Int
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bank.API", "Bank.API\Bank.API.csproj", "{4A2DA1F7-EDC1-49DE-811F-3489A226E7A7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InternetAuction.IntegrationTests", "InternetAuction.IntegrationTests\InternetAuction.IntegrationTests.csproj", "{AF961B4E-D46B-4ABD-8ED5-F3AE86EF2018}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,14 @@ Global
 		{4A2DA1F7-EDC1-49DE-811F-3489A226E7A7}.Debug-Jenny|Any CPU.Build.0 = Debug|Any CPU
 		{4A2DA1F7-EDC1-49DE-811F-3489A226E7A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A2DA1F7-EDC1-49DE-811F-3489A226E7A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF961B4E-D46B-4ABD-8ED5-F3AE86EF2018}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF961B4E-D46B-4ABD-8ED5-F3AE86EF2018}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF961B4E-D46B-4ABD-8ED5-F3AE86EF2018}.Debug-Jan|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF961B4E-D46B-4ABD-8ED5-F3AE86EF2018}.Debug-Jan|Any CPU.Build.0 = Debug|Any CPU
+		{AF961B4E-D46B-4ABD-8ED5-F3AE86EF2018}.Debug-Jenny|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF961B4E-D46B-4ABD-8ED5-F3AE86EF2018}.Debug-Jenny|Any CPU.Build.0 = Debug|Any CPU
+		{AF961B4E-D46B-4ABD-8ED5-F3AE86EF2018}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF961B4E-D46B-4ABD-8ED5-F3AE86EF2018}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

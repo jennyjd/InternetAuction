@@ -27,14 +27,14 @@ namespace InternetAuction.API.Repositories
         }
 
 
-        public float CheckCurrentMaxBet(int auctionId)
+        public decimal CheckCurrentMaxBet(int auctionId)
         {
             var lastBet = _context.AuctionsHistory.Where(x => x.AuctionId == auctionId).OrderBy(x => x.Date).Last();
             return _context.AuctionsHistory.Where(x => x.ClientId == lastBet.ClientId && x.AuctionId == auctionId).Sum(x => x.Sum);
         }
 
 
-        public float CheckCurrentUserBet(int auctionId, int clientId)
+        public decimal CheckCurrentUserBet(int auctionId, int clientId)
         {
             var auctionHistory = _context.AuctionsHistory.Where(x => x.ClientId == clientId && x.AuctionId == auctionId);
             if (auctionHistory.Any())
