@@ -8,6 +8,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Ninject;
 using System;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http;
@@ -95,7 +96,7 @@ namespace InternetAuction.API.Controllers
             var currentBet = AuctionsHistoryRepository.CheckCurrentMaxBet(auctionId);
             if (auction.IsCompleted)
             {
-                return Ok(new BetResponseVM
+                return Content(HttpStatusCode.BadRequest, new BetResponseVM
                 {
                     Auction = auction,
                     State = BetState.AuctionCompleted,
@@ -104,7 +105,7 @@ namespace InternetAuction.API.Controllers
             }
             if (bet.Sum <= currentBet || bet.Sum < auction.StartPrice)
             {
-                return Ok(new BetResponseVM
+                return Content(HttpStatusCode.BadRequest, new BetResponseVM
                 {
                     Auction = auction,
                     State = BetState.SmallBet,
@@ -116,7 +117,7 @@ namespace InternetAuction.API.Controllers
             var bankCardCurrency = CreditCardsOperations.GetCreditCardCurrency(creditCard.Number, bet.Cvv);
             if (bankCardCurrency == null)
             {
-                return Ok(new BetResponseVM
+                return Content(HttpStatusCode.BadRequest, new BetResponseVM
                 {
                     Auction = auction,
                     State = BetState.InvalidCreditCardData,
@@ -129,7 +130,15 @@ namespace InternetAuction.API.Controllers
             var newAddedSum = bet.Sum - currentUserBet;
             var requestedSumFromBank = newAddedSum * currencyConversion.Rate;
 
-            // TODO: request money from bank
+            if (!CreditCardsOperations.TakeMoney(requestedSumFromBank, creditCard.Number, bet.Cvv))
+            {
+                return Content(HttpStatusCode.BadRequest, new BetResponseVM
+                {
+                    Auction = auction,
+                    State = BetState.NotEnoughMoney,
+                    CurrentBet = currentBet
+                });
+            }
 
 
             AuctionsHistoryRepository.AddBet(new AuctionHistory

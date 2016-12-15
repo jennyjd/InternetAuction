@@ -88,12 +88,15 @@ SET IDENTITY_INSERT CurrenciesConversions ON
 INSERT INTO CurrenciesConversions 
 (Id, FromCurrencyId, ToCurrencyId, Rate)
 VALUES 
-(1, 1, 2, 1.967),
-(2, 1, 3, 2.080),
-(3, 2, 1, 0.51),
-(4, 2, 3, 0.95),
-(5, 3, 1, 0.48),
-(6, 3, 2, 1.0617)
+(1, 1, 1, 1),
+(2, 1, 2, 1.967),
+(3, 1, 3, 2.080),
+(4, 2, 2, 1),
+(5, 2, 1, 0.51),
+(6, 2, 3, 0.95),
+(7, 3, 3, 1),
+(8, 3, 1, 0.48),
+(9, 3, 2, 1.0617)
 
 SET IDENTITY_INSERT CurrenciesConversions OFF
 

@@ -5,7 +5,7 @@
 	[AuctionId] INT NOT NULL,
 	[CreditCardId] INT NOT NULL,
 	[CurrencyId] TINYINT NOT NULL,
-	[Sum] DECIMAL(10, 8) NOT NULL,
+	[Sum] DECIMAL(20, 5) NOT NULL,
 	[Date] DATETIME NOT NULL,
 
 	CONSTRAINT primaryAuctionsHistoryKey PRIMARY KEY ([Id]),
