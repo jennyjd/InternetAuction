@@ -14,6 +14,7 @@ import 'rxjs/add/operator/catch';
 export class LotService {
     private lotsUrl = `${Constant.apiEndpoint}/Auctions`;
     private betUrl = `${Constant.apiEndpoint}/Auctions/Bet`;
+    private getCurBet = `${Constant.apiEndpoint}/Auctions/GetCurrentBet`; 
 
     constructor(private http: Http) {
     }
@@ -30,6 +31,12 @@ export class LotService {
             .catch(this.handleError);
     }
 
+    getCurrentBet(auctionId) {
+        return this.http.get(`${this.getCurBet}/${auctionId}`)
+            .map(response => response.json())
+            .catch(this.handleError);
+    }
+
     makeBet(auctionId, creditId, sum, cvv) {
         let JSONstr = JSON.stringify({CreditCardId: creditId.toString(), Sum: sum, Cvv: cvv});
         console.log("json = " + JSONstr)
@@ -37,7 +44,7 @@ export class LotService {
         headers.append('Content-Type', 'application/json');
 
         return this.http.post(`${this.betUrl}/${auctionId}`, JSONstr, { headers: headers, withCredentials: true })
-            .map(res => res.ok)
+            .map(response => response.json())
             .catch(this.handleError);
     }
 

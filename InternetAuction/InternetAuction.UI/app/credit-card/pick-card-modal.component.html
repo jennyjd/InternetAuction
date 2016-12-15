@@ -21,9 +21,13 @@
             </li>
         </ul>
     </md-card-content>
+    <div *ngIf="betCompletedWarning" style="color:green">
+        Ваша ставка принята
+    </div>
     <form (ngSubmit)="makeBet()">
         <md-card-actions layout="row">
-            <md-input *ngIf="!isDisabled" class="cvv_input" placeholder="CVV" [(ngModel)]="model.cvv" #cvv name="cvv" maxlength="3" minlength="3" required></md-input>
+            <!--maxlength="3"-->
+            <md-input *ngIf="!isDisabled" class="cvv_input" placeholder="CVV" [(ngModel)]="model.cvv" #cvv name="cvv" maxlength="4" minlength="3" required></md-input>
             <button md-raised-button [disabled]="isDisabled" type="submit">Сделать ставку</button>
         </md-card-actions>
     </form>

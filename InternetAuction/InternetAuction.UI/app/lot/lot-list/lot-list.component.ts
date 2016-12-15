@@ -41,17 +41,28 @@ export class LotListComponent {
                 .subscribe(res => {
                     console.log(res);
                     lot.userLogin = res.UserName;
+                        
+                    this.getCurrentBet(lot);
 
-                    lot.EndDate = new Date((Date.parse(lot.EndDate)));
-                    lot.EndDate.setHours(lot.EndDate.getHours() - 3);//GMT+03
-
-                    console.log(lot.EndDate);
-                    lot.mainPicture = "https://pp.vk.me/c419225/v419225009/6e41/vv2MqgXalNw.jpg";
-                    this.lots.push(lot);  
-                    console.log(lot);
                 },
                 error => this.errorMessage = <any>error)
         }; 
+    }
+
+    getCurrentBet(lot) {
+        this.lotService.getCurrentBet(lot.Id)
+            .subscribe(res => {
+                console.log("Current Bet");
+                console.log(res);
+                lot.CurrentBet = res;
+                lot.EndDate = new Date((Date.parse(lot.EndDate)));
+                lot.EndDate.setHours(lot.EndDate.getHours() - 3);//GMT+03
+
+                lot.mainPicture = "https://pp.vk.me/c419225/v419225009/6e41/vv2MqgXalNw.jpg";
+                this.lots.push(lot);
+                console.log(lot);
+            },
+            error => this.errorMessage = <any>error)
     }
 }
 

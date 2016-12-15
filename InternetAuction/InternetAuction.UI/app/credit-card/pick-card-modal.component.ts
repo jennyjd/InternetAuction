@@ -23,6 +23,7 @@ export class ModalPickCardComponent {
     userCreditCards: CreditCard[] = [];
     choosedCard: any = {};
     model: any = {};
+    betCompletedWarning: boolean = false;
     isDisabled: boolean = true;
     cardFocus: Array<boolean> = [];
 
@@ -59,6 +60,8 @@ export class ModalPickCardComponent {
         this.lotService.makeBet(this.lotId, this.choosedCard.id, this.betSum, this.model.cvv)
             .subscribe(res => {            
                 console.log(res);
+                this.betCompletedWarning = true;
+                //this.closeModal();
         },
             error => this.errorMessage = <any>error);
     }

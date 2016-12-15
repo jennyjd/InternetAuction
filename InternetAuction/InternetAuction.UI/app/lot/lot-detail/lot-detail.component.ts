@@ -43,12 +43,22 @@ export class LotDetailComponent implements OnInit {
             .subscribe(res => {
                 this.selected_lot = res;
 
+                this.getCurrentBet(this.selected_lot);
                 this.getTimeLeft();
 
                 console.log(this.selected_lot);
                 this.lotState = this.selected_lot.GoodsState.Name;
                 this.currency = this.selected_lot.Currency.ShortName;
                 this.getUserInf();
+            },
+            error => this.errorMessage = <any>error);
+    }
+
+    getCurrentBet(lot) {
+        this.lotservise.getCurrentBet(lot.Id)
+            .subscribe(res => {
+                console.log(res);
+                this.selected_lot.currentBet = res;
             },
             error => this.errorMessage = <any>error);
     }
@@ -67,6 +77,12 @@ export class LotDetailComponent implements OnInit {
 
     onCloseModal(state: boolean): void {
         this.modal = false;
+        this.updateData();
+    }
+
+    updateData() {
+        this.getCurrentBet(this.selected_lot);
+        this.getTimeLeft();
     }
 
     isUserAuthorized() {
