@@ -4,6 +4,7 @@ import { Constant } from '../globals';
 import { UserService } from '../user/user.service';
 import { CreditCard } from './credit-card';
 import { LoginComponent } from '../login/login.component';
+import { LotService } from '../lot/lot.service';
 
 @Component({
     selector: 'pick-modal',
@@ -15,6 +16,8 @@ import { LoginComponent } from '../login/login.component';
 
 export class ModalPickCardComponent {
     @Output() closeModalEvent = new EventEmitter<boolean>();
+    @Input() betSum: any;
+    @Input() lotId: any;
     errorMessage: any;
     nullUser: boolean = false;
     userCreditCards: CreditCard[] = [];
@@ -23,7 +26,7 @@ export class ModalPickCardComponent {
     isDisabled: boolean = true;
     cardFocus: Array<boolean> = [];
 
-    constructor(private userService: UserService) {
+    constructor(private userService: UserService, private lotService: LotService ) {
         this.getCards();
     }
 
@@ -51,6 +54,13 @@ export class ModalPickCardComponent {
     makeBet() {
         console.log(this.model);
         console.log(this.choosedCard);
+        console.log(this.betSum);
+        console.log(this.lotId);
+        this.lotService.makeBet(this.lotId, this.choosedCard.Id, this.betSum, this.model.cvv)
+            .subscribe(res => {            
+                console.log(res);
+        },
+            error => this.errorMessage = <any>error);
     }
 
     chooseCard(card) {
