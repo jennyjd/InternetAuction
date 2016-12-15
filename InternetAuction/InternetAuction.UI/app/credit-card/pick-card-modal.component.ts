@@ -56,7 +56,7 @@ export class ModalPickCardComponent {
         console.log(this.choosedCard);
         console.log(this.betSum);
         console.log(this.lotId);
-        this.lotService.makeBet(this.lotId, this.choosedCard.Id, this.betSum, this.model.cvv)
+        this.lotService.makeBet(this.lotId, this.choosedCard.id, this.betSum, this.model.cvv)
             .subscribe(res => {            
                 console.log(res);
         },
