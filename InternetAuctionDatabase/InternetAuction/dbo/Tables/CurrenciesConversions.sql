@@ -3,7 +3,7 @@
 	[Id] INT IDENTITY(1,1) NOT NULL,
 	[FromCurrencyId] TINYINT NOT NULL,
 	[ToCurrencyId] TINYINT NOT NULL, 
-	[Rate] DECIMAL(10, 8) NOT NULL,
+	[Rate] DECIMAL(20, 5) NOT NULL,
 
 	CONSTRAINT primaryCurrenciesConversionsKey PRIMARY KEY ([Id]),
 	CONSTRAINT foreignCurrenciesConversionsToCurrenciesFromCurrencyKey FOREIGN KEY([FromCurrencyId])
