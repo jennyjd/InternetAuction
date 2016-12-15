@@ -85,7 +85,7 @@ namespace InternetAuction.API.DbContext
 
             modelBuilder.Entity<CreditCard>()
                 .Property(x => x.Cash)
-                .HasPrecision(10, 10)
+                .HasPrecision(20, 5)
                 .HasColumnName("Cash")
                 .IsOptional();
 
@@ -201,11 +201,13 @@ namespace InternetAuction.API.DbContext
 
             modelBuilder.Entity<Auction>()
                 .Property(x => x.StartPrice)
+                .HasPrecision(20, 5)
                 .HasColumnName("StartPrice")
                 .IsRequired();
 
             modelBuilder.Entity<Auction>()
                 .Property(x => x.PriceOfFastSell)
+                .HasPrecision(20, 5)
                 .HasColumnName("PriceOfFastSell")
                 .IsOptional();
 
@@ -299,6 +301,7 @@ namespace InternetAuction.API.DbContext
 
             modelBuilder.Entity<CurrencyConversion>()
                .Property(x => x.Rate)
+               .HasPrecision(20, 5)
                .HasColumnName("Rate")
                .IsRequired();
         }
@@ -335,6 +338,7 @@ namespace InternetAuction.API.DbContext
 
             modelBuilder.Entity<AuctionHistory>()
                .Property(x => x.Sum)
+               .HasPrecision(20, 5)
                .HasColumnName("Sum")
                .IsRequired();
 
