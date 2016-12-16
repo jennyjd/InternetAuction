@@ -39,7 +39,8 @@ export class LoginService {
     }
 
     public handleError(error: Response) {
-        console.error(error);
+        //console.error(error);
+        //return error.json().error;
         return Observable.throw(error.json().error || 'Server error');
     }
 }

@@ -31,13 +31,14 @@ import { Md2Module } from 'md2';
 
 import { MomentModule } from 'angular2-moment';
 import { ImageUploadModule } from 'angular2-image-upload';
+import { SimpleNotificationsModule } from 'angular2-notifications';
 
 import { routing, appRoutingProviders } from './app.routing'
 
 @NgModule({
     imports: [BrowserModule, MdCardModule, MdButtonModule, MdIconModule, MdSidenavModule, MdToolbarModule,
         MdListModule, MdInputModule, routing, FormsModule, ImageUploadModule.forRoot(), Md2Module.forRoot(),
-        MdProgressCircleModule, MomentModule],
+        MdProgressCircleModule, MomentModule, SimpleNotificationsModule],
     declarations: [AppComponent, LotComponent, LotListComponent, LoginComponent, HomeComponent, RegistrationComponent,
         UserDetailsComponent, LotCreateComponent, LotDetailComponent, LoadingComponent, ModalPickCardComponent],
     bootstrap: [AppComponent],

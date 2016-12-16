@@ -1,5 +1,5 @@
 ﻿<pick-modal *ngIf="modal && isUserAuth" (closeModalEvent)="onCloseModal($event)" [betSum]="model.bet" [lotId]="selected_lot.Id"></pick-modal>
-
+<simple-notifications ></simple-notifications>
 <div *ngIf="modal && !isUserAuth">
     <div id="overlay">
     </div>

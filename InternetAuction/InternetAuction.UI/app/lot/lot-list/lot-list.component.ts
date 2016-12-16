@@ -31,7 +31,6 @@ export class LotListComponent {
     getLots() {
         this.lotService.getLots()
             .subscribe(res => {
-                console.log(res);
                 this.addData(res);
             },
             error => this.errorMessage = <any>error);
@@ -41,7 +40,6 @@ export class LotListComponent {
         for (let lot of res) {
             this.userService.getUserAccountById(lot.ClientId)
                 .subscribe(res => {
-                    console.log(res);
                     lot.userLogin = res.UserName;                        
                     this.getCurrentBet(lot);
                 },
@@ -52,8 +50,6 @@ export class LotListComponent {
     getCurrentBet(lot) {
         this.lotService.getCurrentBet(lot.Id)
             .subscribe(res => {
-                console.log("Current Bet");
-                console.log(res);
                 lot.CurrentBet = res;
 
                 if (lot.CurrentBet != 0) { lot.betDone = true }
@@ -64,10 +60,9 @@ export class LotListComponent {
 
                 lot.mainPicture = "https://pp.vk.me/c419225/v419225009/6e41/vv2MqgXalNw.jpg";
 
-                lot.CurrencyName = this.generalService.getCurrencyById(lot.Id).ShortName;
-                //console.log("Currency", lot.CurrencyName);
+                lot.CurrencyName = this.generalService.getCurrencyById(lot.CurrencyId).ShortName;
+                console.log("Currency", lot.CurrencyName);
                 this.lots.push(lot);
-                //console.log(lot);
             },
             error => this.errorMessage = <any>error)
     }

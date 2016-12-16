@@ -15,7 +15,7 @@ import { LotService } from '../lot/lot.service';
 })
 
 export class ModalPickCardComponent {
-    @Output() closeModalEvent = new EventEmitter<boolean>();
+    @Output() closeModalEvent = new EventEmitter();
     @Input() betSum: any;
     @Input() lotId: any;
     errorMessage: any;
@@ -23,7 +23,7 @@ export class ModalPickCardComponent {
     userCreditCards: CreditCard[] = [];
     choosedCard: any = {};
     model: any = {};
-    betCompletedWarning: boolean = false;
+    betState: string = '';
     isDisabled: boolean = true;
     cardFocus: Array<boolean> = [];
 
@@ -49,7 +49,7 @@ export class ModalPickCardComponent {
     }
 
     closeModal() {
-        this.closeModalEvent.emit(true);
+        this.closeModalEvent.emit({ event: true, betState: this.betState });
     }
 
     makeBet() {
@@ -58,12 +58,15 @@ export class ModalPickCardComponent {
         console.log(this.betSum);
         console.log(this.lotId);
         this.lotService.makeBet(this.lotId, this.choosedCard.id, this.betSum, this.model.cvv)
-            .subscribe(res => {            
+            .subscribe(res => {
                 console.log(res);
-                this.betCompletedWarning = true;
-                //this.closeModal();
-        },
-            error => this.errorMessage = <any>error);
+                this.betState = 'success';
+                this.closeModal();
+            },
+            error => {
+                this.errorMessage = <any>error;
+                this.betState = 'error';
+            });
     }
 
     chooseCard(card) {

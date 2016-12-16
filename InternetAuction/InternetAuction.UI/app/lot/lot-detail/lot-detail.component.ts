@@ -1,5 +1,6 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { NotificationsService } from 'angular2-notifications';
 import 'rxjs/add/operator/switchMap';
 
 import { LotService } from '../lot.service';
@@ -33,7 +34,8 @@ export class LotDetailComponent implements OnInit {
         private router: Router,
         private lotservise: LotService,
         private userServise: UserService,
-        private generalServise: GeneralService) {
+        private generalServise: GeneralService,
+        private notifService: NotificationsService) {
 
         this.isUserAuth = this.isUserAuthorized()
     }
@@ -83,9 +85,51 @@ export class LotDetailComponent implements OnInit {
         this.selected_lot.timeLeft = ourDate;
     }
 
-    onCloseModal(state: boolean): void {
+    onCloseModal(event): void {
+        console.log('CLOSE EVENT');
+        console.log(event);
         this.modal = false;
         this.updateData();
+        this.checkBetResult(event.betState);
+    }
+
+    checkBetResult(betState) {
+        if (betState == 'success') {
+            this.successNotif();
+        }
+        else if (betState == 'error') {
+            this.errorNotif();
+        }
+    }
+
+    errorNotif() {
+        this.notifService.error(
+            'Ошибка!',
+            'Что-то пошло не так',
+            {
+                position: ["top", "right"],
+                timeOut: 2500,
+                showProgressBar: true,
+                pauseOnHover: true,
+                clickToClose: true,
+                maxLength: 1000
+            }
+        )
+    }
+
+    successNotif() {
+        this.notifService.success(
+            'Успех!',
+            'Ваша ставка успешно принята',
+            {
+                position: ["top", "right"],
+                timeOut: 2500,
+                showProgressBar: true,
+                pauseOnHover: true,
+                clickToClose: true,
+                maxLength: 1000
+            }
+        )
     }
 
     updateData() {

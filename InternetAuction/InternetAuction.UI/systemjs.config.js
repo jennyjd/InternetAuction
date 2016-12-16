@@ -37,7 +37,8 @@
             'angular2-image-upload': 'npm:angular2-image-upload',
             'md2': 'node_modules/md2',
             'angular2-moment': 'npm:angular2-moment',
-            'moment': 'npm:moment'
+            'moment': 'npm:moment',
+            'angular2-notifications': 'node_modules/angular2-notifications'
         },
         // packages tells the System loader how to load when no filename and/or no extension
         packages: {
@@ -66,6 +67,10 @@
             },
             'angular2-moment': {
                 main: './index.js',
+                defaultExtension: 'js'
+            },
+            'angular2-notifications': {
+                main: 'components.js',
                 defaultExtension: 'js'
             }
         }

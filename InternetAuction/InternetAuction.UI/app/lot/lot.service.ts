@@ -38,6 +38,7 @@ export class LotService {
     }
 
     makeBet(auctionId, creditId, sum, cvv) {
+        console.log(auctionId, creditId, sum, cvv);
         let JSONstr = JSON.stringify({CreditCardId: creditId.toString(), Sum: sum, Cvv: cvv});
         console.log("json = " + JSONstr)
         let headers = new Headers();

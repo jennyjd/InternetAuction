@@ -1,5 +1,6 @@
 ﻿import { Component } from '@angular/core'
 import { Router } from '@angular/router';
+import { NotificationsService } from 'angular2-notifications';
 
 import { LoginService } from './login.service'
 import { User } from '../user/user'
@@ -17,7 +18,7 @@ export class LoginComponent {
     loading = false;
     errorMessage: string;
 
-    constructor(private router: Router, private loginService: LoginService) { }
+    constructor(private router: Router, private loginService: LoginService, private notifService: NotificationsService) { }
 
     loginUser() {
         this.errorMessage = '';
@@ -31,7 +32,23 @@ export class LoginComponent {
                 this.router.navigate(['/']);
             },
             error => {
+                this.errorNotif();
                 this.errorMessage = error;
             });
+    }
+
+    errorNotif() {
+        this.notifService.error(
+            'Ошибка!',
+            'Аккаунт не существует',
+            {
+                position: ["top", "right"],
+                timeOut: 2500,
+                showProgressBar: true,
+                pauseOnHover: true,
+                clickToClose: true,
+                maxLength: 1000
+            }
+        )
     }
 }
