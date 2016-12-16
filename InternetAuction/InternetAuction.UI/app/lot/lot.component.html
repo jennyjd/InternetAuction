@@ -10,10 +10,11 @@
             <md-card-title>{{lotitem.Name}}</md-card-title>
             <md-card-content>
                 <div *ngIf="lotitem.visible_items == true" class="more_inf">
-                    <div>login: {{lotitem.userLogin}}</div>
-                    <div>FAST SELL: {{lotitem.PriceOfFastSell}}</div>
-                    <div *ngIf="lotitem.betDone">ТЕКУЩАЯ СТАВКА: {{lotitem.CurrentBet}}</div>
+                    <div *ngIf="lotitem.betDone">Текущая ставка: {{lotitem.CurrentBet}} {{lotitem.CurrencyName}}</div>
                     <div *ngIf="!lotitem.betDone">Ставок нету</div>
+                    <div>Выкуп: {{lotitem.PriceOfFastSell}} {{lotitem.CurrencyName}}</div>
+                    <p></p>
+                    <div>login: {{lotitem.userLogin}}</div>
                 </div>
                 <div class="bottom_inf">
                     Осталось:

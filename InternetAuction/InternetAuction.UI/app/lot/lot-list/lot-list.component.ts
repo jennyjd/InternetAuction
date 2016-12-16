@@ -6,6 +6,7 @@ import { LotService } from '../lot.service';
 import { UserService } from '../../user/user.service';
 import { SharedService } from '../../shared.service';
 import { Constant } from '../../globals';
+import { GeneralService } from '../../general.service';
 
 @Component({
     selector: 'lot-list',
@@ -21,7 +22,8 @@ export class LotListComponent {
     lots: any[] = [];
     //@Input() selected: string;
 
-    constructor(private lotService: LotService, private userService: UserService, private sharedService: SharedService) {
+    constructor(private lotService: LotService, private userService: UserService, private sharedService: SharedService,
+        private generalService: GeneralService) {
         this.getLots();
         console.log(this.lots);
     }
@@ -40,10 +42,8 @@ export class LotListComponent {
             this.userService.getUserAccountById(lot.ClientId)
                 .subscribe(res => {
                     console.log(res);
-                    lot.userLogin = res.UserName;
-                        
+                    lot.userLogin = res.UserName;                        
                     this.getCurrentBet(lot);
-
                 },
                 error => this.errorMessage = <any>error)
         }; 
@@ -63,8 +63,11 @@ export class LotListComponent {
                 lot.EndDate.setHours(lot.EndDate.getHours() - 3);//GMT+03
 
                 lot.mainPicture = "https://pp.vk.me/c419225/v419225009/6e41/vv2MqgXalNw.jpg";
+
+                lot.CurrencyName = this.generalService.getCurrencyById(lot.Id).ShortName;
+                //console.log("Currency", lot.CurrencyName);
                 this.lots.push(lot);
-                console.log(lot);
+                //console.log(lot);
             },
             error => this.errorMessage = <any>error)
     }
