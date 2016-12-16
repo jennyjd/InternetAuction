@@ -11,42 +11,42 @@ namespace Bank.API
             new CreditCard
             {
                 CurrencyId = 1,
-                Cvv = "1234",
+                Cvv = "123",
                 Number = "1282237041056833",
                 Sum = 10000
             },
             new CreditCard
             {
                 CurrencyId = 2,
-                Cvv = "1234",
+                Cvv = "234",
                 Number = "7309400641159165",
                 Sum = 10000
             },
             new CreditCard
             {
                 CurrencyId = 1,
-                Cvv = "1234",
+                Cvv = "789",
                 Number = "6246746369166353",
                 Sum = 1000
             },
             new CreditCard
             {
                 CurrencyId = 1,
-                Cvv = "1234",
+                Cvv = "234",
                 Number = "3047580553634127",
                 Sum = 1000
             },
             new CreditCard
             {
                 CurrencyId = 1,
-                Cvv = "1234",
+                Cvv = "345",
                 Number = "1736656025872241",
                 Sum = 10000000
             },
             new CreditCard
             {
                 CurrencyId = 1,
-                Cvv = "1234",
+                Cvv = "243",
                 Number = "8722173641054006",
                 Sum = 500
             }

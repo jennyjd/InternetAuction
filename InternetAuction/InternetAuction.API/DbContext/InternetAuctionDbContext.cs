@@ -332,14 +332,20 @@ namespace InternetAuction.API.DbContext
                .IsRequired();
 
             modelBuilder.Entity<AuctionHistory>()
-               .Property(x => x.CurrencyId)
-               .HasColumnName("CurrencyId")
+               .Property(x => x.CreditCardCurrencyId)
+               .HasColumnName("CreditCardCurrencyId")
                .IsRequired();
 
             modelBuilder.Entity<AuctionHistory>()
-               .Property(x => x.Sum)
+               .Property(x => x.CreditCardSum)
                .HasPrecision(20, 5)
-               .HasColumnName("Sum")
+               .HasColumnName("CreditCardSum")
+               .IsRequired();
+
+            modelBuilder.Entity<AuctionHistory>()
+               .Property(x => x.BetSum)
+               .HasPrecision(20, 5)
+               .HasColumnName("BetSum")
                .IsRequired();
 
             modelBuilder.Entity<AuctionHistory>()
