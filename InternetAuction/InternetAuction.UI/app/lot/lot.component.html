@@ -12,7 +12,8 @@
                 <div *ngIf="lotitem.visible_items == true" class="more_inf">
                     <div>login: {{lotitem.userLogin}}</div>
                     <div>FAST SELL: {{lotitem.PriceOfFastSell}}</div>
-                    <div>ТЕКУЩАЯ СТАВКА: {{lotitem.CurrentBet}}</div>
+                    <div *ngIf="lotitem.betDone">ТЕКУЩАЯ СТАВКА: {{lotitem.CurrentBet}}</div>
+                    <div *ngIf="!lotitem.betDone">Ставок нету</div>
                 </div>
                 <div class="bottom_inf">
                     Осталось:

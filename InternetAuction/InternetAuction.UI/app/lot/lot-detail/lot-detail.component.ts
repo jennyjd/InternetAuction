@@ -24,6 +24,7 @@ export class LotDetailComponent implements OnInit {
     lotState: string = '';
     currency: string = '';
     modal: boolean = false;
+    betDone: boolean = false;
     isUserAuth: boolean;
     myDate = new Date();
 
@@ -59,8 +60,15 @@ export class LotDetailComponent implements OnInit {
             .subscribe(res => {
                 console.log(res);
                 this.selected_lot.currentBet = res;
+                this.checkCurrBet();
             },
             error => this.errorMessage = <any>error);
+    }
+
+    checkCurrBet() {
+        if (this.selected_lot.currentBet != 0) {
+            this.betDone = true;
+        }
     }
 
     changeModal() {

@@ -16,8 +16,7 @@ export class LotComponent implements DoCheck {
     @Input() lotitem: any;
     selectedCategoryId = "none";
 
-    constructor(private router: Router, private sharedService: SharedService) {
-    }
+    constructor(private router: Router, private sharedService: SharedService) { }
 
     ngDoCheck() {
         this.selectedCategoryId = this.sharedService.getSelected();

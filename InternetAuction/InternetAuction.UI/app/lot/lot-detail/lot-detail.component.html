@@ -37,7 +37,9 @@
                     </div>
                 </div>
                 <div class="bet_wrap">
-                    <h3>Текущая ставка: {{selected_lot.currentBet}} {{currency}}</h3>
+                    <h3>Начальная ставка: {{selected_lot.StartPrice}} {{currency}}</h3>
+                    <h3 *ngIf="betDone">Текущая ставка: {{selected_lot.currentBet}} {{currency}}</h3>
+                    <p *ngIf="!betDone">Ставок нету</p>
                     <!--изменить на текущую цену-->
                     <form (ngSubmit)="changeModal()">
                         <md-input placeholder="Ставка" [(ngModel)]="model.bet" #bet name="bet" value={{selected_lot.currentBet}} required></md-input>

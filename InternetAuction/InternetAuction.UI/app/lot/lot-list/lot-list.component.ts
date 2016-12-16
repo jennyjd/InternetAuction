@@ -55,6 +55,10 @@ export class LotListComponent {
                 console.log("Current Bet");
                 console.log(res);
                 lot.CurrentBet = res;
+
+                if (lot.CurrentBet != 0) { lot.betDone = true }
+                else { lot.betDone = false }
+
                 lot.EndDate = new Date((Date.parse(lot.EndDate)));
                 lot.EndDate.setHours(lot.EndDate.getHours() - 3);//GMT+03
 
