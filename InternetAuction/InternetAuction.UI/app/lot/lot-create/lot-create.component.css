@@ -10,6 +10,20 @@
     border-bottom: 1px solid lightgrey;
 }
 
+.alert {
+    border: 1px solid;
+    border-radius: 0.2em;
+    padding: 5px;
+    font-size: 12px;
+    margin: 6px 0px;
+    width: 95%;
+}
+
+.alert-warning {
+    border-color: #ffb366;
+    background-color: #ffe6cc;
+}
+
 .name_wrap {
     margin-bottom: 20px;
 }
@@ -62,8 +76,15 @@ textarea{
 .select_categories {
     min-height: 200px;
     display: flex;
-    width: 100%;
+    width: 95%;
     border-bottom: 1px solid lightgrey;
+}
+
+.alert-error {
+    margin-top: 15px;
+    font-size: 13px;
+    border-color: #990000;
+    background-color: #ffcccc;
 }
 
 .select_categories button {

@@ -61,7 +61,7 @@ export class LotService {
         headers.append('Content-Type', 'application/json');
 
         return this.http.post(this.lotsUrl, JSONstr, { headers: headers, withCredentials: true })
-            .map(res => res.ok)
+            .map(res => res.json())
             .catch(this.handleError);
     }
 

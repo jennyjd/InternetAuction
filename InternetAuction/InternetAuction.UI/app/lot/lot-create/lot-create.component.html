@@ -1,5 +1,5 @@
 ﻿<md-card class="create_wrap">
-    <form (ngSubmit)="createLot()">
+    <form (ngSubmit)="createLot(startPrice, fastSell)">
         
         <div class="image_uploader">
             <div class="separator">
@@ -37,13 +37,23 @@
 
         <div class="main_inf">
             <h3>Основная информация</h3>
-            <md-input placeholder="Начальная цена" [(ngModel)]="lot.startPrice" name="startPrice" #startPrice required>
-                <span md-suffix></span>
-            </md-input>
+            <md-input placeholder="Начальная цена" [(ngModel)]="lot.startPrice" name="startPrice" #startPrice="ngModel" required pattern="[0-9]+"></md-input>
+            <div *ngIf="startPrice.errors && (startPrice.dirty || startPrice.touched)" class="alert alert-warning">
+                <div [hidden]="!startPrice.errors.pattern">
+                    Данное поле должно быть числом
+                </div>
+            </div>
 
-            <md-input placeholder="Стоимость выкупа" [(ngModel)]="lot.fastSell" name="fastSell" #fastSell>
-                <span md-suffix></span>
-            </md-input>
+            <md-input placeholder="Стоимость выкупа" [(ngModel)]="lot.fastSell" name="fastSell" #fastSell="ngModel" pattern="^$|[0-9]+"></md-input>
+            <div *ngIf="fastSell.errors && (startPrice.dirty || startPrice.touched)" class="alert alert-warning">
+                <div [hidden]="!fastSell.errors.pattern">
+                    Данное поле должно быть числом
+                </div>
+            </div>
+
+            <div *ngFor="let error of priceErrors" class="alert alert-warning">
+                {{error}}
+            </div>
 
             <md2-select [(ngModel)]="lot.stateId" placeholder="Состояние" name="stateId" #stateId required>
                 <md2-option [value]="st.Id" *ngFor="let st of lotState">{{st.Name}}</md2-option>
@@ -95,11 +105,17 @@
             </div>
         </div>
 
+        <div *ngIf="categoryError" class="alert alert-warning">
+            Выберите категорию
+        </div>
+
         <h3>Описание лота</h3>
         <textarea [(ngModel)]="lot.description" name="description" #description required></textarea>
 
+        <div *ngIf="categoryError || priceErrors.length != 0" class="alert alert-error">Проверьте корректность введенных данных</div>
+
         <md-card-actions layout="row">
-            <button md-raised-button type="submit">Добавить лот</button>
+            <button md-raised-button type="submit" style="float:right">Добавить лот</button>
         </md-card-actions>
     </form>
 </md-card>

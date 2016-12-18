@@ -22,6 +22,8 @@ export class LotCreateComponent {
     selected_category = null;
     lot: any = {};
     minDate = new Date();
+    categoryError: boolean = false;
+    priceErrors: string[] = [];
 
     pictures =
        ['https://s-media-cache-ak0.pinimg.com/736x/bb/bf/58/bbbf58c0716c059fa378d419defa0f05.jpg',
@@ -33,6 +35,8 @@ export class LotCreateComponent {
         this.getCategories();
         this.getCurrency();
         this.getLotState();
+        this.minDate
+        this.minDate.setHours(this.minDate.getHours() + 3);//3часа - минимальное время проведения аукциона
     }
 
     getCategories() {
@@ -49,8 +53,6 @@ export class LotCreateComponent {
     getCurrency() {
         this.generalService.getCurrency()
             .subscribe(res => {
-                console.log("GET CUREENCY");
-                console.log(res);
                 for (let curr of res) {
                     this.currency.push(curr)
                 }
@@ -61,8 +63,6 @@ export class LotCreateComponent {
     getLotState() {
         this.generalService.getLotState()
             .subscribe(res => {
-                console.log("GET LOT STATE");
-                console.log(res);
                 for (let state of res) {
                     this.lotState.push(state)
                 }
@@ -93,16 +93,41 @@ export class LotCreateComponent {
         return true
     }
 
-    createLot() {
-        console.log(this.lot);
-        this.lotService.createLot(this.lot)
-            .subscribe(
-            res => {
-                console.log("OK");
-                console.log(res);
-                this.router.navigate(['/']);
-            },
-            error => this.errorMessage = <any>error);
+    createLot(startPrice, fastSell) {
+        if (!this.validate(startPrice, fastSell)) {
+            return;
+        }
+        else {
+            this.lotService.createLot(this.lot)
+                .subscribe(
+                res => {
+                    this.router.navigate(['/lotdetail', res.Id]);
+                },
+                error => this.errorMessage = <any>error);
+        }
+    }
+
+    validate(startPrice, fastSell) {
+        this.priceErrors = [];
+        let check = true;
+        this.categoryError = false;
+        if (this.lot.categoryId == undefined) {
+            this.categoryError = true;
+            check = false;
+        }
+        if (parseInt(startPrice.model) > parseInt(fastSell.model)) {
+            this.priceErrors.push("Начальная цена должна быть меньше стоимость выкупа");
+            check = false;
+        }
+        if (parseInt(startPrice.model) <= 0) {
+            this.priceErrors.push("Начальная цена должна быть больше нуля");
+            check = false;
+        }
+        if (parseInt(fastSell.model) <= 0) {
+            this.priceErrors.push("Стоимость выкупа должна быть больше нуля");
+            check = false;
+        }
+        return check;
     }
 
     chooseCategory(category) {
