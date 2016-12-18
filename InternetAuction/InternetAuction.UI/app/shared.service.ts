@@ -13,6 +13,15 @@ export class SharedService {
         return sel.selected
     }
 
+    saveSuccessRegistr(success) {
+        localStorage.setItem('successRegistr', JSON.stringify(success));
+    }
+
+    getSuccessRegistr() {
+        let sel = JSON.parse(localStorage.getItem('successRegistr'));
+        return sel
+    }
+
     saveOpened(str) {
         localStorage.setItem('opened_sidenav', JSON.stringify({ opened: str }));
     }

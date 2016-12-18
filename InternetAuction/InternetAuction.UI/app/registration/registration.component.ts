@@ -2,7 +2,8 @@
 import { Router } from '@angular/router';
 
 import { Constant } from '../globals';
-import { UserService } from '../user/user.service'
+import { UserService } from '../user/user.service';
+import { SharedService } from '../shared.service';
 
 @Component({
     selector: 'registration',
@@ -18,7 +19,7 @@ export class RegistrationComponent {
     monthError: boolean = false;
     yearError: boolean = false;
 
-    constructor(private router: Router, private userService: UserService) {
+    constructor(private router: Router, private userService: UserService, private sharedService: SharedService) {
     }
 
     register(inputs) {
@@ -33,8 +34,7 @@ export class RegistrationComponent {
             this.userService.create(this.userModel, this.creditModel)
                 .subscribe(
                 res => {
-                    console.log("OK");
-                    console.log(res);
+                    this.sharedService.saveSuccessRegistr(true);
                     this.router.navigate(['/login']);
                 },
                 error => {
@@ -47,19 +47,16 @@ export class RegistrationComponent {
     checkInputs(inputs) {
         for (let item of inputs) {
             if (item.errors != null) {
-                console.log(item);
                 this.errorsDetected = true;
                 return false
             }
             if (item.name == "ValidMonth") {
-                console.log(parseInt(item.model));
                 if (parseInt(item.model) > 12 || parseInt(item.model) < 1) {
                     this.monthError = true;
                     return false
                 }
             }
             else if (item.name == "ValidYear") {
-                console.log(parseInt(item.model));
                 if (parseInt(item.model) < 16) {
                     this.yearError = true;
                     return false

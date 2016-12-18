@@ -1,8 +1,9 @@
-﻿import { Component } from '@angular/core'
+﻿import { Component, AfterViewInit } from '@angular/core'
 import { Router } from '@angular/router';
 import { NotificationsService } from 'angular2-notifications';
 
 import { LoginService } from './login.service'
+import { SharedService } from '../shared.service';
 import { User } from '../user/user'
 import { Constant } from '../globals';
 
@@ -13,12 +14,23 @@ import { Constant } from '../globals';
     providers: [LoginService]
 })
 
-export class LoginComponent {
+export class LoginComponent implements AfterViewInit  {
     model: any = {};
     loading = false;
     errorMessage: string;
 
-    constructor(private router: Router, private loginService: LoginService, private notifService: NotificationsService) { }
+    constructor(private router: Router, private loginService: LoginService, private notifService: NotificationsService,
+        private sharedService: SharedService) {
+     
+    }
+
+    ngAfterViewInit() {
+        console.log(this.sharedService.getSuccessRegistr());
+        if (this.sharedService.getSuccessRegistr()) {
+            this.successRegistrNotif();
+        }
+        this.sharedService.saveSuccessRegistr(false);
+    }
 
     loginUser() {
         this.errorMessage = '';
@@ -37,13 +49,28 @@ export class LoginComponent {
             });
     }
 
+    successRegistrNotif() {
+        this.notifService.success(
+            'Успех!',
+            'Регистрация прошла успешно!',
+            {
+                position: ["top", "right"],
+                timeOut: 3000,
+                showProgressBar: true,
+                pauseOnHover: true,
+                clickToClose: true,
+                maxLength: 1000
+            }
+        )
+    }
+
     errorNotif() {
         this.notifService.error(
             'Ошибка!',
             'Аккаунт не существует',
             {
                 position: ["top", "right"],
-                timeOut: 2500,
+                timeOut: 3000,
                 showProgressBar: true,
                 pauseOnHover: true,
                 clickToClose: true,
