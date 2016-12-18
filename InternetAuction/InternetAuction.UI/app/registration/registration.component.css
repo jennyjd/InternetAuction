@@ -4,6 +4,31 @@
     margin:0 auto;
 }
 
+.alert {
+    border: 1px solid;
+    border-radius: 0.2em;
+    padding: 5px;
+    font-size: 12px;
+    margin-bottom: 6px;
+}
+
+.alert-warning {
+    border-color: #ffb366;
+    background-color: #ffe6cc;
+}
+
+.alert-error {
+    margin-top: 70px;
+    font-size: 13px;
+    border-color: #990000;
+    background-color: #ffcccc;
+}
+
+.submit_button {
+    float: right;
+    margin-bottom: 10px;
+}
+
 .information{
     width:50%;
     margin: 0 15px;
@@ -22,7 +47,7 @@
 }
 
 .validThru md-input {
-    width: 40px;
+    width: 42px;
 }
 
 md-input {

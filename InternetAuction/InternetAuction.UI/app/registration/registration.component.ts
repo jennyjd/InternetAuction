@@ -14,31 +14,66 @@ export class RegistrationComponent {
     userModel: any = {};
     creditModel: any = {};
     loading = false;
+    errorsDetected: boolean = false;
+    monthError: boolean = false;
+    yearError: boolean = false;
 
     constructor(private router: Router, private userService: UserService) {
     }
 
-    register() {
-        this.loading = true;
-        this.dataUpdate();
-        this.userService.create(this.userModel, this.creditModel)
-            .subscribe(
-            res => {
-                console.log("OK");
-                console.log(res);
-                this.router.navigate(['/login']);
-            },
-            error => {
-                console.log("ERROR");
-                this.loading = false;
-            });
+    register(inputs) {
+        this.yearError = false;
+        this.monthError = false;
+        if (this.checkInputs(inputs) == false) {
+            return
+        }
+        else {
+            this.loading = true;
+            this.dataUpdate();
+            this.userService.create(this.userModel, this.creditModel)
+                .subscribe(
+                res => {
+                    console.log("OK");
+                    console.log(res);
+                    this.router.navigate(['/login']);
+                },
+                error => {
+                    console.log("ERROR");
+                    this.loading = false;
+                });
+        }
+    }
+
+    checkInputs(inputs) {
+        for (let item of inputs) {
+            if (item.errors != null) {
+                console.log(item);
+                this.errorsDetected = true;
+                return false
+            }
+            if (item.name == "ValidMonth") {
+                console.log(parseInt(item.model));
+                if (parseInt(item.model) > 12 || parseInt(item.model) < 1) {
+                    this.monthError = true;
+                    return false
+                }
+            }
+            else if (item.name == "ValidYear") {
+                console.log(parseInt(item.model));
+                if (parseInt(item.model) < 16) {
+                    this.yearError = true;
+                    return false
+                }
+            }
+        }
+        return true
     }
 
     dataUpdate() {
         let Name = this.creditModel.HolderName.split(" ");
         this.creditModel.userFirstName = Name[0];
         this.creditModel.userLastName = Name[1];
-        this.creditModel.Number = this.creditModel.Number.replace(/\s+/g, '');
+        this.creditModel.number = this.creditModel.Number.replace(/\s+/g, '');
         //изменить на последний день месяца
         this.creditModel.validThru = this.creditModel.ValidMonth + "-28-20" + this.creditModel.ValidYear;
     }

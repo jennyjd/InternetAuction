@@ -19,7 +19,7 @@ export class UserService {
         let UserJSON = JSON.stringify({
             FirstName: user.firstName, LastName: user.lastName, Login: user.login,
             Password: user.password, Email: user.email, CreditCards: [{
-                Number: credit.Number, ValidTo: credit.validThru,
+                Number: credit.number, ValidTo: credit.validThru,
                 OwnerFirstName: credit.userFirstName, OwnerLastName: credit.userLastName
             }]
         });

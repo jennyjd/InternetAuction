@@ -93,6 +93,7 @@
     <Content Include="assets\icons\done-white.svg" />
     <Content Include="assets\icons\gavel-white.svg" />
     <Content Include="assets\icons\home-white.svg" />
+    <Content Include="assets\icons\info-black-mini.svg" />
     <Content Include="assets\icons\keyboard_arrow_down-black.svg" />
     <Content Include="assets\icons\payment-black.svg" />
     <Content Include="assets\icons\payment-white.svg" />
