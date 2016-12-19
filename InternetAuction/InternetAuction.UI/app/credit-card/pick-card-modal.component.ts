@@ -17,15 +17,17 @@ import { LotService } from '../lot/lot.service';
 export class ModalPickCardComponent {
     @Output() closeModalEvent = new EventEmitter();
     @Input() betSum: any;
+    @Input() fastSell: any;
     @Input() lotId: any;
     errorMessage: any;
     nullUser: boolean = false;
     userCreditCards: CreditCard[] = [];
     choosedCard: any = {};
     model: any = {};
-    betState: string = '';
+    betState: any;
     isDisabled: boolean = true;
     cardFocus: Array<boolean> = [];
+    isFastSell: boolean = false;
 
     constructor(private userService: UserService, private lotService: LotService ) {
         this.getCards();
@@ -57,16 +59,28 @@ export class ModalPickCardComponent {
         console.log(this.choosedCard);
         console.log(this.betSum);
         console.log(this.lotId);
-        this.lotService.makeBet(this.lotId, this.choosedCard.id, this.betSum, this.model.cvv)
+
+        this.checkFastSell();
+
+        this.lotService.makeBet(this.lotId, this.choosedCard.id, this.betSum, this.model.cvv, this.isFastSell)
             .subscribe(res => {
                 console.log(res);
-                this.betState = 'success';
+                this.betState = res.State;
                 this.closeModal();
             },
             error => {
                 this.errorMessage = <any>error;
-                this.betState = 'error';
             });
+    }
+
+    checkFastSell() {
+        console.log("КУКУК");
+        console.log(this.fastSell);
+        if (this.fastSell[1] == true) {
+            this.isFastSell = true;
+            return true;
+        }
+        return false;
     }
 
     chooseCard(card) {

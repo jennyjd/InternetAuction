@@ -1,4 +1,4 @@
-﻿<pick-modal *ngIf="modal && isUserAuth" (closeModalEvent)="onCloseModal($event)" [betSum]="model.bet" [lotId]="selected_lot.Id"></pick-modal>
+﻿<pick-modal *ngIf="modal && isUserAuth" (closeModalEvent)="onCloseModal($event)" [betSum]="model.bet" [fastSell]="[selected_lot.PriceOfFastSell, redeemBool]" [lotId]="selected_lot.Id"></pick-modal>
 <simple-notifications ></simple-notifications>
 <div *ngIf="modal && !isUserAuth">
     <div id="overlay">
@@ -37,25 +37,33 @@
                     </div>
                 </div>
                 <div class="bet_wrap">
-                    <h3>Начальная ставка: {{selected_lot.StartPrice}} {{currency}}</h3>
-                    <h3 *ngIf="betDone">Текущая ставка: {{selected_lot.currentBet}} {{currency}}</h3>
-                    <p *ngIf="!betDone">Ставок нету</p>
-                    <!--изменить на текущую цену-->
-                    <form (ngSubmit)="changeModal()">
-                        <md-input placeholder="Ставка" [(ngModel)]="model.bet" #bet name="bet" value={{selected_lot.currentBet}} required></md-input>
-                        <button md-mini-fab style="background-color:#D95154" type="submit" tooltip="Сделать ставку" tooltip-position="below" >
-                            <img src="../../../assets/icons/gavel-white.svg" />
-                        </button>
-                    </form>
+                    <div *ngIf="!selected_lot.IsCompleted">
+                        <h3>Начальная ставка: {{selected_lot.StartPrice}} {{currency}}</h3>
+                        <h3 *ngIf="betDone">Текущая ставка: {{selected_lot.currentBet}} {{currency}}</h3>
+                        <p *ngIf="!betDone">Ставок нету</p>
+                        <!--изменить на текущую цену-->
+                        <form (ngSubmit)="changeModal()">
+                            <!--value={{selected_lot.currentBet}}-->
+                            <md-input placeholder="Ставка" [(ngModel)]="model.bet" #bet name="bet" required></md-input>
+                            <button md-mini-fab style="background-color:#D95154" type="submit" tooltip="Сделать ставку" tooltip-position="below">
+                                <img src="../../../assets/icons/gavel-white.svg" />
+                            </button>
+                        </form>
 
-                    <div *ngIf="checkFastSell(selected_lot)">
-                        {{selected_lot.PriceOfFastSell}} {{currency}}
-                        <button md-raised-button>Выкупить</button>
+                        <div *ngIf="checkFastSell(selected_lot)">
+                            {{selected_lot.PriceOfFastSell}} {{currency}}
+                            <button md-raised-button (click)="redeem()">Выкупить</button>
+                        </div>
+
+                        <h3>Осталось: </h3>
+                        <span>
+                            {{selected_lot.timeLeft | amDifference: today: 'days'}} дн.
+                            {{(selected_lot.timeLeft | amDifference: today: 'hours') - (selected_lot.timeLeft | amDifference: today: 'days')*24}} ч.
+                        </span>
                     </div>
-
-                    <h3>Осталось: </h3>
-                    <span>{{selected_lot.timeLeft | amDifference: today: 'days'}} дн. 
-                    {{(selected_lot.timeLeft | amDifference: today: 'hours') - (selected_lot.timeLeft | amDifference: today: 'days')*24}} ч.</span>
+                    <div *ngIf="selected_lot.IsCompleted">
+                        <h3>Аукцион завершён!</h3>
+                    </div>
                 </div>
             </div>
             <div class="description">

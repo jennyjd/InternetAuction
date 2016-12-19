@@ -37,14 +37,20 @@ export class LotService {
             .catch(this.handleError);
     }
 
-    makeBet(auctionId, creditId, sum, cvv) {
-        console.log(auctionId, creditId, sum, cvv);
-        let JSONstr = JSON.stringify({CreditCardId: creditId.toString(), Sum: sum, Cvv: cvv});
+    makeBet(auctionId, creditId, sum, cvv, isFastSell) {
+        console.log(auctionId, creditId, sum, cvv, isFastSell);
+        let JSONstr = '';
+        if (isFastSell) {
+            JSONstr = JSON.stringify({ CreditCardId: creditId.toString(), Cvv: cvv });
+        }
+        else {
+            JSONstr = JSON.stringify({ CreditCardId: creditId.toString(), Sum: sum, Cvv: cvv });
+        }
         console.log("json = " + JSONstr)
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
 
-        return this.http.post(`${this.betUrl}/${auctionId}`, JSONstr, { headers: headers, withCredentials: true })
+        return this.http.post(`${this.betUrl}/${auctionId}/${isFastSell}`, JSONstr, { headers: headers, withCredentials: true })
             .map(response => response.json())
             .catch(this.handleError);
     }

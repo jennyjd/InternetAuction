@@ -29,6 +29,7 @@ export class LotDetailComponent implements OnInit, AfterViewInit {
     betDone: boolean = false;
     isUserAuth: boolean;
     myDate = new Date();
+    redeemBool: boolean = false;
 
     constructor(
         private route: ActivatedRoute,
@@ -40,6 +41,7 @@ export class LotDetailComponent implements OnInit, AfterViewInit {
         private sharedService: SharedService) {
 
         this.isUserAuth = this.isUserAuthorized()
+        this.redeemBool = false;
     }
 
     ngOnInit() {
@@ -87,6 +89,11 @@ export class LotDetailComponent implements OnInit, AfterViewInit {
         this.modal = !this.modal;
     }
 
+    redeem() {
+        this.redeemBool = true;
+        this.changeModal();
+    }
+
     getTimeLeft() {
         let currentDate = new Date();
         let ourDate = new Date(Date.parse(this.selected_lot.EndDate));
@@ -96,29 +103,26 @@ export class LotDetailComponent implements OnInit, AfterViewInit {
     }
 
     onCloseModal(event): void {
-        console.log('CLOSE EVENT');
-        console.log(event);
         this.modal = false;
         this.updateData();
         this.checkBetResult(event.betState);
     }
 
     checkBetResult(betState) {
-        if (betState == 'success') {
-            this.successNotif();
-        }
-        else if (betState == 'error') {
-            this.errorNotif();
-        }
+        console.log(betState);
+        if (betState == 0) { this.successNotif("Аукцион завершен!"); }
+        else if (betState == 2) { this.errorNotif("Введеные некорректные данные по банковской карте!"); }
+        else if (betState == 3) { this.successNotif("Ваша ставка успешно принята!"); }
+        else if (betState == 4) { this.errorNotif("На вашей карте недостаточно средств!"); }
     }
 
-    errorNotif() {
+    errorNotif(msg) {
         this.notifService.error(
             'Ошибка!',
-            'Что-то пошло не так',
+            msg,
             {
                 position: ["top", "right"],
-                timeOut: 2500,
+                timeOut: 3000,
                 showProgressBar: true,
                 pauseOnHover: true,
                 clickToClose: true,
@@ -142,10 +146,10 @@ export class LotDetailComponent implements OnInit, AfterViewInit {
         )
     }
 
-    successNotif() {
+    successNotif(msg) {
         this.notifService.success(
             'Успех!',
-            'Ваша ставка успешно принята',
+            msg,
             {
                 position: ["top", "right"],
                 timeOut: 2500,
@@ -158,8 +162,19 @@ export class LotDetailComponent implements OnInit, AfterViewInit {
     }
 
     updateData() {
-        this.getCurrentBet(this.selected_lot);
-        this.getTimeLeft();
+        this.lotservise.getLotById(this.selected_lot.Id)
+            .subscribe(res => {
+            this.selected_lot = res;
+
+            this.getCurrentBet(this.selected_lot);
+            this.getTimeLeft();
+
+            console.log(this.selected_lot);
+            this.lotState = this.selected_lot.GoodsState.Name;
+            this.currency = this.selected_lot.Currency.ShortName;
+            this.getUserInf();
+        },
+            error => this.errorMessage = <any>error);
     }
 
     isUserAuthorized() {
