@@ -16,5 +16,7 @@ namespace InternetAuction.API.Repositories.Abstractions
         Auction GetAuction(int id);
 
         Auction AddAuction(Auction auction);
+
+        Auction CompleteAuction(int auctionId);
     }
 }

@@ -43,5 +43,11 @@ namespace InternetAuction.API.Repositories
             }
             return 0;
         }
+
+
+        public IEnumerable<int> GetParticipantsIds(int auctionId)
+        {
+            return _context.AuctionsHistory.Where(x => x.AuctionId == auctionId).GroupBy(x => x.ClientId).Select(x => x.Key);
+        }
     }
 }

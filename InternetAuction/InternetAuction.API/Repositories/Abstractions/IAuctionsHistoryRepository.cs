@@ -14,5 +14,7 @@ namespace InternetAuction.API.Repositories.Abstractions
         decimal CheckCurrentUserBet(int auctionId, int clientId);
 
         AuctionHistory AddBet(AuctionHistory auctionHistory);
+
+        IEnumerable<int> GetParticipantsIds(int auctionId);
     }
 }
