@@ -5,12 +5,17 @@ using System.Linq;
 using System.Web;
 using InternetAuction.API.Models;
 using InternetAuction.API.DbContext;
+using Ninject;
 
 namespace InternetAuction.API.Repositories
 {
     public class AuctionsRepository : IAuctionsRepository
     {
         private readonly InternetAuctionDbContext _context;
+
+
+        [Inject]
+        public IAuctionsHistoryRepository AuctionsHistoryRepository { get; set; }
 
 
         public AuctionsRepository()
@@ -26,6 +31,7 @@ namespace InternetAuction.API.Repositories
                 // TODO: check winner
                 if (auction.EndDate <= DateTime.Now && !auction.IsCompleted)
                 {
+                    var clientsIds = AuctionsHistoryRepository.GetParticipantsIds(auction.Id);
                     /*
                      * clientId
                      * creditCardId
@@ -60,6 +66,15 @@ namespace InternetAuction.API.Repositories
             _context.Auctions.Add(auction);
             _context.SaveChanges();
             return GetAuction(auction.Id);
+        }
+
+
+        public Auction CompleteAuction(int auctionId)
+        {
+            var updatedAuction = _context.Auctions.SingleOrDefault(x => x.Id == auctionId);
+            updatedAuction.IsCompleted = true;
+            _context.SaveChanges();
+            return updatedAuction;
         }
 
 

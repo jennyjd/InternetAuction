@@ -85,15 +85,28 @@ namespace InternetAuction.API.Controllers
 
         [Authorize(Roles = "Client")]
         [HttpPost]
-        [Route("Bet/{auctionId}")]
-        public IHttpActionResult Bet(int auctionId, [FromBody]BetVM bet)
+        [Route("Bet/{auctionId}/{isFastSell}")]
+        public IHttpActionResult Bet(int auctionId, bool isFastSell, [FromBody]BetVM bet)
         {
             InternetAuctionUser user = HttpContext.Current.GetOwinContext()
                     .GetUserManager<InternetAuctionUserManager>()
                     .FindById(HttpContext.Current.User.Identity.GetUserId());
 
             var auction = AuctionsRepository.GetAuction(auctionId);
+            if (isFastSell && auction.PriceOfFastSell.HasValue)
+            {
+                bet.Sum = auction.PriceOfFastSell.Value;
+            }
             var currentBet = AuctionsHistoryRepository.CheckCurrentMaxBet(auctionId);
+            if (isFastSell && !auction.PriceOfFastSell.HasValue)
+            {
+                return Content(HttpStatusCode.BadRequest, new BetResponseVM
+                {
+                    Auction = auction,
+                    State = BetState.AuctionHasNotFastSellOption,
+                    CurrentBet = currentBet
+                });
+            }
             if (auction.IsCompleted)
             {
                 return Content(HttpStatusCode.BadRequest, new BetResponseVM
@@ -152,7 +165,10 @@ namespace InternetAuction.API.Controllers
                 Date = DateTime.Now
             });
 
-
+            if (isFastSell)
+            {
+                AuctionsRepository.CompleteAuction(auction.Id);
+            }
             return Ok(new BetResponseVM
             {
                 Auction = AuctionsRepository.GetAuction(auctionId),
