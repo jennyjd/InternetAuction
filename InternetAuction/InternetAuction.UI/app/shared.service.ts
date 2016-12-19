@@ -13,11 +13,11 @@ export class SharedService {
         return sel.selected
     }
 
-    saveSuccessRegistr(success) {
+    saveSuccess(success) {
         localStorage.setItem('successRegistr', JSON.stringify(success));
     }
 
-    getSuccessRegistr() {
+    getSuccess() {
         let sel = JSON.parse(localStorage.getItem('successRegistr'));
         return sel
     }

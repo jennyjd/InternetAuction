@@ -1,4 +1,4 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { NotificationsService } from 'angular2-notifications';
 import 'rxjs/add/operator/switchMap';
@@ -6,6 +6,7 @@ import 'rxjs/add/operator/switchMap';
 import { LotService } from '../lot.service';
 import { UserService } from '../../user/user.service';
 import { GeneralService } from '../../general.service';
+import { SharedService } from '../../shared.service';
 import { Constant } from '../../globals';
 import { ModalPickCardComponent } from '../../credit-card/pick-card-modal.component';
 
@@ -17,7 +18,7 @@ import { ModalPickCardComponent } from '../../credit-card/pick-card-modal.compon
     entryComponents: [ModalPickCardComponent]
 })
 
-export class LotDetailComponent implements OnInit {
+export class LotDetailComponent implements OnInit, AfterViewInit {
     selected_lot: any = {};
     userInformation: any = {};
     errorMessage: any;
@@ -35,7 +36,8 @@ export class LotDetailComponent implements OnInit {
         private lotservise: LotService,
         private userServise: UserService,
         private generalServise: GeneralService,
-        private notifService: NotificationsService) {
+        private notifService: NotificationsService,
+        private sharedService: SharedService) {
 
         this.isUserAuth = this.isUserAuthorized()
     }
@@ -55,6 +57,14 @@ export class LotDetailComponent implements OnInit {
                 this.getUserInf();
             },
             error => this.errorMessage = <any>error);
+    }
+
+    ngAfterViewInit() {
+        console.log(this.sharedService.getSuccess());
+        if (this.sharedService.getSuccess()) {
+            this.successNewLotAddedNotif();
+        }
+        this.sharedService.saveSuccess(false);
     }
 
     getCurrentBet(lot) {
@@ -109,6 +119,21 @@ export class LotDetailComponent implements OnInit {
             {
                 position: ["top", "right"],
                 timeOut: 2500,
+                showProgressBar: true,
+                pauseOnHover: true,
+                clickToClose: true,
+                maxLength: 1000
+            }
+        )
+    }
+
+    successNewLotAddedNotif() {
+        this.notifService.success(
+            'Успех!',
+            'Ваш лот успещно добавлен!',
+            {
+                position: ["top", "right"],
+                timeOut: 3000,
                 showProgressBar: true,
                 pauseOnHover: true,
                 clickToClose: true,

@@ -34,7 +34,7 @@ export class RegistrationComponent {
             this.userService.create(this.userModel, this.creditModel)
                 .subscribe(
                 res => {
-                    this.sharedService.saveSuccessRegistr(true);
+                    this.sharedService.saveSuccess(true);
                     this.router.navigate(['/login']);
                 },
                 error => {

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { MdUniqueSelectionDispatcher } from '@angular2-material/core';
 
 import { GeneralService } from '../../general.service';
+import { SharedService } from '../../shared.service';
 import { LotService } from '../lot.service';
 import { Constant } from '../../globals';
 
@@ -31,12 +32,13 @@ export class LotCreateComponent {
         'http://houseplanning.ru/sites/default/files/images/ikea_4.jpg',
         'http://lookathome.ru/wp-content/uploads/2013/10/LookAtHome.ru_Mebel_IKEA_v_interiere-foto-3.jpeg']
 
-    constructor(private generalService: GeneralService, private lotService: LotService, private router: Router) {
+    constructor(private generalService: GeneralService, private lotService: LotService, private router: Router,
+        private sharedService: SharedService) {
         this.getCategories();
         this.getCurrency();
         this.getLotState();
-        this.minDate
         this.minDate.setHours(this.minDate.getHours() + 3);//3часа - минимальное время проведения аукциона
+        console.log(this.minDate);
     }
 
     getCategories() {
@@ -101,6 +103,7 @@ export class LotCreateComponent {
             this.lotService.createLot(this.lot)
                 .subscribe(
                 res => {
+                    this.sharedService.saveSuccess(true);
                     this.router.navigate(['/lotdetail', res.Id]);
                 },
                 error => this.errorMessage = <any>error);
