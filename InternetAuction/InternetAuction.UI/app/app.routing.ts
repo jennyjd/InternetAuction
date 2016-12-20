@@ -7,6 +7,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { UserDetailsComponent } from './user/user-detail/user-detail.component';
 import { LotCreateComponent } from './lot/lot-create/lot-create.component';
 import { LotDetailComponent } from './lot/lot-detail/lot-detail.component';
+import { AdminComponent } from './admin/admin.component';
 
 
 const appRoutes: Routes = [
@@ -33,6 +34,10 @@ const appRoutes: Routes = [
     {
         path: 'lotdetail/:id',
         component: LotDetailComponent
+    },
+    {
+        path: 'admin',
+        component: AdminComponent
     }
 ];
 

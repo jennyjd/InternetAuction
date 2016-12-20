@@ -14,6 +14,7 @@ import { LotCreateComponent } from './lot/lot-create/lot-create.component';
 import { LotDetailComponent } from './lot/lot-detail/lot-detail.component';
 import { LoadingComponent } from './loading/loading.component';
 import { ModalPickCardComponent } from './credit-card/pick-card-modal.component';
+import { AdminComponent } from './admin/admin.component';
 
 import { UserService } from './user/user.service';
 import { LoginService } from './login/login.service';
@@ -40,7 +41,7 @@ import { routing, appRoutingProviders } from './app.routing'
         MdListModule, MdInputModule, routing, FormsModule, ImageUploadModule.forRoot(), Md2Module.forRoot(),
         MdProgressCircleModule, MomentModule, SimpleNotificationsModule],
     declarations: [AppComponent, LotComponent, LotListComponent, LoginComponent, HomeComponent, RegistrationComponent,
-        UserDetailsComponent, LotCreateComponent, LotDetailComponent, LoadingComponent, ModalPickCardComponent],
+        UserDetailsComponent, LotCreateComponent, LotDetailComponent, LoadingComponent, ModalPickCardComponent, AdminComponent],
     bootstrap: [AppComponent],
     providers: [MdIconRegistry, OVERLAY_PROVIDERS, appRoutingProviders, UserService, LoginService]
 })

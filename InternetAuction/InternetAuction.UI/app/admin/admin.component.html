@@ -1,0 +1,10 @@
+﻿<button md-button (click)="changeToCurrent()" >Текущие</button>
+<button md-button (click)="changeToCompleted()" >Завершенные</button>
+
+<md-card *ngFor="let lot of viewLots" class="lots">
+    <div class="image_container">
+        <span></span> <img class="md-card-image">
+    </div>
+    {{lot.Name}}
+    <img src="../../assets/icons/keyboard_arrow_down-black.svg"/>
+</md-card>

@@ -7,6 +7,7 @@
         <button md-mini-fab routerLink="/" tooltip="На главную" tooltip-position="below">
             <img src="../assets/icons/home-white.svg" />
         </button>
+        <button md-button routerLink="/admin">Админка</button>
         <button md-button routerLink="/createlot" *ngIf="isUserHere()">Добавить лот</button>
         <button md-button routerLink="/login" *ngIf="!isUserHere()">Войти</button>
         <button md-button (click)="logout()" *ngIf="isUserHere()">Выход</button>

@@ -1,0 +1,33 @@
+﻿.lots {
+    width: 80%;
+    margin:0 auto;
+}
+
+.card-media {
+    background-color: beige;
+}
+
+md-card {
+    display:flex;
+    flex-flow: row wrap;
+}
+
+.image_container {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    width: inherit;
+    height: 100px;
+    width: 100px;
+    border: 1px solid grey;
+}
+.image_container * {
+    vertical-align: middle;
+}
+
+.image_container img{
+    height: auto; 
+    width: auto; 
+    max-width: 100px; 
+    max-height: 100px;
+}

@@ -60,6 +60,8 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\admin\admin.component.css" />
+    <Content Include="app\admin\admin.component.html" />
     <Content Include="app\app.component.css" />
     <Content Include="app\app.component.html" />
     <Content Include="app\credit-card\pick-card-modal.component.css" />
@@ -130,6 +132,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <TypeScriptCompile Include="app\admin\admin.component.ts" />
     <TypeScriptCompile Include="app\app.component.ts" />
     <TypeScriptCompile Include="app\app.module.ts" />
     <TypeScriptCompile Include="app\app.routing.ts" />

@@ -45,7 +45,7 @@ export class AppComponent {
 
         router.events.subscribe((val) => {
             this.opened_sidebar = true;
-            if (val.url != '/') {
+            if (val.url != '/' && val.url != '/admin') {
                 this.opened_sidebar = false;
             }
         });  
