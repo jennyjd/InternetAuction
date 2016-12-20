@@ -90,15 +90,23 @@ export class LotDetailComponent implements OnInit, AfterViewInit {
         let bet = parseInt(sum.model);
         this.betAmmountErrors = [];
         console.log(bet);
+        console.log(this.selected_lot.PriceOfFastSell);
         console.log(this.selected_lot.currentBet);
-        if (bet < this.selected_lot.currentBet) {
-            this.betAmmountErrors.push("Ваша ставка меньше текущей!");
+        if (this.selected_lot.currentBet != 0) {
+            if (bet <= this.selected_lot.currentBet) {
+                this.betAmmountErrors.push("Ваша ставка должна быть больше текущей!");
+            }
         }
-        else if (bet > this.selected_lot.PriceOfFastSell) {
-            this.betAmmountErrors.push("Ваша ставка больше стоимости выкупа! Чтобы выкупить данный лот, нажмите на кнопку 'Выкупить'");
+        else if (bet <= this.selected_lot.StartPrice) {
+            this.betAmmountErrors.push("Ваша ставка должна быть больше начальной!");
         }
-        else if (bet == this.selected_lot.PriceOfFastSell) {
-            this.betAmmountErrors.push("Ваша ставка cоответствует стоимости выкупа! Чтобы выкупить данный лот, нажмите на кнопку 'Выкупить'");
+        else if (this.selected_lot.PriceOfFastSell != null) {
+            if (bet > this.selected_lot.PriceOfFastSell) {
+                this.betAmmountErrors.push("Ваша ставка больше стоимости выкупа! Чтобы выкупить данный лот, нажмите на кнопку 'Выкупить'");
+            }
+            else if (bet == this.selected_lot.PriceOfFastSell) {
+                this.betAmmountErrors.push("Ваша ставка cоответствует стоимости выкупа! Чтобы выкупить данный лот, нажмите на кнопку 'Выкупить'");
+            }
         }
         else {
             this.changeModal();
