@@ -76,6 +76,7 @@
     <Build Include="dbo\Tables\GoodsState.sql" />
     <Build Include="dbo\Tables\AuctionsHistory.sql" />
     <Build Include="dbo\Tables\CurrenciesConversions.sql" />
+    <Build Include="dbo\Tables\AuctionsResults.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\AuctionsCategories.sql" />

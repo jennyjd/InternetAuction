@@ -5,12 +5,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using InternetAuction.API.Models;
+using Ninject;
 
 namespace InternetAuction.API.Repositories
 {
     public class AuctionsHistoryRepository : IAuctionsHistoryRepository
     {
         private readonly InternetAuctionDbContext _context;
+
+
+        [Inject]
+        public IAuctionsRepository AuctionsRepository { get; set; }
 
 
         public AuctionsHistoryRepository()
@@ -48,6 +53,48 @@ namespace InternetAuction.API.Repositories
         public IEnumerable<int> GetParticipantsIds(int auctionId)
         {
             return _context.AuctionsHistory.Where(x => x.AuctionId == auctionId).GroupBy(x => x.ClientId).Select(x => x.Key);
+        }
+
+
+        public object GetAuctionsHistoryForParticipant(int clientId)
+        {
+            var auctionsHistory = _context.AuctionsHistory.Where(x => x.ClientId == clientId).GroupBy(x => x.AuctionId);
+            var list = new List<object>();
+
+            foreach (var history in auctionsHistory)
+            {
+                var auction = AuctionsRepository.GetAuction(history.Key);
+                list.Add(new
+                {
+                    AuctionId = auction.Id,
+                    CurrencyId = auction.CurrencyId,
+                    IsCompleted = auction.IsCompleted,
+                    UserBet = CheckCurrentUserBet(auction.Id, clientId),
+                    MaxBet = CheckCurrentMaxBet(auction.Id),
+                    IsWinner = auction.IsCompleted && CheckCurrentUserBet(auction.Id, clientId) == CheckCurrentMaxBet(auction.Id) ? true : false
+                });
+            }
+
+            return list;
+        }
+
+
+        public object GetAuctionsHistoryForOwner(int clientId)
+        {
+            var auctions = AuctionsRepository.GetAuctions().Where(x => x.ClientId == clientId);
+            var list = new List<object>();
+
+            foreach (var auction in auctions)
+            {
+                list.Add(new
+                {
+                    AuctionId = auction.Id,
+                    IsCompleted = auction.IsCompleted,
+                    MaxBet = CheckCurrentMaxBet(auction.Id)
+                });
+            }
+
+            return list;
         }
     }
 }
