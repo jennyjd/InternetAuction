@@ -37,6 +37,9 @@
                     </div>
                 </div>
                 <div class="bet_wrap">
+                    <button md-mini-fab (click)="updateData()" class="update_button" tooltip="Обновить лот" tooltip-position="below">
+                        <img src="../../../assets/icons/update-black-mini.svg" />
+                    </button>
                     <div *ngIf="!selected_lot.IsCompleted">
                         <h3>Начальная ставка: {{selected_lot.StartPrice}} {{currency}}</h3>
                         <h3 *ngIf="betDone">Текущая ставка: {{selected_lot.currentBet}} {{currency}}</h3>
