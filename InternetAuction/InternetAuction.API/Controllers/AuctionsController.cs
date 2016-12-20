@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Ninject;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -29,6 +30,9 @@ namespace InternetAuction.API.Controllers
 
         [Inject]
         public ICurrenciesConversionsRepository CurrenciesConversionsRepository { get; set; }
+
+        [Inject]
+        public IAuctionsResultsRepository AuctionsResultsRepository { get; set; }
 
 
         [HttpGet]
@@ -183,7 +187,7 @@ namespace InternetAuction.API.Controllers
             {
                 Auction = AuctionsRepository.GetAuction(auctionId),
                 State = BetState.BetAccepted,
-                CurrentBet = currentBet
+                CurrentBet = AuctionsHistoryRepository.CheckCurrentMaxBet(auctionId)
             });
         }
 
@@ -211,6 +215,33 @@ namespace InternetAuction.API.Controllers
                     .FindById(HttpContext.Current.User.Identity.GetUserId());
 
             return Ok(AuctionsHistoryRepository.GetAuctionsHistoryForOwner(user.ClientId.Value));
+        }
+
+
+        [Authorize(Roles = "Client")]
+        [HttpGet]
+        [Route("GetAuctionsResults")]
+        public IHttpActionResult GetAuctionsResults()
+        {
+            InternetAuctionUser user = HttpContext.Current.GetOwinContext()
+                    .GetUserManager<InternetAuctionUserManager>()
+                    .FindById(HttpContext.Current.User.Identity.GetUserId());
+
+            return Ok(AuctionsResultsRepository.GetAuctionResults(user.ClientId.Value).Where(x => !x.IsSeenResult));
+        }
+
+
+        [Authorize(Roles = "Client")]
+        [HttpPost]
+        [Route("SeenAuctionResults")]
+        public IHttpActionResult SeenAuctionResults(ICollection<int> auctionsResultsIds)
+        {
+            InternetAuctionUser user = HttpContext.Current.GetOwinContext()
+                    .GetUserManager<InternetAuctionUserManager>()
+                    .FindById(HttpContext.Current.User.Identity.GetUserId());
+
+            AuctionsResultsRepository.SeenAuctionsResults(user.ClientId.Value, auctionsResultsIds);
+            return Ok();
         }
     }
 }
