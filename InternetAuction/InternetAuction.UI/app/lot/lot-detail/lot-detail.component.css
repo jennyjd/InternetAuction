@@ -44,6 +44,20 @@
     width:50%;
 }
 
+.alert {
+    border: 1px solid;
+    border-radius: 0.2em;
+    padding: 5px;
+    font-size: 12px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.alert-warning {
+    border-color: #ffb366;
+    background-color: #ffe6cc;
+}
+
 .main_information {
     width: 100%;
     height: 375px;

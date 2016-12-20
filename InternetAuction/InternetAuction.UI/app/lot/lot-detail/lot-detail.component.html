@@ -42,13 +42,16 @@
                         <h3 *ngIf="betDone">Текущая ставка: {{selected_lot.currentBet}} {{currency}}</h3>
                         <p *ngIf="!betDone">Ставок нету</p>
                         <!--изменить на текущую цену-->
-                        <form (ngSubmit)="changeModal()">
+                        <form (ngSubmit)="makeBet(bet)">
                             <!--value={{selected_lot.currentBet}}-->
-                            <md-input placeholder="Ставка" [(ngModel)]="model.bet" #bet name="bet" required></md-input>
+                            <md-input placeholder="Ставка" [(ngModel)]="model.bet" #bet="ngModel" name="bet" required></md-input>
                             <button md-mini-fab style="background-color:#D95154" type="submit" tooltip="Сделать ставку" tooltip-position="below">
                                 <img src="../../../assets/icons/gavel-white.svg" />
                             </button>
                         </form>
+                        <div *ngFor="let error of betAmmountErrors" class="alert alert-warning">
+                            {{error}}
+                        </div>
 
                         <div *ngIf="checkFastSell(selected_lot)">
                             {{selected_lot.PriceOfFastSell}} {{currency}}
