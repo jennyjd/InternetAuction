@@ -1,4 +1,4 @@
-﻿import { Component, Input } from '@angular/core'
+﻿import { Component, Input, Output, EventEmitter } from '@angular/core'
 import { LotComponent } from '../lot.component'
 import { Lot } from '../lot'
 
@@ -17,10 +17,9 @@ import { GeneralService } from '../../general.service';
 })
 
 export class LotListComponent {
-    //lots = LOTS;
     errorMessage: any;
+    uncompletedLots: any[] = [];
     lots: any[] = [];
-    //@Input() selected: string;
 
     constructor(private lotService: LotService, private userService: UserService, private sharedService: SharedService,
         private generalService: GeneralService) {
@@ -37,17 +36,30 @@ export class LotListComponent {
     }
 
     addData(res) {
-        for (let lot of res) {
+        let lotAmmount = this.getUncompletedLots(res);
+        for (let lot of this.uncompletedLots) {
             this.userService.getUserAccountById(lot.ClientId)
                 .subscribe(res => {
                     lot.userLogin = res.UserName;                        
-                    this.getCurrentBet(lot);
+                    this.getCurrentBet(lot, lotAmmount);
+                    lotAmmount--;
                 },
                 error => this.errorMessage = <any>error)
         }; 
     }
 
-    getCurrentBet(lot) {
+    getUncompletedLots(res) {
+        let counter = 0;
+        for (let lot of res) {
+            if (lot.IsCompleted == false) {
+                this.uncompletedLots.push(lot);
+                counter++;
+            }
+        }
+        return counter;
+    }
+
+    getCurrentBet(lot, lotAmmount) {
         this.lotService.getCurrentBet(lot.Id)
             .subscribe(res => {
                 lot.CurrentBet = res;
@@ -63,72 +75,9 @@ export class LotListComponent {
                 lot.CurrencyName = this.generalService.getCurrencyById(lot.CurrencyId).ShortName;
                 console.log("Currency", lot.CurrencyName);
                 this.lots.push(lot);
+
+                if (lotAmmount == 1) { console.log("Загрузка лотов завершена"); }
             },
             error => this.errorMessage = <any>error)
     }
 }
-
-/*let LOTS: Lot[] = [
-    {
-        id: 1,
-        title: "Комод",
-        description: "Очень хороший комод Очень хорофывук вапки апвеы",
-        starting_price: 2,
-        picture_url: "http://www.mebelminsk.by/assets/images/company/moyamebel/4/komod%20julietta-1.jpg",
-        visible_items: false,
-        category: "Россия"
-    },
-    {
-        id: 2,
-        title: "Стул",
-        description: "Очень хороший стул",
-        starting_price: 10,
-        category: "Россия",
-        visible_items: false,
-        picture_url: "https://ae01.alicdn.com/kf/HTB1678NLXXXXXaVXVXXq6xXFXXXA/The-Nordic-imported-white-oak-butterfly-font-b-chair-b-font-dining-font-b-chair-b.jpg"
-    },
-    {
-        id: 3,
-        title: "Шкаф",
-        description: "Очень хороший шкаф",
-        starting_price: 4,
-        category: "Фантастика",
-        visible_items: false,
-        picture_url: "http://s.4pda.to/vePhL20ONebGKbOrDQSyOBC2od4N.jpg"
-    },
-    {
-        id: 4,
-        title: "Ваза",
-        description: "Очень хорошая ваза",
-        starting_price: 7,
-        category: "Скульптура",
-        visible_items: false,
-        picture_url: "http://img.alicdn.com/imgextra/i1/T16fqKXnRyXXXmHsw9_102642.jpg"
-    },
-    {
-        id: 5,
-        title: "Ваза",
-        description: "Очень хорошая ваза",
-        starting_price: 7,
-        category: "Скульптура",
-        visible_items: false,
-        picture_url: "http://img.alicdn.com/imgextra/i1/T16fqKXnRyXXXmHsw9_102642.jpg"
-    },
-    {
-        id: 6,
-        title: "Ваза",
-        description: "Очень хорошая ваза",
-        starting_price: 7,
-        category: "Скульптура",
-        visible_items: false,
-        picture_url: "http://img.alicdn.com/imgextra/i1/T16fqKXnRyXXXmHsw9_102642.jpg"
-    },
-    {
-        id: 7,
-        title: "Ваза",
-        description: "Очень хорошая ваза",
-        starting_price: 7,
-        category: "Скульптура",
-        visible_items: false,
-        picture_url: "http://img.alicdn.com/imgextra/i1/T16fqKXnRyXXXmHsw9_102642.jpg"
-    }]*/

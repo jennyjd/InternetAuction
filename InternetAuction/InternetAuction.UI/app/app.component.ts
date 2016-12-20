@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, DoCheck } from '@angular/core';
+﻿import { Component } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 
 import { User } from './user/user';
@@ -17,7 +17,7 @@ import { Constant } from './globals';
     entryComponents: [LoadingComponent]
 })
 
-export class AppComponent{
+export class AppComponent {
     menu: any[] = [];
     lotStates: any;
     errorMessage: any;
@@ -48,7 +48,7 @@ export class AppComponent{
             if (val.url != '/') {
                 this.opened_sidebar = false;
             }
-        });
+        });  
     }
 
     isUserHere() {
@@ -92,14 +92,12 @@ export class AppComponent{
 
     selectCategory(categoryId) {
         if (typeof this.categoryFocus[categoryId] != 'undefined') {
-            console.log("djfh");
             this.categoryFocus = [];
             localStorage.setItem("selected_category", JSON.stringify({ selected: "none" }));
             return;
         }
         this.categoryFocus = [];
         this.categoryFocus[categoryId] = !this.categoryFocus[categoryId];
-        console.log(this.categoryFocus);
         this.selectedCategoryId = categoryId;
         this.sharedService.saveSelected(this.selectedCategoryId);
     }
@@ -116,8 +114,6 @@ export class AppComponent{
     logout() {
         this.loginService.logout()
             .subscribe(res => {
-                console.log(res);
-                console.log("YOU WERE LOGOUTED");
                 localStorage.removeItem('currentUserId');
                 this.router.navigate(['/']);
             },
