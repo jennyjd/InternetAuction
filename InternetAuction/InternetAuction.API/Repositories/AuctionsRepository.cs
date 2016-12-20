@@ -6,6 +6,7 @@ using System.Web;
 using InternetAuction.API.Models;
 using InternetAuction.API.DbContext;
 using Ninject;
+using InternetAuction.API.Services;
 
 namespace InternetAuction.API.Repositories
 {
@@ -16,6 +17,9 @@ namespace InternetAuction.API.Repositories
 
         [Inject]
         public IAuctionsHistoryRepository AuctionsHistoryRepository { get; set; }
+
+        [Inject]
+        public IAuctionsResultsRepository AuctionsResultsRepository { get; set; }
 
 
         public AuctionsRepository()
@@ -37,6 +41,24 @@ namespace InternetAuction.API.Repositories
                      * creditCardId
                      * SumId
                      */
+
+                    foreach (var id in clientsIds)
+                    {
+                        AuctionsResultsRepository.AddAuctionResult(new AuctionResult
+                        {
+                            ClientId = id,
+                            AuctionId = auction.Id,
+                            IsSeenResult = false
+                        });
+                    }
+                    AuctionsResultsRepository.AddAuctionResult(new AuctionResult
+                    {
+                        ClientId = auction.ClientId,
+                        AuctionId = auction.Id,
+                        IsSeenResult = false,
+                        ChargeFromWin = AuctionsHistoryRepository.CheckCurrentMaxBet(auction.Id) * Constants.CHARGE_FROM_WIN
+                    });
+
                     auction.IsCompleted = true;
                 }
             }

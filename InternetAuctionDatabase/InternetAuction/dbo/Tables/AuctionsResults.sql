@@ -4,6 +4,7 @@
 	[ClientId] INT NOT NULL,
 	[AuctionId] INT NOT NULL,
 	[IsSeenResult] BIT NOT NULL,
+	[ChargeFromWin] DECIMAL(20, 5) NULL,
 
 	CONSTRAINT primaryAuctionsResultsKey PRIMARY KEY ([Id]),
 	CONSTRAINT foreignAuctionsResultsToClientsKey FOREIGN KEY ([ClientId])

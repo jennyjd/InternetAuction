@@ -59,6 +59,10 @@ namespace InternetAuction.API.Repositories
         public object GetAuctionsHistoryForParticipant(int clientId)
         {
             var auctionsHistory = _context.AuctionsHistory.Where(x => x.ClientId == clientId).GroupBy(x => x.AuctionId);
+            if (!auctionsHistory.Any())
+            {
+                return null;
+            }
             var list = new List<object>();
 
             foreach (var history in auctionsHistory)
@@ -82,6 +86,10 @@ namespace InternetAuction.API.Repositories
         public object GetAuctionsHistoryForOwner(int clientId)
         {
             var auctions = AuctionsRepository.GetAuctions().Where(x => x.ClientId == clientId);
+            if (!auctions.Any())
+            {
+                return null;
+            }
             var list = new List<object>();
 
             foreach (var auction in auctions)
