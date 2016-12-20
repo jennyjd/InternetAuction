@@ -13,7 +13,8 @@ namespace InternetAuction.API.ViewModels
         InvalidCreditCardData,
         BetAccepted,
         NotEnoughMoney,
-        AuctionHasNotFastSellOption
+        AuctionHasNotFastSellOption,
+        OwnerCanNotMakeBet
     }
 
 

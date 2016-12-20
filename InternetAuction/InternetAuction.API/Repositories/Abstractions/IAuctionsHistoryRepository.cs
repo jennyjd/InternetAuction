@@ -16,5 +16,9 @@ namespace InternetAuction.API.Repositories.Abstractions
         AuctionHistory AddBet(AuctionHistory auctionHistory);
 
         IEnumerable<int> GetParticipantsIds(int auctionId);
+
+        object GetAuctionsHistoryForParticipant(int clientId);
+
+        object GetAuctionsHistoryForOwner(int clientId);
     }
 }

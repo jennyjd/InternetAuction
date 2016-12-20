@@ -98,6 +98,15 @@ namespace InternetAuction.API.Controllers
                 bet.Sum = auction.PriceOfFastSell.Value;
             }
             var currentBet = AuctionsHistoryRepository.CheckCurrentMaxBet(auctionId);
+            if (user.ClientId == auction.ClientId)
+            {
+                return Content(HttpStatusCode.BadRequest, new BetResponseVM
+                {
+                    Auction = auction,
+                    State = BetState.OwnerCanNotMakeBet,
+                    CurrentBet = currentBet
+                });
+            }
             if (isFastSell && !auction.PriceOfFastSell.HasValue)
             {
                 return Content(HttpStatusCode.BadRequest, new BetResponseVM
@@ -168,13 +177,40 @@ namespace InternetAuction.API.Controllers
             if (isFastSell)
             {
                 AuctionsRepository.CompleteAuction(auction.Id);
+                // Set winner
             }
             return Ok(new BetResponseVM
             {
                 Auction = AuctionsRepository.GetAuction(auctionId),
-                State = BetState.AuctionCompleted,
+                State = BetState.BetAccepted,
                 CurrentBet = currentBet
             });
+        }
+
+
+        [Authorize(Roles = "Client")]
+        [HttpGet]
+        [Route("GetAuctionsHistoryForParticipant")]
+        public IHttpActionResult GetAuctionsHistoryForParticipant()
+        {
+            InternetAuctionUser user = HttpContext.Current.GetOwinContext()
+                    .GetUserManager<InternetAuctionUserManager>()
+                    .FindById(HttpContext.Current.User.Identity.GetUserId());
+
+            return Ok(AuctionsHistoryRepository.GetAuctionsHistoryForParticipant(user.ClientId.Value));
+        }
+
+
+        [Authorize(Roles = "Client")]
+        [HttpGet]
+        [Route("GetAuctionsHistoryForOwner")]
+        public IHttpActionResult GetAuctionsHistoryForOwner()
+        {
+            InternetAuctionUser user = HttpContext.Current.GetOwinContext()
+                    .GetUserManager<InternetAuctionUserManager>()
+                    .FindById(HttpContext.Current.User.Identity.GetUserId());
+
+            return Ok(AuctionsHistoryRepository.GetAuctionsHistoryForOwner(user.ClientId.Value));
         }
     }
 }
