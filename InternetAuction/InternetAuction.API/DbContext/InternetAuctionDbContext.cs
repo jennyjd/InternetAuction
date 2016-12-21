@@ -360,7 +360,7 @@ namespace InternetAuction.API.DbContext
         private void MapAuctionsResults(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<AuctionResult>()
-                .ToTable("AuctionResult");
+                .ToTable("AuctionsResults");
 
             modelBuilder.Entity<AuctionResult>()
                 .HasKey(x => x.Id)

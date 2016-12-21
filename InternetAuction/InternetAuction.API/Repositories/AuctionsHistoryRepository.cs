@@ -98,7 +98,8 @@ namespace InternetAuction.API.Repositories
                 {
                     AuctionId = auction.Id,
                     IsCompleted = auction.IsCompleted,
-                    MaxBet = CheckCurrentMaxBet(auction.Id)
+                    MaxBet = CheckCurrentMaxBet(auction.Id),
+                    CustomerId = _context.AuctionsHistory.Where(x => x.AuctionId == auction.Id).OrderBy(x => x.Date).AsEnumerable().LastOrDefault().ClientId
                 });
             }
 
