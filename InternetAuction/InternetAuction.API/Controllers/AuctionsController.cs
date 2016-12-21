@@ -243,5 +243,14 @@ namespace InternetAuction.API.Controllers
             AuctionsResultsRepository.SeenAuctionsResults(user.ClientId.Value, auctionsResultsIds);
             return Ok();
         }
+
+
+        [Authorize(Roles = "Administrator")]
+        [HttpGet]
+        [Route("GetAuctionsHistory")]
+        public IHttpActionResult GetAuctionsHistory()
+        {
+            return Ok(AuctionsHistoryRepository.G);
+        }
     }
 }
