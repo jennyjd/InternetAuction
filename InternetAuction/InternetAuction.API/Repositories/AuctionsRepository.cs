@@ -28,12 +28,12 @@ namespace InternetAuction.API.Repositories
         }
 
 
-        private void CheckIfAuctionsCompleted(IEnumerable<Auction> auctions)
+        private void CheckIfAuctionsCompleted(IEnumerable<Auction> auctions, bool forseCompleteAuction = false)
         {
-            foreach(var auction in auctions)
+            foreach (var auction in auctions)
             {
                 // TODO: check winner
-                if (auction.EndDate <= DateTime.Now && !auction.IsCompleted)
+                if (auction.EndDate <= DateTime.Now && !auction.IsCompleted || forseCompleteAuction)
                 {
                     var clientsIds = AuctionsHistoryRepository.GetParticipantsIds(auction.Id);
                     /*
@@ -94,7 +94,8 @@ namespace InternetAuction.API.Repositories
         public Auction CompleteAuction(int auctionId)
         {
             var updatedAuction = _context.Auctions.SingleOrDefault(x => x.Id == auctionId);
-            updatedAuction.IsCompleted = true;
+            //updatedAuction.IsCompleted = true;
+            CheckIfAuctionsCompleted(new List<Auction> { updatedAuction }, true);
             _context.SaveChanges();
             return updatedAuction;
         }
