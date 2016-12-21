@@ -250,7 +250,8 @@ namespace InternetAuction.API.Controllers
         [Route("GetAuctionsHistory")]
         public IHttpActionResult GetAuctionsHistory()
         {
-            return Ok(AuctionsHistoryRepository.G);
+            throw new NotImplementedException();
+            //return Ok(AuctionsHistoryRepository.G);
         }
     }
 }
