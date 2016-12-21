@@ -34,6 +34,7 @@
             '@angular2-material/input': 'npm:@angular2-material/input/input.umd.js',
             '@angular2-material/radio': 'npm:@angular2-material/radio/radio.umd.js',
             '@angular2-material/progress-circle': 'npm:@angular2-material/progress-circle/progress-circle.umd.js',
+            '@angular2-material/tabs': 'npm:@angular2-material/tabs/tabs.umd.js',
             'angular2-image-upload': 'npm:angular2-image-upload',
             'md2': 'node_modules/md2',
             'angular2-moment': 'npm:angular2-moment',

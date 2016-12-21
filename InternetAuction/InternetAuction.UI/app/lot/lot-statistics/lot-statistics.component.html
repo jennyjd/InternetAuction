@@ -1,0 +1,38 @@
+﻿<h2>Информация о ваших аукционах</h2> 
+
+<md-tab-group>
+    <md-tab *ngFor="let menuel of menu">
+        <template md-tab-label>
+            <div (click)="changeViewStats(menuel)">{{menuel}}</div>
+        </template>
+        <template md-tab-content>
+            <md-card *ngFor="let stats of viewStats" class="lots">
+                <div class="image_container">
+                    <span></span> <img class="md-card-image">
+                </div>
+                <div class="content_container">
+                    <div class="title_container">
+                        <md-card-title>{{stats.Auction.Name}}</md-card-title>
+                    </div>
+                    <md-card-content>
+                        <p *ngIf="stats.betDone">Текущая ставка: {{stats.MaxBet}}</p>
+                        <div *ngIf="firstTab">
+                            <p *ngIf="!stats.betDone">Ставок нету</p>
+                        </div>
+                        <div *ngIf="!firstTab">
+                            <p>Ваша ставка: {{stats.UserBet}}</p>
+                        </div>
+                        <p>
+                            Осталось:
+                            {{stats.Auction.EndDate | amDifference: today: 'days'}} дн.
+                            {{(stats.Auction.EndDate | amDifference: today: 'hours') - (stats.Auction.EndDate | amDifference: today: 'days')*24}} ч.
+                        </p>
+                    </md-card-content>
+                    <button md-mini-fab class="lot_details red_button" (click)="view_details(lotitem)" tooltip="Подробнее" tooltip-position="below">
+                        <img src="../../assets/icons/visibility-white.svg" />
+                    </button>
+                </div>
+            </md-card>
+        </template>
+    </md-tab>
+</md-tab-group>

@@ -1,0 +1,55 @@
+﻿md-card {
+    display:flex;
+    flex-flow: row wrap;
+    padding: 0px;
+    border-bottom: 1px solid lightgrey;
+}
+
+.content_container {
+    padding: 12px;
+    display:flex;
+    flex-flow: row wrap;
+}
+
+.title_container {
+    width: 275px;
+    margin: 0px 10px;
+}
+
+md-card-title {
+    font-size: 20px;
+}
+
+md-card-content {
+    margin-bottom: 0px;
+}
+
+.lot_details {
+    position: absolute;
+    right: 40px;
+    top: 35px;
+}
+
+.image_container {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    width: inherit;
+    height: 100px;
+    width: 100px;
+    border: 1px solid grey;
+}
+.image_container * {
+    vertical-align: middle;
+}
+
+.image_container img{
+    height: auto; 
+    width: auto; 
+    max-width: 100px; 
+    max-height: 100px;
+}
+
+.red_button {
+    background-color: var(--red);
+}

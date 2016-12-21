@@ -15,6 +15,7 @@ import { LotDetailComponent } from './lot/lot-detail/lot-detail.component';
 import { LoadingComponent } from './loading/loading.component';
 import { ModalPickCardComponent } from './credit-card/pick-card-modal.component';
 import { AdminComponent } from './admin/admin.component';
+import { LotStatisticsComponent } from './lot/lot-statistics/lot-statistics.component';
 
 import { UserService } from './user/user.service';
 import { LoginService } from './login/login.service';
@@ -29,6 +30,7 @@ import { MdInputModule } from '@angular2-material/input';
 import { MdIconRegistry } from '@angular2-material/icon';
 import { MdProgressCircleModule } from '@angular2-material/progress-circle';
 import { Md2Module } from 'md2';
+import { MdTabsModule } from '@angular2-material/tabs';
 
 import { MomentModule } from 'angular2-moment';
 import { ImageUploadModule } from 'angular2-image-upload';
@@ -39,9 +41,10 @@ import { routing, appRoutingProviders } from './app.routing'
 @NgModule({
     imports: [BrowserModule, MdCardModule, MdButtonModule, MdIconModule, MdSidenavModule, MdToolbarModule,
         MdListModule, MdInputModule, routing, FormsModule, ImageUploadModule.forRoot(), Md2Module.forRoot(),
-        MdProgressCircleModule, MomentModule, SimpleNotificationsModule],
+        MdProgressCircleModule, MomentModule, SimpleNotificationsModule, MdTabsModule],
     declarations: [AppComponent, LotComponent, LotListComponent, LoginComponent, HomeComponent, RegistrationComponent,
-        UserDetailsComponent, LotCreateComponent, LotDetailComponent, LoadingComponent, ModalPickCardComponent, AdminComponent],
+        UserDetailsComponent, LotCreateComponent, LotDetailComponent, LoadingComponent, ModalPickCardComponent, AdminComponent,
+        LotStatisticsComponent],
     bootstrap: [AppComponent],
     providers: [MdIconRegistry, OVERLAY_PROVIDERS, appRoutingProviders, UserService, LoginService]
 })

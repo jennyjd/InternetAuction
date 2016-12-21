@@ -15,21 +15,21 @@
                 <div class="value_wrap">
                     <div *ngIf="!editPersonalInf">
                         <!--<div *ngFor="let inf of personalInf" class="mar_divs" style="color:grey">{{inf}}</div>-->
-                        <div class="mar_divs">{{currentUser.Login}}</div>
+                        <div class="mar_divs">{{userLogin}}</div>
                         <div class="mar_divs">{{currentUser.LastName}}</div>
                         <div class="mar_divs">{{currentUser.FirstName}}</div>
                         <div class="mar_divs">{{currentUser.Patronymic}}</div>
-                        <div class="mar_divs">{{currentUser.Email}}</div>
+                        <div class="mar_divs">{{userEmail}}</div>
                     </div>
 
                     <!------------------ФОРМА ИЗМЕНЕНИЯ ЛИЧНЫХ ДАННЫХ КЛИЕНТА---------------->
                     <div *ngIf="editPersonalInf">
                         <form (ngSubmit)="changeUserInf()">
-                            <div class="mar_divs">{{currentUser.Login}}</div>
+                            <div class="mar_divs">{{userLogin}}</div>
                             <md-input value={{currentUser.LastName}}></md-input>
                             <md-input value={{currentUser.FirstName}}></md-input>
                             <md-input value={{currentUser.Patronymic}}></md-input>
-                            <md-input value={{currentUser.Email}}></md-input>
+                            <md-input value={{userEmail}}></md-input>
                             <button md-mini-fab class="red_button" type="submit" *ngIf="editPersonalInf" tooltip="Сохранить" tooltip-position="below">
                                 <img src="../../../assets/icons/done-white.svg"/>
                             </button>
@@ -95,4 +95,6 @@
             </div>
          </div>
     </div>
+
+    <statistics></statistics>
 </md-card>

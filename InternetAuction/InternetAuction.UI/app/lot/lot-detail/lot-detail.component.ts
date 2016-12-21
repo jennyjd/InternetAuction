@@ -94,23 +94,21 @@ export class LotDetailComponent implements OnInit, AfterViewInit {
         console.log(this.selected_lot.currentBet);
         if (this.selected_lot.currentBet != 0) {
             if (bet <= this.selected_lot.currentBet) {
-                this.betAmmountErrors.push("Ваша ставка должна быть больше текущей!");
+                this.betAmmountErrors.push("Ваша ставка должна быть больше текущей!"); return;
             }
         }
         else if (bet <= this.selected_lot.StartPrice) {
-            this.betAmmountErrors.push("Ваша ставка должна быть больше начальной!");
+            this.betAmmountErrors.push("Ваша ставка должна быть больше начальной!"); return;
         }
         else if (this.selected_lot.PriceOfFastSell != null) {
             if (bet > this.selected_lot.PriceOfFastSell) {
-                this.betAmmountErrors.push("Ваша ставка больше стоимости выкупа! Чтобы выкупить данный лот, нажмите на кнопку 'Выкупить'");
+                this.betAmmountErrors.push("Ваша ставка больше стоимости выкупа! Чтобы выкупить данный лот, нажмите на кнопку 'Выкупить'"); return;
             }
             else if (bet == this.selected_lot.PriceOfFastSell) {
-                this.betAmmountErrors.push("Ваша ставка cоответствует стоимости выкупа! Чтобы выкупить данный лот, нажмите на кнопку 'Выкупить'");
+                this.betAmmountErrors.push("Ваша ставка cоответствует стоимости выкупа! Чтобы выкупить данный лот, нажмите на кнопку 'Выкупить'"); return;
             }
         }
-        else {
-            this.changeModal();
-        }
+        this.changeModal();     
     }
 
     changeModal() {

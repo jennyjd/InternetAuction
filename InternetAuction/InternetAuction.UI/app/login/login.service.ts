@@ -33,7 +33,7 @@ export class LoginService {
     }
 
     logout() {
-        return this.http.get('http://localhost:21561/api/account/signout', { withCredentials: true })
+        return this.http.get(this.logoutUrl, { withCredentials: true })
             .map(response => response.json())
             .catch(this.handleError);
     }

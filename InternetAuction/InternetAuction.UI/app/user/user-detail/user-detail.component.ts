@@ -6,12 +6,15 @@ import { UserService } from '../user.service';
 import { CreditCard } from '../../credit-card/credit-card';
 import { CreditCardService } from '../../credit-card/credit-card.service';
 import { Constant } from '../../globals';
+import { LotStatisticsComponent } from '../../lot/lot-statistics/lot-statistics.component';
+
 
 @Component({
     selector: 'user-details',
     templateUrl: `${Constant.appPath}app/user/user-detail/user-detail.component.html`,
     styleUrls: [`${Constant.appPath}app/user/user-detail/user-detail.component.css`],
-    providers: [UserService, CreditCardService]
+    providers: [UserService, CreditCardService],
+    entryComponents: [LotStatisticsComponent]
 })
 
 export class UserDetailsComponent {
@@ -24,6 +27,9 @@ export class UserDetailsComponent {
 
     editUserModel: any = {};
     currentUser: any = {};
+
+    userLogin: string = '';
+    userEmail: string = '';
 
     newCardModel: any = {};
     userCreditCards: CreditCard[] = [];
@@ -57,8 +63,9 @@ export class UserDetailsComponent {
             error => this.errorMessage = <any>error);
         this.userService.getUserAccountById(currentUserId)
             .subscribe(res => {
-                this.currentUser.Login = res.UserName;
-                this.currentUser.Email = res.Email;
+                this.userLogin = res.UserName;
+                this.userEmail = res.Email;
+                console.log(this.currentUser);
             },
             error => this.errorMessage = <any>error);
     }
