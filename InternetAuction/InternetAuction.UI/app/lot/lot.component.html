@@ -1,7 +1,7 @@
 ﻿<div class="full_width_wrap">
     <md-card *ngIf="selectedCategoryId === lotitem.CategoryId || selectedCategoryId == 'none'" (mouseenter)="over(lotitem)" (mouseleave)="out(lotitem)">
         <div class="image_container">
-            <span></span> <img src="{{lotitem.mainPicture}}" class="md-card-image">
+            <span></span> <img src="../../assets/images/lot_photo.jpg" class="md-card-image">
         </div>
         <button md-mini-fab class="lot_details red_button" (click)="view_details(lotitem)" tooltip="Подробнее" tooltip-position="below">
             <img src="../../assets/icons/visibility-white.svg"/>

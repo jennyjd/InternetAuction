@@ -70,7 +70,7 @@ export class LotListComponent {
                 lot.EndDate = new Date((Date.parse(lot.EndDate)));
                 lot.EndDate.setHours(lot.EndDate.getHours() - 3);//GMT+03
 
-                lot.mainPicture = "https://pp.vk.me/c419225/v419225009/6e41/vv2MqgXalNw.jpg";
+                //lot.mainPicture = "https://pp.vk.me/c419225/v419225009/6e41/vv2MqgXalNw.jpg";
 
                 lot.CurrencyName = this.generalService.getCurrencyById(lot.CurrencyId).ShortName;
                 console.log("Currency", lot.CurrencyName);

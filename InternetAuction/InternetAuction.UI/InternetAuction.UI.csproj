@@ -105,6 +105,7 @@
     <Content Include="assets\icons\update-black-mini.svg" />
     <Content Include="assets\icons\visibility-white.svg" />
     <Content Include="assets\images\logo.png" />
+    <Content Include="assets\images\lot_photo.jpg" />
     <Content Include="index.html" />
     <Content Include="package.json" />
     <Content Include="style.css" />

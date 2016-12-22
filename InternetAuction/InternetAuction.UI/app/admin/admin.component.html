@@ -8,35 +8,47 @@
             <template md-tab-content>
                 <md-card *ngFor="let lot of viewLots" class="lots">
                     <div class="image_container">
-                        <span></span> <img class="md-card-image">
+                        <span></span> <img src="../../assets/images/lot_photo.jpg" class="md-card-image">
                     </div>
                     <div class="content_container">
                         <div class="title_container">
                             <md-card-title>{{lot.Auction.Name}}</md-card-title>
                         </div>
-                        <md-card-content>
+
+                        <div class="information">
+                            <!--поменять на login и email-->
+                            <p>Владелец: {{lot.Owner.FirstName}}</p>
+                            <p> {{lot.Owner.LastName}}</p>
+                            <p>Дата начала: {{lot.Auction.StartDate}}</p>
                             <div *ngIf="!completedTab">
-                                <div *ngIf="lot.betDone">
-                                    <p>Текущая ставка: {{lot.MaxBet}} {{lot.Auction.currencySign}}</p>
-                                    <!--поменять на login и email-->
-                                    <p>Пользователь: {{lot.Customer.FirstName}}</p>
-                                </div>
-                                <p *ngIf="!lot.betDone">Ставок нету</p>
                                 <p>
                                     Осталось:
                                     {{lot.Auction.EndDate | amDifference: today: 'days'}} дн.
                                     {{(lot.Auction.EndDate | amDifference: today: 'hours') - (lot.Auction.EndDate | amDifference: today: 'days')*24}} ч.
                                 </p>
                             </div>
+                        </div>
+
+                        <div class="information">
+                            <div *ngIf="!completedTab">
+                                <div *ngIf="lot.betDone">
+                                    <p>Текущая ставка: {{lot.MaxBet}} {{lot.Auction.currencySign}}</p>
+                                    <!--поменять на login и email-->
+                                    <p>Пользователь: {{lot.Customer.FirstName}}</p>
+                                    <p>{{lot.Customer.LastName}}</p>
+                                    <p>Дата последней ставки: {{lot.BetDate}}</p>
+                                </div>
+                                <p *ngIf="!lot.betDone">Ставок нету</p>
+                            </div>
                             <div *ngIf="completedTab">
-                                <div *ngIf="!lot.betDone">Аукцион не быыл проведен успешно!</div>
+                                <p *ngIf="!lot.betDone">Аукцион не был проведен успешно!</p>
                                 <div *ngIf="lot.betDone">
                                     <p>Выиграл: {{lot.Customer.FirstName}}</p>
                                     <!--<p>{{lot.Winner.Email}}</p>-->
                                     <p>Выкуп: {{lot.MaxBet}} {{lot.Auction.currencySign}}</p>
                                 </div>
                             </div>
-                        </md-card-content>
+                        </div>
                         <!--<button md-mini-fab class="lot_details red_button" (click)="view_details(lotitem)" tooltip="Подробнее" tooltip-position="below">
                             <img src="../../assets/icons/visibility-white.svg" />
                         </button>  -->

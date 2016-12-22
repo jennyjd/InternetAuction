@@ -29,8 +29,13 @@ export class AdminComponent {
                 this.viewLots = res;
                 console.log(res);
                 for (let lot of res) {
-                    if (lot.MaxBet != 0) { lot.betDone = true; }
+                    if (lot.MaxBet != 0) {
+                        lot.betDone = true;
+                        lot.BetDate = lot.BetDate.slice(0, 10);
+                    }
                     else { lot.betDone = false; }
+
+                    lot.Auction.StartDate = lot.Auction.StartDate.slice(0, 10);
 
                     this.getCurrencySign(lot);
 

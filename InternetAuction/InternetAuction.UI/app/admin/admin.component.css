@@ -6,9 +6,14 @@
 
 .lots {
     display:flex;
-    flex-flow: row wrap;
     padding: 0px;
+    margin-top: 2px;
     border-bottom: 1px solid lightgrey;
+    box-shadow:none;
+}
+
+.information {
+    width: 233px;
 }
 
 .content_container {
@@ -32,6 +37,7 @@
 
 p {
     margin: 4px 0px;
+    font-size: 13px;
 }
 
 md-card-title {
@@ -55,7 +61,7 @@ md-card-content {
     width: inherit;
     height: 100px;
     width: 100px;
-    border: 1px solid grey;
+    border: 1px solid white;
 }
 .image_container * {
     vertical-align: middle;
