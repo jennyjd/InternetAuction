@@ -1,15 +1,51 @@
-﻿.lots {
+﻿.admin-container {
     width: 80%;
-    margin:0 auto;
+    min-width: 850px;
+    margin: 20px auto;
 }
 
-.card-media {
-    background-color: beige;
-}
-
-md-card {
+.lots {
     display:flex;
     flex-flow: row wrap;
+    padding: 0px;
+    border-bottom: 1px solid lightgrey;
+}
+
+.content_container {
+    padding: 12px;
+    display:flex;
+    flex-flow: row wrap;
+}
+
+.title_container {
+    width: 275px;
+    margin: 0px 10px;
+}
+
+.confirm_button {
+    position: absolute;
+    right: 2px;
+    bottom: 4px;
+    color: white;
+    background-color:var(--orange);
+}
+
+p {
+    margin: 4px 0px;
+}
+
+md-card-title {
+    font-size: 20px;
+}
+
+md-card-content {
+    margin-bottom: 0px;
+}
+
+.lot_details {
+    position: absolute;
+    right: 40px;
+    top: 15px;
 }
 
 .image_container {
@@ -30,4 +66,8 @@ md-card {
     width: auto; 
     max-width: 100px; 
     max-height: 100px;
+}
+
+.red_button {
+    background-color: var(--red);
 }

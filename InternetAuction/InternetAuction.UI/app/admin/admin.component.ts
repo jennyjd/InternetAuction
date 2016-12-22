@@ -12,32 +12,55 @@ import { Constant } from '../globals';
 
 export class AdminComponent {
     errorMessage: any;
-
     viewLots: any[] = []
     currentLots: any[] = [];
     completedLots: any[] = [];
+    completedTab: boolean = false;
+    currency = Constant.currency;
+    menu: string[] = ['Действующие аукционы', 'Завершенные аукционы'];
 
     constructor(private lotService: LotService) {
-        this.testLotRequest();
+        this.getAllHistory();
     }
 
-    testLotRequest() {
-        this.lotService.getLots()
+    getAllHistory() {
+        this.lotService.getAllHistory()
             .subscribe(res => {
                 this.viewLots = res;
+                console.log(res);
                 for (let lot of res) {
-                    if (lot.IsCompleted == false) { this.currentLots.push(lot); }
-                    else { this.completedLots.push(lot); }
+                    if (lot.MaxBet != 0) { lot.betDone = true; }
+                    else { lot.betDone = false; }
+
+                    this.getCurrencySign(lot);
+
+                    if (lot.Auction.IsCompleted == false) {
+                        this.currentLots.push(lot);
+                    }
+                    else {
+                        this.completedLots.push(lot);
+                    }
                 }
             },
             error => this.errorMessage = <any>error);
     }
 
-    changeToCurrent() {
-        this.viewLots = this.currentLots;
+    getCurrencySign(lot) {
+        for (let prop in this.currency) {
+            if (lot.Auction.CurrencyId == prop) {
+                lot.Auction.currencySign = this.currency[prop];
+            }
+        }
     }
 
-    changeToCompleted() {
-        this.viewLots = this.completedLots;
+    changeViewLots(menuel) {
+        if (this.menu.indexOf(menuel) == 0) {
+            this.viewLots = this.currentLots;
+            this.completedTab = false;
+        }
+        else if (this.menu.indexOf(menuel) == 1) {
+            this.viewLots = this.completedLots;
+            this.completedTab = true;
+        }
     }
 }

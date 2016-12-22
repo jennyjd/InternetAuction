@@ -24,6 +24,7 @@ export class AppComponent {
     loading: boolean = true;
     selectedCategoryId = "none";
     opened_sidebar: boolean;
+    isClient: boolean = false;
     categoryFocus: Array<boolean> = [];
 
     currentUser: any;
@@ -52,8 +53,13 @@ export class AppComponent {
     }
 
     isUserHere() {
-        if (this.userService.getCurrentUser() == null) {
+        this.isClient = false;
+        let currentUser = this.userService.getCurrentUser();
+        if (currentUser == null) {
             return false
+        }
+        if (currentUser.role == 'client') {
+            this.isClient = true;
         }
         return true
     }
@@ -115,7 +121,7 @@ export class AppComponent {
         this.loginService.logout()
             .subscribe(res => {
                 localStorage.removeItem('currentUserId');
-                this.router.navigate(['/']);
+                this.router.navigate(['/login']);
             },
             error => this.errorMessage = <any>error);
     }

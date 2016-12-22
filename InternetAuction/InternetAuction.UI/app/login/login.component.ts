@@ -38,10 +38,14 @@ export class LoginComponent implements AfterViewInit  {
         this.loginService.login(this.model)
             .subscribe(
             res => {
-                console.log("Вы вошли в систему");
-                console.log(res.ClientId);
-                localStorage.setItem('currentUserId', JSON.stringify({ Id: res.ClientId }));
-                this.router.navigate(['/']);
+                if (res.ClientId === undefined) {
+                    localStorage.setItem('currentUserId', JSON.stringify({ Id: res.ClientId, role: 'admin' }));
+                    this.router.navigate(['/admin']);
+                }
+                else {
+                    localStorage.setItem('currentUserId', JSON.stringify({ Id: res.ClientId, role: 'client' }));
+                    this.router.navigate(['/']);
+                }
             },
             error => {
                 this.errorNotif();
