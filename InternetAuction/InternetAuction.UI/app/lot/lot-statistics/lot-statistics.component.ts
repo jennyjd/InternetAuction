@@ -20,58 +20,86 @@ export class LotStatisticsComponent {
     viewStats: any[] = [];
     ownerTab: boolean = false;
     completedTab: boolean = false;
+    auctionResults: any[] = [];
+    currency = Constant.currency;
     menu: string[] = ['Ваши лоты', 'Аукционы с вашими ставками', 'Ваши завершенные аукционы', 'Завершенные аукционы с вашими ставками'];
 
     constructor(private lotService: LotService, private userService: UserService) {
+        this.getAuctionResults();
         this.getStatistics();
     }
 
     getStatistics() {
         this.lotService.getAuctionsHistoryForOwner()
             .subscribe(res => {
-                this.addLots(res, this.ownerStat, 0);               
+                this.addLots(res, this.ownerStat,  true);               
             },
             error => this.errorMessage = <any>error);
 
         this.lotService.getAuctionsHistoryForParticipant()
             .subscribe(res => {
-                this.addLots(res, this.participantStat, 1);               
+                this.addLots(res, this.participantStat,  false);               
             },
             error => this.errorMessage = <any>error);
     }
 
-    addLots(result, stats, index) {
+    addLots(result, stats, forOwner) {
         for (let lot of result) {
-            console.log(lot);
             this.lotService.getLotById(lot.AuctionId)
                 .subscribe(res => {
                     lot.Auction = res;
+                    this.getCurrencySign(lot);
                     if (lot.MaxBet != 0) { lot.betDone = true }
                     else { lot.betDone = false }
 
-                    if (res.IsCompleted == true) {
-                        if (index == 0) {
-                            this.getWinnerInf(lot);
-                        }
-                        else {
-                            this.completedParticipantStat.push(lot);
-                        }
+                    if (lot.IsCompleted && forOwner) {
+                        this.getWinnerInf(lot);
+                        
+                    }
+                    else if (lot.IsCompleted && !forOwner) {
+                        this.detectUnseenLots(lot, this.completedParticipantStat);
                     }
                     else {
                         stats.push(lot);
                     }
+
                 },
                 error => this.errorMessage = <any>error);
         }
     }
 
+    getCurrencySign(lot) {
+        for (let prop in this.currency) {
+            if (lot.Auction.CurrencyId == prop) {
+                lot.Auction.currencySign = this.currency[prop];
+            }
+        }
+    }
+
+    getAuctionResults() {
+        this.lotService.getAuctionResults()
+            .subscribe(res => {
+                this.auctionResults = res;
+            },
+            error => this.errorMessage = <any>error);
+    }
+
+    detectUnseenLots(lot, completed) {
+        for (let result of this.auctionResults) {
+            if (result.AuctionId == lot.AuctionId) {
+                lot.isSeen = result.IsSeenResult;
+                completed.push(lot);
+            }
+        }
+    }
+
+
     getWinnerInf(lot) {
+        console.log("WINNER");
         this.userService.getUserAccountById(lot.CustomerId)
             .subscribe(res => {
                 lot.Winner = res;
-                console.log("WINNER");
-                console.log(lot.Winner);
-                this.completedOwnerStat.push(lot);
+                this.detectUnseenLots(lot, this.completedOwnerStat);
             },
             error => this.errorMessage = <any>error);
     }
@@ -99,3 +127,4 @@ export class LotStatisticsComponent {
         }
     }
 }
+

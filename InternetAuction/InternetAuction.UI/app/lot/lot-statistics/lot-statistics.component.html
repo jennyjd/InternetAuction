@@ -16,33 +16,41 @@
                     </div>
                     <md-card-content>
                         <div *ngIf="!completedTab">
-                            <p *ngIf="stats.betDone">Текущая ставка: {{stats.MaxBet}}</p>
+                            <p *ngIf="stats.betDone">Текущая ставка: {{stats.MaxBet}} {{stats.Auction.currencySign}}</p>
                             <div *ngIf="ownerTab">
                                 <p *ngIf="!stats.betDone">Ставок нету</p>
                             </div>
                             <div *ngIf="!ownerTab">
-                                <p>Ваша ставка: {{stats.UserBet}}</p>
+                                <p>Ваша ставка: {{stats.UserBet}} {{stats.Auction.currencySign}}</p>
                             </div>
-                            <p>
-                                Осталось:
+                            <p>Осталось:
                                 {{stats.Auction.EndDate | amDifference: today: 'days'}} дн.
                                 {{(stats.Auction.EndDate | amDifference: today: 'hours') - (stats.Auction.EndDate | amDifference: today: 'days')*24}} ч.
                             </p>
                         </div>
                         <div *ngIf="completedTab">
                             <div *ngIf="ownerTab">
-                                <p *ngIf="!stats.betDone">Аукцион не быыл проведен успешно!</p>
-                                <p *ngIf="stats.betDone">
-                                    Выиграл: {{stats.Winner.UserName}}
-                                    {{stats.Winner.Email}}
-                                    <p>Выкуп: {{stats.MaxBet}}</p>
-                                </p>
+                                <div *ngIf="!stats.betDone">Аукцион не быыл проведен успешно!</div>
+                                <div *ngIf="stats.betDone">
+                                    <p>Выиграл: {{stats.Winner.UserName}}</p>
+                                    <p>{{stats.Winner.Email}}</p>
+                                    <p>Выкуп: {{stats.MaxBet}} {{stats.Auction.currencySign}}</p>
+                                </div>
+                            </div>
+                            <div *ngIf="!ownerTab">
+                                <div *ngIf="stats.IsWinner">
+                                    Вы выиграли!!!
+                                    <p>Ваша ставка: {{stats.UserBet}} {{stats.Auction.currencySign}}</p>
+                                </div>
                             </div>
                         </div>
                     </md-card-content>
                     <button md-mini-fab class="lot_details red_button" (click)="view_details(lotitem)" tooltip="Подробнее" tooltip-position="below">
                         <img src="../../assets/icons/visibility-white.svg" />
                     </button>
+                    <div *ngIf="completedTab">
+                        <button md-button class="confirm_button" *ngIf="!stats.isSeen">Подтвердить</button>
+                    </div>
                 </div>
             </md-card>
         </template>

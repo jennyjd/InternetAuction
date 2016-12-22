@@ -17,6 +17,7 @@ export class LotService {
     private getCurBet = `${Constant.apiEndpoint}/Auctions/GetCurrentBet`; 
     private ownerLotStatistics = `${Constant.apiEndpoint}/Auctions/GetAuctionsHistoryForOwner`;
     private participantLotStatistics = `${Constant.apiEndpoint}/Auctions/GetAuctionsHistoryForParticipant`;
+    private getAuctionResultsUrl = `${Constant.apiEndpoint }/Auctions/GetAuctionsResults`;
 
     constructor(private http: Http) {
     }
@@ -81,6 +82,12 @@ export class LotService {
 
     getAuctionsHistoryForParticipant() {
         return this.http.get(this.participantLotStatistics, { withCredentials: true })
+            .map(response => response.json())
+            .catch(this.handleError);
+    }
+
+    getAuctionResults() {
+        return this.http.get(this.getAuctionResultsUrl, { withCredentials: true })
             .map(response => response.json())
             .catch(this.handleError);
     }
