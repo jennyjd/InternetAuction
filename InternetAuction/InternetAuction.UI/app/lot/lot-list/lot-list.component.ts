@@ -1,5 +1,7 @@
 ﻿import { Component, Input, Output, EventEmitter } from '@angular/core'
+
 import { LotComponent } from '../lot.component'
+import { LoadingComponent } from '../../loading/loading.component';
 import { Lot } from '../lot'
 
 import { LotService } from '../lot.service';
@@ -12,13 +14,15 @@ import { GeneralService } from '../../general.service';
     selector: 'lot-list',
     templateUrl: `${Constant.appPath}app/lot/lot-list/lot-list.component.html`,
     styleUrls: [`${Constant.appPath}app/lot/lot-list/lot-list.component.css`],
-    entryComponents: [LotComponent],
+    entryComponents: [LotComponent, LoadingComponent],
     providers: [LotService, UserService, SharedService]
 })
 
 export class LotListComponent {
     errorMessage: any;
     uncompletedLots: any[] = [];
+    loading: boolean = true;
+    currency = Constant.currency;
     lots: any[] = [];
 
     constructor(private lotService: LotService, private userService: UserService, private sharedService: SharedService,
@@ -59,6 +63,14 @@ export class LotListComponent {
         return counter;
     }
 
+    getCurrencySign(lot) {
+        for (let prop in this.currency) {
+            if (lot.CurrencyId == prop) {
+                lot.currencySign = this.currency[prop];
+            }
+        }
+    }
+
     getCurrentBet(lot, lotAmmount) {
         this.lotService.getCurrentBet(lot.Id)
             .subscribe(res => {
@@ -70,13 +82,16 @@ export class LotListComponent {
                 lot.EndDate = new Date((Date.parse(lot.EndDate)));
                 lot.EndDate.setHours(lot.EndDate.getHours() - 3);//GMT+03
 
-                //lot.mainPicture = "https://pp.vk.me/c419225/v419225009/6e41/vv2MqgXalNw.jpg";
+                lot.fastSell = true;
+                if (lot.PriceOfFastSell == null) {
+                    lot.fastSell = false;
+                }
+                this.getCurrencySign(lot);
+                console.log("Currency", lot);
 
-                lot.CurrencyName = this.generalService.getCurrencyById(lot.CurrencyId).ShortName;
-                console.log("Currency", lot.CurrencyName);
                 this.lots.push(lot);
 
-                if (lotAmmount == 1) { console.log("Загрузка лотов завершена"); }
+                if (lotAmmount == 1) { this.loading = false; }
             },
             error => this.errorMessage = <any>error)
     }

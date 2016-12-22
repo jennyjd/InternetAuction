@@ -24,12 +24,13 @@ export class LotDetailComponent implements OnInit, AfterViewInit {
     errorMessage: any;
     model: any = {};
     lotState: string = '';
-    currency: string = '';
     modal: boolean = false;
     betDone: boolean = false;
     isUserAuth: boolean;
     myDate = new Date();
+    lotIsYours: boolean = true;
     redeemBool: boolean = false;
+    currency = Constant.currency;
     betAmmountErrors: string[] = [];
 
     constructor(
@@ -51,11 +52,14 @@ export class LotDetailComponent implements OnInit, AfterViewInit {
             .subscribe(res => {
                 this.selected_lot = res;
 
+                this.checkIfLotIsYours();
+
                 this.getCurrentBet(this.selected_lot);
                 this.getTimeLeft();
 
                 console.log(this.selected_lot);
                 this.lotState = this.selected_lot.GoodsState.Name;
+                this.getCurrencySign();
                 this.currency = this.selected_lot.Currency.ShortName;
                 this.getUserInf();
             },
@@ -68,6 +72,14 @@ export class LotDetailComponent implements OnInit, AfterViewInit {
             this.successNewLotAddedNotif();
         }
         this.sharedService.saveSuccess(false);
+    }
+
+    getCurrencySign() {
+        for (let prop in this.currency) {
+            if (this.selected_lot.CurrencyId == prop) {
+                this.selected_lot.currencySign = this.currency[prop];
+            }
+        }
     }
 
     getCurrentBet(lot) {
@@ -83,6 +95,13 @@ export class LotDetailComponent implements OnInit, AfterViewInit {
     checkCurrBet() {
         if (this.selected_lot.currentBet != 0) {
             this.betDone = true;
+        }
+    }
+
+    checkIfLotIsYours() {
+        let currentUser = this.userServise.getCurrentUser();
+        if (currentUser.Id != this.selected_lot.ClientId) {
+            this.lotIsYours = false;
         }
     }
 

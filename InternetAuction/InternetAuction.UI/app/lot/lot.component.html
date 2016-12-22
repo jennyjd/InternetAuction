@@ -10,17 +10,17 @@
             <md-card-title>{{lotitem.Name}}</md-card-title>
             <md-card-content>
                 <div *ngIf="lotitem.visible_items == true" class="more_inf">
-                    <div *ngIf="lotitem.betDone">Текущая ставка: {{lotitem.CurrentBet}} {{lotitem.CurrencyName}}</div>
-                    <div *ngIf="!lotitem.betDone">Ставок нету</div>
-                    <div>Выкуп: {{lotitem.PriceOfFastSell}} {{lotitem.CurrencyName}}</div>
-                    <p>sdkfjsldk</p>
-                    <p>kfdjkl</p>
-                    <div>login: {{lotitem.userLogin}}</div>
+                    <p *ngIf="lotitem.betDone">Текущая ставка: {{lotitem.CurrentBet}} {{lotitem.currencySign}}</p>
+                    <p *ngIf="!lotitem.betDone">Ставок нету</p>
+                    <p *ngIf="lotitem.fastSell">Выкуп: {{lotitem.PriceOfFastSell}} {{lotitem.currencySign}}</p>
+                    <p>Владелец: {{lotitem.userLogin}}</p>
                 </div>
                 <div class="bottom_inf">
-                    Осталось:
-                    {{lotitem.EndDate | amDifference: today: 'days'}} дн.
-                    {{(lotitem.EndDate | amDifference: today: 'hours') - (lotitem.EndDate | amDifference: today: 'days')*24}} ч.
+                    <p>
+                        Осталось:
+                        {{lotitem.EndDate | amDifference: today: 'days'}} дн.
+                        {{(lotitem.EndDate | amDifference: today: 'hours') - (lotitem.EndDate | amDifference: today: 'days')*24}} ч.
+                    </p>
                 </div>
             </md-card-content>
         </div>
