@@ -17,6 +17,9 @@ namespace InternetAuction.API.Repositories
         [Inject]
         public IAuctionsRepository AuctionsRepository { get; set; }
 
+        [Inject]
+        public IClientsRepository ClientsRepository { get; set; }
+
 
         public AuctionsHistoryRepository()
         {
@@ -100,6 +103,34 @@ namespace InternetAuction.API.Repositories
                     IsCompleted = auction.IsCompleted,
                     MaxBet = CheckCurrentMaxBet(auction.Id),
                     CustomerId = _context.AuctionsHistory.Where(x => x.AuctionId == auction.Id).OrderBy(x => x.Date).AsEnumerable().LastOrDefault()?.ClientId
+                });
+            }
+
+            return list;
+        }
+
+
+        public object GetAuctionsHistoryForAuctions()
+        {
+            var auctions = AuctionsRepository.GetAuctions();
+            if (!auctions.Any())
+            {
+                return null;
+            }
+            var list = new List<object>();
+
+            foreach (var auction in auctions)
+            {
+                var lastBet = _context.AuctionsHistory.Where(x => x.AuctionId == auction.Id).OrderBy(x => x.Date).AsEnumerable().LastOrDefault();
+                var customer = lastBet != null ? ClientsRepository.GetClient(lastBet.ClientId) : null;
+                var owner = ClientsRepository.GetClient(auction.ClientId);
+                list.Add(new
+                {
+                    Auction = auction,
+                    MaxBet = CheckCurrentMaxBet(auction.Id),
+                    Customer = customer,
+                    Owner = owner,
+                    BetDate = lastBet?.Date
                 });
             }
 
