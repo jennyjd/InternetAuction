@@ -49,7 +49,7 @@
                         <img src="../../assets/icons/visibility-white.svg" />
                     </button>
                     <div *ngIf="completedTab">
-                        <button md-button class="confirm_button" *ngIf="!stats.isSeen">Подтвердить</button>
+                        <button md-button class="confirm_button" *ngIf="!stats.isSeen" (click)="confirmDeal(stats)">Подтвердить</button>
                     </div>
                 </div>
             </md-card>

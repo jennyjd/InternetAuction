@@ -53,8 +53,7 @@ export class LotStatisticsComponent {
                     else { lot.betDone = false }
 
                     if (lot.IsCompleted && forOwner) {
-                        this.getWinnerInf(lot);
-                        
+                        this.getWinnerInf(lot);                        
                     }
                     else if (lot.IsCompleted && !forOwner) {
                         this.detectUnseenLots(lot, this.completedParticipantStat);
@@ -85,17 +84,27 @@ export class LotStatisticsComponent {
     }
 
     detectUnseenLots(lot, completed) {
+        lot.isSeen = true;
         for (let result of this.auctionResults) {
             if (result.AuctionId == lot.AuctionId) {
                 lot.isSeen = result.IsSeenResult;
-                completed.push(lot);
+                lot.resultId = result.Id;
             }
         }
+        completed.push(lot);
+    }
+
+    confirmDeal(lot) {
+        this.lotService.seenAuctionResult(lot.resultId)
+            .subscribe(res => {
+                console.log(res);
+                lot.isSeen = true;
+            },
+            error => this.errorMessage = <any>error);
     }
 
 
     getWinnerInf(lot) {
-        console.log("WINNER");
         this.userService.getUserAccountById(lot.CustomerId)
             .subscribe(res => {
                 lot.Winner = res;

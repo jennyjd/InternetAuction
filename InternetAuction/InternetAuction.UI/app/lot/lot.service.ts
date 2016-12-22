@@ -17,7 +17,8 @@ export class LotService {
     private getCurBet = `${Constant.apiEndpoint}/Auctions/GetCurrentBet`; 
     private ownerLotStatistics = `${Constant.apiEndpoint}/Auctions/GetAuctionsHistoryForOwner`;
     private participantLotStatistics = `${Constant.apiEndpoint}/Auctions/GetAuctionsHistoryForParticipant`;
-    private getAuctionResultsUrl = `${Constant.apiEndpoint }/Auctions/GetAuctionsResults`;
+    private getAuctionResultsUrl = `${Constant.apiEndpoint}/Auctions/GetAuctionsResults`;
+    private seenResultUrl = `${Constant.apiEndpoint}/Auctions/SeenAuctionResults`;
 
     constructor(private http: Http) {
     }
@@ -89,6 +90,16 @@ export class LotService {
     getAuctionResults() {
         return this.http.get(this.getAuctionResultsUrl, { withCredentials: true })
             .map(response => response.json())
+            .catch(this.handleError);
+    }
+
+    seenAuctionResult(resultId) {
+        let JSONstr = JSON.stringify([resultId]);
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+
+        return this.http.post(this.seenResultUrl, JSONstr, { headers: headers, withCredentials: true })
+            .map(response => response.ok)
             .catch(this.handleError);
     }
 
