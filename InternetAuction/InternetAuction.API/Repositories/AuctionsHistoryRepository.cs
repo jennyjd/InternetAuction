@@ -6,6 +6,8 @@ using System.Linq;
 using System.Web;
 using InternetAuction.API.Models;
 using Ninject;
+using Microsoft.AspNet.Identity.Owin;
+using InternetAuction.API.Infrastructure;
 
 namespace InternetAuction.API.Repositories
 {
@@ -112,6 +114,7 @@ namespace InternetAuction.API.Repositories
 
         public object GetAuctionsHistoryForAuctions()
         {
+            var userManager = HttpContext.Current.GetOwinContext().GetUserManager<InternetAuctionUserManager>();
             var auctions = AuctionsRepository.GetAuctions();
             if (!auctions.Any())
             {
@@ -122,8 +125,8 @@ namespace InternetAuction.API.Repositories
             foreach (var auction in auctions)
             {
                 var lastBet = _context.AuctionsHistory.Where(x => x.AuctionId == auction.Id).OrderBy(x => x.Date).AsEnumerable().LastOrDefault();
-                var customer = lastBet != null ? ClientsRepository.GetClient(lastBet.ClientId) : null;
-                var owner = ClientsRepository.GetClient(auction.ClientId);
+                var customer = lastBet != null ? userManager.Users.SingleOrDefault(x => x.ClientId == lastBet.ClientId) : null;
+                var owner = userManager.Users.SingleOrDefault(x => x.ClientId == auction.ClientId);
                 list.Add(new
                 {
                     Auction = auction,
