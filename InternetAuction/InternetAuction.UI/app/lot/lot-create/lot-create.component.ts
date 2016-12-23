@@ -26,11 +26,11 @@ export class LotCreateComponent {
     categoryError: boolean = false;
     priceErrors: string[] = [];
 
-    pictures =
+    /*pictures =
        ['https://s-media-cache-ak0.pinimg.com/736x/bb/bf/58/bbbf58c0716c059fa378d419defa0f05.jpg',
         'http://cliqueimg.com/cache/posts/169114/how-to-style-ikea-for-a-stunning-high-low-mix-1495982.640x0c.jpg',
         'http://houseplanning.ru/sites/default/files/images/ikea_4.jpg',
-        'http://lookathome.ru/wp-content/uploads/2013/10/LookAtHome.ru_Mebel_IKEA_v_interiere-foto-3.jpeg']
+        'http://lookathome.ru/wp-content/uploads/2013/10/LookAtHome.ru_Mebel_IKEA_v_interiere-foto-3.jpeg']*/
 
     constructor(private generalService: GeneralService, private lotService: LotService, private router: Router,
         private sharedService: SharedService) {

@@ -56,8 +56,8 @@ export class LotService {
         headers.append('Content-Type', 'application/json');
 
         return this.http.post(`${this.betUrl}/${auctionId}/${isFastSell}`, JSONstr, { headers: headers, withCredentials: true })
-            .map(response => response.json())
-            .catch(this.handleError);
+            .map(response => response.json());
+            //.catch(this.handleError);
     }
 
     createLot(lot) {

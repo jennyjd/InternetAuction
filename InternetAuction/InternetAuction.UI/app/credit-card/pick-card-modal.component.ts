@@ -69,13 +69,14 @@ export class ModalPickCardComponent {
                 this.closeModal();
             },
             error => {
-                this.errorMessage = <any>error;
+                this.errorMessage = error.json()
+                console.log(this.errorMessage.State);
+                this.betState = this.errorMessage.State;
+                this.closeModal();
             });
     }
 
     checkFastSell() {
-        console.log("КУКУК");
-        console.log(this.fastSell);
         if (this.fastSell[1] == true) {
             this.isFastSell = true;
             return true;

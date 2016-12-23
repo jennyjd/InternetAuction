@@ -1,7 +1,8 @@
 ﻿import { NgModule } from '@angular/core';
 import { OVERLAY_PROVIDERS } from "@angular2-material/core";
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { LotComponent } from './lot/lot.component';
@@ -46,6 +47,7 @@ import { routing, appRoutingProviders } from './app.routing'
         UserDetailsComponent, LotCreateComponent, LotDetailComponent, LoadingComponent, ModalPickCardComponent, AdminComponent,
         LotStatisticsComponent],
     bootstrap: [AppComponent],
-    providers: [MdIconRegistry, OVERLAY_PROVIDERS, appRoutingProviders, UserService, LoginService]
+    providers: [MdIconRegistry, OVERLAY_PROVIDERS, appRoutingProviders, UserService, LoginService,
+        { provide: LocationStrategy, useClass: HashLocationStrategy }]
 })
 export class AppModule { }

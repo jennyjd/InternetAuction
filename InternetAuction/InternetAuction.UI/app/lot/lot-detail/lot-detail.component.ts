@@ -60,7 +60,7 @@ export class LotDetailComponent implements OnInit, AfterViewInit {
                 console.log(this.selected_lot);
                 this.lotState = this.selected_lot.GoodsState.Name;
                 this.getCurrencySign();
-                this.currency = this.selected_lot.Currency.ShortName;
+                //this.currency = this.selected_lot.Currency.ShortName;
                 this.getUserInf();
             },
             error => this.errorMessage = <any>error);
@@ -100,8 +100,11 @@ export class LotDetailComponent implements OnInit, AfterViewInit {
 
     checkIfLotIsYours() {
         let currentUser = this.userServise.getCurrentUser();
-        if (currentUser.Id != this.selected_lot.ClientId) {
-            this.lotIsYours = false;
+        console.log(currentUser);
+        if (currentUser != null) {
+            if (currentUser.Id != this.selected_lot.ClientId) {
+                this.lotIsYours = false;
+            }
         }
     }
 
@@ -213,6 +216,7 @@ export class LotDetailComponent implements OnInit, AfterViewInit {
 
             this.getCurrentBet(this.selected_lot);
             this.getTimeLeft();
+            this.getCurrencySign();
 
             console.log(this.selected_lot);
             this.lotState = this.selected_lot.GoodsState.Name;
