@@ -204,11 +204,14 @@ namespace InternetAuction.API.Controllers
             var participantsIds = AuctionsHistoryRepository.GetParticipantsIds(auctionId);
             foreach (var id in participantsIds)
             {
-                if (id != currentUserBet.ClientId)
+                if (currentUserBet == null || id != currentUserBet.ClientId)
                 {
                     var userBet = AuctionsHistoryRepository.CheckCurrentUserBetNew(auctionId, id);
-                    var card = CreditCardsRepository.GetCreditCard(userBet.CreditCardId);
-                    CreditCardsOperations.ReturnMoney(userBet.CreditCardSum, card.Number);
+                    if (userBet != null)
+                    {
+                        var card = CreditCardsRepository.GetCreditCard(userBet.CreditCardId);
+                        CreditCardsOperations.ReturnMoney(userBet.CreditCardSum, card.Number);
+                    }
                 }
             }
 
