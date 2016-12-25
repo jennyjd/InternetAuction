@@ -165,7 +165,7 @@ namespace InternetAuction.API.Controllers
 
             decimal newBetSum = 0;
             decimal newCreditCardSum = 0;
-            if (currentUserBet.CreditCardId == creditCard.Id)
+            if (currentUserBet.CreditCardId == creditCard.Id && currentUserBet != null)
             {
                 var newAddedSum = bet.Sum * currencyConversion.Rate - currentUserBet.CreditCardSum;
                 newCreditCardSum = currentUserBet.CreditCardSum + newAddedSum;
@@ -193,7 +193,10 @@ namespace InternetAuction.API.Controllers
                     });
                 }
 
-                CreditCardsOperations.ReturnMoney(currentUserBet.CreditCardSum * currencyConversionForReturn.Rate, creditCard.Number);
+                if (currentUserBet != null)
+                {
+                    CreditCardsOperations.ReturnMoney(currentUserBet.CreditCardSum * currencyConversionForReturn.Rate, creditCard.Number);
+                }
             }
 
             // check if currency conversion right
