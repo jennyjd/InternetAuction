@@ -19,7 +19,7 @@ import { LotStatisticsComponent } from '../../lot/lot-statistics/lot-statistics.
 
 export class UserDetailsComponent {
     path = Constant.path;
-    personalLabels: string[] = ["Логин", "Фамилия", "Имя", "Отчество", "Почта"];
+    personalLabels: string[] = ["Логин", "Фамилия", "Имя", "Почта"];
     cardLabels: string[] = ["Владелец", "Срок действия"];
     addCardLabels: string[] = ["Номер", "Владелец", "Срок действия"];
 
@@ -36,6 +36,9 @@ export class UserDetailsComponent {
     userCreditCards: CreditCard[] = [];
 
     errorMessage: any;
+    errorsDetected: boolean = false;
+    monthError: boolean = false;
+    yearError: boolean = false;
 
     constructor(private userService: UserService, private creditService: CreditCardService) {
         this.getUser();
@@ -71,6 +74,21 @@ export class UserDetailsComponent {
             error => this.errorMessage = <any>error);
     }
 
+    showAddCardForm() {
+        this.addNewCard = true;
+        this.newCardModel.number = '';
+        this.newCardModel.ownerName = '';
+        this.newCardModel.validMonth = '';
+        this.newCardModel.validYear = '';
+        this.errorsDetected = false;
+        this.monthError = false;
+        this.yearError = false;
+    }
+
+    closeCardForm() {
+        this.addNewCard = false;
+    }
+
     checkForEmptyFields(res) {
         for (var key in res) {
             if (res.hasOwnProperty(key) && res[key] == null) {
@@ -83,23 +101,50 @@ export class UserDetailsComponent {
         this.editPersonalInf = false;
     }
 
-    addNewCardSubmit() {
-        this.addNewCard = false;
-        let Name = this.newCardModel.ownerName.split(" ");
-        this.newCardModel.userFirstName = Name[0];
-        this.newCardModel.userLastName = Name[1];
-        this.newCardModel.number = this.newCardModel.number.replace(/\s+/g, '');
-        //изменить на последний день месяца
-        this.newCardModel.validThru = this.newCardModel.validMonth + "-28-20" + this.newCardModel.validYear;
+    checkAddNewCardForm(inputs) {
+        for (let item of inputs) {
+            if (item.errors != null) {
+                this.errorsDetected = true;
+                return false
+            }
+            if (item.name == "validMonth") {
+                if (parseInt(item.model) > 12 || parseInt(item.model) < 1) {
+                    this.monthError = true;
+                    return false
+                }
+            }
+            else if (item.name == "validYear") {
+                if (parseInt(item.model) < 16) {
+                    this.yearError = true;
+                    return false
+                }
+            }
+        }
+        return true
+    }
 
-        this.creditService.addNewCard(this.newCardModel, this.currentUser.Id)
-            .subscribe(
-            res => {
-                this.userCreditCards.push(new CreditCard(res[0]));
-            },
-            error => {
-                this.errorMessage = error;
-            });
+    addNewCardSubmit(inputs) {
+        if (!this.checkAddNewCardForm(inputs)) {
+            return false
+        }
+        else {
+            this.addNewCard = false;
+            let Name = this.newCardModel.ownerName.split(" ");
+            this.newCardModel.userFirstName = Name[0];
+            this.newCardModel.userLastName = Name[1];
+            this.newCardModel.number = this.newCardModel.number.replace(/\s+/g, '');
+            //изменить на последний день месяца
+            this.newCardModel.validThru = this.newCardModel.validMonth + "-28-20" + this.newCardModel.validYear;
+
+            this.creditService.addNewCard(this.newCardModel, this.currentUser.Id)
+                .subscribe(
+                res => {
+                    this.userCreditCards.push(new CreditCard(res[0]));
+                },
+                error => {
+                    this.errorMessage = error;
+                });
+        }
     }
 
 }

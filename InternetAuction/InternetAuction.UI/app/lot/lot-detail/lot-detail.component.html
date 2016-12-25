@@ -44,9 +44,8 @@
                         <h3>Начальная ставка: {{selected_lot.StartPrice}} {{selected_lot.currencySign}}</h3>
                         <h3 *ngIf="betDone">Текущая ставка: {{selected_lot.currentBet}} {{selected_lot.currencySign}}</h3>
                         <p *ngIf="!betDone">Ставок нету</p>
-                        <!--изменить на текущую цену-->
+
                         <form *ngIf="!lotIsYours" (ngSubmit)="makeBet(bet)">
-                            <!--value={{selected_lot.currentBet}}-->
                             <md-input placeholder="Ставка" [(ngModel)]="model.bet" #bet="ngModel" name="bet" required></md-input>
                             <button md-mini-fab style="background-color:#D95154" type="submit" tooltip="Сделать ставку" tooltip-position="below">
                                 <img src="..{{path}}/../../assets/icons/gavel-white.svg" />
@@ -57,18 +56,16 @@
                         </div>
 
                         <div *ngIf="checkFastSell(selected_lot) && !lotIsYours">
-                            {{selected_lot.PriceOfFastSell}} {{selected_lot.currencySign}}
-                            <button md-raised-button (click)="redeem()">Выкупить</button>
+                            <b>{{selected_lot.PriceOfFastSell}} {{selected_lot.currencySign}}</b>
+                            <button md-raised-button class="redeem_button" (click)="redeem()">Выкупить</button>
                         </div>
                         <div *ngIf="checkFastSell(selected_lot) && lotIsYours">
                             Выкуп: {{selected_lot.PriceOfFastSell}} {{selected_lot.currencySign}}
                         </div>
 
-                        <h3>Осталось: </h3>
-                        <span>
+                        <h3>Осталось: </h3>                   
                             {{selected_lot.timeLeft | amDifference: today: 'days'}} дн.
-                            {{(selected_lot.timeLeft | amDifference: today: 'hours') - (selected_lot.timeLeft | amDifference: today: 'days')*24}} ч.
-                        </span>
+                            {{(selected_lot.timeLeft | amDifference: today: 'hours') - (selected_lot.timeLeft | amDifference: today: 'days')*24}} ч.   
                     </div>
                     <div *ngIf="selected_lot.IsCompleted">
                         <h3>Аукцион завершён!</h3>
@@ -76,16 +73,16 @@
                 </div>
             </div>
             <div class="description">
+                <h3>Состояние:</h3> <p>{{lotState}}</p>
                 <h3>Описание</h3>
-                <p>{{selected_lot.Description}}</p>
-                <h3>Состояние: {{lotState}}</h3>
+                <p [innerHTML]="selected_lot.Description"></p>
             </div>
         </md-card>
     </div>
 
     <md-card class="seller_information">
-        <h3>Информация об аукционисте</h3>
-        <p>{{userInformation.FirstName}}</p>
-        <p>{{userInformation.LastName}}</p>
+        <h2>Информация об аукционисте:</h2>
+        <p><b>Логин:</b> {{userInformation.UserName}}</p>
+        <p><b>Адрес эл.почты:</b> {{userInformation.Email}}</p>
     </md-card>
 </div>

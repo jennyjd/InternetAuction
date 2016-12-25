@@ -1,7 +1,9 @@
 ﻿.admin-container {
     width: 80%;
-    min-width: 850px;
+    min-width: 1352px;
     margin: 20px auto;
+    margin-bottom: 300px;
+
 }
 
 .lots {

@@ -48,7 +48,7 @@
                             </div>
                         </div>
                     </md-card-content>
-                    <button md-mini-fab class="lot_details red_button" (click)="view_details(lotitem)" tooltip="Подробнее" tooltip-position="below">
+                    <button md-mini-fab class="lot_details red_button" (click)="viewLotDetails(stats.Auction.Id)" tooltip="Подробнее" tooltip-position="below">
                         <img src="..{{path}}/../assets/icons/visibility-white.svg" />
                     </button>
                     <div *ngIf="completedTab">

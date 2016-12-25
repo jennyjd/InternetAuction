@@ -41,6 +41,7 @@ export class LotListComponent {
 
     addData(res) {
         let lotAmmount = this.getUncompletedLots(res);
+        if (lotAmmount == 0) { this.loading = false; }
         for (let lot of this.uncompletedLots) {
             this.userService.getUserAccountById(lot.ClientId)
                 .subscribe(res => {

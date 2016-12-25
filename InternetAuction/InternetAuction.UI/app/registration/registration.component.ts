@@ -45,6 +45,7 @@ export class RegistrationComponent {
     }
 
     checkInputs(inputs) {
+        if (!this.checkPasswords(inputs)) { return false }
         for (let item of inputs) {
             if (item.errors != null) {
                 this.errorsDetected = true;
@@ -62,6 +63,24 @@ export class RegistrationComponent {
                     return false
                 }
             }
+        }
+        return true
+    }
+
+    checkPasswords(inputs) {
+        let pass = '';
+        let pass2 = '';
+        for (let item of inputs) {
+            if (item.name == "password") {
+                pass = item.model;
+            }
+            else if (item.name == "password2") {
+                pass2 = item.model;
+            }
+        }
+        if (pass != pass2) {
+            this.errorsDetected = true;
+            return false
         }
         return true
     }

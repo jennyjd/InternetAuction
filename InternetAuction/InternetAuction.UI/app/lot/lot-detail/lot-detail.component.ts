@@ -52,6 +52,7 @@ export class LotDetailComponent implements OnInit, AfterViewInit {
             .switchMap((params: Params) => this.lotservise.getLotById(+params['id']))
             .subscribe(res => {
                 this.selected_lot = res;
+                this.selected_lot.Description = this.selected_lot.Description.replace(/(?:\r\n|\r|\n)/g, '<br />');
 
                 this.checkIfLotIsYours();
 
@@ -231,9 +232,10 @@ export class LotDetailComponent implements OnInit, AfterViewInit {
     }
 
     getUserInf() {
-        this.userServise.getUserById(this.selected_lot.ClientId)
+        this.userServise.getUserAccountById(this.selected_lot.ClientId)
             .subscribe(res => {
                 this.userInformation = res;
+                console.log("USER INF", this.userInformation);
             },
             error => this.errorMessage = <any>error);
     }

@@ -38,15 +38,15 @@
         <div class="main_inf">
             <h3>Основная информация</h3>
             <md-input placeholder="Начальная цена" [(ngModel)]="lot.startPrice" name="startPrice" #startPrice="ngModel" required pattern="[0-9]+"></md-input>
-            <div *ngIf="startPrice.errors && (startPrice.dirty || startPrice.touched)" class="alert alert-warning">
-                <div [hidden]="!startPrice.errors.pattern">
+            <div *ngIf="startPrice.errors && startPrice.dirty">
+                <div [hidden]="!startPrice.errors.pattern" class="alert alert-warning">
                     Данное поле должно быть числом
                 </div>
             </div>
 
             <md-input placeholder="Стоимость выкупа" [(ngModel)]="lot.fastSell" name="fastSell" #fastSell="ngModel" pattern="^$|[0-9]+"></md-input>
-            <div *ngIf="fastSell.errors && (startPrice.dirty || startPrice.touched)" class="alert alert-warning">
-                <div [hidden]="!fastSell.errors.pattern">
+            <div *ngIf="fastSell.errors && fastSell.dirty">
+                <div [hidden]="!fastSell.errors.pattern" class="alert alert-warning">
                     Данное поле должно быть числом
                 </div>
             </div>

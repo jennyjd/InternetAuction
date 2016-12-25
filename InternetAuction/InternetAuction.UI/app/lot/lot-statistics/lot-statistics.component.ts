@@ -1,4 +1,5 @@
 ﻿import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Constant } from '../../globals';
 
 import { LotService } from '../lot.service';
@@ -25,7 +26,7 @@ export class LotStatisticsComponent {
     currency = Constant.currency;
     menu: string[] = ['Ваши лоты', 'Аукционы с вашими ставками', 'Ваши завершенные аукционы', 'Завершенные аукционы с вашими ставками'];
 
-    constructor(private lotService: LotService, private userService: UserService) {
+    constructor(private lotService: LotService, private userService: UserService, private router: Router) {
         this.getAuctionResults();
         this.getStatistics();
     }
@@ -33,40 +34,48 @@ export class LotStatisticsComponent {
     getStatistics() {
         this.lotService.getAuctionsHistoryForOwner()
             .subscribe(res => {
-                this.addLots(res, this.ownerStat,  true);               
+                console.log("OWNER", res);  
+                this.addLots(res, this.ownerStat, true);             
             },
             error => this.errorMessage = <any>error);
 
         this.lotService.getAuctionsHistoryForParticipant()
             .subscribe(res => {
+                console.log("PARTIC", res); 
                 this.addLots(res, this.participantStat,  false);               
             },
             error => this.errorMessage = <any>error);
     }
 
     addLots(result, stats, forOwner) {
-        for (let lot of result) {
-            this.lotService.getLotById(lot.AuctionId)
-                .subscribe(res => {
-                    lot.Auction = res;
-                    this.getCurrencySign(lot);
-                    if (lot.MaxBet != 0) { lot.betDone = true }
-                    else { lot.betDone = false }
+        if (result != null) {
+            for (let lot of result) {
+                this.lotService.getLotById(lot.AuctionId)
+                    .subscribe(res => {
+                        lot.Auction = res;
+                        this.getCurrencySign(lot);
+                        if (lot.MaxBet != 0) { lot.betDone = true }
+                        else { lot.betDone = false }
 
-                    if (lot.IsCompleted && forOwner) {
-                        this.getWinnerInf(lot);                        
-                    }
-                    else if (lot.IsCompleted && !forOwner) {
-                        this.detectUnseenLots(lot, this.completedParticipantStat);
-                    }
-                    else {
-                        console.log('LOT', lot);
-                        stats.push(lot);
-                    }
+                        if (lot.IsCompleted && forOwner) {
+                            this.getWinnerInf(lot);
+                        }
+                        else if (lot.IsCompleted && !forOwner) {
+                            this.detectUnseenLots(lot, this.completedParticipantStat);
+                        }
+                        else {
+                            console.log('LOT', lot);
+                            stats.push(lot);
+                        }
 
-                },
-                error => this.errorMessage = <any>error);
+                    },
+                    error => this.errorMessage = <any>error);
+            }
         }
+    }
+
+    viewLotDetails(lotId) {
+        this.router.navigate(['/lotdetail', lotId]);
     }
 
     getCurrencySign(lot) {

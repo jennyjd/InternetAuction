@@ -16,9 +16,8 @@
                         </div>
 
                         <div class="information">
-                            <!--поменять на login и email-->
-                            <p>Владелец: {{lot.Owner.FirstName}}</p>
-                            <p> {{lot.Owner.LastName}}</p>
+                            <p>Владелец: {{lot.Owner.UserName}}</p>
+                            <p> {{lot.Owner.Email}}</p>
                             <p>Дата начала: {{lot.Auction.StartDate}}</p>
                             <div *ngIf="!completedTab">
                                 <p>
@@ -33,9 +32,8 @@
                             <div *ngIf="!completedTab">
                                 <div *ngIf="lot.betDone">
                                     <p>Текущая ставка: {{lot.MaxBet}} {{lot.Auction.currencySign}}</p>
-                                    <!--поменять на login и email-->
-                                    <p>Пользователь: {{lot.Customer.FirstName}}</p>
-                                    <p>{{lot.Customer.LastName}}</p>
+                                    <p>Пользователь: {{lot.Customer.UserName}}</p>
+                                    <p>{{lot.Customer.Email}}</p>
                                     <p>Дата последней ставки: {{lot.BetDate}}</p>
                                 </div>
                                 <p *ngIf="!lot.betDone">Ставок нету</p>
@@ -43,8 +41,8 @@
                             <div *ngIf="completedTab">
                                 <p *ngIf="!lot.betDone">Аукцион не был проведен успешно!</p>
                                 <div *ngIf="lot.betDone">
-                                    <p>Выиграл: {{lot.Customer.FirstName}}</p>
-                                    <!--<p>{{lot.Winner.Email}}</p>-->
+                                    <p>Выиграл: {{lot.Customer.UserName}}</p>
+                                    <p>{{lot.Customer.Email}}</p>
                                     <p>Выкуп: {{lot.MaxBet}} {{lot.Auction.currencySign}}</p>
                                 </div>
                             </div>

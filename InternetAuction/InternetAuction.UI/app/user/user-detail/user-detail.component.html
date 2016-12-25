@@ -4,9 +4,9 @@
             <div class="header">
                 <!------------------ЛИЧНЫЕ ДАННЫЕ---------------->
                 <h2>Личные данные</h2>
-                <button md-mini-fab class="but red_button" *ngIf="!editPersonalInf" (click)="editPersonalInf = true" tooltip="Изменить" tooltip-position="below">
+                <!--<button md-mini-fab class="but red_button" *ngIf="!editPersonalInf" (click)="editPersonalInf = true" tooltip="Изменить" tooltip-position="below">
                     <img src="..{{path}}/../../assets/icons/create-white.svg" style="color:white"/>
-                </button>
+                </button>-->
             </div>
             <div class="content">
                 <div class="labels_wrap">
@@ -18,12 +18,12 @@
                         <div class="mar_divs">{{userLogin}}</div>
                         <div class="mar_divs">{{currentUser.LastName}}</div>
                         <div class="mar_divs">{{currentUser.FirstName}}</div>
-                        <div class="mar_divs">{{currentUser.Patronymic}}</div>
+                        <!--<div class="mar_divs">{{currentUser.Patronymic}}</div>-->
                         <div class="mar_divs">{{userEmail}}</div>
                     </div>
 
                     <!------------------ФОРМА ИЗМЕНЕНИЯ ЛИЧНЫХ ДАННЫХ КЛИЕНТА---------------->
-                    <div *ngIf="editPersonalInf">
+                    <!--<div *ngIf="editPersonalInf">
                         <form (ngSubmit)="changeUserInf()">
                             <div class="mar_divs">{{userLogin}}</div>
                             <md-input value={{currentUser.LastName}}></md-input>
@@ -34,7 +34,7 @@
                                 <img src="..{{path}}/../../assets/icons/done-white.svg"/>
                             </button>
                         </form>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div>
@@ -43,57 +43,84 @@
         <div class="cards_inf">
             <div class="header">
                 <h2>Банковские карты</h2>
-                <button md-mini-fab class="but red_button" tooltip="Добавить" tooltip-position="below" *ngIf="!addNewCard" (click)="addNewCard = true">
+                <button md-mini-fab class="but red_button" tooltip="Добавить" tooltip-position="below" *ngIf="!addNewCard" (click)="showAddCardForm()">
                     <img src="..{{path}}/../../assets/icons/add-white.svg" />
                 </button>
             </div>
 
             <!------------------ФОРМА ДОБАВЛЕНИЯ НОВОЙ КАРТЫ---------------->
-            <form class="addCardForm" *ngIf="addNewCard" (ngSubmit)="addNewCardSubmit()">
+            <form class="addCardForm" *ngIf="addNewCard" (ngSubmit)="addNewCardSubmit([number, userName, validMonth, validYear])">
+                <button md-button class="close_button" (click)="closeCardForm()">
+                    <img src="../../assets/icons/clear.svg" />
+                </button>
                 <div class="labels_wrap">
                     <div *ngFor="let label of addCardLabels" class="mar_divs">{{label}}</div>                 
                 </div>
                 <div class="value_wrap">
-                    <md-input placeholder="Номер карты" maxlength="19" required [(ngModel)]="newCardModel.number" #number name="number" (ngModelChange)="validate(number.value)"></md-input>
-                    <md-input placeholder="Имя владельца" required [(ngModel)]="newCardModel.ownerName" #userName name="userName"></md-input>
+                    <md-input placeholder="Номер карты" maxlength="19" required [(ngModel)]="newCardModel.number" #number="ngModel" name="number" pattern="([0-9]{4} ){3}[0-9]{4}" (ngModelChange)="validate(number.value)"></md-input>
+                    <div *ngIf="number.errors && number.dirty">
+                        <div [hidden]="!number.errors.pattern" class="alert alert-warning">
+                            Формат - 1234 1234 1234 1234
+                        </div>
+                    </div>
+
+                    <md-input placeholder="Имя владельца" required [(ngModel)]="newCardModel.ownerName" #userName="ngModel" name="userName"  pattern="[A-Za-z]+ [A-Za-z]+"></md-input>
+                    <div *ngIf="userName.errors && userName.dirty">
+                        <div [hidden]="!userName.errors.pattern" class="alert alert-warning">
+                            Поле должно содержать ИМЯ и ФАМИЛИЮ владельца карты.
+                        </div>
+                    </div>
+
                     <div class="validThru">
-                        <md-input placeholder="MM" maxlength="2" required [(ngModel)]="newCardModel.validMonth" #validMonth name="validMonth"></md-input>/
-                        <md-input placeholder="YY" maxlength="2" required [(ngModel)]="newCardModel.validYear" #validYear name="validYear"></md-input>
+                        <md-input placeholder="MM" maxlength="2" required [(ngModel)]="newCardModel.validMonth" #validMonth="ngModel" name="validMonth" pattern="[0-9]{2}"></md-input>/
+                        <md-input placeholder="YY" maxlength="2" required [(ngModel)]="newCardModel.validYear" #validYear="ngModel" name="validYear" pattern="[0-9]{2}"></md-input>
+                        <div *ngIf="validMonth.errors && validMonth.dirty && validYear.errors && validYear.dirty">
+                            <div [hidden]="!validMonth.errors.pattern || !validYear.errors.pattern" class="alert alert-warning">
+                                Пример: 01/18
+                            </div>
+                        </div>
+                        <div *ngIf="!errorsDetected && monthError" class="alert alert-warning">
+                            Поле ввода месяца может содержать информацию в интервале от 01 до 12
+                        </div>
+                        <div *ngIf="!errorsDetected && yearError" class="alert alert-warning">
+                            Проверьте поле для ввода срока годности карты. Ваша карта может быть недействительна.
+                        </div>
                         <button md-mini-fab tooltip="Сохранить" tooltip-position="below" *ngIf="addNewCard" class="addCardButton red_button" type="submit">
                             <img src="..{{path}}/../../assets/icons/done-white.svg" />
                         </button>
                     </div>
+                    <div *ngIf="errorsDetected" class="alert alert-error">Проверьте корректность введенных данных</div>
                 </div>
             </form>
 
-            <!------------------ДАННЫЕ ПО КАРТАМ КЛИЕНТА---------------->
-            <div class="content">
-                <div class="card_handler">
-                    <md2-accordion *ngFor="let card of userCreditCards">
-                        <md2-accordion-tab>
-                            <md2-accordion-header>
-                                <div class="card-icon">
-                                    <img src="../../../assets/icons/payment-black.svg"/>
+                <!------------------ДАННЫЕ ПО КАРТАМ КЛИЕНТА---------------->
+                <div class="content">
+                    <div class="card_handler">
+                        <md2-accordion *ngFor="let card of userCreditCards">
+                            <md2-accordion-tab>
+                                <md2-accordion-header>
+                                    <div class="card-icon">
+                                        <img src="../../../assets/icons/payment-black.svg" />
+                                    </div>
+                                    <div class="card_number">
+                                        {{card.number}}
+                                    </div>
+                                </md2-accordion-header>
+                                <div style="display:flex">
+                                    <div class="labels_wrap">
+                                        <div *ngFor="let label of cardLabels" class="mar_divs">{{label}}</div>
+                                    </div>
+                                    <div class="value_wrap">
+                                        <div class="mar_divs">{{card.owner}}</div>
+                                        <div class="mar_divs">{{card.validMonth}}/{{card.validYear}}</div>
+                                    </div>
                                 </div>
-                                <div class="card_number">
-                                    {{card.number}}
-                                </div>
-                            </md2-accordion-header>
-                            <div style="display:flex">
-                                <div class="labels_wrap">
-                                    <div *ngFor="let label of cardLabels" class="mar_divs">{{label}}</div>
-                                </div>
-                                <div class="value_wrap">
-                                    <div class="mar_divs">{{card.owner}}</div>
-                                    <div class="mar_divs">{{card.validMonth}}/{{card.validYear}}</div>
-                                </div>
-                            </div>
-                        </md2-accordion-tab>
-                    </md2-accordion>
+                            </md2-accordion-tab>
+                        </md2-accordion>
+                    </div>
+
                 </div>
-        
             </div>
-         </div>
     </div>
 
     <statistics></statistics>
