@@ -21,7 +21,7 @@
                                 <p *ngIf="!stats.betDone">Ставок нету</p>
                             </div>
                             <div *ngIf="!ownerTab">
-                                <p>Ваша ставка: {{stats.UserBet}} {{stats.Auction.currencySign}}</p>
+                                <p>Ваша ставка: {{stats.UserBet.BetSum}} {{stats.Auction.currencySign}}</p>
                             </div>
                             <p>Осталось:
                                 {{stats.Auction.EndDate | amDifference: today: 'days'}} дн.
@@ -40,7 +40,10 @@
                             <div *ngIf="!ownerTab">
                                 <div *ngIf="stats.IsWinner">
                                     Вы выиграли!!!
-                                    <p>Ваша ставка: {{stats.UserBet}} {{stats.Auction.currencySign}}</p>
+                                    <p>Ваша ставка: {{stats.UserBet.BetSum}} {{stats.Auction.currencySign}}</p>
+                                </div>
+                                <div *ngIf="!stats.IsWinner">
+                                    Вы проиграли!!!
                                 </div>
                             </div>
                         </div>

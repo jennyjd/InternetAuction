@@ -61,7 +61,6 @@ export class LotDetailComponent implements OnInit, AfterViewInit {
                 console.log(this.selected_lot);
                 this.lotState = this.selected_lot.GoodsState.Name;
                 this.getCurrencySign();
-                //this.currency = this.selected_lot.Currency.ShortName;
                 this.getUserInf();
             },
             error => this.errorMessage = <any>error);
@@ -221,7 +220,6 @@ export class LotDetailComponent implements OnInit, AfterViewInit {
 
             console.log(this.selected_lot);
             this.lotState = this.selected_lot.GoodsState.Name;
-            this.currency = this.selected_lot.Currency.ShortName;
             this.getUserInf();
         },
             error => this.errorMessage = <any>error);
