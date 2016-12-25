@@ -67,7 +67,31 @@ namespace Bank.API
 
         public static bool TakeMoney(decimal sum, string creditCardNumber, string cvv)
         {
-            return creditCards.SingleOrDefault(x => x.Number == creditCardNumber && x.Cvv == cvv && x.Sum >= sum) != null;
+            var creditCard = creditCards.SingleOrDefault(x => x.Number == creditCardNumber && x.Cvv == cvv && x.Sum >= sum);
+            if (creditCard != null)
+            {
+                creditCard.Sum -= sum;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
+        public static bool ReturnMoney(decimal sum, string creditCardNumber)
+        {
+            var creditCard = creditCards.SingleOrDefault(x => x.Number == creditCardNumber);
+            if (creditCard != null)
+            {
+                creditCard.Sum += sum;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

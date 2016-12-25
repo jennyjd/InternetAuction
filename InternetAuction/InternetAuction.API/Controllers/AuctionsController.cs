@@ -87,6 +87,152 @@ namespace InternetAuction.API.Controllers
         }
 
 
+        [HttpGet]
+        [Route("GetCurrentBetNew/{auctionId}")]
+        public IHttpActionResult GetCurrentBetNew(int auctionId)
+        {
+            return Ok(AuctionsHistoryRepository.CheckCurrentMaxBetNew(auctionId));
+        }
+
+
+        [Authorize(Roles = "Client")]
+        [HttpPost]
+        [Route("BetNew/{auctionId}/{isFastSell}")]
+        public IHttpActionResult BetNew(int auctionId, bool isFastSell, [FromBody]BetVM bet)
+        {
+            InternetAuctionUser user = HttpContext.Current.GetOwinContext()
+                    .GetUserManager<InternetAuctionUserManager>()
+                    .FindById(HttpContext.Current.User.Identity.GetUserId());
+
+            var auction = AuctionsRepository.GetAuction(auctionId);
+            if (isFastSell && auction.PriceOfFastSell.HasValue)
+            {
+                bet.Sum = auction.PriceOfFastSell.Value;
+            }
+            var currentBet = AuctionsHistoryRepository.CheckCurrentMaxBet(auctionId);
+            if (user.ClientId == auction.ClientId)
+            {
+                return Content(HttpStatusCode.BadRequest, new BetResponseVM
+                {
+                    Auction = auction,
+                    State = BetState.OwnerCanNotMakeBet,
+                    CurrentBet = currentBet
+                });
+            }
+            if (isFastSell && !auction.PriceOfFastSell.HasValue)
+            {
+                return Content(HttpStatusCode.BadRequest, new BetResponseVM
+                {
+                    Auction = auction,
+                    State = BetState.AuctionHasNotFastSellOption,
+                    CurrentBet = currentBet
+                });
+            }
+            if (auction.IsCompleted)
+            {
+                return Content(HttpStatusCode.BadRequest, new BetResponseVM
+                {
+                    Auction = auction,
+                    State = BetState.AuctionCompleted,
+                    CurrentBet = currentBet
+                });
+            }
+            if (bet.Sum <= currentBet || bet.Sum < auction.StartPrice)
+            {
+                return Content(HttpStatusCode.BadRequest, new BetResponseVM
+                {
+                    Auction = auction,
+                    State = BetState.SmallBet,
+                    CurrentBet = currentBet
+                });
+            }
+
+            var creditCard = CreditCardsRepository.GetCreditCard(bet.CreditCardId);
+            var bankCardCurrency = CreditCardsOperations.GetCreditCardCurrency(creditCard.Number, bet.Cvv);
+            if (bankCardCurrency == null)
+            {
+                return Content(HttpStatusCode.BadRequest, new BetResponseVM
+                {
+                    Auction = auction,
+                    State = BetState.InvalidCreditCardData,
+                    CurrentBet = currentBet
+                });
+            }
+
+            var currencyConversionForReturn = CurrenciesConversionsRepository.GetCurrencyConversion(bankCardCurrency.Value, auction.CurrencyId);
+            var currencyConversion = CurrenciesConversionsRepository.GetCurrencyConversion(auction.CurrencyId, bankCardCurrency.Value);
+            var currentUserBet = AuctionsHistoryRepository.CheckCurrentUserBetNew(auctionId, user.ClientId.Value);
+
+            decimal newBetSum = 0;
+            decimal newCreditCardSum = 0;
+            if (currentUserBet.CreditCardId == creditCard.Id)
+            {
+                var newAddedSum = bet.Sum * currencyConversion.Rate - currentUserBet.CreditCardSum;
+                newCreditCardSum = currentUserBet.CreditCardSum + newAddedSum;
+                if (!CreditCardsOperations.TakeMoney(newAddedSum, creditCard.Number, bet.Cvv))
+                {
+                    return Content(HttpStatusCode.BadRequest, new BetResponseVM
+                    {
+                        Auction = auction,
+                        State = BetState.NotEnoughMoney,
+                        CurrentBet = currentBet
+                    });
+                }
+            }
+            else
+            {
+                var newAddedSum = bet.Sum * currencyConversion.Rate;
+                newCreditCardSum = newAddedSum;
+                if (!CreditCardsOperations.TakeMoney(newAddedSum, creditCard.Number, bet.Cvv))
+                {
+                    return Content(HttpStatusCode.BadRequest, new BetResponseVM
+                    {
+                        Auction = auction,
+                        State = BetState.NotEnoughMoney,
+                        CurrentBet = currentBet
+                    });
+                }
+
+                CreditCardsOperations.ReturnMoney(currentUserBet.CreditCardSum * currencyConversionForReturn.Rate, creditCard.Number);
+            }
+
+            // check if currency conversion right
+
+            var participantsIds = AuctionsHistoryRepository.GetParticipantsIds(auctionId);
+            foreach (var id in participantsIds)
+            {
+                if (id != currentUserBet.ClientId)
+                {
+                    var userBet = AuctionsHistoryRepository.CheckCurrentUserBetNew(auctionId, id);
+                    var card = CreditCardsRepository.GetCreditCard(userBet.CreditCardId);
+                    CreditCardsOperations.ReturnMoney(userBet.CreditCardSum, card.Number);
+                }
+            }
+
+            AuctionsHistoryRepository.AddBet(new AuctionHistory
+            {
+                AuctionId = auction.Id,
+                ClientId = user.ClientId.Value,
+                CreditCardId = bet.CreditCardId,
+                CreditCardCurrencyId = bankCardCurrency.Value,
+                CreditCardSum = newCreditCardSum,
+                BetSum = bet.Sum,
+                Date = DateTime.Now
+            });
+
+            if (isFastSell)
+            {
+                AuctionsRepository.CompleteAuction(auction.Id);
+            }
+            return Ok(new BetResponseVM
+            {
+                Auction = AuctionsRepository.GetAuction(auctionId),
+                State = BetState.BetAccepted,
+                CurrentBet = AuctionsHistoryRepository.CheckCurrentMaxBet(auctionId)
+            });
+        }
+
+
         [Authorize(Roles = "Client")]
         [HttpPost]
         [Route("Bet/{auctionId}/{isFastSell}")]

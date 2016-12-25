@@ -44,6 +44,13 @@ namespace InternetAuction.API.Repositories
         }
 
 
+        public decimal CheckCurrentMaxBetNew(int auctionId)
+        {
+            var lastBet = _context.AuctionsHistory.Where(x => x.AuctionId == auctionId).OrderBy(x => x.Date).AsEnumerable().LastOrDefault();
+            return lastBet == null ? 0 : lastBet.BetSum;
+        }
+
+
         public decimal CheckCurrentUserBet(int auctionId, int clientId)
         {
             var auctionHistory = _context.AuctionsHistory.Where(x => x.ClientId == clientId && x.AuctionId == auctionId);
@@ -52,6 +59,17 @@ namespace InternetAuction.API.Repositories
                 return auctionHistory.Sum(x => x.BetSum);
             }
             return 0;
+        }
+
+
+        public AuctionHistory CheckCurrentUserBetNew(int auctionId, int clientId)
+        {
+            var auctionHistory = _context.AuctionsHistory.Where(x => x.ClientId == clientId && x.AuctionId == auctionId).OrderBy(x => x.Date).AsEnumerable().LastOrDefault();
+            if (auctionHistory != null)
+            {
+                return auctionHistory;
+            }
+            return null;
         }
 
 
