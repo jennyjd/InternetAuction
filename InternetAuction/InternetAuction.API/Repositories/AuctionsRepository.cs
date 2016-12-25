@@ -60,7 +60,8 @@ namespace InternetAuction.API.Repositories
                         ClientId = auction.ClientId,
                         AuctionId = auction.Id,
                         IsSeenResult = false,
-                        ChargeFromWin = AuctionsHistoryRepository.CheckCurrentMaxBet(auction.Id) * Constants.CHARGE_FROM_WIN
+                        // CheckCurrentMaxBet
+                        ChargeFromWin = AuctionsHistoryRepository.CheckCurrentMaxBetNew(auction.Id) * Constants.CHARGE_FROM_WIN
                     });
 
                     auction.IsCompleted = true;

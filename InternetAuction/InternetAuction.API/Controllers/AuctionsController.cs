@@ -109,7 +109,7 @@ namespace InternetAuction.API.Controllers
             {
                 bet.Sum = auction.PriceOfFastSell.Value;
             }
-            var currentBet = AuctionsHistoryRepository.CheckCurrentMaxBet(auctionId);
+            var currentBet = AuctionsHistoryRepository.CheckCurrentMaxBetNew(auctionId);
             if (user.ClientId == auction.ClientId)
             {
                 return Content(HttpStatusCode.BadRequest, new BetResponseVM
@@ -228,7 +228,7 @@ namespace InternetAuction.API.Controllers
             {
                 Auction = AuctionsRepository.GetAuction(auctionId),
                 State = BetState.BetAccepted,
-                CurrentBet = AuctionsHistoryRepository.CheckCurrentMaxBet(auctionId)
+                CurrentBet = AuctionsHistoryRepository.CheckCurrentMaxBetNew(auctionId)
             });
         }
 
