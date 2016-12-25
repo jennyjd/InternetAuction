@@ -38,6 +38,7 @@ namespace InternetAuction.API.Repositories
             return auctionResult;
         }
 
+
         public void SeenAuctionsResults(int userId, ICollection<int> auctionsResultsIds)
         {
             foreach (var austionResultId in auctionsResultsIds)
