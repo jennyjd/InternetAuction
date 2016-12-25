@@ -12,6 +12,7 @@ import { UserService } from '../../user/user.service';
 })
 
 export class LotStatisticsComponent {
+    path = Constant.path;
     errorMessage: any;
     ownerStat: any[] = [];
     participantStat: any[] = [];
@@ -59,6 +60,7 @@ export class LotStatisticsComponent {
                         this.detectUnseenLots(lot, this.completedParticipantStat);
                     }
                     else {
+                        console.log('LOT', lot);
                         stats.push(lot);
                     }
 
@@ -105,12 +107,15 @@ export class LotStatisticsComponent {
 
 
     getWinnerInf(lot) {
-        this.userService.getUserAccountById(lot.CustomerId)
-            .subscribe(res => {
-                lot.Winner = res;
-                this.detectUnseenLots(lot, this.completedOwnerStat);
-            },
-            error => this.errorMessage = <any>error);
+        console.log('USER', lot, lot.CustomerId);
+        if (lot.CustomerId != null) {
+            this.userService.getUserAccountById(lot.CustomerId)
+                .subscribe(res => {
+                    lot.Winner = res;
+                    this.detectUnseenLots(lot, this.completedOwnerStat);
+                },
+                error => this.errorMessage = <any>error);
+        }
     }
 
     changeViewStats(menuel) {

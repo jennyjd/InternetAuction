@@ -13,10 +13,10 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class LotService {
     private lotsUrl = `${Constant.apiEndpoint}/Auctions`;
-    private betUrl = `${Constant.apiEndpoint}/Auctions/Bet`;
-    private getCurBet = `${Constant.apiEndpoint}/Auctions/GetCurrentBet`; 
-    private ownerLotStatistics = `${Constant.apiEndpoint}/Auctions/GetAuctionsHistoryForOwner`;
-    private participantLotStatistics = `${Constant.apiEndpoint}/Auctions/GetAuctionsHistoryForParticipant`;
+    private betUrl = `${Constant.apiEndpoint}/Auctions/BetNew`;
+    private getCurBet = `${Constant.apiEndpoint}/Auctions/GetCurrentBetNew`; 
+    private ownerLotStatistics = `${Constant.apiEndpoint}/Auctions/GetAuctionsHistoryForOwnerNew`;
+    private participantLotStatistics = `${Constant.apiEndpoint}/Auctions/GetAuctionsHistoryForParticipantNew`;
     private getAuctionResultsUrl = `${Constant.apiEndpoint}/Auctions/GetAuctionsResults`;
     private seenResultUrl = `${Constant.apiEndpoint}/Auctions/SeenAuctionResults`;
     private getAuctionHistory = `${Constant.apiEndpoint}/Auctions/GetAuctionsHistory`;

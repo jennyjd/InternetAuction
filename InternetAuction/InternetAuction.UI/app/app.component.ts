@@ -18,6 +18,7 @@ import { Constant } from './globals';
 })
 
 export class AppComponent {
+    path = Constant.path;
     menu: any[] = [];
     lotStates: any;
     errorMessage: any;

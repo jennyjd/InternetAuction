@@ -15,6 +15,7 @@ import { LotService } from '../lot/lot.service';
 })
 
 export class ModalPickCardComponent {
+    path = Constant.path;
     @Output() closeModalEvent = new EventEmitter();
     @Input() betSum: any;
     @Input() fastSell: any;

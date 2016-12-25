@@ -15,6 +15,7 @@ import { Constant } from '../../globals';
 })
 
 export class LotCreateComponent {
+    path = Constant.path;
     categories: any[] = [];
     currency: any[] = [];
     lotState: any[] = [];

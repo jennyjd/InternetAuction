@@ -18,6 +18,7 @@ import { LotStatisticsComponent } from '../../lot/lot-statistics/lot-statistics.
 })
 
 export class UserDetailsComponent {
+    path = Constant.path;
     personalLabels: string[] = ["Логин", "Фамилия", "Имя", "Отчество", "Почта"];
     cardLabels: string[] = ["Владелец", "Срок действия"];
     addCardLabels: string[] = ["Номер", "Владелец", "Срок действия"];

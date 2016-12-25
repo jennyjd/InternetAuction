@@ -19,6 +19,7 @@ import { ModalPickCardComponent } from '../../credit-card/pick-card-modal.compon
 })
 
 export class LotDetailComponent implements OnInit, AfterViewInit {
+    path = Constant.path;
     selected_lot: any = {};
     userInformation: any = {};
     errorMessage: any;
@@ -182,7 +183,7 @@ export class LotDetailComponent implements OnInit, AfterViewInit {
     successNewLotAddedNotif() {
         this.notifService.success(
             'Успех!',
-            'Ваш лот успещно добавлен!',
+            'Ваш лот успешно добавлен!',
             {
                 position: ["top", "right"],
                 timeOut: 3000,

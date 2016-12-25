@@ -5,7 +5,7 @@
                 <!------------------ЛИЧНЫЕ ДАННЫЕ---------------->
                 <h2>Личные данные</h2>
                 <button md-mini-fab class="but red_button" *ngIf="!editPersonalInf" (click)="editPersonalInf = true" tooltip="Изменить" tooltip-position="below">
-                    <img src="../../../assets/icons/create-white.svg" style="color:white"/>
+                    <img src="..{{path}}/../../assets/icons/create-white.svg" style="color:white"/>
                 </button>
             </div>
             <div class="content">
@@ -31,7 +31,7 @@
                             <md-input value={{currentUser.Patronymic}}></md-input>
                             <md-input value={{userEmail}}></md-input>
                             <button md-mini-fab class="red_button" type="submit" *ngIf="editPersonalInf" tooltip="Сохранить" tooltip-position="below">
-                                <img src="../../../assets/icons/done-white.svg"/>
+                                <img src="..{{path}}/../../assets/icons/done-white.svg"/>
                             </button>
                         </form>
                     </div>
@@ -44,7 +44,7 @@
             <div class="header">
                 <h2>Банковские карты</h2>
                 <button md-mini-fab class="but red_button" tooltip="Добавить" tooltip-position="below" *ngIf="!addNewCard" (click)="addNewCard = true">
-                    <img src="../../../assets/icons/add-white.svg" />
+                    <img src="..{{path}}/../../assets/icons/add-white.svg" />
                 </button>
             </div>
 
@@ -60,7 +60,7 @@
                         <md-input placeholder="MM" maxlength="2" required [(ngModel)]="newCardModel.validMonth" #validMonth name="validMonth"></md-input>/
                         <md-input placeholder="YY" maxlength="2" required [(ngModel)]="newCardModel.validYear" #validYear name="validYear"></md-input>
                         <button md-mini-fab tooltip="Сохранить" tooltip-position="below" *ngIf="addNewCard" class="addCardButton red_button" type="submit">
-                            <img src="../../../assets/icons/done-white.svg" />
+                            <img src="..{{path}}/../../assets/icons/done-white.svg" />
                         </button>
                     </div>
                 </div>

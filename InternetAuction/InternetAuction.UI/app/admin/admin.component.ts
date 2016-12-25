@@ -11,6 +11,7 @@ import { Constant } from '../globals';
 })
 
 export class AdminComponent {
+    path = Constant.path;
     errorMessage: any;
     viewLots: any[] = []
     currentLots: any[] = [];

@@ -5,14 +5,14 @@
             <md-icon>menu</md-icon>
         </button>-->
         <button md-mini-fab routerLink="/" tooltip="На главную" tooltip-position="below">
-            <img src="../assets/icons/home-white.svg" />
+            <img src="..{{path}}/assets/icons/home-white.svg"/>
         </button>
         <button md-button routerLink="/admin" *ngIf="isUserHere() && !isClient">Админка</button>
         <button md-button routerLink="/createlot" *ngIf="isUserHere() && isClient">Добавить лот</button>
         <button md-button routerLink="/login" *ngIf="!isUserHere()">Войти</button>
         <button md-button (click)="logout()" *ngIf="isUserHere()">Выход</button>
         <button md-mini-fab class="orange_button" *ngIf="isUserHere() && isClient" (click)="selectUser()" tooltip="Личный кабинет" tooltip-position="below">
-            <img src="../assets/icons/person-white.svg"/>
+            <img src="..{{path}}/assets/icons/person-white.svg"/>
         </button>
     </md-toolbar>
 
@@ -20,7 +20,7 @@
 
     <md-sidenav mode="side" opened={{opened_sidebar}} style="background-color:#424242; color:#FAFAFA;">
         <div class="logo_wrap" (click)="redirect_main()">
-            <img src="../assets/images/logo.png" />
+            <img src="..{{path}}/assets/images/logo.png" />
         </div>
         <md2-accordion [multiple]="multiple" *ngFor="let menuel of menu">
             <md2-accordion-tab *ngIf="isNotSubcategory(menuel)">

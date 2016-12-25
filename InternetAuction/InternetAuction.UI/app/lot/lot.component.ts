@@ -13,6 +13,7 @@ import { Constant } from '../globals';
 
 export class LotComponent implements DoCheck {
     //@Input() selected: string;
+    path = Constant.path;
     @Input() lotitem: any;
     selectedCategoryId = "none";
 
