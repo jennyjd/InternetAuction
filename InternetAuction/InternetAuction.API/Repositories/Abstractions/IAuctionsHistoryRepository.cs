@@ -26,5 +26,9 @@ namespace InternetAuction.API.Repositories.Abstractions
         decimal CheckCurrentMaxBetNew(int auctionId);
 
         AuctionHistory CheckCurrentUserBetNew(int auctionId, int clientId);
+
+        object GetAuctionsHistoryForParticipantNew(int clientId);
+
+        object GetAuctionsHistoryForOwnerNew(int clientId);
     }
 }

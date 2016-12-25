@@ -106,6 +106,33 @@ namespace InternetAuction.API.Repositories
         }
 
 
+        public object GetAuctionsHistoryForParticipantNew(int clientId)
+        {
+            var auctionsHistory = _context.AuctionsHistory.Where(x => x.ClientId == clientId).GroupBy(x => x.AuctionId);
+            if (!auctionsHistory.Any())
+            {
+                return null;
+            }
+            var list = new List<object>();
+
+            foreach (var history in auctionsHistory)
+            {
+                var auction = AuctionsRepository.GetAuction(history.Key);
+                list.Add(new
+                {
+                    AuctionId = auction.Id,
+                    CurrencyId = auction.CurrencyId,
+                    IsCompleted = auction.IsCompleted,
+                    UserBet = CheckCurrentUserBetNew(auction.Id, clientId),
+                    MaxBet = CheckCurrentMaxBetNew(auction.Id),
+                    IsWinner = auction.IsCompleted && CheckCurrentUserBetNew(auction.Id, clientId).BetSum == CheckCurrentMaxBetNew(auction.Id) ? true : false
+                });
+            }
+
+            return list;
+        }
+
+
         public object GetAuctionsHistoryForOwner(int clientId)
         {
             var auctions = AuctionsRepository.GetAuctions().Where(x => x.ClientId == clientId);
@@ -122,6 +149,30 @@ namespace InternetAuction.API.Repositories
                     AuctionId = auction.Id,
                     IsCompleted = auction.IsCompleted,
                     MaxBet = CheckCurrentMaxBet(auction.Id),
+                    CustomerId = _context.AuctionsHistory.Where(x => x.AuctionId == auction.Id).OrderBy(x => x.Date).AsEnumerable().LastOrDefault()?.ClientId
+                });
+            }
+
+            return list;
+        }
+
+
+        public object GetAuctionsHistoryForOwnerNew(int clientId)
+        {
+            var auctions = AuctionsRepository.GetAuctions().Where(x => x.ClientId == clientId);
+            if (!auctions.Any())
+            {
+                return null;
+            }
+            var list = new List<object>();
+
+            foreach (var auction in auctions)
+            {
+                list.Add(new
+                {
+                    AuctionId = auction.Id,
+                    IsCompleted = auction.IsCompleted,
+                    MaxBet = CheckCurrentMaxBetNew(auction.Id),
                     CustomerId = _context.AuctionsHistory.Where(x => x.AuctionId == auction.Id).OrderBy(x => x.Date).AsEnumerable().LastOrDefault()?.ClientId
                 });
             }

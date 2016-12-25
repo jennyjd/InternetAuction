@@ -338,6 +338,7 @@ namespace InternetAuction.API.Controllers
         }
 
 
+        //================================================================
         [Authorize(Roles = "Client")]
         [HttpGet]
         [Route("GetAuctionsHistoryForParticipant")]
@@ -397,6 +398,33 @@ namespace InternetAuction.API.Controllers
         public IHttpActionResult GetAuctionsHistory()
         {
             return Ok(AuctionsHistoryRepository.GetAuctionsHistoryForAuctions());
+        }
+        //================================================================
+
+
+        [Authorize(Roles = "Client")]
+        [HttpGet]
+        [Route("GetAuctionsHistoryForParticipantNew")]
+        public IHttpActionResult GetAuctionsHistoryForParticipantNew()
+        {
+            InternetAuctionUser user = HttpContext.Current.GetOwinContext()
+                    .GetUserManager<InternetAuctionUserManager>()
+                    .FindById(HttpContext.Current.User.Identity.GetUserId());
+
+            return Ok(AuctionsHistoryRepository.GetAuctionsHistoryForParticipantNew(user.ClientId.Value));
+        }
+
+
+        [Authorize(Roles = "Client")]
+        [HttpGet]
+        [Route("GetAuctionsHistoryForOwnerNew")]
+        public IHttpActionResult GetAuctionsHistoryForOwnerNew()
+        {
+            InternetAuctionUser user = HttpContext.Current.GetOwinContext()
+                    .GetUserManager<InternetAuctionUserManager>()
+                    .FindById(HttpContext.Current.User.Identity.GetUserId());
+
+            return Ok(AuctionsHistoryRepository.GetAuctionsHistoryForOwnerNew(user.ClientId.Value));
         }
     }
 }
