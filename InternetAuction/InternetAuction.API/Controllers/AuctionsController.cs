@@ -165,7 +165,7 @@ namespace InternetAuction.API.Controllers
 
             decimal newBetSum = 0;
             decimal newCreditCardSum = 0;
-            if (currentUserBet.CreditCardId == creditCard.Id && currentUserBet != null)
+            if (currentUserBet != null && currentUserBet.CreditCardId == creditCard.Id)
             {
                 var newAddedSum = bet.Sum * currencyConversion.Rate - currentUserBet.CreditCardSum;
                 newCreditCardSum = currentUserBet.CreditCardSum + newAddedSum;
