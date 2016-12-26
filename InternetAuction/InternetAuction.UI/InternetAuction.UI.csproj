@@ -102,6 +102,7 @@
     <Content Include="assets\icons\payment-black.svg" />
     <Content Include="assets\icons\payment-white.svg" />
     <Content Include="assets\icons\person-white.svg" />
+    <Content Include="assets\icons\search-white-mini.svg" />
     <Content Include="assets\icons\update-black-mini.svg" />
     <Content Include="assets\icons\visibility-white.svg" />
     <Content Include="assets\images\logo.png" />

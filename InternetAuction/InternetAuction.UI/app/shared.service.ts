@@ -13,6 +13,15 @@ export class SharedService {
         return sel.selected
     }
 
+    saveSearch(searchStr) {
+        localStorage.setItem('search', JSON.stringify(searchStr));
+    }
+
+    getSearch() {
+        let searchStr = JSON.parse(localStorage.getItem('search'));
+        return searchStr
+    }
+
     saveSuccess(success) {
         localStorage.setItem('successRegistr', JSON.stringify(success));
     }

@@ -6,11 +6,22 @@
     background-color: var(--orange);
 }
 
+.red_button {
+    background-color: var(--red);
+}
+
 .logo_wrap{
     width: 90%;
     padding: 20px 10px;
     text-align: center;
     border-bottom: 1px solid #333333;
+}
+
+.search_button {
+    float: right;
+    border-radius: 0px 4px 4px 0px;
+    height: 33px;
+    width: 33px;
 }
 
 md-sidenav {
@@ -38,6 +49,31 @@ md2-accordion button {
 .menu_list {
     font-size: 18px;
     font-weight:normal;
+}
+
+.right {
+    position: absolute;
+    right: 16px;
+}
+
+#search_input {
+    border: none;
+    font-size: 15px;
+    padding: 5px 8px;
+    border-radius: 4px;
+    height: 33px;
+}
+
+input:focus {
+    outline: none;
+}
+
+.search_form {
+    background-color: white;
+    width: 270px;
+    border-radius: 4px;
+    margin-left: 40px;
+    height: 33px;
 }
 
 .subcategory {

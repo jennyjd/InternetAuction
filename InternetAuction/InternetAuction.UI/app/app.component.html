@@ -9,11 +9,21 @@
         </button>
         <button md-button routerLink="/admin" *ngIf="isUserHere() && !isClient">Админка</button>
         <button md-button routerLink="/createlot" *ngIf="isUserHere() && isClient">Добавить лот</button>
+        <div class="search_form" *ngIf="isUserHere() && viewSearch">
+            <form (ngSubmit)="search(searchStr.value)">
+                <input #searchStr id="search_input" placeholder="Поиск.."/>
+                <button md-mini-fab class="red_button search_button" type="submit">
+                    <img src="../assets/icons/search-white-mini.svg" />
+                </button>
+            </form>
+        </div>
         <button md-button routerLink="/login" *ngIf="!isUserHere()">Войти</button>
-        <button md-button (click)="logout()" *ngIf="isUserHere()">Выход</button>
-        <button md-mini-fab class="orange_button" *ngIf="isUserHere() && isClient" (click)="selectUser()" tooltip="Личный кабинет" tooltip-position="below">
-            <img src="..{{path}}/assets/icons/person-white.svg"/>
-        </button>
+        <div class="right">
+            <button md-button (click)="logout()" *ngIf="isUserHere()" style="bottom:5px;">Выход</button>
+            <button md-mini-fab class="orange_button" *ngIf="isUserHere() && isClient" (click)="selectUser()" tooltip="Личный кабинет" tooltip-position="before">
+                <img src="..{{path}}/assets/icons/person-white.svg" />
+            </button>
+        </div>
     </md-toolbar>
 
     <router-outlet></router-outlet>

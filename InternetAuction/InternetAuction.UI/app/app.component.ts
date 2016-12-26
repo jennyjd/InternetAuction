@@ -27,6 +27,7 @@ export class AppComponent {
     opened_sidebar: boolean;
     isClient: boolean = false;
     categoryFocus: Array<boolean> = [];
+    viewSearch: boolean = false;
 
     currentUser: any;
     title: "Auction";
@@ -40,6 +41,7 @@ export class AppComponent {
         this.opened_sidebar = true;
         localStorage.setItem("selected_category", JSON.stringify({ selected: "none" }));
         localStorage.setItem("loading", JSON.stringify(true));
+        this.sharedService.saveSearch('');
 
         this.getCategories();
         this.getLotStates();
@@ -50,6 +52,10 @@ export class AppComponent {
             if (val.url != '/' && val.url != '/admin') {
                 this.opened_sidebar = false;
             }
+            if (val.url == '/') {
+                this.viewSearch = true;
+            }
+            else { this.viewSearch = false;}
         });  
     }
 
@@ -95,6 +101,11 @@ export class AppComponent {
 
     toggle(menu_element) {
         menu_element.status = !menu_element.status
+    }
+
+    search(searchStr) {
+        console.log("ПОИСК");
+        this.sharedService.saveSearch(searchStr);
     }
 
     selectCategory(categoryId) {

@@ -1,4 +1,4 @@
-﻿import { Component, Input, Output, EventEmitter } from '@angular/core'
+﻿import { Component, Input, Output, EventEmitter, DoCheck } from '@angular/core'
 
 import { LotComponent } from '../lot.component'
 import { LoadingComponent } from '../../loading/loading.component';
@@ -18,17 +18,42 @@ import { GeneralService } from '../../general.service';
     providers: [LotService, UserService, SharedService]
 })
 
-export class LotListComponent {
+export class LotListComponent implements DoCheck{
     errorMessage: any;
     uncompletedLots: any[] = [];
     loading: boolean = true;
     currency = Constant.currency;
     lots: any[] = [];
+    searchStr: string = '';
+    searchLots: any[] = [];
+    viewLots: any[] = []; 
 
     constructor(private lotService: LotService, private userService: UserService, private sharedService: SharedService,
         private generalService: GeneralService) {
         this.getLots();
         console.log(this.lots);
+    }
+
+    ngDoCheck() {
+        this.searchStr = this.sharedService.getSearch();
+        if (this.searchStr != '') {
+            this.getSearchedLots();
+            this.sharedService.saveSearch('');
+        }
+    }
+
+    getSearchedLots() {
+        this.searchLots = [];
+        let reg;
+        reg = new RegExp(this.searchStr, 'i');
+        for (let lot of this.lots) {
+            if (lot.Name.match(reg) != null) {
+                this.searchLots.push(lot);
+            }
+        }
+        if (this.searchLots.length != 0) {
+            this.viewLots = this.searchLots;
+        }
     }
 
     getLots() {
@@ -92,7 +117,10 @@ export class LotListComponent {
 
                 this.lots.push(lot);
 
-                if (lotAmmount == 1) { this.loading = false; }
+                if (lotAmmount == 1) {
+                    this.loading = false;
+                    this.viewLots = this.lots;
+                }
             },
             error => this.errorMessage = <any>error)
     }
