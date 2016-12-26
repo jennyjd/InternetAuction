@@ -109,7 +109,6 @@ export class AppComponent {
     }
 
     search(searchStr) {
-        console.log("ПОИСК");
         this.sharedService.saveSearch(searchStr);
     }
 
@@ -156,7 +155,6 @@ export class AppComponent {
     }
 
     selectUser() {
-        console.log("SELECTION Current User ID" + this.userService.getCurrentUser());
         this.router.navigate(['/userdetail']);
     }
 

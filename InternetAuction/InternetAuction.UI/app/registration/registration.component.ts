@@ -38,7 +38,6 @@ export class RegistrationComponent {
                     this.router.navigate(['/login']);
                 },
                 error => {
-                    console.log("ERROR");
                     this.loading = false;
                 });
         }

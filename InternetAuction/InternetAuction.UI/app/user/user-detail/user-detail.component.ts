@@ -60,7 +60,6 @@ export class UserDetailsComponent {
                 for (let card of res.CreditCards) {
                     this.userCreditCards.push(new CreditCard(card));
                 }
-                console.log(this.userCreditCards);
                                 
                 this.currentUser = res;
             },
@@ -69,7 +68,6 @@ export class UserDetailsComponent {
             .subscribe(res => {
                 this.userLogin = res.UserName;
                 this.userEmail = res.Email;
-                console.log(this.currentUser);
             },
             error => this.errorMessage = <any>error);
     }

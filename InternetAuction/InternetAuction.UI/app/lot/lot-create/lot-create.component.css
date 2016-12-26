@@ -65,12 +65,13 @@ textarea{
     text-align: -webkit-center;
 }
 
-.subcategory:focus {
-    background-color: lightgrey;
-}
-
 .separator * {
    
+}
+
+.focus {
+    background-color: var(--orange);
+    color: white;
 }
 
 .select_categories {
@@ -189,4 +190,13 @@ md-input {
 
 md-radio-button {
     margin-right: 20px;
+}
+
+md-card-actions {
+    margin: 30px 0px;
+}
+
+.red_button {
+    background-color: var(--red);
+    color: white;
 }

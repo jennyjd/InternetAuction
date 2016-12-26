@@ -11,6 +11,10 @@
     background-color: var(--red);
 }
 
+p {
+    font-size: 12px;
+}
+
 .bottom_inf {
     position: absolute;
     bottom: 0;

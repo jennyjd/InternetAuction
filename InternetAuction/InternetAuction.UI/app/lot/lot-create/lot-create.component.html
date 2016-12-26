@@ -4,7 +4,7 @@
         <div class="image_uploader">
             <div class="separator">
                 <div class="image_viewer center_image">
-                    <span></span><img src={{mainPicture}}/>
+                    <span></span><img src="../../../assets/images/lot_photo.jpg" />
                 </div>
                 <!--solve vertical align problem (display:inline-flex)-->
                 <div class="other_images_container">
@@ -19,14 +19,14 @@
                         <md-hint>{{name.characterCount}} / 40</md-hint>
                     </md-input>
                 </div>
-                <image-upload [max]="5"
+                <!--<image-upload [max]="5"
                               [url]="'example.com/images/upload'"
                               [buttonCaption]="'Добавить фото'"
                               [dropBoxMessage]="'Перетащите ваши фото сюда'"
                               (onFileUploadFinish)="imageUploaded($event)"
                               (onRemove)="imageRemoved($event)"
                               (isPending)="disableSendButton($event)">
-                </image-upload>
+                </image-upload>-->
                 <!--<div>
                     <button md-icon-button class="md-mini md-primary" aria-label="view">
                         <md-icon>delete forever</md-icon>
@@ -95,7 +95,7 @@
             <div class="subcategory_wrap">
                 <ul *ngIf="ifCategoryIsSelected()">
                     <li *ngFor="let sub of selected_category.SubAuctionCategories">
-                        <button type="button" md-button class="subcategory" value="{{sub.Name}}" (click)="chooseCategory(sub.Id)">
+                        <button type="button" md-button class="subcategory" value="{{sub.Name}}" (click)="chooseCategory(sub.Id)" [class.focus]="categoryFocus[sub.Id]">
                             <div flex layout="row">
                                 {{sub.Name}}
                             </div>
@@ -115,7 +115,7 @@
         <div *ngIf="categoryError || priceErrors.length != 0" class="alert alert-error">Проверьте корректность введенных данных</div>
 
         <md-card-actions layout="row">
-            <button md-raised-button type="submit" style="float:right">Добавить лот</button>
+            <button md-raised-button type="submit" style="float:right" class="red_button">Добавить лот</button>
         </md-card-actions>
     </form>
 </md-card>

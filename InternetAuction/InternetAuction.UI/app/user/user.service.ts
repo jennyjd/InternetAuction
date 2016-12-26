@@ -40,14 +40,12 @@ export class UserService {
     }
 
     getUserAccountById(id) {
-        console.log('USER ID', id);
         return this.http.get(`${this.getAccountURL}/${id}`)
             .map(response => response.json())
             .catch(this.handleError);
     }
 
     public handleError(error: Response) {
-        console.error(error);
         return Observable.throw(error.json().error || 'Server error');
     }
 

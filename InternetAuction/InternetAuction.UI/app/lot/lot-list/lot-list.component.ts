@@ -31,7 +31,6 @@ export class LotListComponent implements DoCheck{
     constructor(private lotService: LotService, private userService: UserService, private sharedService: SharedService,
         private generalService: GeneralService) {
         this.getLots();
-        console.log(this.lots);
     }
 
     ngDoCheck() {
@@ -113,7 +112,6 @@ export class LotListComponent implements DoCheck{
                     lot.fastSell = false;
                 }
                 this.getCurrencySign(lot);
-                console.log("Currency", lot);
 
                 this.lots.push(lot);
 

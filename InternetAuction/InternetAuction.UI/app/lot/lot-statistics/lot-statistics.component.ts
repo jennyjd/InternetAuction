@@ -15,10 +15,16 @@ import { UserService } from '../../user/user.service';
 export class LotStatisticsComponent {
     path = Constant.path;
     errorMessage: any;
+
     ownerStat: any[] = [];
     participantStat: any[] = [];
+
     completedOwnerStat: any[] = [];
     completedParticipantStat: any[] = [];
+
+    unseenOwner: any[] = [];
+    unseenParticipant: any[] = [];
+
     viewStats: any[] = [];
     ownerTab: boolean = false;
     completedTab: boolean = false;
@@ -33,15 +39,13 @@ export class LotStatisticsComponent {
 
     getStatistics() {
         this.lotService.getAuctionsHistoryForOwner()
-            .subscribe(res => {
-                console.log("OWNER", res);  
+            .subscribe(res => { 
                 this.addLots(res, this.ownerStat, true);             
             },
             error => this.errorMessage = <any>error);
 
         this.lotService.getAuctionsHistoryForParticipant()
             .subscribe(res => {
-                console.log("PARTIC", res); 
                 this.addLots(res, this.participantStat,  false);               
             },
             error => this.errorMessage = <any>error);
@@ -61,10 +65,9 @@ export class LotStatisticsComponent {
                             this.getWinnerInf(lot);
                         }
                         else if (lot.IsCompleted && !forOwner) {
-                            this.detectUnseenLots(lot, this.completedParticipantStat);
+                            this.detectUnseenLots(lot, this.completedParticipantStat, this.unseenParticipant);
                         }
                         else {
-                            console.log('LOT', lot);
                             stats.push(lot);
                         }
 
@@ -94,7 +97,7 @@ export class LotStatisticsComponent {
             error => this.errorMessage = <any>error);
     }
 
-    detectUnseenLots(lot, completed) {
+    detectUnseenLots(lot, completed, unseen) {
         lot.isSeen = true;
         for (let result of this.auctionResults) {
             if (result.AuctionId == lot.AuctionId) {
@@ -102,13 +105,17 @@ export class LotStatisticsComponent {
                 lot.resultId = result.Id;
             }
         }
-        completed.push(lot);
+        if (lot.isSeen == false) {
+            unseen.push(lot);
+        }
+        else {
+            completed.push(lot);
+        }
     }
 
     confirmDeal(lot) {
         this.lotService.seenAuctionResult(lot.resultId)
             .subscribe(res => {
-                console.log(res);
                 lot.isSeen = true;
             },
             error => this.errorMessage = <any>error);
@@ -116,12 +123,11 @@ export class LotStatisticsComponent {
 
 
     getWinnerInf(lot) {
-        console.log('USER', lot, lot.CustomerId);
         if (lot.CustomerId != null) {
             this.userService.getUserAccountById(lot.CustomerId)
                 .subscribe(res => {
                     lot.Winner = res;
-                    this.detectUnseenLots(lot, this.completedOwnerStat);
+                    this.detectUnseenLots(lot, this.completedOwnerStat, this.unseenOwner);
                 },
                 error => this.errorMessage = <any>error);
         }

@@ -40,13 +40,11 @@ export class ModalPickCardComponent {
             this.nullUser = true;
         }
 
-        console.log(currentUser.Id);
         this.userService.getUserById(currentUser.Id)
             .subscribe(res => {
                 for (let card of res.CreditCards) {
                     this.userCreditCards.push(new CreditCard(card));
                 }
-                console.log(this.userCreditCards);
             },
             error => this.errorMessage = <any>error);
     }
@@ -56,22 +54,15 @@ export class ModalPickCardComponent {
     }
 
     makeBet() {
-        console.log(this.model);
-        console.log(this.choosedCard);
-        console.log(this.betSum);
-        console.log(this.lotId);
-
         this.checkFastSell();
 
         this.lotService.makeBet(this.lotId, this.choosedCard.id, this.betSum, this.model.cvv, this.isFastSell)
             .subscribe(res => {
-                console.log(res);
                 this.betState = res.State;
                 this.closeModal();
             },
             error => {
                 this.errorMessage = error.json()
-                console.log(this.errorMessage.State);
                 this.betState = this.errorMessage.State;
                 this.closeModal();
             });

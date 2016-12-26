@@ -26,6 +26,14 @@
     background-color:var(--orange);
 }
 
+.win {
+    background-color: #ecffe6;
+}
+
+.lose {
+    background-color: #ffe6e6;
+}
+
 p {
     margin: 4px 0px;
 }

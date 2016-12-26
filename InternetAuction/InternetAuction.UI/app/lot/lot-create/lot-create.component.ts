@@ -20,12 +20,14 @@ export class LotCreateComponent {
     currency: any[] = [];
     lotState: any[] = [];
     errorMessage: any;
-    mainPicture = 'http://designmyhome.ru/sites/default/files/images/mebel_ikea_03.jpg';
+    //mainPicture = 'http://designmyhome.ru/sites/default/files/images/mebel_ikea_03.jpg';
     selected_category = null;
     lot: any = {};
     minDate = new Date();
     categoryError: boolean = false;
     priceErrors: string[] = [];
+
+    categoryFocus: Array<boolean> = [];
 
     /*pictures =
        ['https://s-media-cache-ak0.pinimg.com/736x/bb/bf/58/bbbf58c0716c059fa378d419defa0f05.jpg',
@@ -39,7 +41,6 @@ export class LotCreateComponent {
         this.getCurrency();
         this.getLotState();
         this.minDate.setHours(this.minDate.getHours() + 3);//3часа - минимальное время проведения аукциона
-        console.log(this.minDate);
     }
 
     getCategories() {
@@ -88,7 +89,7 @@ export class LotCreateComponent {
     }
 
     changeMainPicture(picture) {
-        this.mainPicture = picture;
+        //this.mainPicture = picture;
     }
 
     ifCategoryIsSelected() {
@@ -136,5 +137,8 @@ export class LotCreateComponent {
 
     chooseCategory(category) {
         this.lot.categoryId = category;
+
+        this.categoryFocus = [];
+        this.categoryFocus[category] = !this.categoryFocus[category];
     }
 }

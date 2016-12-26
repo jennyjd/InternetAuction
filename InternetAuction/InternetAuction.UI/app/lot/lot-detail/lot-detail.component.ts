@@ -59,7 +59,6 @@ export class LotDetailComponent implements OnInit, AfterViewInit {
                 this.getCurrentBet(this.selected_lot);
                 this.getTimeLeft();
 
-                console.log(this.selected_lot);
                 this.lotState = this.selected_lot.GoodsState.Name;
                 this.getCurrencySign();
                 this.getUserInf();
@@ -68,7 +67,6 @@ export class LotDetailComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        console.log(this.sharedService.getSuccess());
         if (this.sharedService.getSuccess()) {
             this.successNewLotAddedNotif();
         }
@@ -86,7 +84,6 @@ export class LotDetailComponent implements OnInit, AfterViewInit {
     getCurrentBet(lot) {
         this.lotservise.getCurrentBet(lot.Id)
             .subscribe(res => {
-                console.log(res);
                 this.selected_lot.currentBet = res;
                 this.checkCurrBet();
             },
@@ -101,7 +98,6 @@ export class LotDetailComponent implements OnInit, AfterViewInit {
 
     checkIfLotIsYours() {
         let currentUser = this.userServise.getCurrentUser();
-        console.log(currentUser);
         if (currentUser != null) {
             if (currentUser.Id != this.selected_lot.ClientId) {
                 this.lotIsYours = false;
@@ -112,9 +108,6 @@ export class LotDetailComponent implements OnInit, AfterViewInit {
     makeBet(sum) {
         let bet = parseInt(sum.model);
         this.betAmmountErrors = [];
-        console.log(bet);
-        console.log(this.selected_lot.PriceOfFastSell);
-        console.log(this.selected_lot.currentBet);
         if (this.selected_lot.currentBet != 0) {
             if (bet <= this.selected_lot.currentBet) {
                 this.betAmmountErrors.push("Ваша ставка должна быть больше текущей!"); return;
@@ -147,7 +140,6 @@ export class LotDetailComponent implements OnInit, AfterViewInit {
         let currentDate = new Date();
         let ourDate = new Date(Date.parse(this.selected_lot.EndDate));
         ourDate.setHours(ourDate.getHours() - 3);//GMT +03
-        console.log(ourDate);
         this.selected_lot.timeLeft = ourDate;
     }
 
@@ -158,7 +150,6 @@ export class LotDetailComponent implements OnInit, AfterViewInit {
     }
 
     checkBetResult(betState) {
-        console.log(betState);
         if (betState == 0) { this.successNotif("Аукцион завершен!"); }
         else if (betState == 2) { this.errorNotif("Введеные некорректные данные по банковской карте!"); }
         else if (betState == 3) { this.successNotif("Ваша ставка успешно принята!"); }
@@ -219,7 +210,6 @@ export class LotDetailComponent implements OnInit, AfterViewInit {
             this.getTimeLeft();
             this.getCurrencySign();
 
-            console.log(this.selected_lot);
             this.lotState = this.selected_lot.GoodsState.Name;
             this.getUserInf();
         },
@@ -235,7 +225,6 @@ export class LotDetailComponent implements OnInit, AfterViewInit {
         this.userServise.getUserAccountById(this.selected_lot.ClientId)
             .subscribe(res => {
                 this.userInformation = res;
-                console.log("USER INF", this.userInformation);
             },
             error => this.errorMessage = <any>error);
     }

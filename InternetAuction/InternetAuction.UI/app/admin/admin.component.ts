@@ -28,7 +28,6 @@ export class AdminComponent {
         this.lotService.getAllHistory()
             .subscribe(res => {
                 this.viewLots = res;
-                console.log(res);
                 for (let lot of res) {
                     if (lot.MaxBet != 0) {
                         lot.betDone = true;
