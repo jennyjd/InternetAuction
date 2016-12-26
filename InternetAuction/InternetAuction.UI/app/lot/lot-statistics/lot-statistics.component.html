@@ -58,7 +58,8 @@
             </div>
 
             <md-card *ngFor="let stats of viewStats" class="lots"  
-                     [class.win]="completedTab && !ownerTab && stats.IsWinner" [class.lose]="completedTab && !ownerTab && !stats.IsWinner">
+                     [class.win]="(completedTab && !ownerTab && stats.IsWinner) || (!completedTab && !ownerTab && stats.MaxBet == stats.UserBet.BetSum)" 
+                     [class.lose]="(completedTab && !ownerTab && !stats.IsWinner) || (!completedTab && !ownerTab && stats.MaxBet > stats.UserBet.BetSum)">
                 <div class="image_container">
                     <span></span> <img src="..{{path}}/../../assets/images/lot_photo.jpg" class="md-card-image">
                 </div>

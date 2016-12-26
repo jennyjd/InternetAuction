@@ -17,6 +17,11 @@
     background-color: #ffe6cc;
 }
 
+.red_button {
+    background-color: var(--red);
+    color: white;
+}
+
 .alert-error {
     margin-top: 70px;
     font-size: 13px;

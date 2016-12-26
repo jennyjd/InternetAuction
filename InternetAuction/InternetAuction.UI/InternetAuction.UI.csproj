@@ -91,6 +91,7 @@
     <Content Include="assets\icons\add-white.svg" />
     <Content Include="assets\icons\autorenew-black.svg" />
     <Content Include="assets\icons\autorenew-white.svg" />
+    <Content Include="assets\icons\backspace-black.svg" />
     <Content Include="assets\icons\clear-white.svg" />
     <Content Include="assets\icons\clear.svg" />
     <Content Include="assets\icons\create-white.svg" />
