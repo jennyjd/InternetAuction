@@ -7,13 +7,14 @@ import { LoginService } from './login/login.service';
 import { SharedService } from './shared.service';
 import { GeneralService } from './general.service';
 import { LoadingComponent } from './loading/loading.component';
+import { LotService } from './lot/lot.service';
 import { Constant } from './globals';
 
 @Component({
     selector: 'my-app', 
     templateUrl: `${Constant.appPath}app/app.component.html`,
     styleUrls: [`${Constant.appPath}app/app.component.css`],
-    providers: [SharedService, GeneralService],
+    providers: [SharedService, GeneralService, LotService],
     entryComponents: [LoadingComponent]
 })
 
@@ -29,6 +30,8 @@ export class AppComponent {
     categoryFocus: Array<boolean> = [];
     viewSearch: boolean = false;
 
+    notifCount: number = 0;
+
     currentUser: any;
     title: "Auction";
 
@@ -36,7 +39,8 @@ export class AppComponent {
                 private loginService: LoginService,
                 private router: Router,
                 private sharedService: SharedService,
-                private generalService: GeneralService) {
+                private generalService: GeneralService,
+                private lotService: LotService) {
 
         this.opened_sidebar = true;
         localStorage.setItem("selected_category", JSON.stringify({ selected: "none" }));
@@ -54,6 +58,7 @@ export class AppComponent {
             }
             if (val.url == '/') {
                 this.viewSearch = true;
+                this.getAuctionResults();
             }
             else { this.viewSearch = false;}
         });  
@@ -136,6 +141,18 @@ export class AppComponent {
                 this.router.navigate(['/login']);
             },
             error => this.errorMessage = <any>error);
+    }
+
+    getAuctionResults() {
+        if (this.isUserHere()) {
+            this.lotService.getAuctionResults()
+                .subscribe(res => {
+                    if (res.length != 0) {
+                        this.notifCount = res.length;
+                    }
+                },
+                error => this.errorMessage = <any>error);
+        }
     }
 
     selectUser() {
