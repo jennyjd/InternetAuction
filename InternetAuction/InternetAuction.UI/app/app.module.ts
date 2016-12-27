@@ -17,6 +17,7 @@ import { LoadingComponent } from './loading/loading.component';
 import { ModalPickCardComponent } from './credit-card/pick-card-modal.component';
 import { AdminComponent } from './admin/admin.component';
 import { LotStatisticsComponent } from './lot/lot-statistics/lot-statistics.component';
+import { AdminRegistrationComponent } from './admin/admin-registration/admin-registration.component';
 
 import { UserService } from './user/user.service';
 import { LoginService } from './login/login.service';
@@ -45,7 +46,7 @@ import { routing, appRoutingProviders } from './app.routing'
         MdProgressCircleModule, MomentModule, SimpleNotificationsModule, MdTabsModule],
     declarations: [AppComponent, LotComponent, LotListComponent, LoginComponent, HomeComponent, RegistrationComponent,
         UserDetailsComponent, LotCreateComponent, LotDetailComponent, LoadingComponent, ModalPickCardComponent, AdminComponent,
-        LotStatisticsComponent],
+        LotStatisticsComponent, AdminRegistrationComponent],
     bootstrap: [AppComponent],
     providers: [MdIconRegistry, OVERLAY_PROVIDERS, appRoutingProviders, UserService, LoginService,
         { provide: LocationStrategy, useClass: HashLocationStrategy }]

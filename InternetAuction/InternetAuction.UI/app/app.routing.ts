@@ -8,6 +8,7 @@ import { UserDetailsComponent } from './user/user-detail/user-detail.component';
 import { LotCreateComponent } from './lot/lot-create/lot-create.component';
 import { LotDetailComponent } from './lot/lot-detail/lot-detail.component';
 import { AdminComponent } from './admin/admin.component';
+import { AdminRegistrationComponent } from './admin/admin-registration/admin-registration.component';
 
 
 const appRoutes: Routes = [
@@ -38,6 +39,10 @@ const appRoutes: Routes = [
     {
         path: 'admin',
         component: AdminComponent
+    },
+    {
+        path: 'adminregistration',
+        component: AdminRegistrationComponent
     }
 ];
 

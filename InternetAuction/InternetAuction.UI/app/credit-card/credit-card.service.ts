@@ -13,6 +13,7 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class CreditCardService {
     private cardUrl = `${Constant.apiEndpoint}/CreditCards`;
+    private deleteCardUrl = `${Constant.apiEndpoint}/CreditCards/DeleteCard`;
 
     constructor(private http: Http, private router: Router) { }
 
@@ -27,6 +28,15 @@ export class CreditCardService {
         headers.append('Content-Type', 'application/json');
 
         return this.http.post(`${this.cardUrl}/${id}`, JSONstr, { headers: headers })
+            .map((res: Response) => res.json())
+            .catch(this.handleError);
+    }
+
+    deleteCard(cardId) {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+
+        return this.http.post(`${this.deleteCardUrl}/${cardId}`, { headers: headers })
             .map((res: Response) => res.json())
             .catch(this.handleError);
     }

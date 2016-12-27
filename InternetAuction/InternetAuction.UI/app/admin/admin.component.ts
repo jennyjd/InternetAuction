@@ -1,7 +1,9 @@
-﻿import { Component } from '@angular/core';
+﻿import { Component, AfterViewInit } from '@angular/core';
 
 import { LotService } from '../lot/lot.service';
 import { Constant } from '../globals';
+import { SharedService } from '../shared.service';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
     selector: 'admin',
@@ -10,7 +12,7 @@ import { Constant } from '../globals';
     providers: [LotService]
 })
 
-export class AdminComponent {
+export class AdminComponent implements AfterViewInit {
     path = Constant.path;
     errorMessage: any;
     viewLots: any[] = []
@@ -20,8 +22,15 @@ export class AdminComponent {
     currency = Constant.currency;
     menu: string[] = ['Действующие аукционы', 'Завершенные аукционы'];
 
-    constructor(private lotService: LotService) {
+    constructor(private lotService: LotService, private sharedService: SharedService, private notifService: NotificationsService) {
         this.getAllHistory();
+    }
+
+    ngAfterViewInit() {
+        if (this.sharedService.getSuccess()) {
+            this.successRegistrNotif();
+        }
+        this.sharedService.saveSuccess(false);
     }
 
     getAllHistory() {
@@ -67,5 +76,20 @@ export class AdminComponent {
             this.viewLots = this.completedLots;
             this.completedTab = true;
         }
+    }
+
+    successRegistrNotif() {
+        this.notifService.success(
+            'Успех!',
+            'Регистрация прошла успешно!',
+            {
+                position: ["top", "right"],
+                timeOut: 3000,
+                showProgressBar: true,
+                pauseOnHover: true,
+                clickToClose: true,
+                maxLength: 1000
+            }
+        )
     }
 }

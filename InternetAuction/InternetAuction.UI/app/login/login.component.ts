@@ -25,7 +25,7 @@ export class LoginComponent implements AfterViewInit  {
     }
 
     ngAfterViewInit() {
-        console.log(this.sharedService.getSuccess());
+        //console.log(this.sharedService.getSuccess());
         if (this.sharedService.getSuccess()) {
             this.successRegistrNotif();
         }

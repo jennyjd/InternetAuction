@@ -115,6 +115,9 @@
                                         <div class="mar_divs">{{card.validMonth}}/{{card.validYear}}</div>
                                     </div>
                                 </div>
+                                <button md-mini-fab class="delete_card red_button" (click)="deleteCard(card.id)" tooltip="Удалить" tooltip-position="below">
+                                    <img src="../../../assets/icons/delete-white-mini.svg" />
+                                </button>
                             </md2-accordion-tab>
                         </md2-accordion>
                     </div>

@@ -12,6 +12,7 @@ import 'rxjs/add/operator/catch';
 export class UserService {
     private userURL = `${Constant.apiEndpoint}/clients`;
     private getAccountURL = `${Constant.apiEndpoint}/clients/GetClientAccount`;//?
+    private createAdminURL = `${Constant.apiEndpoint}/Account/CreateAdministrator`;//?
     constructor(private http: Http) { }
 
     create(user, credit) {
@@ -24,11 +25,23 @@ export class UserService {
             }]
         });
 
-        console.log("json = " + UserJSON);
+        //console.log("json = " + UserJSON);
 
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
         return this.http.post(this.userURL, UserJSON, { headers: headers })
+            .map(res => res)
+            .catch(this.handleError);
+    }
+
+    createAdmin(admin) {
+        let UserJSON = JSON.stringify({ UserName: admin.login,Password: admin.password, Email: admin.email});
+
+        console.log("json = " + UserJSON);
+
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        return this.http.post(this.createAdminURL, UserJSON, { headers: headers, withCredentials: true})
             .map(res => res)
             .catch(this.handleError);
     }

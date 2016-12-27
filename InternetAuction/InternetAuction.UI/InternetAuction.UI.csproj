@@ -60,6 +60,8 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\admin\admin-registration\admin-registration.component.css" />
+    <Content Include="app\admin\admin-registration\admin-registration.component.html" />
     <Content Include="app\admin\admin.component.css" />
     <Content Include="app\admin\admin.component.html" />
     <Content Include="app\app.component.css" />
@@ -95,6 +97,7 @@
     <Content Include="assets\icons\clear-white.svg" />
     <Content Include="assets\icons\clear.svg" />
     <Content Include="assets\icons\create-white.svg" />
+    <Content Include="assets\icons\delete-white-mini.svg" />
     <Content Include="assets\icons\done-white.svg" />
     <Content Include="assets\icons\gavel-white.svg" />
     <Content Include="assets\icons\home-white.svg" />
@@ -137,6 +140,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <TypeScriptCompile Include="app\admin\admin-registration\admin-registration.component.ts" />
     <TypeScriptCompile Include="app\admin\admin.component.ts" />
     <TypeScriptCompile Include="app\app.component.ts" />
     <TypeScriptCompile Include="app\app.module.ts" />

@@ -11,6 +11,14 @@
     border-bottom: 1px solid lightgrey;
 }
 
+.delete_card {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
 .red_button {
     background-color: var(--red);
 }

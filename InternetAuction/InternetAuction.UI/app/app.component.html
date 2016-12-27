@@ -8,6 +8,7 @@
             <img src="..{{path}}/assets/icons/home-white.svg"/>
         </button>
         <!--<button md-button routerLink="/admin" *ngIf="isUserHere() && !isClient">Админка</button>-->
+        <button md-button routerLink="/adminregistration" *ngIf="isUserHere() && !isClient">Зарегистрировать админа</button>
         <button md-button routerLink="/createlot" *ngIf="isUserHere() && isClient">Добавить лот</button>
         <div class="search_form" *ngIf="viewSearch">
             <form (ngSubmit)="search(searchStr.value)">

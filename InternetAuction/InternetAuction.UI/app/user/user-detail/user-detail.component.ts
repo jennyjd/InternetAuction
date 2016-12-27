@@ -57,6 +57,8 @@ export class UserDetailsComponent {
             .subscribe(res => {
                 this.checkForEmptyFields(res);
 
+                console.log('User',res);
+
                 for (let card of res.CreditCards) {
                     this.userCreditCards.push(new CreditCard(card));
                 }
@@ -68,6 +70,14 @@ export class UserDetailsComponent {
             .subscribe(res => {
                 this.userLogin = res.UserName;
                 this.userEmail = res.Email;
+            },
+            error => this.errorMessage = <any>error);
+    }
+
+    deleteCard(cardId) {
+        this.creditService.deleteCard(cardId)
+            .subscribe(res => {
+                console.log(res);
             },
             error => this.errorMessage = <any>error);
     }
