@@ -19,6 +19,19 @@
     right: 10px;
 }
 
+.alert {
+    border: 1px solid;
+    border-radius: 0.2em;
+    padding: 5px;
+    font-size: 12px;
+    margin-bottom: 6px;
+}
+
+.alert-warning {
+    border-color: #ffb366;
+    background-color: #ffe6cc;
+}
+
 .red_button {
     background-color: var(--red);
 }

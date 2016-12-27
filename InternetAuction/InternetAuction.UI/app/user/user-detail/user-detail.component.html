@@ -20,6 +20,7 @@
                         <div class="mar_divs">{{currentUser.FirstName}}</div>
                         <!--<div class="mar_divs">{{currentUser.Patronymic}}</div>-->
                         <div class="mar_divs">{{userEmail}}</div>
+                       
                     </div>
 
                     <!------------------ФОРМА ИЗМЕНЕНИЯ ЛИЧНЫХ ДАННЫХ КЛИЕНТА---------------->
@@ -125,6 +126,20 @@
                 </div>
             </div>
     </div>
-
+    <!------------------ИЗМЕНЕНИЕ ПАРОЛЯ---------------->
+    <div>
+        <button md-button (click)="openPassChange()">Изменить пароль</button>
+        <form *ngIf="changePassword" (ngSubmit)="changePass()">
+            <md-input type="password" placeholder="Пароль" [(ngModel)]="pass.password" #password="ngModel" required name="password" minlength="6"></md-input>
+            <md-input type="password" placeholder="Повторите пароль" [(ngModel)]="pass.password2" #password2="ngModel" required name="password2" minlength="6"></md-input>
+            <div *ngIf="password2.dirty">
+                <div *ngIf="pass.password != pass.password2" class="alert alert-warning">
+                    Пароли не совпадают!
+                </div>
+            </div>
+            <div *ngIf="passErrorsDetected" class="alert alert-error">Проверьте корректность введенных данных</div>
+            <button md-button type="submit">Изменить</button>
+        </form>
+    </div>
     <statistics></statistics>
 </md-card>

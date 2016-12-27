@@ -7,6 +7,7 @@ import { CreditCard } from '../../credit-card/credit-card';
 import { CreditCardService } from '../../credit-card/credit-card.service';
 import { Constant } from '../../globals';
 import { LotStatisticsComponent } from '../../lot/lot-statistics/lot-statistics.component';
+import { NotificationsService } from 'angular2-notifications';
 
 
 @Component({
@@ -25,6 +26,8 @@ export class UserDetailsComponent {
 
     editPersonalInf: boolean = false;
     addNewCard: boolean = false;
+    changePassword: boolean = false;
+    passErrorsDetected: boolean = false;
 
     editUserModel: any = {};
     currentUser: any = {};
@@ -35,12 +38,14 @@ export class UserDetailsComponent {
     newCardModel: any = {};
     userCreditCards: CreditCard[] = [];
 
+    pass: any = {};
+
     errorMessage: any;
     errorsDetected: boolean = false;
     monthError: boolean = false;
     yearError: boolean = false;
 
-    constructor(private userService: UserService, private creditService: CreditCardService) {
+    constructor(private userService: UserService, private creditService: CreditCardService, private notifService: NotificationsService,) {
         this.getUser();
     }
 
@@ -60,9 +65,11 @@ export class UserDetailsComponent {
                 console.log('User',res);
 
                 for (let card of res.CreditCards) {
-                    this.userCreditCards.push(new CreditCard(card));
+                    if (card.IsRemoved != true) {
+                        this.userCreditCards.push(new CreditCard(card));
+                    }
                 }
-                                
+             
                 this.currentUser = res;
             },
             error => this.errorMessage = <any>error);
@@ -74,12 +81,53 @@ export class UserDetailsComponent {
             error => this.errorMessage = <any>error);
     }
 
+    openPassChange() {
+        this.changePassword = true;
+    }
+
+    changePass(pass, pass2) {
+        if (pass.model != pass2.model) {
+            this.passErrorsDetected = true;
+            return false
+        }
+    }
+
     deleteCard(cardId) {
-        this.creditService.deleteCard(cardId)
-            .subscribe(res => {
-                console.log(res);
-            },
-            error => this.errorMessage = <any>error);
+        if (this.userCreditCards.length != 1) {
+            this.creditService.deleteCard(cardId)
+                .subscribe(res => {
+                    console.log('OK');
+                    this.userCreditCards = [];
+                    this.getUser();
+
+                    /* for (let index in this.userCreditCards) {
+                         console.log('ids',this.userCreditCards[index].id);
+                         if (this.userCreditCards[index].id == cardId) {
+                             delete this.userCreditCards[index];
+                             console.log('deleted', this.userCreditCards[index].id);
+                         }
+                     }*/
+                },
+                error => this.errorMessage = <any>error);
+        }
+        else {
+            this.errorNotif("К вашему");
+        }
+    }
+
+    errorNotif(msg) {
+        this.notifService.error(
+            'Ошибка!',
+            msg,
+            {
+                position: ["top", "right"],
+                timeOut: 3000,
+                showProgressBar: true,
+                pauseOnHover: true,
+                clickToClose: false,
+                maxLength: 10000
+            }
+        )
     }
 
     showAddCardForm() {
