@@ -148,6 +148,15 @@ namespace InternetAuction.API.Controllers
             }
 
             var creditCard = CreditCardsRepository.GetCreditCard(bet.CreditCardId);
+            if (creditCard.ValidTo < DateTime.Now)
+            {
+                return Content(HttpStatusCode.BadRequest, new BetResponseVM
+                {
+                    Auction = auction,
+                    State = BetState.CreditCardExpired,
+                    CurrentBet = currentBet
+                });
+            }
             var bankCardCurrency = CreditCardsOperations.GetCreditCardCurrency(creditCard.Number, bet.Cvv);
             if (bankCardCurrency == null)
             {

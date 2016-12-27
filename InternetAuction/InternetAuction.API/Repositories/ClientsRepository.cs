@@ -9,6 +9,7 @@ using Ninject;
 using InternetAuction.API.ViewModels.Clients;
 using InternetAuction.API.Factories.Abstractions;
 using InternetAuction.API.Factories;
+using System.Data.Entity;
 
 namespace InternetAuction.API.Repositories
 {

@@ -20,6 +20,8 @@ namespace InternetAuction.API.Models
 
         public int ClientId { get; set; }
 
+        public bool? IsRemoved { get; set; }
+
         public Client Client { get; set; }
 
         public Currency Currency { get; set; }

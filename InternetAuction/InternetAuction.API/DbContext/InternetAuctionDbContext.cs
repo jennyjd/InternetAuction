@@ -117,6 +117,11 @@ namespace InternetAuction.API.DbContext
                 .Property(x => x.ClientId)
                 .HasColumnName("ClientId")
                 .IsRequired();
+
+            modelBuilder.Entity<CreditCard>()
+                .Property(x => x.IsRemoved)
+                .HasColumnName("IsRemoved")
+                .IsOptional();
         }
 
 

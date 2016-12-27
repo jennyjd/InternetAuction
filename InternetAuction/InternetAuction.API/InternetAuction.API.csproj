@@ -215,6 +215,7 @@
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Repositories\GoodsSateRepository.cs" />
     <Compile Include="Services\Constants.cs" />
+    <Compile Include="ViewModels\AdministratorSignUpVM.cs" />
     <Compile Include="ViewModels\AdministratorVM.cs" />
     <Compile Include="ViewModels\BetResponseVM.cs" />
     <Compile Include="ViewModels\BetVM.cs" />

@@ -25,9 +25,9 @@ namespace InternetAuction.API.Repositories
         }
 
 
-        public ICollection<CreditCard> GetCreditCards()
+        public ICollection<CreditCard> GetCreditCards(bool withRemoved = false)
         {
-            return _context.CreditCards.ToList();
+            return _context.CreditCards.Where(x => x.IsRemoved != true || withRemoved).ToList();
         }
 
 
@@ -36,6 +36,15 @@ namespace InternetAuction.API.Repositories
             _context.CreditCards.AddRange(creditCards);
             _context.SaveChanges();
             return creditCards.ToList();
+        }
+
+
+        public CreditCard RemoveCreditCards(int creditCardId)
+        {
+            var creditCard = _context.CreditCards.SingleOrDefault(x => x.Id == creditCardId);
+            creditCard.IsRemoved = true;
+            _context.SaveChanges();
+            return creditCard;
         }
     }
 }
