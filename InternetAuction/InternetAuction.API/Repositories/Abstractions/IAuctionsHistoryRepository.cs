@@ -30,5 +30,7 @@ namespace InternetAuction.API.Repositories.Abstractions
         object GetAuctionsHistoryForParticipantNew(int clientId);
 
         object GetAuctionsHistoryForOwnerNew(int clientId);
+
+        IEnumerable<int> GetCurrentAuctionsIdsForParticipantNew(int clientId, int creditCardId);
     }
 }

@@ -30,7 +30,12 @@ namespace InternetAuction.API.Controllers
         [Route("DeleteCard/{creditCardId}")]
         public IHttpActionResult DeleteCard(int creditCardId)
         {
-            return Ok(CreditCardsRepository.RemoveCreditCards(creditCardId));
+            var removedCard = CreditCardsRepository.RemoveCreditCards(creditCardId);
+            if (removedCard == null)
+            {
+                return BadRequest("Can not delete credit card");
+            }
+            return Ok(removedCard);
         }
 
 

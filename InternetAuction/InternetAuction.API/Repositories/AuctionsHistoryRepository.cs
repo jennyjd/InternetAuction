@@ -134,6 +134,27 @@ namespace InternetAuction.API.Repositories
         }
 
 
+        public IEnumerable<int> GetCurrentAuctionsIdsForParticipantNew(int clientId, int creditCardId)
+        {
+            var auctionsHistory = _context.AuctionsHistory.Where(x => x.ClientId == clientId);
+            if (!auctionsHistory.Any())
+            {
+                return null;
+            }
+            var list = new List<int>();
+
+            foreach (var history in auctionsHistory)
+            {
+                if (history.CreditCardId == creditCardId && CheckCurrentUserBetNew(history.AuctionId, clientId).BetSum == CheckCurrentMaxBetNew(history.AuctionId))
+                {
+                    list.Add(history.AuctionId);
+                }
+            }
+
+            return list;
+        }
+
+
         public object GetAuctionsHistoryForOwner(int clientId)
         {
             var auctions = AuctionsRepository.GetAuctions().Where(x => x.ClientId == clientId);
