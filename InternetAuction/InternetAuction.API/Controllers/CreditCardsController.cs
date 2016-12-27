@@ -19,16 +19,16 @@ namespace InternetAuction.API.Controllers
 
 
         [HttpPost]
-        [Route("{withRemoved}")]
-        public IHttpActionResult Post(bool withRemoved = false)
+        [Route("GetCards/{withRemoved}")]
+        public IHttpActionResult GetCards(bool withRemoved = false)
         {
             return Ok(CreditCardsRepository.GetCreditCards(withRemoved));
         }
 
 
         [HttpPost]
-        [Route("{creditCardId}")]
-        public IHttpActionResult Post(int creditCardId)
+        [Route("DeleteCard/{creditCardId}")]
+        public IHttpActionResult DeleteCard(int creditCardId)
         {
             return Ok(CreditCardsRepository.RemoveCreditCards(creditCardId));
         }
