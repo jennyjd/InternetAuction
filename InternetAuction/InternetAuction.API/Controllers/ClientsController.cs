@@ -1,4 +1,5 @@
-﻿using InternetAuction.API.Infrastructure;
+﻿using Bank.API;
+using InternetAuction.API.Infrastructure;
 using InternetAuction.API.Infrastructure.Swagger;
 using InternetAuction.API.Infrastructure.Swagger.Examples;
 using InternetAuction.API.Models;
@@ -10,6 +11,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Ninject;
 using Swashbuckle.Swagger.Annotations;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -61,14 +63,27 @@ namespace InternetAuction.API.Controllers
         [Route]
         public IHttpActionResult Post(ClientSignUpVM client)
         {
-            // TODO: throw error if login or email exists
-
-            var newClient = ClientsRepository.AddClient(client);
             var userManager = HttpContext.Current.GetOwinContext().GetUserManager<InternetAuctionUserManager>();
             if (userManager.FindByEmail(client.Email) != null || userManager.FindByName(client.Login) != null)
             {
                 return BadRequest("User with this email or user name exists");
             };
+
+            var notValidCreditCards = new List<CreditCard>();
+            foreach (var creditCard in client.CreditCards)
+            {
+                if (!CreditCardsOperations.IsValidCreditCard(creditCard.Number))
+                {
+                    notValidCreditCards.Add(creditCard);
+                }
+            }
+
+            if (notValidCreditCards.Any())
+            {
+                return Content(HttpStatusCode.BadRequest, notValidCreditCards);
+            }
+
+            var newClient = ClientsRepository.AddClient(client);
 
             var identityResult = userManager.Create(new InternetAuctionUser
             {
