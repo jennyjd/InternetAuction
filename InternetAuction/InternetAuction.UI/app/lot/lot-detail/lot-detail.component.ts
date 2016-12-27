@@ -106,7 +106,7 @@ export class LotDetailComponent implements OnInit, AfterViewInit {
     }
 
     makeBet(sum) {
-        let bet = parseInt(sum.model);
+        let bet = parseFloat(sum.model);
         this.betAmmountErrors = [];
         if (this.selected_lot.currentBet != 0) {
             if (bet <= this.selected_lot.currentBet) {

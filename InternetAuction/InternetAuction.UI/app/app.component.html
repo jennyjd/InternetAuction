@@ -11,9 +11,9 @@
         <button md-button routerLink="/createlot" *ngIf="isUserHere() && isClient">Добавить лот</button>
         <div class="search_form" *ngIf="viewSearch">
             <form (ngSubmit)="search(searchStr.value)">
-                <input #searchStr id="search_input" placeholder="Поиск.."/>
+                <input #searchStr id="search_input" placeholder="Поиск по названию.."/>
                 <button md-mini-fab class="red_button search_button" type="submit">
-                    <img src="../assets/icons/search-white-mini.svg" />
+                    <img src="..{{path}}/assets/icons/search-white-mini.svg" />
                 </button>
             </form>
         </div>

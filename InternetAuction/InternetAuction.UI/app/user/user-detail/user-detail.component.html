@@ -44,7 +44,7 @@
             <div class="header">
                 <h2>Банковские карты</h2>
                 <button md-mini-fab class="but red_button" tooltip="Добавить" tooltip-position="below" *ngIf="!addNewCard" (click)="showAddCardForm()">
-                    <img src="..{{path}}/../../assets/icons/add-white.svg" />
+                    <img src="../../..{{path}}/assets/icons/add-white.svg" />
                 </button>
             </div>
 
@@ -86,7 +86,7 @@
                             Проверьте поле для ввода срока годности карты. Ваша карта может быть недействительна.
                         </div>
                         <button md-mini-fab tooltip="Сохранить" tooltip-position="below" *ngIf="addNewCard" class="addCardButton red_button" type="submit">
-                            <img src="..{{path}}/../../assets/icons/done-white.svg" />
+                            <img src="../../..{{path}}/assets/icons/done-white.svg" />
                         </button>
                     </div>
                     <div *ngIf="errorsDetected" class="alert alert-error">Проверьте корректность введенных данных</div>
