@@ -7,8 +7,10 @@ namespace InternetAuction.API.Repositories.Abstractions
     {
         CreditCard GetCreditCard(int creditCardId);
 
-        ICollection<CreditCard> GetCreditCards();
+        ICollection<CreditCard> GetCreditCards(bool withRemoved = false);
 
         ICollection<CreditCard> AddCreditCards(IEnumerable<CreditCard> creditCards);
+
+        CreditCard RemoveCreditCards(int creditCardId);
     }
 }
