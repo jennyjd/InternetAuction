@@ -93,5 +93,15 @@ namespace Bank.API
                 return false;
             }
         }
+
+
+        public static bool IsValidCreditCard(string creditCardNumber)
+        {
+            if (creditCards.Any(x => x.Number == creditCardNumber))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using InternetAuction.API.Models;
+﻿using Bank.API;
+using InternetAuction.API.Models;
 using InternetAuction.API.Repositories.Abstractions;
 using InternetAuction.API.ViewModels;
 using Ninject;
@@ -43,10 +44,21 @@ namespace InternetAuction.API.Controllers
         [Route("{clientId}")]
         public IHttpActionResult Post(int clientId, [FromBody]IEnumerable<CreditCard> creditCards)
         {
+            var notValidCreditCards = new List<CreditCard>();
             foreach (var creditCard in creditCards)
             {
                 creditCard.ClientId = clientId;
+                if (!CreditCardsOperations.IsValidCreditCard(creditCard.Number))
+                {
+                    notValidCreditCards.Add(creditCard);
+                }
             }
+
+            if (notValidCreditCards.Any())
+            {
+                return Content(HttpStatusCode.BadRequest, notValidCreditCards);
+            }
+
             return Ok(CreditCardsRepository.AddCreditCards(creditCards));
         }
     }
