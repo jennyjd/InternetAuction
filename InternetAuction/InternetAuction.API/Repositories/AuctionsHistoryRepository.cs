@@ -8,6 +8,7 @@ using InternetAuction.API.Models;
 using Ninject;
 using Microsoft.AspNet.Identity.Owin;
 using InternetAuction.API.Infrastructure;
+using InternetAuction.API.Services;
 
 namespace InternetAuction.API.Repositories
 {
@@ -173,6 +174,7 @@ namespace InternetAuction.API.Repositories
                     AuctionId = auction.Id,
                     IsCompleted = auction.IsCompleted,
                     MaxBet = CheckCurrentMaxBetNew(auction.Id),
+                    ChargeFromWin = Constants.CHARGE_FROM_WIN,
                     CustomerId = _context.AuctionsHistory.Where(x => x.AuctionId == auction.Id).OrderBy(x => x.Date).AsEnumerable().LastOrDefault()?.ClientId
                 });
             }
