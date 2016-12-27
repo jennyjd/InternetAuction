@@ -65,6 +65,10 @@ namespace InternetAuction.API.Controllers
 
             var newClient = ClientsRepository.AddClient(client);
             var userManager = HttpContext.Current.GetOwinContext().GetUserManager<InternetAuctionUserManager>();
+            if (userManager.FindByEmail(client.Email) != null || userManager.FindByName(client.Login) != null)
+            {
+                return BadRequest("User with this email or user name exists");
+            };
 
             var identityResult = userManager.Create(new InternetAuctionUser
             {

@@ -73,12 +73,14 @@ namespace InternetAuction.API.Controllers
 
         [Authorize(Roles = "Administrator")]
         [HttpPost]
-        [Route]
+        [Route("CreateAdministrator")]
         public IHttpActionResult CreateAdministrator(AdministratorSignUpVM administrator)
         {
-            // TODO: throw error if login or email exists
-
             var userManager = HttpContext.Current.GetOwinContext().GetUserManager<InternetAuctionUserManager>();
+            if (userManager.FindByEmail(administrator.Email) != null || userManager.FindByName(administrator.UserName) != null)
+            {
+                return BadRequest("User with this email or user name exists");
+            };
 
             var identityResult = userManager.Create(new InternetAuctionUser
             {
