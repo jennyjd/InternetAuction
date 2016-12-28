@@ -24,7 +24,6 @@ export class CreditCardService {
             "ValidTo": model.validThru,
             "OwnerFirstName": model.userFirstName,
             "OwnerLastName": model.userLastName }]);
-        console.log("json = " + JSONstr)
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
 
@@ -49,7 +48,6 @@ export class CreditCardService {
     }
 
     public handleError(error: Response) {
-        console.error(error);
         return Observable.throw(error.json().error || 'Server error');
     }
 }

@@ -61,16 +61,17 @@ export class ModalPickCardComponent {
         this.closeModalEvent.emit({ event: true, betState: this.betState });
     }
 
+    closeUserModal() {
+        this.closeUserModalEvent.emit({ event: true });
+    }
+
     transferMoney() {
-        console.log('PICK LOT', this.lot);
         this.cardService.getMoney(this.lot.AuctionId, this.choosedCard.id)
             .subscribe(res => {
-                console.log('GET MONEY RES', res);
                 this.lotService.seenAuctionResult(this.lot.resultId)
                     .subscribe(res => {
                         this.lot.isSeen = true;
-                        this.closeUserModalEvent.emit({ event: true });
-                        ///
+                        this.closeUserModal();
                     },
                     error => this.errorMessage = <any>error);
             },

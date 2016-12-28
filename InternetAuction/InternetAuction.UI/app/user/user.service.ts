@@ -25,8 +25,6 @@ export class UserService {
             }]
         });
 
-        //console.log("json = " + UserJSON);
-
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
         return this.http.post(this.userURL, UserJSON, { headers: headers })
@@ -36,8 +34,6 @@ export class UserService {
 
     createAdmin(admin) {
         let UserJSON = JSON.stringify({ UserName: admin.login,Password: admin.password, Email: admin.email});
-
-        console.log("json = " + UserJSON);
 
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');

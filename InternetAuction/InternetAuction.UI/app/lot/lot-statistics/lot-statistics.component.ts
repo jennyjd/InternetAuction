@@ -122,12 +122,16 @@ export class LotStatisticsComponent {
     }
 
     confirmDeal(lot) {
-        this.openModal(lot);
-        /*this.lotService.seenAuctionResult(lot.resultId)
-            .subscribe(res => {
-                lot.isSeen = true;
-            },
-            error => this.errorMessage = <any>error);*/
+        if (lot.IsWinner != undefined) {
+            this.lotService.seenAuctionResult(lot.resultId)
+                .subscribe(res => {
+                    lot.isSeen = true;
+                },
+                error => this.errorMessage = <any>error);
+        }
+        else{
+            this.openModal(lot);
+        }
     }
 
 

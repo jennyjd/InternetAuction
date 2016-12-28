@@ -73,7 +73,6 @@ export class AppComponent {
             this.userService.getUserAccountById(this.currentUser.Id)
                 .subscribe(res => {
                     this.userLogin = res.UserName;
-                    console.log(this.userLogin);
                 },
                 error => this.errorMessage = <any>error);
         }

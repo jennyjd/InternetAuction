@@ -63,7 +63,6 @@ export class UserDetailsComponent {
     onOpenModalEvent(event): void {
         this.modal = true;
         this.lot = event.lot;
-        console.log('LOT', this.lot);
     }
 
     onCloseUserModal(event): void {
@@ -108,7 +107,6 @@ export class UserDetailsComponent {
         if (this.userCreditCards.length != 1) {
             this.creditService.deleteCard(cardId)
                 .subscribe(res => {
-                    console.log('OK');
                     this.userCreditCards = [];
                     this.getUser();
 
@@ -123,7 +121,6 @@ export class UserDetailsComponent {
                 error => this.errorMessage = <any>error);
         }
         else {
-            console.log("КУКУ");
             this.successNewLotAddedNotif();
         }
     }

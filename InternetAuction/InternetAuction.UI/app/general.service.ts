@@ -64,7 +64,6 @@ export class GeneralService {
     }
 
     public handleError(error: Response) {
-        console.error(error);
         return Observable.throw(error.json().error || 'Server error');
     }
 } 
