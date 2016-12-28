@@ -1,4 +1,4 @@
-﻿import { Component } from '@angular/core';
+﻿import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Constant } from '../../globals';
 
@@ -16,6 +16,8 @@ export class LotStatisticsComponent {
     path = Constant.path;
     errorMessage: any;
 
+    @Output() openModalEvent = new EventEmitter();
+
     ownerStat: any[] = [];
     participantStat: any[] = [];
 
@@ -27,6 +29,7 @@ export class LotStatisticsComponent {
 
     viewStats: any[] = [];
     ownerTab: boolean = false;
+    modal: boolean = false;
     completedTab: boolean = false;
     auctionResults: any[] = [];
     currency = Constant.currency;
@@ -90,6 +93,10 @@ export class LotStatisticsComponent {
         }
     }
 
+    openModal(lot) {
+        this.openModalEvent.emit({ event: true, lot: lot });
+    }
+
     getAuctionResults() {
         this.lotService.getAuctionResults()
             .subscribe(res => {
@@ -116,11 +123,12 @@ export class LotStatisticsComponent {
     }
 
     confirmDeal(lot) {
-        this.lotService.seenAuctionResult(lot.resultId)
+        this.openModal(lot);
+        /*this.lotService.seenAuctionResult(lot.resultId)
             .subscribe(res => {
                 lot.isSeen = true;
             },
-            error => this.errorMessage = <any>error);
+            error => this.errorMessage = <any>error);*/
     }
 
 
