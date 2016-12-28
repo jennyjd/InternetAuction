@@ -151,6 +151,7 @@ export class LotDetailComponent implements OnInit, AfterViewInit {
 
     checkBetResult(betState) {
         if (betState == 0) { this.successNotif("Аукцион завершен!"); }
+        else if (betState == 1) { this.errorNotif("Ваша ставка меньше текущей!"); }
         else if (betState == 2) { this.errorNotif("Введеные некорректные данные по банковской карте!"); }
         else if (betState == 3) { this.successNotif("Ваша ставка успешно принята!"); }
         else if (betState == 4) { this.errorNotif("На вашей карте недостаточно средств!"); }

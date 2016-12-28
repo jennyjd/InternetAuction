@@ -18,7 +18,6 @@ export class LoginService {
 
     constructor(private http: Http, private router: Router) {
         let currentUserId = JSON.parse(localStorage.getItem('currentUserId'));
-        console.log("Current user Id: " + currentUserId)
     }
 
     login(model) {
@@ -39,8 +38,6 @@ export class LoginService {
     }
 
     public handleError(error: Response) {
-        //console.error(error);
-        //return error.json().error;
         return Observable.throw(error.json().error || 'Server error');
     }
 }

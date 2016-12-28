@@ -28,7 +28,7 @@ export class LotListComponent implements DoCheck{
     searchLots: any[] = [];
     viewLots: any[] = []; 
 
-    backArrow: boolean = false;
+    //backArrow: boolean = false;
 
     constructor(private lotService: LotService, private userService: UserService, private sharedService: SharedService,
         private generalService: GeneralService) {
@@ -54,14 +54,14 @@ export class LotListComponent implements DoCheck{
         }
         if (this.searchLots.length != 0) {
             this.viewLots = this.searchLots;
-            this.backArrow = true;
+            //this.backArrow = true;
         }
     }
 
-    viewAllLots() {
+    /*viewAllLots() {
         this.viewLots = this.lots;
         this.backArrow = false;
-    }
+    }*/
 
     getLots() {
         this.lotService.getLots()

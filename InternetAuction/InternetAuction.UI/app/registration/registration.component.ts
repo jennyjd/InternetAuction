@@ -18,11 +18,13 @@ export class RegistrationComponent {
     errorsDetected: boolean = false;
     monthError: boolean = false;
     yearError: boolean = false;
+    cardError: boolean = false;
 
     constructor(private router: Router, private userService: UserService, private sharedService: SharedService) {
     }
 
     register(inputs) {
+        this.cardError = false;
         this.yearError = false;
         this.monthError = false;
         if (this.checkInputs(inputs) == false) {
@@ -38,7 +40,7 @@ export class RegistrationComponent {
                     this.router.navigate(['/login']);
                 },
                 error => {
-                    this.loading = false;
+                    this.cardError = true;
                 });
         }
     }

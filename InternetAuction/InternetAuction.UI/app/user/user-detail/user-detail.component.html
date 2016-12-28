@@ -93,6 +93,9 @@
                     <div *ngIf="errorsDetected" class="alert alert-error">Проверьте корректность введенных данных</div>
                 </div>
             </form>
+            <div *ngIf="cardError" class="alert alert-error">
+                Карты с таким номером не существует!
+            </div>
 
                 <!------------------ДАННЫЕ ПО КАРТАМ КЛИЕНТА---------------->
                 <div class="content">
@@ -127,7 +130,7 @@
             </div>
     </div>
     <!------------------ИЗМЕНЕНИЕ ПАРОЛЯ---------------->
-    <div>
+    <!--<div>
         <button md-button (click)="openPassChange()">Изменить пароль</button>
         <form *ngIf="changePassword" (ngSubmit)="changePass()">
             <md-input type="password" placeholder="Пароль" [(ngModel)]="pass.password" #password="ngModel" required name="password" minlength="6"></md-input>
@@ -140,6 +143,6 @@
             <div *ngIf="passErrorsDetected" class="alert alert-error">Проверьте корректность введенных данных</div>
             <button md-button type="submit">Изменить</button>
         </form>
-    </div>
+    </div>-->
     <statistics></statistics>
 </md-card>

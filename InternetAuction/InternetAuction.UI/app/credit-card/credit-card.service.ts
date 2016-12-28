@@ -28,8 +28,8 @@ export class CreditCardService {
         headers.append('Content-Type', 'application/json');
 
         return this.http.post(`${this.cardUrl}/${id}`, JSONstr, { headers: headers })
-            .map((res: Response) => res.json())
-            .catch(this.handleError);
+            .map((res: Response) => res.json());
+            //.catch(this.handleError);
     }
 
     deleteCard(cardId) {

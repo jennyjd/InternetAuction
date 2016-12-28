@@ -30,8 +30,8 @@ export class UserService {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
         return this.http.post(this.userURL, UserJSON, { headers: headers })
-            .map(res => res)
-            .catch(this.handleError);
+            .map(res => res);
+            //.catch(this.handleError);
     }
 
     createAdmin(admin) {

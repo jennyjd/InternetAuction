@@ -3,14 +3,14 @@
         <div class="content">
             <div class="information">
                 <h2>Личные данные</h2>
-                <md-input placeholder="Имя" [(ngModel)]="userModel.firstName" #firstName="ngModel" required name="firstName" pattern="([А-Яа-я])+|([A-Za-z])+"></md-input>
+                <md-input placeholder="Имя" [(ngModel)]="userModel.firstName" #firstName="ngModel" required name="firstName" pattern="([А-Я][а-я]+)|([A-Z][a-z]+)"></md-input>
                 <div *ngIf="firstName.errors && firstName.dirty">
                     <div [hidden]="!firstName.errors.pattern" class="alert alert-warning">
                         Имя может содержать только буквы
                     </div>
                 </div>
 
-                <md-input placeholder="Фамилия" [(ngModel)]="userModel.lastName" #lastName="ngModel" required name="lastName" pattern="([А-Яа-я])+|([A-Za-z])+"></md-input>
+                <md-input placeholder="Фамилия" [(ngModel)]="userModel.lastName" #lastName="ngModel" required name="lastName" pattern="([А-Я][а-я]+)|([A-Z][a-z]+)"></md-input>
                 <div *ngIf="lastName.errors && lastName.dirty">
                     <div [hidden]="!lastName.errors.pattern" class="alert alert-warning">
                         Фамилия может содержать только буквы
@@ -68,6 +68,9 @@
                     </div>
                     <div *ngIf="!errorsDetected && yearError" class="alert alert-warning">
                         Проверьте поле для ввода срока годности карты. Ваша карта может быть недействительна. 
+                    </div>
+                    <div *ngIf="cardError" class="alert alert-error">
+                        Карты с таким номером не существует!
                     </div>
                     <!--<div *ngIf="ValidYear.errors && (ValidYear.dirty || ValidYear.touched)" class="alert alert-warning">
                         <div [hidden]="!ValidYear.errors.pattern">

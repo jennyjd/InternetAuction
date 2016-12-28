@@ -44,6 +44,7 @@ export class UserDetailsComponent {
     errorsDetected: boolean = false;
     monthError: boolean = false;
     yearError: boolean = false;
+    cardError: boolean = false;
 
     constructor(private userService: UserService, private creditService: CreditCardService, private notifService: NotificationsService,) {
         this.getUser();
@@ -180,6 +181,7 @@ export class UserDetailsComponent {
     }
 
     addNewCardSubmit(inputs) {
+        this.cardError = false;
         if (!this.checkAddNewCardForm(inputs)) {
             return false
         }
@@ -193,12 +195,11 @@ export class UserDetailsComponent {
             this.newCardModel.validThru = this.newCardModel.validMonth + "-28-20" + this.newCardModel.validYear;
 
             this.creditService.addNewCard(this.newCardModel, this.currentUser.Id)
-                .subscribe(
-                res => {
+                .subscribe(res => {
                     this.userCreditCards.push(new CreditCard(res[0]));
                 },
                 error => {
-                    this.errorMessage = error;
+                    this.cardError = true;
                 });
         }
     }

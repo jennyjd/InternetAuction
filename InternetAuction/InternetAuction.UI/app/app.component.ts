@@ -29,7 +29,9 @@ export class AppComponent {
     isClient: boolean = false;
     categoryFocus: Array<boolean> = [];
     viewSearch: boolean = false;
+    userLogin: string = '';
 
+    searchString: string = '';
     notifCount: number = 0;
 
     currentUser: any;
@@ -59,21 +61,42 @@ export class AppComponent {
             if (val.url == '/') {
                 this.viewSearch = true;
                 this.getAuctionResults();
+                this.getUserLogin();
             }
             else { this.viewSearch = false;}
         });  
     }
 
+    getUserLogin() {
+        this.currentUser = this.userService.getCurrentUser();
+        if (this.currentUser != null) {
+            this.userService.getUserAccountById(this.currentUser.Id)
+                .subscribe(res => {
+                    this.userLogin = res.UserName;
+                    console.log(this.userLogin);
+                },
+                error => this.errorMessage = <any>error);
+        }
+    }
+
     isUserHere() {
         this.isClient = false;
-        let currentUser = this.userService.getCurrentUser();
-        if (currentUser == null) {
+        this.currentUser = this.userService.getCurrentUser();
+        if (this.currentUser == null) {
             return false
         }
-        if (currentUser.role == 'client') {
+        if (this.currentUser.role == 'client') {
             this.isClient = true;
         }
         return true
+    }
+
+    home() {
+        this.searchString = '';
+        this.categoryFocus = [];
+        localStorage.setItem("selected_category", JSON.stringify({ selected: "none" }));
+        this.sharedService.saveSearch('');
+        this.router.navigate(['/']);
     }
 
     getCurrency() {

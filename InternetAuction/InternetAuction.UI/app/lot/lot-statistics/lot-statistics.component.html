@@ -21,6 +21,7 @@
                                 <p>Выиграл: {{stats.Winner.UserName}}</p>
                                 <p>{{stats.Winner.Email}}</p>
                                 <p>Выкуп: {{stats.MaxBet}} {{stats.Auction.currencySign}}</p>
+                                <p>Комиссия: {{stats.commission}} {{stats.Auction.currencySign}} (5%)</p>
                             </div>
                         </md-card-content>
                         <button md-mini-fab class="lot_details red_button" (click)="viewLotDetails(stats.Auction.Id)" tooltip="Подробнее" tooltip-position="below">
@@ -88,6 +89,7 @@
                                     <p>Выиграл: {{stats.Winner.UserName}}</p>
                                     <p>{{stats.Winner.Email}}</p>
                                     <p>Выкуп: {{stats.MaxBet}} {{stats.Auction.currencySign}}</p>
+                                    <p>Комиссия: {{stats.commission}} {{stats.Auction.currencySign}} (5%)</p>
                                 </div>
                             </div>
                             <div *ngIf="!ownerTab">
