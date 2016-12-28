@@ -8,6 +8,7 @@ import { CreditCard } from '../../credit-card/credit-card';
 import { CreditCardService } from '../../credit-card/credit-card.service';
 import { Constant } from '../../globals';
 import { LotStatisticsComponent } from '../../lot/lot-statistics/lot-statistics.component';
+import { ModalPickCardComponent } from '../../credit-card/pick-card-modal.component';
 
 
 @Component({
@@ -15,7 +16,7 @@ import { LotStatisticsComponent } from '../../lot/lot-statistics/lot-statistics.
     templateUrl: `${Constant.appPath}app/user/user-detail/user-detail.component.html`,
     styleUrls: [`${Constant.appPath}app/user/user-detail/user-detail.component.css`],
     providers: [UserService, CreditCardService],
-    entryComponents: [LotStatisticsComponent]
+    entryComponents: [LotStatisticsComponent, ModalPickCardComponent]
 })
 
 export class UserDetailsComponent {
@@ -39,12 +40,14 @@ export class UserDetailsComponent {
     userCreditCards: CreditCard[] = [];
 
     pass: any = {};
+    lot: any;
 
     errorMessage: any;
     errorsDetected: boolean = false;
     monthError: boolean = false;
     yearError: boolean = false;
     cardError: boolean = false;
+    modal: boolean = false;
 
     constructor(private userService: UserService, private creditService: CreditCardService, private notifService: NotificationsService) {
         this.getUser();
@@ -57,13 +60,21 @@ export class UserDetailsComponent {
         }
     }
 
+    onOpenModalEvent(event): void {
+        this.modal = true;
+        this.lot = event.lot;
+        console.log('LOT', this.lot);
+    }
+
+    onCloseUserModal(event): void {
+        this.modal = false;
+    }
+
     getUser() {
         let currentUserId = this.userService.getCurrentUser().Id;
         this.userService.getUserById(currentUserId)
             .subscribe(res => {
                 this.checkForEmptyFields(res);
-
-                console.log('User',res);
 
                 for (let card of res.CreditCards) {
                     if (card.IsRemoved != true) {

@@ -1,4 +1,6 @@
-﻿<md-card class="personal_cabinet">
+﻿<pick-modal *ngIf="modal" [transfer]="true" (closeUserModalEvent)="onCloseUserModal($event)" [lot]="lot"></pick-modal>
+
+<md-card class="personal_cabinet">
     <div class="separator">
         <div class="private_inf">
             <div class="header">
@@ -144,5 +146,5 @@
             <button md-button type="submit">Изменить</button>
         </form>
     </div>-->
-    <statistics></statistics>
+    <statistics (openModalEvent)="onOpenModalEvent($event)"></statistics>
 </md-card>

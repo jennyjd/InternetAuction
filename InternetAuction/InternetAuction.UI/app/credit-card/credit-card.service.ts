@@ -14,6 +14,7 @@ import 'rxjs/add/operator/catch';
 export class CreditCardService {
     private cardUrl = `${Constant.apiEndpoint}/CreditCards`;
     private deleteCardUrl = `${Constant.apiEndpoint}/CreditCards/DeleteCard`;
+    private getMoneyonCardUrl = `${Constant.apiEndpoint}/Auctions/GetMoney`;
 
     constructor(private http: Http, private router: Router) { }
 
@@ -38,6 +39,12 @@ export class CreditCardService {
 
         return this.http.post(`${this.deleteCardUrl}/${cardId}`, { headers: headers })
             .map((res: Response) => res.json())
+            .catch(this.handleError);
+    }
+
+    getMoney(auctionId, creditCardId) {
+        return this.http.get(`${this.getMoneyonCardUrl}/${auctionId}/${creditCardId}`)
+            .map(response => response.json())
             .catch(this.handleError);
     }
 

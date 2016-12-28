@@ -5,21 +5,27 @@ import { UserService } from '../user/user.service';
 import { CreditCard } from './credit-card';
 import { LoginComponent } from '../login/login.component';
 import { LotService } from '../lot/lot.service';
+import { CreditCardService } from './credit-card.service';
 
 @Component({
     selector: 'pick-modal',
     templateUrl: `${Constant.appPath}app/credit-card/pick-card-modal.component.html`,
     styleUrls: [`${Constant.appPath}app/credit-card/pick-card-modal.component.css`],
-    providers: [UserService],
+    providers: [UserService, CreditCardService],
     entryComponents: [LoginComponent]
 })
 
 export class ModalPickCardComponent {
     path = Constant.path;
     @Output() closeModalEvent = new EventEmitter();
+    @Output() closeUserModalEvent = new EventEmitter();
     @Input() betSum: any;
     @Input() fastSell: any;
     @Input() lotId: any;
+
+    @Input() transfer: any;
+    @Input() lot: any;
+
     errorMessage: any;
     nullUser: boolean = false;
     userCreditCards: CreditCard[] = [];
@@ -30,7 +36,7 @@ export class ModalPickCardComponent {
     cardFocus: Array<boolean> = [];
     isFastSell: boolean = false;
 
-    constructor(private userService: UserService, private lotService: LotService ) {
+    constructor(private userService: UserService, private lotService: LotService, private cardService: CreditCardService ) {
         this.getCards();
     }
 
@@ -43,7 +49,9 @@ export class ModalPickCardComponent {
         this.userService.getUserById(currentUser.Id)
             .subscribe(res => {
                 for (let card of res.CreditCards) {
-                    this.userCreditCards.push(new CreditCard(card));
+                    if (card.IsRemoved != true) {
+                        this.userCreditCards.push(new CreditCard(card));
+                    }
                 }
             },
             error => this.errorMessage = <any>error);
@@ -53,19 +61,40 @@ export class ModalPickCardComponent {
         this.closeModalEvent.emit({ event: true, betState: this.betState });
     }
 
-    makeBet() {
-        this.checkFastSell();
-
-        this.lotService.makeBet(this.lotId, this.choosedCard.id, this.betSum, this.model.cvv, this.isFastSell)
+    transferMoney() {
+        console.log('PICK LOT', this.lot);
+        this.cardService.getMoney(this.lot.AuctionId, this.choosedCard.id)
             .subscribe(res => {
-                this.betState = res.State;
-                this.closeModal();
+                console.log('GET MONEY RES', res);
+                this.lotService.seenAuctionResult(this.lot.resultId)
+                    .subscribe(res => {
+                        this.lot.isSeen = true;
+                        this.closeUserModalEvent.emit({ event: true });
+                        ///
+                    },
+                    error => this.errorMessage = <any>error);
             },
-            error => {
-                this.errorMessage = error.json()
-                this.betState = this.errorMessage.State;
-                this.closeModal();
-            });
+            error => this.errorMessage = <any>error);
+    }
+
+    makeBet() {
+        if (this.transfer) {
+            this.transferMoney();
+        }
+        else {
+            this.checkFastSell();
+
+            this.lotService.makeBet(this.lotId, this.choosedCard.id, this.betSum, this.model.cvv, this.isFastSell)
+                .subscribe(res => {
+                    this.betState = res.State;
+                    this.closeModal();
+                },
+                error => {
+                    this.errorMessage = error.json()
+                    this.betState = this.errorMessage.State;
+                    this.closeModal();
+                });
+        }
     }
 
     checkFastSell() {

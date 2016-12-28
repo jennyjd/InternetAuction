@@ -4,7 +4,8 @@
     <button md-button class="close_button" (click)="closeModal()">
         <img src="../../assets/icons/clear.svg"/>
     </button>
-    <md-card-title>Выберите карту для ставки</md-card-title>
+    <md-card-title *ngIf="!transfer">Выберите карту для ставки</md-card-title>
+    <md-card-title *ngIf="transfer">Выберите карту для перевода денег</md-card-title>
     <md-card-content>
         <ul>
             <li *ngFor="let card of userCreditCards" class="parent-list-item">
@@ -21,14 +22,11 @@
             </li>
         </ul>
     </md-card-content>
-    <!--<div *ngIf="betCompletedWarning" style="color:green">
-        Ваша ставка принята
-    </div>-->
     <form (ngSubmit)="makeBet()">
         <md-card-actions layout="row">
-            <!--maxlength="3"-->
             <md-input *ngIf="!isDisabled" class="cvv_input" placeholder="CVV" [(ngModel)]="model.cvv" #cvv name="cvv" maxlength="3" minlength="3" required></md-input>
-            <button md-raised-button [disabled]="isDisabled" type="submit">Сделать ставку</button>
+            <button md-raised-button [disabled]="isDisabled" type="submit" *ngIf="!transfer">Сделать ставку</button>
+            <button md-raised-button [disabled]="isDisabled" type="submit" *ngIf="transfer">Подтвердить</button>
         </md-card-actions>
     </form>
 </md-card>
