@@ -34,7 +34,6 @@ export class LoginComponent implements AfterViewInit  {
 
     loginUser() {
         this.errorMessage = '';
-        console.log(this.model.username, this.model.password);
         this.loginService.login(this.model)
             .subscribe(
             res => {

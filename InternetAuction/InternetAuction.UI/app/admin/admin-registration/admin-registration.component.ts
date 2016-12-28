@@ -19,7 +19,6 @@ export class AdminRegistrationComponent {
     constructor(private userService: UserService, private router: Router, private sharedService: SharedService) { }
 
     register() {
-        console.log(this.userModel);
         this.userService.createAdmin(this.userModel)
             .subscribe(res => {
                 this.sharedService.saveSuccess(true);

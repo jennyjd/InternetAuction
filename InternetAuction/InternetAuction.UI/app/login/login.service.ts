@@ -22,7 +22,6 @@ export class LoginService {
 
     login(model) {
         let JSONstr = JSON.stringify({ username: model.username, password: model.password });
-        console.log("json = " + JSONstr)
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
 

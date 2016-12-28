@@ -1,11 +1,15 @@
 ﻿<div id="overlay">
 </div>
 <md-card *ngIf="!nullUser" class="modal">
-    <button md-button class="close_button" (click)="closeModal()">
+    <button md-button *ngIf="!transfer" class="close_button" (click)="closeModal()">
         <img src="../../assets/icons/clear.svg"/>
     </button>
+
+    <button md-button *ngIf="transfer" class="close_button" (click)="closeUserModal()">
+        <img src="../../assets/icons/clear.svg" />
+    </button>
     <md-card-title *ngIf="!transfer">Выберите карту для ставки</md-card-title>
-    <md-card-title *ngIf="transfer">Выберите карту для перевода денег</md-card-title>
+    <md-card-title *ngIf="transfer">Выберите карту<br />для перевода денег</md-card-title>
     <md-card-content>
         <ul>
             <li *ngFor="let card of userCreditCards" class="parent-list-item">

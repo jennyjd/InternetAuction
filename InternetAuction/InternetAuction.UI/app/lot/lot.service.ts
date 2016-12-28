@@ -43,7 +43,6 @@ export class LotService {
     }
 
     makeBet(auctionId, creditId, sum, cvv, isFastSell) {
-        console.log(auctionId, creditId, sum, cvv, isFastSell);
         let JSONstr = '';
         if (isFastSell) {
             JSONstr = JSON.stringify({ CreditCardId: creditId.toString(), Cvv: cvv });
@@ -51,7 +50,7 @@ export class LotService {
         else {
             JSONstr = JSON.stringify({ CreditCardId: creditId.toString(), Sum: sum, Cvv: cvv });
         }
-        console.log("json = " + JSONstr)
+
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
 
@@ -61,13 +60,10 @@ export class LotService {
     }
 
     createLot(lot) {
-        console.log(lot);
-        console.log(lot.currencyId);
         let JSONstr = JSON.stringify({
             Name: lot.name, Description: lot.description, StartPrice: lot.startPrice, 
             PriceOfFastSell: lot.fastSell, CategoryId: lot.categoryId.toString(), EndDate: lot.endDate, 
             GoodStateId: lot.stateId.toString(), CurrencyId: lot.currencyId.toString()});
-        console.log("json = " + JSONstr)
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
 
@@ -111,7 +107,6 @@ export class LotService {
     }
 
     public handleError(error: Response) {
-        console.error(error);
         return Observable.throw(error.json().error || 'Server error');
     }
 }
