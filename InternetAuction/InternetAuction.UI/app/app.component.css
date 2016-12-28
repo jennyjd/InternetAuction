@@ -76,6 +76,16 @@ input:focus {
     height: 33px;
 }
 
+.user_login {
+    font-size: 13px !important;
+    min-width: 0;
+    bottom: 5px;
+    padding: 0;
+}
+
+.user_login:hover::after{
+    background-color: transparent !important;
+}
 
 .notif_icon {
     position: absolute;

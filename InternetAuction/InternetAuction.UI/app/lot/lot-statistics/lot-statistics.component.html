@@ -9,7 +9,7 @@
             <div *ngIf="completedTab && ownerTab && unseenOwner.length != 0">
                 <md-card *ngFor="let stats of unseenOwner" class="lots">
                     <div class="image_container">
-                        <span></span> <img src="..{{path}}/../../assets/images/lot_photo.jpg" class="md-card-image">
+                        <span></span> <img src="../../..{{path}}/assets/images/lot_photo.jpg" class="md-card-image">
                     </div>
                     <div class="content_container">
                         <div class="title_container">
@@ -25,7 +25,7 @@
                             </div>
                         </md-card-content>
                         <button md-mini-fab class="lot_details red_button" (click)="viewLotDetails(stats.Auction.Id)" tooltip="Подробнее" tooltip-position="below">
-                            <img src="..{{path}}/../assets/icons/visibility-white.svg" />
+                            <img src="../..{{path}}/assets/icons/visibility-white.svg" />
                         </button>
                         <button md-button class="confirm_button" *ngIf="!stats.isSeen" (click)="confirmDeal(stats)">Подтвердить</button>
                     </div>
@@ -35,7 +35,7 @@
             <div *ngIf="completedTab && !ownerTab && unseenParticipant.length != 0">
                 <md-card *ngFor="let stats of unseenParticipant" class="lots" [class.win]="stats.IsWinner" [class.lose]="!stats.IsWinner">
                     <div class="image_container">
-                        <span></span> <img src="..{{path}}/../../assets/images/lot_photo.jpg" class="md-card-image">
+                        <span></span> <img src="../../..{{path}}/assets/images/lot_photo.jpg" class="md-card-image">
                     </div>
                     <div class="content_container">
                         <div class="title_container">
@@ -51,7 +51,7 @@
                             </div>
                         </md-card-content>
                         <button md-mini-fab class="lot_details red_button" (click)="viewLotDetails(stats.Auction.Id)" tooltip="Подробнее" tooltip-position="below">
-                            <img src="..{{path}}/../assets/icons/visibility-white.svg" />
+                            <img src="../..{{path}}/assets/icons/visibility-white.svg" />
                         </button>
                         <button md-button class="confirm_button" *ngIf="!stats.isSeen" (click)="confirmDeal(stats)">Подтвердить</button>
                     </div>
@@ -62,7 +62,7 @@
                      [class.win]="(completedTab && !ownerTab && stats.IsWinner) || (!completedTab && !ownerTab && stats.MaxBet == stats.UserBet.BetSum)" 
                      [class.lose]="(completedTab && !ownerTab && !stats.IsWinner) || (!completedTab && !ownerTab && stats.MaxBet > stats.UserBet.BetSum)">
                 <div class="image_container">
-                    <span></span> <img src="..{{path}}/../../assets/images/lot_photo.jpg" class="md-card-image">
+                    <span></span> <img src="../../..{{path}}/assets/images/lot_photo.jpg" class="md-card-image">
                 </div>
                 <div class="content_container">
                     <div class="title_container">
@@ -104,7 +104,7 @@
                         </div>
                     </md-card-content>
                     <button md-mini-fab class="lot_details red_button" (click)="viewLotDetails(stats.Auction.Id)" tooltip="Подробнее" tooltip-position="below">
-                        <img src="..{{path}}/../assets/icons/visibility-white.svg" />
+                        <img src="../..{{path}}/assets/icons/visibility-white.svg" />
                     </button>
                     <div *ngIf="completedTab">
                         <button md-button class="confirm_button" *ngIf="!stats.isSeen" (click)="confirmDeal(stats)">Подтвердить</button>

@@ -5,7 +5,7 @@
     </div>
     <md-card class="modal">
         <button md-button class="close_button" (click)="changeModal()">
-            <img src="..{{path}}/../assets/icons/clear.svg" />
+            <img src="../..{{path}}/assets/icons/clear.svg" />
         </button>
         <md-card-title>Вам необходимо <br/>авторизироваться <br/>в системе</md-card-title>
         <md-card-content layout="row">
@@ -25,7 +25,7 @@
                 <div class="images_wrap">
                     <div class="separator">
                         <div class="image_viewer center_image">
-                            <span></span><img src="..{{path}}/../../assets/images/lot_photo.jpg" />
+                            <span></span><img src="../../..{{path}}/assets/images/lot_photo.jpg" />
                         </div>
                         <!--solve vertical align problem (display:inline-flex)-->
                         <div class="other_images_container">
@@ -38,7 +38,7 @@
                 </div>
                 <div class="bet_wrap">
                     <button md-mini-fab (click)="updateData()" class="update_button" tooltip="Обновить лот" tooltip-position="below">
-                        <img src="..{{path}}/../../assets/icons/update-black-mini.svg" />
+                        <img src="../../..{{path}}/assets/icons/update-black-mini.svg" />
                     </button>
                     <div *ngIf="!selected_lot.IsCompleted">
                         <h3>Начальная ставка: {{selected_lot.StartPrice}} {{selected_lot.currencySign}}</h3>
@@ -48,7 +48,7 @@
                         <form *ngIf="!lotIsYours" (ngSubmit)="makeBet(bet)">
                             <md-input placeholder="Ставка" [(ngModel)]="model.bet" #bet="ngModel" name="bet" required></md-input>
                             <button md-mini-fab style="background-color:#D95154" type="submit" tooltip="Сделать ставку" tooltip-position="below">
-                                <img src="..{{path}}/../../assets/icons/gavel-white.svg" />
+                                <img src="../../..{{path}}/assets/icons/gavel-white.svg" />
                             </button>
                         </form>
                         <div *ngFor="let error of betAmmountErrors" class="alert alert-warning">

@@ -24,12 +24,13 @@
         </div>
         <div class="right" *ngIf="isUserHere()">
             <button md-button (click)="logout()" style="bottom:5px;">Выход</button>
-            <span style="font-size: 13px;">{{userLogin}}</span>
+            <button md-button class="user_login" *ngIf="isClient">{{userLogin}}</button>
+            <button md-button class="user_login" *ngIf="!isClient">Администратор</button>
             <button md-mini-fab class="orange_button" *ngIf="isClient" (click)="selectUser()" tooltip="Личный кабинет" tooltip-position="before">
                 <img src="..{{path}}/assets/icons/person-white.svg" />
             </button>
         </div>
-        <button md-mini-fab class="notif_icon red_button" *ngIf="notifCount!=0 && isUserHere()">
+        <button md-mini-fab class="notif_icon red_button" *ngIf="notifCount!=0 && isUserHere() && isClient">
             {{notifCount}}
         </button>
     </md-toolbar>

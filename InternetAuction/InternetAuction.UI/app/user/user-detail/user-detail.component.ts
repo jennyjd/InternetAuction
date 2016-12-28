@@ -1,5 +1,6 @@
 ﻿import { Component } from '@angular/core';
-import { Router} from '@angular/router';
+import { Router } from '@angular/router';
+import { NotificationsService } from 'angular2-notifications';
 
 import { User } from '../user';
 import { UserService } from '../user.service';
@@ -7,7 +8,6 @@ import { CreditCard } from '../../credit-card/credit-card';
 import { CreditCardService } from '../../credit-card/credit-card.service';
 import { Constant } from '../../globals';
 import { LotStatisticsComponent } from '../../lot/lot-statistics/lot-statistics.component';
-import { NotificationsService } from 'angular2-notifications';
 
 
 @Component({
@@ -46,7 +46,7 @@ export class UserDetailsComponent {
     yearError: boolean = false;
     cardError: boolean = false;
 
-    constructor(private userService: UserService, private creditService: CreditCardService, private notifService: NotificationsService,) {
+    constructor(private userService: UserService, private creditService: CreditCardService, private notifService: NotificationsService) {
         this.getUser();
     }
 
@@ -112,21 +112,22 @@ export class UserDetailsComponent {
                 error => this.errorMessage = <any>error);
         }
         else {
-            this.errorNotif("К вашему");
+            console.log("КУКУ");
+            this.successNewLotAddedNotif();
         }
     }
 
-    errorNotif(msg) {
-        this.notifService.error(
-            'Ошибка!',
-            msg,
+    successNewLotAddedNotif() {
+        this.notifService.success(
+            'Успех!',
+            'Ваш лот успешно добавлен!',
             {
                 position: ["top", "right"],
                 timeOut: 3000,
                 showProgressBar: true,
                 pauseOnHover: true,
-                clickToClose: false,
-                maxLength: 10000
+                clickToClose: true,
+                maxLength: 1000
             }
         )
     }

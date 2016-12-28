@@ -52,7 +52,7 @@
             <!------------------ФОРМА ДОБАВЛЕНИЯ НОВОЙ КАРТЫ---------------->
             <form class="addCardForm" *ngIf="addNewCard" (ngSubmit)="addNewCardSubmit([number, userName, validMonth, validYear])">
                 <button md-button class="close_button" (click)="closeCardForm()">
-                    <img src="../../assets/icons/clear.svg" />
+                    <img src="../..{{path}}/assets/icons/clear.svg" />
                 </button>
                 <div class="labels_wrap">
                     <div *ngFor="let label of addCardLabels" class="mar_divs">{{label}}</div>                 
@@ -104,7 +104,7 @@
                             <md2-accordion-tab>
                                 <md2-accordion-header>
                                     <div class="card-icon">
-                                        <img src="../../../assets/icons/payment-black.svg" />
+                                        <img src="../../..{{path}}/assets/icons/payment-black.svg" />
                                     </div>
                                     <div class="card_number">
                                         {{card.number}}
@@ -120,7 +120,7 @@
                                     </div>
                                 </div>
                                 <button md-mini-fab class="delete_card red_button" (click)="deleteCard(card.id)" tooltip="Удалить" tooltip-position="below">
-                                    <img src="../../../assets/icons/delete-white-mini.svg" />
+                                    <img src="../../..{{path}}/assets/icons/delete-white-mini.svg" />
                                 </button>
                             </md2-accordion-tab>
                         </md2-accordion>
