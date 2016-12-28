@@ -43,8 +43,8 @@ export class CreditCardService {
     }
 
     getMoney(auctionId, creditCardId) {
-        return this.http.get(`${this.getMoneyonCardUrl}/${auctionId}/${creditCardId}`)
-            .map(response => response.json())
+        return this.http.get(`${this.getMoneyonCardUrl}/${auctionId}/${creditCardId}`, { withCredentials: true })
+            .map(response => response.ok)
             .catch(this.handleError);
     }
 

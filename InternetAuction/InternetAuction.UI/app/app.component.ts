@@ -60,10 +60,10 @@ export class AppComponent {
             }
             if (val.url == '/') {
                 this.viewSearch = true;
-                this.getAuctionResults();
-                this.getUserLogin();
             }
-            else { this.viewSearch = false;}
+            else { this.viewSearch = false; }
+            this.getAuctionResults();
+            this.getUserLogin();
         });  
     }
 

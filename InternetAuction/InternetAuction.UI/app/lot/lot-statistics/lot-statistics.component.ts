@@ -37,7 +37,7 @@ export class LotStatisticsComponent {
 
     constructor(private lotService: LotService, private userService: UserService, private router: Router) {
         this.getAuctionResults();
-        this.getStatistics();
+        //this.getStatistics();
     }
 
     getStatistics() {
@@ -72,7 +72,6 @@ export class LotStatisticsComponent {
                         }
                         else {
                             stats.push(lot);
-                            console.log('LOT', lot);
                         }
 
                     },
@@ -101,7 +100,7 @@ export class LotStatisticsComponent {
         this.lotService.getAuctionResults()
             .subscribe(res => {
                 this.auctionResults = res;
-                console.log('RESULTS', res);
+                this.getStatistics();
             },
             error => this.errorMessage = <any>error);
     }
@@ -138,7 +137,6 @@ export class LotStatisticsComponent {
                 .subscribe(res => {
                     lot.Winner = res;
                     lot.commission = ((lot.MaxBet*100) * (lot.ChargeFromWin*100))/10000;
-                    console.log(lot.commission, lot.MaxBet);
                     this.detectUnseenLots(lot, this.completedOwnerStat, this.unseenOwner);
                 },
                 error => this.errorMessage = <any>error);
