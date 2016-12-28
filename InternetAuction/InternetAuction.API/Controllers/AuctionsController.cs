@@ -441,5 +441,34 @@ namespace InternetAuction.API.Controllers
 
             return Ok(AuctionsHistoryRepository.GetAuctionsHistoryForOwnerNew(user.ClientId.Value));
         }
+
+
+        [Authorize(Roles = "Client")]
+        [HttpGet]
+        [Route("GetMoney/{auctionId}/{creditCardId}")]
+        public IHttpActionResult GetMoney(int auctionId, int creditCardId)
+        {
+            var maxBet = AuctionsHistoryRepository.CheckCurrentMaxBetNew(auctionId);
+            var creditCard = CreditCardsRepository.GetCreditCard(creditCardId);
+            var auction = AuctionsRepository.GetAuction(auctionId);
+            var currencyId = CreditCardsOperations.GetCreditCardCurrency(creditCard.Number);
+            if (currencyId != null)
+            {
+                var conversion = CurrenciesConversionsRepository.GetCurrencyConversion(auction.CurrencyId, currencyId.Value);
+                var isOperationPerformed = CreditCardsOperations.GetMoney(creditCard.Number, maxBet * conversion.Rate);
+                if (isOperationPerformed)
+                {
+                    return Ok();
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
     }
 }

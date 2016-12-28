@@ -65,6 +65,12 @@ namespace Bank.API
         }
 
 
+        public static byte? GetCreditCardCurrency(string creditCardNumber)
+        {
+            return creditCards.SingleOrDefault(x => x.Number == creditCardNumber)?.CurrencyId;
+        }
+
+
         public static bool TakeMoney(decimal sum, string creditCardNumber, string cvv)
         {
             var creditCard = creditCards.SingleOrDefault(x => x.Number == creditCardNumber && x.Cvv == cvv && x.Sum >= sum);
@@ -99,6 +105,18 @@ namespace Bank.API
         {
             if (creditCards.Any(x => x.Number == creditCardNumber))
             {
+                return true;
+            }
+            return false;
+        }
+
+
+        public static bool GetMoney(string creditCardNumber, decimal sum)
+        {
+            var creditCard = creditCards.SingleOrDefault(x => x.Number == creditCardNumber);
+            if (creditCard != null)
+            {
+                creditCard.Sum += sum;
                 return true;
             }
             return false;
