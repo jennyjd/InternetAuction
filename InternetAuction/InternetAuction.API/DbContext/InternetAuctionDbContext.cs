@@ -19,6 +19,7 @@ namespace InternetAuction.API.DbContext
         public DbSet<GoodsState> GoodStates { get; set; }
         public DbSet<AuctionHistory> AuctionsHistory { get; set; }
         public DbSet<CurrencyConversion> CurrenciesConversions { get; set; }
+        public DbSet<AuctionResult> AuctionsResults { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -31,6 +32,7 @@ namespace InternetAuction.API.DbContext
             MapGoodsStates(modelBuilder);
             MapAuctionsHistory(modelBuilder);
             MapCurrenciesConversions(modelBuilder);
+            MapAuctionsResults(modelBuilder);
         }
 
 
@@ -115,6 +117,11 @@ namespace InternetAuction.API.DbContext
                 .Property(x => x.ClientId)
                 .HasColumnName("ClientId")
                 .IsRequired();
+
+            modelBuilder.Entity<CreditCard>()
+                .Property(x => x.IsRemoved)
+                .HasColumnName("IsRemoved")
+                .IsOptional();
         }
 
 
@@ -332,20 +339,58 @@ namespace InternetAuction.API.DbContext
                .IsRequired();
 
             modelBuilder.Entity<AuctionHistory>()
-               .Property(x => x.CurrencyId)
-               .HasColumnName("CurrencyId")
+               .Property(x => x.CreditCardCurrencyId)
+               .HasColumnName("CreditCardCurrencyId")
                .IsRequired();
 
             modelBuilder.Entity<AuctionHistory>()
-               .Property(x => x.Sum)
+               .Property(x => x.CreditCardSum)
                .HasPrecision(20, 5)
-               .HasColumnName("Sum")
+               .HasColumnName("CreditCardSum")
+               .IsRequired();
+
+            modelBuilder.Entity<AuctionHistory>()
+               .Property(x => x.BetSum)
+               .HasPrecision(20, 5)
+               .HasColumnName("BetSum")
                .IsRequired();
 
             modelBuilder.Entity<AuctionHistory>()
                .Property(x => x.Date)
                .HasColumnName("Date")
                .IsRequired();
+        }
+
+
+        private void MapAuctionsResults(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<AuctionResult>()
+                .ToTable("AuctionsResults");
+
+            modelBuilder.Entity<AuctionResult>()
+                .HasKey(x => x.Id)
+                .HasEntitySetName("Id");
+
+            modelBuilder.Entity<AuctionResult>()
+                .Property(x => x.ClientId)
+                .HasColumnName("ClientId")
+                .IsRequired();
+
+            modelBuilder.Entity<AuctionResult>()
+                .Property(x => x.AuctionId)
+                .HasColumnName("AuctionId")
+                .IsRequired();
+
+            modelBuilder.Entity<AuctionResult>()
+                .Property(x => x.IsSeenResult)
+                .HasColumnName("IsSeenResult")
+                .IsRequired();
+
+            modelBuilder.Entity<AuctionResult>()
+                .Property(x => x.ChargeFromWin)
+                .HasPrecision(20, 5)
+                .HasColumnName("ChargeFromWin")
+                .IsOptional();
         }
     }
 }

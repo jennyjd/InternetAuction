@@ -1,0 +1,29 @@
+﻿<div class="full_width_wrap">
+    <md-card *ngIf="selectedCategoryId === lotitem.CategoryId || selectedCategoryId == 'none'" (mouseenter)="over(lotitem)" (mouseleave)="out(lotitem)">
+        <div class="image_container">
+            <span></span> <img src="../..{{path}}/assets/images/lot_photo.jpg" class="md-card-image">
+        </div>
+        <button md-mini-fab class="lot_details red_button" (click)="view_details(lotitem)" tooltip="Подробнее" tooltip-position="below">
+            <img src="../..{{path}}/assets/icons/visibility-white.svg"/>
+        </button>
+        <div class="content">
+            <md-card-title>{{lotitem.Name}}</md-card-title>
+            <md-card-content>
+                <div *ngIf="lotitem.visible_items == true" class="more_inf">
+                    <p *ngIf="lotitem.betDone">Текущая ставка: {{lotitem.CurrentBet}} {{lotitem.currencySign}}</p>
+                    <p *ngIf="!lotitem.betDone">Ставок нету</p>
+                    <p *ngIf="lotitem.fastSell">Выкуп: {{lotitem.PriceOfFastSell}} {{lotitem.currencySign}}</p>
+                    <p>Владелец: {{lotitem.userLogin}}</p>
+                </div>
+                <div class="bottom_inf">
+                    <p>
+                        Осталось:
+                        {{lotitem.EndDate | amDifference: today: 'days'}} дн.
+                        {{(lotitem.EndDate | amDifference: today: 'hours') - (lotitem.EndDate | amDifference: today: 'days')*24}} ч.
+                    </p>
+                </div>
+            </md-card-content>
+        </div>
+    </md-card>
+</div>
+

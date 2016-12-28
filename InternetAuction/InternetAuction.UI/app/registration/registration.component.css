@@ -1,0 +1,61 @@
+﻿md-card{
+    width: 650px;
+    margin: 15px;
+    margin:0 auto;
+}
+
+.alert {
+    border: 1px solid;
+    border-radius: 0.2em;
+    padding: 5px;
+    font-size: 12px;
+    margin-bottom: 6px;
+}
+
+.alert-warning {
+    border-color: #ffb366;
+    background-color: #ffe6cc;
+}
+
+.red_button {
+    background-color: var(--red);
+    color: white;
+}
+
+.alert-error {
+    margin-top: 70px;
+    font-size: 13px;
+    border-color: #990000;
+    background-color: #ffcccc;
+}
+
+.submit_button {
+    float: right;
+    margin-bottom: 10px;
+}
+
+.information{
+    width:50%;
+    margin: 0 15px;
+}
+
+.content {
+    display:flex;
+}
+
+.registr_wrap{
+    margin-top:16px;
+}
+
+.validThru {
+    flex-flow: row wrap;
+}
+
+.validThru md-input {
+    width: 42px;
+}
+
+md-input {
+    padding-top: 1px;
+    width: 100%;
+}

@@ -1,0 +1,17 @@
+﻿md-card{
+    width: 350px;
+    margin: 15px;
+    margin:0 auto;
+}
+
+.login_wrap{
+    margin-top: 16px;
+}
+
+md-card > * {
+    display:block;
+}
+md-input {
+    padding-top: 1px;
+    width:100%;
+}

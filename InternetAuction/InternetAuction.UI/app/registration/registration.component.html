@@ -1,0 +1,89 @@
+﻿<md-card class="registr_wrap">
+    <form (ngSubmit)="register([firstName, lastName, login, HolderName, Number, ValidMonth, ValidYear, password, password2])" class="registr_form">
+        <div class="content">
+            <div class="information">
+                <h2>Личные данные</h2>
+                <md-input placeholder="Имя" [(ngModel)]="userModel.firstName" #firstName="ngModel" required name="firstName" pattern="([А-Я][а-я]+)|([A-Z][a-z]+)"></md-input>
+                <div *ngIf="firstName.errors && firstName.dirty">
+                    <div [hidden]="!firstName.errors.pattern" class="alert alert-warning">
+                        Имя может содержать только буквы
+                    </div>
+                </div>
+
+                <md-input placeholder="Фамилия" [(ngModel)]="userModel.lastName" #lastName="ngModel" required name="lastName" pattern="([А-Я][а-я]+)|([A-Z][a-z]+)"></md-input>
+                <div *ngIf="lastName.errors && lastName.dirty">
+                    <div [hidden]="!lastName.errors.pattern" class="alert alert-warning">
+                        Фамилия может содержать только буквы
+                    </div>
+                </div>
+
+                <md-input placeholder="Логин" [(ngModel)]="userModel.login" #login="ngModel" required name="login"  pattern="^[A-Za-z]+[A-Za-z0-9_]*$"></md-input>
+                <div *ngIf="login.errors && login.dirty">
+                    <div [hidden]="!login.errors.pattern" class="alert alert-warning">
+                        Логин должен начинаться с буквы. Содержать буквы латинского алфавита, цифры и "_"
+                    </div>
+                </div>
+                <!--<md-input type="tel" placeholder="Контактный телефон" [(ngModel)]="model.tel" #tel required name="tel"></md-input>-->
+                <md-input type="email" placeholder="Адрес электронной почты" [(ngModel)]="userModel.email" #email="ngModel" required name="email"></md-input>
+
+                <md-input type="password" placeholder="Пароль" [(ngModel)]="userModel.password" #password="ngModel" required name="password" minlength="6"></md-input>
+                <md-input type="password" placeholder="Повторите пароль" [(ngModel)]="userModel.password2" #password2="ngModel" required name="password2" minlength="6"></md-input>
+                <div *ngIf="password2.dirty">
+                    <div *ngIf="userModel.password != userModel.password2" class="alert alert-warning">
+                        Пароли не совпадают!
+                    </div>
+                </div>
+
+
+                <!--<md-input type="password" placeholder="Повторите пароль" [(ngModel)]="model.password2" #password2 required name="password2"></md-input>-->
+            </div>
+            <div class="information">
+                <h2>Данные банковской карты</h2>
+                <md-input placeholder="Имя держателя карты" [(ngModel)]="creditModel.HolderName" #HolderName="ngModel" required name="HolderName" pattern="[A-Za-z]+ [A-Za-z]+"></md-input>
+                <div *ngIf="HolderName.errors && HolderName.dirty">
+                    <div [hidden]="!HolderName.errors.pattern" class="alert alert-warning">
+                        Поле должно содержать ИМЯ и ФАМИЛИЮ владельца карты.
+                    </div>
+                </div>
+
+                <md-input placeholder="Номер карты" [(ngModel)]="creditModel.Number" #Number="ngModel" required name="Number" (ngModelChange)="validate(Number.value)" maxlength="19" minlength="19" pattern="([0-9]{4} ){3}[0-9]{4}"></md-input>
+                <div *ngIf="Number.errors && Number.dirty">
+                    <div [hidden]="!Number.errors.pattern" class="alert alert-warning">
+                        Формат - 1234 1234 1234 1234
+                    </div>
+                </div>
+                
+                <div class="validThru">
+                    <span>Срок действия: </span>
+                    <md-input placeholder="MM" [(ngModel)]="creditModel.ValidMonth" #ValidMonth="ngModel" required name="ValidMonth" maxlength="2" pattern="[0-9]{2}"></md-input> /
+
+                    <md-input placeholder="YY" [(ngModel)]="creditModel.ValidYear" #ValidYear="ngModel" required name="ValidYear" maxlength="2" pattern="[0-9]{2}"></md-input>
+                    <div *ngIf="ValidMonth.errors && ValidMonth.dirty && ValidYear.errors && ValidYear.dirty">
+                        <div [hidden]="!ValidMonth.errors.pattern" class="alert alert-warning">
+                            Пример: 01/18
+                        </div>
+                    </div>
+                    <div *ngIf="!errorsDetected && monthError" class="alert alert-warning">
+                        Поле ввода месяца может содержать информацию в интервале от 01 до 12
+                    </div>
+                    <div *ngIf="!errorsDetected && yearError" class="alert alert-warning">
+                        Проверьте поле для ввода срока годности карты. Ваша карта может быть недействительна. 
+                    </div>
+                    <div *ngIf="cardError" class="alert alert-error">
+                        Карты с таким номером не существует!
+                    </div>
+                    <!--<div *ngIf="ValidYear.errors && (ValidYear.dirty || ValidYear.touched)" class="alert alert-warning">
+                        <div [hidden]="!ValidYear.errors.pattern">
+                            Имя должно содержать только кириллицу
+                        </div>
+                    </div>-->
+
+                </div>
+                <div *ngIf="errorsDetected" class="alert alert-error">Проверьте корректность введенных данных</div>
+            </div>
+        </div>
+        <md-card-actions layout="row">
+            <button md-raised-button type="submit" class="submit_button red_button">Зарегистрироваться</button>
+        </md-card-actions>
+    </form>
+</md-card>

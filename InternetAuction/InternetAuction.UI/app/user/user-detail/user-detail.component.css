@@ -1,0 +1,136 @@
+﻿.personal_cabinet {
+    width: 800px;
+    min-width: 800px;
+    margin: 20px auto;
+    margin-bottom: 300px;
+}
+
+.separator{
+    display: flex;
+    text-align: -webkit-center;
+    border-bottom: 1px solid lightgrey;
+}
+
+.delete_card {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.alert {
+    border: 1px solid;
+    border-radius: 0.2em;
+    padding: 5px;
+    font-size: 12px;
+    margin-bottom: 6px;
+}
+
+.alert-warning {
+    border-color: #ffb366;
+    background-color: #ffe6cc;
+}
+
+.red_button {
+    background-color: var(--red);
+}
+
+.orange_button {
+    background-color: var(--orange);
+}
+
+.private_inf {
+    width: 50%;
+    border-right: 1px solid lightgrey;
+}
+
+.labels_wrap {
+    width:35%;
+}
+
+.header {
+    height: 50px;
+}
+
+.but {
+    position: relative;
+    top: -40px;
+    right: -160px;
+}
+
+.validThru {
+    flex-flow: row wrap;
+}
+
+.alert {
+    border: 1px solid;
+    border-radius: 0.2em;
+    padding: 5px;
+    font-size: 12px;
+    margin-bottom: 6px;
+}
+
+.alert-warning {
+    border-color: #ffb366;
+    background-color: #ffe6cc;
+}
+
+.alert-error {
+    font-size: 13px;
+    border-color: #990000;
+    background-color: #ffcccc;
+}
+
+.validThru md-input {
+    width: 42px;
+}
+
+.addCardForm {
+    display: flex;
+    text-align: left;
+    margin-bottom: 35px;
+}
+
+.close_button {
+    min-width: 24px;
+    padding: 0;
+    position: absolute;
+    right: 40px;
+}
+
+.addCardButton {
+    position:absolute;
+    right: 30px;
+}
+
+.card-icon {
+    position:absolute;
+    top: 7px;
+}
+
+.card_number {
+    padding-left: 35px;
+}
+
+.value_wrap {
+    width:65%;
+}
+
+.mar_divs{
+    padding: 16px 0px;
+}
+
+.card_handler {
+    width:100%;
+}
+
+.cards_inf{
+    width:50%;
+    padding-left:24px;
+}
+
+.content {
+    display: flex;
+    text-align: left;
+}

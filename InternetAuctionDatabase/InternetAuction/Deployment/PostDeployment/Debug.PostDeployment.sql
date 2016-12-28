@@ -61,10 +61,21 @@ INSERT INTO AuctionsCategories
 (Id, Name, ParentAuctionCategoryId)
 VALUES 
 (1, N'Коллекционирование', NULL),
-(2, N'Мебель', NULL),
-(3, N'Одежда', NULL),
-(4, N'Монеты', 1),
-(5, N'Марки', 1)
+(2, N'Антиквариат', NULL),
+(3, N'Книги', NULL),
+(4, N'Электроника', NULL),
+(100, N'Монеты', 1),
+(101, N'Марки', 1),
+(102, N'Мебель', 2),
+(103, N'Посуда', 2),
+(104, N'Картины', 2),
+(105, N'Художественные', 3),
+(106, N'Научные', 3),
+(107, N'Учебные', 3),
+(108, N'Телевизоры', 4),
+(109, N'Компьютеры', 4),
+(110, N'Бытовая техника', 4),
+(111, N'Акустика', 4)
 
 SET IDENTITY_INSERT AuctionsCategories OFF
 
@@ -120,12 +131,12 @@ SET IDENTITY_INSERT CreditCards ON
 INSERT INTO CreditCards 
 (Id, Number, Cash, ValidTo, OwnerFirstName, OwnerLastName, CurrencyId, ClientId)
 VALUES 
-(1, N'1282237041056833', NULL, CAST(N'2021-08-11' AS DateTime), N'Иван', N'Иванов', NULL, 1),
-(2, N'7309400641159165', NULL, CAST(N'2018-05-21' AS DateTime), N'Иван', N'Иванов', NULL, 1),
-(3, N'6246746369166353', NULL, CAST(N'2019-01-07' AS DateTime), N'Пётр', N'Петров', NULL, 2),
-(4, N'3047580553634127', NULL, CAST(N'2021-08-11' AS DateTime), N'Андрей', N'Андреевский', NULL, 3),
-(5, N'1736656025872241', NULL, CAST(N'2020-08-09' AS DateTime), N'Андрей', N'Андреевский', NULL, 3),
-(6, N'8722173641054006', NULL, CAST(N'2018-10-25' AS DateTime), N'Андрей', N'Андреевский', NULL, 3)
+(1, N'1282237041056833', NULL, CAST(N'2021-11-08' AS DateTime), N'Иван', N'Иванов', NULL, 1),
+(2, N'7309400641159165', NULL, CAST(N'2018-21-05' AS DateTime), N'Иван', N'Иванов', NULL, 1),
+(3, N'6246746369166353', NULL, CAST(N'2019-07-01' AS DateTime), N'Пётр', N'Петров', NULL, 2),
+(4, N'3047580553634127', NULL, CAST(N'2021-11-08' AS DateTime), N'Андрей', N'Андреевский', NULL, 3),
+(5, N'1736656025872241', NULL, CAST(N'2020-09-08' AS DateTime), N'Андрей', N'Андреевский', NULL, 3),
+(6, N'8722173641054006', NULL, CAST(N'2018-25-10' AS DateTime), N'Андрей', N'Андреевский', NULL, 3)
 
 SET IDENTITY_INSERT CreditCards OFF
 

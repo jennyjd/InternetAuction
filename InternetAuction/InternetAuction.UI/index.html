@@ -1,40 +1,39 @@
-﻿<!DOCTYPE html>
-<html>
+﻿<html>
+
 <head>
-    <title></title>
-	<meta charset="utf-8" />
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
-            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-            crossorigin="anonymous"></script>
+    <title>InternetAuction</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
+    <!-- 1. Load libraries -->
+    <!-- Polyfill(s) for older browsers -->
+    <script src="node_modules/core-js/client/shim.min.js"></script>
+    <script src="node_modules/zone.js/dist/zone.js"></script>
+    <script src="node_modules/reflect-metadata/Reflect.js"></script>
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
+
+    <!-- 2. Configure SystemJS -->
+    <script src="systemjs.config.js"></script>
+
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
     <script>
-        $.ajax({
-            url: "http://localhost:21561/api/TestApi/TestMsg",
-            success: function(result){console.log(result)}
-            //xhrFields: {
-            //    withCredentials: true
-            //}
+        System.import('app').catch(function(err) {
+            console.error(err);
         });
-
-        $.ajax({
-            url: "http://localhost:21561/api/TestApi/GetCurrentUser",
-            success: function (result) { console.log(result) },
-            xhrFields: {
-                withCredentials: true
-            }
+    </script>
+    <!--<script>
+        $.get("http://localhost:21561/api/testapi/TestAuthorize", function (data) {
+            alert("Data Loaded: " + data);
         });
-
-        function func() {
-            $.ajax({
-                url: "http://localhost:21561/api/TestApi/TestAuthorize",
-                success: function (result) { console.log(result) },
-                xhrFields: {
-                    withCredentials: true
-                }
-            });
-        }
-        </script>
+    </script>-->
+    <base href="/InternetAuction" />
+    <!--<base href="/" />-->
 </head>
+<!-- 3. Display the application -->
+
 <body>
-    <button onclick="func()">Hello</button>
+    <my-app>Loading...</my-app>
 </body>
+
 </html>

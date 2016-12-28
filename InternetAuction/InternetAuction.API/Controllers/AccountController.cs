@@ -8,6 +8,9 @@ using Microsoft.AspNet.Identity.Owin;
 using Ninject;
 using InternetAuction.API.Repositories.Abstractions;
 using InternetAuction.API.ViewModels.Clients;
+using InternetAuction.API.Models;
+using System;
+using System.Linq;
 
 namespace InternetAuction.API.Controllers
 {
@@ -65,6 +68,35 @@ namespace InternetAuction.API.Controllers
         {
             HttpContext.Current.GetOwinContext().Authentication.SignOut();
             return Ok("SignOut");
+        }
+
+
+        [Authorize(Roles = "Administrator")]
+        [HttpPost]
+        [Route("CreateAdministrator")]
+        public IHttpActionResult CreateAdministrator(AdministratorSignUpVM administrator)
+        {
+            var userManager = HttpContext.Current.GetOwinContext().GetUserManager<InternetAuctionUserManager>();
+            if (userManager.FindByEmail(administrator.Email) != null || userManager.FindByName(administrator.UserName) != null)
+            {
+                return BadRequest("User with this email or user name exists");
+            };
+
+            var identityResult = userManager.Create(new InternetAuctionUser
+            {
+                UserName = administrator.UserName,
+                Email = administrator.Email,
+            }, administrator.Password);
+
+            if (identityResult.Errors.Any())
+            {
+                // TODO: handle identity errors
+                throw new Exception("Identity error");
+            }
+
+            userManager.AddToRole(userManager.FindByName(administrator.UserName).Id, "Administrator");
+
+            return Ok();
         }
     }
 }

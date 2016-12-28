@@ -14,5 +14,23 @@ namespace InternetAuction.API.Repositories.Abstractions
         decimal CheckCurrentUserBet(int auctionId, int clientId);
 
         AuctionHistory AddBet(AuctionHistory auctionHistory);
+
+        IEnumerable<int> GetParticipantsIds(int auctionId);
+
+        object GetAuctionsHistoryForParticipant(int clientId);
+
+        object GetAuctionsHistoryForOwner(int clientId);
+
+        object GetAuctionsHistoryForAuctions();
+
+        decimal CheckCurrentMaxBetNew(int auctionId);
+
+        AuctionHistory CheckCurrentUserBetNew(int auctionId, int clientId);
+
+        object GetAuctionsHistoryForParticipantNew(int clientId);
+
+        object GetAuctionsHistoryForOwnerNew(int clientId);
+
+        IEnumerable<int> GetCurrentAuctionsIdsForParticipantNew(int clientId, int creditCardId);
     }
 }

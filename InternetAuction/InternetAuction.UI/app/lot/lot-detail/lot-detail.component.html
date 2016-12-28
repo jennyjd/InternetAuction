@@ -1,0 +1,88 @@
+﻿<pick-modal *ngIf="modal && isUserAuth" (closeModalEvent)="onCloseModal($event)" [betSum]="model.bet" [fastSell]="[selected_lot.PriceOfFastSell, redeemBool]" [lotId]="selected_lot.Id"></pick-modal>
+<simple-notifications ></simple-notifications>
+<div *ngIf="modal && !isUserAuth">
+    <div id="overlay">
+    </div>
+    <md-card class="modal">
+        <button md-button class="close_button" (click)="changeModal()">
+            <img src="../..{{path}}/assets/icons/clear.svg" />
+        </button>
+        <md-card-title>Вам необходимо <br/>авторизироваться <br/>в системе</md-card-title>
+        <md-card-content layout="row">
+            <button md-raised-button routerLink="/login">Вход</button>
+            <button md-raised-button routerLink="/registration">Регистрация</button>
+        </md-card-content>
+</md-card>
+</div>
+
+<div class="lot_detail_wrap">
+    <div class="lot_information">
+        <md-card class="lotname">
+            <h2>{{selected_lot.Name}}</h2>
+        </md-card>
+        <md-card class="content">
+            <div class="main_information">
+                <div class="images_wrap">
+                    <div class="separator">
+                        <div class="image_viewer center_image">
+                            <span></span><img src="../../..{{path}}/assets/images/lot_photo.jpg" />
+                        </div>
+                        <!--solve vertical align problem (display:inline-flex)-->
+                        <div class="other_images_container">
+                            <!--*ngFor="let image of pictures"-->
+                            <div class="other_images center_image" (click)="changeMainPicture(image)">
+                                <span></span><img src={{image}} />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bet_wrap">
+                    <button md-mini-fab (click)="updateData()" class="update_button" tooltip="Обновить лот" tooltip-position="below">
+                        <img src="../../..{{path}}/assets/icons/update-black-mini.svg" />
+                    </button>
+                    <div *ngIf="!selected_lot.IsCompleted">
+                        <h3>Начальная ставка: {{selected_lot.StartPrice}} {{selected_lot.currencySign}}</h3>
+                        <h3 *ngIf="betDone">Текущая ставка: {{selected_lot.currentBet}} {{selected_lot.currencySign}}</h3>
+                        <p *ngIf="!betDone">Ставок нету</p>
+
+                        <form *ngIf="!lotIsYours" (ngSubmit)="makeBet(bet)">
+                            <md-input placeholder="Ставка" [(ngModel)]="model.bet" #bet="ngModel" name="bet" required></md-input>
+                            <button md-mini-fab style="background-color:#D95154" type="submit" tooltip="Сделать ставку" tooltip-position="below">
+                                <img src="../../..{{path}}/assets/icons/gavel-white.svg" />
+                            </button>
+                        </form>
+                        <div *ngFor="let error of betAmmountErrors" class="alert alert-warning">
+                            {{error}}
+                        </div>
+
+                        <div *ngIf="checkFastSell(selected_lot) && !lotIsYours">
+                            <b>{{selected_lot.PriceOfFastSell}} {{selected_lot.currencySign}}</b>
+                            <button md-raised-button class="redeem_button" (click)="redeem()">Выкупить</button>
+                        </div>
+                        <div *ngIf="checkFastSell(selected_lot) && lotIsYours">
+                            Выкуп: {{selected_lot.PriceOfFastSell}} {{selected_lot.currencySign}}
+                        </div>
+
+                        <h3>Осталось: </h3>                   
+                            {{selected_lot.timeLeft | amDifference: today: 'days'}} дн.
+                            {{(selected_lot.timeLeft | amDifference: today: 'hours') - (selected_lot.timeLeft | amDifference: today: 'days')*24}} ч.   
+                    </div>
+                    <div *ngIf="selected_lot.IsCompleted">
+                        <h3>Аукцион завершён!</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="description">
+                <h3>Состояние:</h3> <p>{{lotState}}</p>
+                <h3>Описание</h3>
+                <p [innerHTML]="selected_lot.Description"></p>
+            </div>
+        </md-card>
+    </div>
+
+    <md-card class="seller_information">
+        <h2>Информация об аукционисте:</h2>
+        <p><b>Логин:</b> {{userInformation.UserName}}</p>
+        <p><b>Адрес эл.почты:</b> {{userInformation.Email}}</p>
+    </md-card>
+</div>

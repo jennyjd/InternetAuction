@@ -1,0 +1,47 @@
+﻿.card-container {
+    display: flex;
+    flex-flow: row wrap;
+    margin: 30px 30px 20px 30px;
+    width: 97%;
+}
+
+/*md-sidenav {
+    width: 200px;
+    height: calc(100% - 64px);
+}
+
+md2-accordion-tab {
+    border-style:none;
+}
+
+md2-accordion-header {
+    color: white;
+}
+
+md-icon {
+    vertical-align:middle;
+}
+
+button {
+    padding-left: 10px;
+    width: 200px;
+    text-align:left;
+}
+
+.menu_list {
+    font-size: 18px;
+    font-weight:normal;
+}
+
+.subcategory {
+    padding-left:25px;
+}
+
+ul {
+    padding-left:0;
+}
+
+li {
+    list-style-type: none; 
+    margin: -16px;
+}*/

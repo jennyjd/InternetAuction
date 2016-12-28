@@ -1,0 +1,81 @@
+﻿.admin-container {
+    width: 80%;
+    min-width: 1000px;
+    margin: 20px auto;
+    margin-bottom: 300px;
+
+}
+
+.lots {
+    display:flex;
+    padding: 0px;
+    margin-top: 2px;
+    border-bottom: 1px solid lightgrey;
+    box-shadow:none;
+}
+
+.information {
+    width: 233px;
+}
+
+.content_container {
+    padding: 12px;
+    display:flex;
+    flex-flow: row wrap;
+}
+
+.title_container {
+    width: 275px;
+    margin: 0px 10px;
+}
+
+.confirm_button {
+    position: absolute;
+    right: 2px;
+    bottom: 4px;
+    color: white;
+    background-color:var(--orange);
+}
+
+p {
+    margin: 4px 0px;
+    font-size: 13px;
+}
+
+md-card-title {
+    font-size: 20px;
+}
+
+md-card-content {
+    margin-bottom: 0px;
+}
+
+.lot_details {
+    position: absolute;
+    right: 40px;
+    top: 15px;
+}
+
+.image_container {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    width: inherit;
+    height: 100px;
+    width: 100px;
+    border: 1px solid white;
+}
+.image_container * {
+    vertical-align: middle;
+}
+
+.image_container img{
+    height: auto; 
+    width: auto; 
+    max-width: 100px; 
+    max-height: 100px;
+}
+
+.red_button {
+    background-color: var(--red);
+}

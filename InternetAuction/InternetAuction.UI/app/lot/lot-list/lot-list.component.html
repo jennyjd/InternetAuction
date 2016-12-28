@@ -1,0 +1,8 @@
+﻿<!--[selected]="selected"-->
+<loading *ngIf="loading"></loading>
+<!--<button md-mini-fab class="back_button" *ngIf="backArrow" (click)="viewAllLots()" tooltip="Все лоты" tooltip-position="below">
+    <img src="../../../assets/icons/backspace-black.svg" />
+</button>-->
+<lot *ngFor="let lotitem of viewLots" [lotitem]="lotitem">
+</lot>
+

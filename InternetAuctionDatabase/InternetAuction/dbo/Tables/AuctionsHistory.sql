@@ -4,8 +4,9 @@
 	[ClientId] INT NOT NULL,
 	[AuctionId] INT NOT NULL,
 	[CreditCardId] INT NOT NULL,
-	[CurrencyId] TINYINT NOT NULL,
-	[Sum] DECIMAL(20, 5) NOT NULL,
+	[CreditCardCurrencyId] TINYINT NOT NULL,
+	[CreditCardSum] DECIMAL(20, 5) NOT NULL,
+	[BetSum] DECIMAL(20, 5) NOT NULL,
 	[Date] DATETIME NOT NULL,
 
 	CONSTRAINT primaryAuctionsHistoryKey PRIMARY KEY ([Id]),
@@ -15,6 +16,6 @@
 		REFERENCES Auctions ([Id]),
 	CONSTRAINT foreignAuctionsHistoryToCreditCardsKey FOREIGN KEY ([CreditCardId])
 		REFERENCES CreditCards ([Id]),
-	CONSTRAINT foreignAuctionsHistoryToCurrenciesKey FOREIGN KEY ([CurrencyId])
+	CONSTRAINT foreignAuctionsHistoryToCurrenciesKey FOREIGN KEY ([CreditCardCurrencyId])
 		REFERENCES Currencies ([Id])
 )

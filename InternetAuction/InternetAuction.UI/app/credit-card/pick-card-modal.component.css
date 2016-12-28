@@ -1,0 +1,73 @@
+﻿#overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background:  grey;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+    z-index: 50;
+    height: 1000px;
+}
+
+.modal {
+    position: absolute;
+    top: 25%;
+    left: 40%;
+    margin: -28px 0 0 -25px;
+    z-index: 999;
+    min-width: 360px;
+}
+
+.close_button {
+    min-width: 24px;
+    padding: 0;
+    position: absolute;
+    right: 16px;
+    top: 16px;
+}
+
+.card-icon {
+    position:absolute;
+    top: 5px;
+}
+
+md-card-actions {
+    text-align: right;
+}
+
+.cardButton {
+    width: 100%;
+    text-align: left;
+}
+
+.cardInf {
+    padding-left: 35px;
+}
+
+.cardNum {
+    padding-left: 35px;
+    font-size: 20px;
+}
+
+.fix_height {
+    height: 30px;
+}
+
+ul {
+    padding-left:0;
+}
+
+.cvv_input {
+    width: 46px;
+}
+
+li {
+    list-style-type: none;
+}
+
+.focus {
+    background-color: #D95154;
+    color: white;
+}

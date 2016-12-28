@@ -11,42 +11,42 @@ namespace Bank.API
             new CreditCard
             {
                 CurrencyId = 1,
-                Cvv = "1234",
+                Cvv = "123",
                 Number = "1282237041056833",
                 Sum = 10000
             },
             new CreditCard
             {
                 CurrencyId = 2,
-                Cvv = "1234",
+                Cvv = "234",
                 Number = "7309400641159165",
                 Sum = 10000
             },
             new CreditCard
             {
                 CurrencyId = 1,
-                Cvv = "1234",
+                Cvv = "789",
                 Number = "6246746369166353",
                 Sum = 1000
             },
             new CreditCard
             {
                 CurrencyId = 1,
-                Cvv = "1234",
+                Cvv = "234",
                 Number = "3047580553634127",
                 Sum = 1000
             },
             new CreditCard
             {
                 CurrencyId = 1,
-                Cvv = "1234",
+                Cvv = "345",
                 Number = "1736656025872241",
                 Sum = 10000000
             },
             new CreditCard
             {
                 CurrencyId = 1,
-                Cvv = "1234",
+                Cvv = "243",
                 Number = "8722173641054006",
                 Sum = 500
             }
@@ -67,7 +67,41 @@ namespace Bank.API
 
         public static bool TakeMoney(decimal sum, string creditCardNumber, string cvv)
         {
-            return creditCards.SingleOrDefault(x => x.Number == creditCardNumber && x.Cvv == cvv && x.Sum >= sum) != null;
+            var creditCard = creditCards.SingleOrDefault(x => x.Number == creditCardNumber && x.Cvv == cvv && x.Sum >= sum);
+            if (creditCard != null)
+            {
+                creditCard.Sum -= sum;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
+        public static bool ReturnMoney(decimal sum, string creditCardNumber)
+        {
+            var creditCard = creditCards.SingleOrDefault(x => x.Number == creditCardNumber);
+            if (creditCard != null)
+            {
+                creditCard.Sum += sum;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
+        public static bool IsValidCreditCard(string creditCardNumber)
+        {
+            if (creditCards.Any(x => x.Number == creditCardNumber))
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

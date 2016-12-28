@@ -5,6 +5,8 @@ using System.Linq;
 using System.Web;
 using InternetAuction.API.Models;
 using InternetAuction.API.DbContext;
+using Ninject;
+using InternetAuction.API.Services;
 
 namespace InternetAuction.API.Repositories
 {
@@ -13,19 +15,55 @@ namespace InternetAuction.API.Repositories
         private readonly InternetAuctionDbContext _context;
 
 
+        [Inject]
+        public IAuctionsHistoryRepository AuctionsHistoryRepository { get; set; }
+
+        [Inject]
+        public IAuctionsResultsRepository AuctionsResultsRepository { get; set; }
+
+
         public AuctionsRepository()
         {
             _context = new InternetAuctionDbContext();
         }
 
 
-        private void CheckIfAuctionsCompleted(IEnumerable<Auction> auctions)
+        private void CheckIfAuctionsCompleted(IEnumerable<Auction> auctions, bool forseCompleteAuction = false)
         {
-            foreach(var auction in auctions)
+            foreach (var auction in auctions)
             {
-                // TODO: check winner
-                if (auction.EndDate <= DateTime.Now && !auction.IsCompleted)
+                if (forseCompleteAuction)
                 {
+                    auction.EndDate = DateTime.Now;
+                }
+                // TODO: check winner
+                if (auction.EndDate <= DateTime.Now && !auction.IsCompleted || forseCompleteAuction)
+                {
+                    var clientsIds = AuctionsHistoryRepository.GetParticipantsIds(auction.Id);
+                    /*
+                     * clientId
+                     * creditCardId
+                     * SumId
+                     */
+
+                    foreach (var id in clientsIds)
+                    {
+                        AuctionsResultsRepository.AddAuctionResult(new AuctionResult
+                        {
+                            ClientId = id,
+                            AuctionId = auction.Id,
+                            IsSeenResult = false
+                        });
+                    }
+                    AuctionsResultsRepository.AddAuctionResult(new AuctionResult
+                    {
+                        ClientId = auction.ClientId,
+                        AuctionId = auction.Id,
+                        IsSeenResult = false,
+                        // CheckCurrentMaxBet
+                        ChargeFromWin = AuctionsHistoryRepository.CheckCurrentMaxBetNew(auction.Id) * Constants.CHARGE_FROM_WIN
+                    });
+
                     auction.IsCompleted = true;
                 }
             }
@@ -55,6 +93,16 @@ namespace InternetAuction.API.Repositories
             _context.Auctions.Add(auction);
             _context.SaveChanges();
             return GetAuction(auction.Id);
+        }
+
+
+        public Auction CompleteAuction(int auctionId)
+        {
+            var updatedAuction = _context.Auctions.SingleOrDefault(x => x.Id == auctionId);
+            //updatedAuction.IsCompleted = true;
+            CheckIfAuctionsCompleted(new List<Auction> { updatedAuction }, true);
+            _context.SaveChanges();
+            return updatedAuction;
         }
 
 

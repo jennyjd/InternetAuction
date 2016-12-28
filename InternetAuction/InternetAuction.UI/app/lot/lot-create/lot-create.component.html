@@ -1,0 +1,121 @@
+﻿<md-card class="create_wrap">
+    <form (ngSubmit)="createLot(startPrice, fastSell)">
+        
+        <div class="image_uploader">
+            <div class="separator">
+                <div class="image_viewer center_image">
+                    <span></span><img src="../../..{{path}}/assets/images/lot_photo.jpg" />
+                </div>
+                <!--solve vertical align problem (display:inline-flex)-->
+                <div class="other_images_container">
+                    <div *ngFor="let image of pictures" class="other_images center_image" (click)="changeMainPicture(image)">
+                        <span></span><img src={{image}}/>
+                    </div>
+                </div>
+            </div>
+            <div class="separator">
+                <div class="name_wrap">
+                    <md-input placeholder="Название лота" maxlength="40" [(ngModel)]="lot.name" name="name" #name required>
+                        <md-hint>{{name.characterCount}} / 40</md-hint>
+                    </md-input>
+                </div>
+                <!--<image-upload [max]="5"
+                              [url]="'example.com/images/upload'"
+                              [buttonCaption]="'Добавить фото'"
+                              [dropBoxMessage]="'Перетащите ваши фото сюда'"
+                              (onFileUploadFinish)="imageUploaded($event)"
+                              (onRemove)="imageRemoved($event)"
+                              (isPending)="disableSendButton($event)">
+                </image-upload>-->
+                <!--<div>
+                    <button md-icon-button class="md-mini md-primary" aria-label="view">
+                        <md-icon>delete forever</md-icon>
+                    </button>
+                </div>-->
+            </div>
+        </div>
+
+        <div class="main_inf">
+            <h3>Основная информация</h3>
+            <md-input placeholder="Начальная цена" [(ngModel)]="lot.startPrice" name="startPrice" #startPrice="ngModel" required pattern="[0-9]+"></md-input>
+            <div *ngIf="startPrice.errors && startPrice.dirty">
+                <div [hidden]="!startPrice.errors.pattern" class="alert alert-warning">
+                    Данное поле должно быть числом
+                </div>
+            </div>
+
+            <md-input placeholder="Стоимость выкупа" [(ngModel)]="lot.fastSell" name="fastSell" #fastSell="ngModel" pattern="^$|[0-9]+"></md-input>
+            <div *ngIf="fastSell.errors && fastSell.dirty">
+                <div [hidden]="!fastSell.errors.pattern" class="alert alert-warning">
+                    Данное поле должно быть числом
+                </div>
+            </div>
+
+            <div *ngFor="let error of priceErrors" class="alert alert-warning">
+                {{error}}
+            </div>
+
+            <md2-select [(ngModel)]="lot.stateId" placeholder="Состояние" name="stateId" #stateId required>
+                <md2-option [value]="st.Id" *ngFor="let st of lotState">{{st.Name}}</md2-option>
+            </md2-select>
+
+            <md2-select [(ngModel)]="lot.currencyId" placeholder="Валюта" name="currencyId" #currencyId required>
+                <md2-option *ngFor="let curr of currency" [value]="curr.Id">{{curr.ShortName}}</md2-option>
+            </md2-select>
+
+            <md2-datepicker [(ngModel)]="lot.endDate"
+                            name="endDate"
+                            placeholder="Время окончания"
+                            #endDate
+                            [min]="minDate"
+                            [max]=""
+                            type="datetime"
+                            style="width: 95%"
+                            format="DD/MM/YYYY HH:mm"
+                            required>
+            </md2-datepicker>
+        </div>
+
+        <h3>Выбор категорий</h3>
+        <div class="select_categories">
+            <div class="category_wrap">
+                <ul>
+                    <li *ngFor="let category of categories" class="parent-list-item">
+                        <div *ngIf="isNotSubcategory(category)">
+                            <button type="button" md-button focus (click)="toggle(category)">
+                                <div flex layout="row">
+                                    <b>{{category.Name}}</b>
+                                    <img src="/../..{{path}}/assets/icons/keyboard_arrow_down-black.svg" />
+                                </div>
+                            </button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="subcategory_wrap">
+                <ul *ngIf="ifCategoryIsSelected()">
+                    <li *ngFor="let sub of selected_category.SubAuctionCategories">
+                        <button type="button" md-button class="subcategory" value="{{sub.Name}}" (click)="chooseCategory(sub.Id)" [class.focus]="categoryFocus[sub.Id]">
+                            <div flex layout="row">
+                                {{sub.Name}}
+                            </div>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div *ngIf="categoryError" class="alert alert-warning">
+            Выберите категорию
+        </div>
+
+        <h3>Описание лота</h3>
+        <textarea [(ngModel)]="lot.description" name="description" #description required></textarea>
+
+        <div *ngIf="categoryError || priceErrors.length != 0" class="alert alert-error">Проверьте корректность введенных данных</div>
+
+        <md-card-actions layout="row">
+            <button md-raised-button type="submit" style="float:right" class="red_button">Добавить лот</button>
+        </md-card-actions>
+    </form>
+</md-card>

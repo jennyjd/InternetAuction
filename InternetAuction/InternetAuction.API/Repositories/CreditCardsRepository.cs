@@ -5,12 +5,17 @@ using System.Linq;
 using System.Web;
 using InternetAuction.API.Models;
 using InternetAuction.API.DbContext;
+using Ninject;
 
 namespace InternetAuction.API.Repositories
 {
     public class CreditCardsRepository : ICreditCardsRepository
     {
         private readonly InternetAuctionDbContext _context;
+
+
+        [Inject]
+        public IAuctionsHistoryRepository AuctionsHistoryRepository { get; set; }
 
 
         public CreditCardsRepository()
@@ -25,9 +30,9 @@ namespace InternetAuction.API.Repositories
         }
 
 
-        public ICollection<CreditCard> GetCreditCards()
+        public ICollection<CreditCard> GetCreditCards(bool withRemoved = false)
         {
-            return _context.CreditCards.ToList();
+            return _context.CreditCards.Where(x => x.IsRemoved != true || withRemoved).ToList();
         }
 
 
@@ -36,6 +41,22 @@ namespace InternetAuction.API.Repositories
             _context.CreditCards.AddRange(creditCards);
             _context.SaveChanges();
             return creditCards.ToList();
+        }
+
+
+        public CreditCard RemoveCreditCards(int creditCardId)
+        {
+            var creditCard = _context.CreditCards.SingleOrDefault(x => x.Id == creditCardId);
+
+            var auctionHistories = AuctionsHistoryRepository.GetCurrentAuctionsIdsForParticipantNew(creditCard.ClientId, creditCardId);
+            if (auctionHistories == null || auctionHistories.Any())
+            {
+                return null;
+            }
+
+            creditCard.IsRemoved = true;
+            _context.SaveChanges();
+            return creditCard;
         }
     }
 }

@@ -1,0 +1,23 @@
+﻿<md-card>
+    <h2>Регистрация администратора</h2>
+    <form (ngSubmit)="register()">
+        <md-input placeholder="Логин" [(ngModel)]="userModel.login" #login="ngModel" required name="login" pattern="^[A-Za-z]+[A-Za-z0-9_]*$"></md-input>
+        <div *ngIf="login.errors && login.dirty">
+            <div [hidden]="!login.errors.pattern" class="alert alert-warning">
+                Логин должен начинаться с буквы. Содержать буквы латинского алфавита, цифры и "_"
+            </div>
+        </div>
+
+        <md-input type="email" placeholder="Адрес электронной почты" [(ngModel)]="userModel.email" #email="ngModel" required name="email"></md-input>
+
+        <md-input type="password" placeholder="Пароль" [(ngModel)]="userModel.password" #password="ngModel" required name="password" minlength="6"></md-input>
+        <md-input type="password" placeholder="Повторите пароль" [(ngModel)]="userModel.password2" #password2="ngModel" required name="password2" minlength="6"></md-input>
+        <div *ngIf="password2.dirty">
+            <div *ngIf="userModel.password != userModel.password2" class="alert alert-warning">
+                Пароли не совпадают!
+            </div>
+        </div>
+
+        <button md-raised-button type="submit" class="submit_button red_button">Зарегистрировать</button>
+    </form>
+</md-card>

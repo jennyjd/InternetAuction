@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -20,6 +21,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
+    <TypeScriptToolsVersion>2.0</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -58,6 +60,64 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\admin\admin-registration\admin-registration.component.css" />
+    <Content Include="app\admin\admin-registration\admin-registration.component.html" />
+    <Content Include="app\admin\admin.component.css" />
+    <Content Include="app\admin\admin.component.html" />
+    <Content Include="app\app.component.css" />
+    <Content Include="app\app.component.html" />
+    <Content Include="app\credit-card\pick-card-modal.component.css" />
+    <Content Include="app\credit-card\pick-card-modal.component.html" />
+    <Content Include="app\home\home.component.css" />
+    <Content Include="app\home\home.component.html" />
+    <Content Include="app\loading\loading.component.css" />
+    <Content Include="app\loading\loading.component.html" />
+    <Content Include="app\login\login.component.css" />
+    <Content Include="app\login\login.component.html" />
+    <Content Include="app\lot\lot-create\lot-create.component.css" />
+    <Content Include="app\lot\lot-create\lot-create.component.html" />
+    <Content Include="app\lot\lot-detail\lot-detail.component.css" />
+    <Content Include="app\lot\lot-detail\lot-detail.component.html" />
+    <Content Include="app\lot\lot-list-view.component.css" />
+    <Content Include="app\lot\lot-list-view.component.html" />
+    <Content Include="app\lot\lot-list\lot-list.component.css" />
+    <Content Include="app\lot\lot-list\lot-list.component.html" />
+    <Content Include="app\lot\lot-statistics\lot-statistics.component.css" />
+    <Content Include="app\lot\lot-statistics\lot-statistics.component.html" />
+    <Content Include="app\lot\lot.component.css" />
+    <Content Include="app\lot\lot.component.html" />
+    <Content Include="app\registration\registration.component.css" />
+    <Content Include="app\registration\registration.component.html" />
+    <Content Include="app\user\user-detail\user-detail.component.css" />
+    <Content Include="app\user\user-detail\user-detail.component.html" />
+    <Content Include="assets\icons\add-white.svg" />
+    <Content Include="assets\icons\autorenew-black.svg" />
+    <Content Include="assets\icons\autorenew-white.svg" />
+    <Content Include="assets\icons\backspace-black.svg" />
+    <Content Include="assets\icons\clear-white.svg" />
+    <Content Include="assets\icons\clear.svg" />
+    <Content Include="assets\icons\create-white.svg" />
+    <Content Include="assets\icons\delete-white-mini.svg" />
+    <Content Include="assets\icons\done-white.svg" />
+    <Content Include="assets\icons\gavel-white.svg" />
+    <Content Include="assets\icons\home-white.svg" />
+    <Content Include="assets\icons\info-black-mini.svg" />
+    <Content Include="assets\icons\keyboard_arrow_down-black.svg" />
+    <Content Include="assets\icons\payment-black.svg" />
+    <Content Include="assets\icons\payment-white.svg" />
+    <Content Include="assets\icons\person-white.svg" />
+    <Content Include="assets\icons\search-white-mini.svg" />
+    <Content Include="assets\icons\update-black-mini.svg" />
+    <Content Include="assets\icons\visibility-white.svg" />
+    <Content Include="assets\images\logo.png" />
+    <Content Include="assets\images\lot_photo.jpg" />
+    <Content Include="index.html" />
+    <Content Include="package.json" />
+    <Content Include="style.css" />
+    <Content Include="typings.json" />
+    <Content Include="tsconfig.json" />
+    <Content Include="packages.config" />
+    <None Include="Properties\PublishProfiles\InternetAuctionUI.pubxml" />
     <None Include="Web.Debug-Jan.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -72,11 +132,44 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="index.html" />
+    <Content Include="systemjs.config.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <TypeScriptCompile Include="app\admin\admin-registration\admin-registration.component.ts" />
+    <TypeScriptCompile Include="app\admin\admin.component.ts" />
+    <TypeScriptCompile Include="app\app.component.ts" />
+    <TypeScriptCompile Include="app\app.module.ts" />
+    <TypeScriptCompile Include="app\app.routing.ts" />
+    <TypeScriptCompile Include="app\credit-card\credit-card.service.ts" />
+    <TypeScriptCompile Include="app\credit-card\credit-card.ts" />
+    <TypeScriptCompile Include="app\credit-card\pick-card-modal.component.ts" />
+    <TypeScriptCompile Include="app\general.service.ts" />
+    <TypeScriptCompile Include="app\globals.ts" />
+    <TypeScriptCompile Include="app\home\home.component.ts" />
+    <TypeScriptCompile Include="app\loading\loading.component.ts" />
+    <TypeScriptCompile Include="app\login\login.component.ts" />
+    <TypeScriptCompile Include="app\login\login.service.ts" />
+    <TypeScriptCompile Include="app\lot\lot-create\lot-create.component.ts" />
+    <TypeScriptCompile Include="app\lot\lot-detail\lot-detail.component.ts" />
+    <TypeScriptCompile Include="app\lot\lot-list\lot-list.component.ts" />
+    <TypeScriptCompile Include="app\lot\lot-statistics\lot-statistics.component.ts" />
+    <TypeScriptCompile Include="app\lot\lot.component.ts" />
+    <TypeScriptCompile Include="app\lot\lot.service.ts" />
+    <TypeScriptCompile Include="app\lot\lot.ts" />
+    <TypeScriptCompile Include="app\main.ts" />
+    <TypeScriptCompile Include="app\registration\registration.component.ts" />
+    <TypeScriptCompile Include="app\shared.service.ts" />
+    <TypeScriptCompile Include="app\user\user-detail\user-detail.component.ts" />
+    <TypeScriptCompile Include="app\user\user.service.ts" />
+    <TypeScriptCompile Include="app\user\user.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -101,6 +194,7 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <ProjectExtensions>

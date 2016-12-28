@@ -1,0 +1,117 @@
+﻿md-toolbar button {
+    font-size: 20px;
+}
+
+.orange_button {
+    background-color: var(--orange);
+}
+
+.red_button {
+    background-color: var(--red);
+}
+
+.logo_wrap{
+    width: 90%;
+    padding: 20px 10px;
+    text-align: center;
+    border-bottom: 1px solid #333333;
+}
+
+.search_button {
+    float: right;
+    border-radius: 0px 4px 4px 0px;
+    height: 33px;
+    width: 33px;
+}
+
+md-sidenav {
+    width: 225px;
+    height: 100%;
+}
+
+md2-accordion-tab {
+    border-style:none;
+}
+
+md2-accordion-header {
+    color: white;
+}
+
+md-icon {
+    vertical-align:middle;
+}
+
+md2-accordion button {
+    width: 200px;
+    text-align:left;
+}
+
+.menu_list {
+    font-size: 18px;
+    font-weight:normal;
+}
+
+.right {
+    position: absolute;
+    right: 16px;
+}
+
+#search_input {
+    border: none;
+    font-size: 15px;
+    padding: 5px 8px;
+    border-radius: 4px;
+    height: 33px;
+}
+
+input:focus {
+    outline: none;
+}
+
+.search_form {
+    background-color: white;
+    width: 270px;
+    border-radius: 4px;
+    margin-left: 40px;
+    height: 33px;
+}
+
+.user_login {
+    font-size: 13px !important;
+    min-width: 0;
+    bottom: 5px;
+    padding: 0;
+}
+
+.user_login:hover::after{
+    background-color: transparent !important;
+}
+
+.notif_icon {
+    position: absolute;
+    right: 5px;
+    top: 32px;
+    width: 20px;
+    height: 20px;
+    font-size: 13px !important;
+    line-height: 1;
+    vertical-align: middle;
+}
+
+.subcategory {
+    padding-left:25px;
+    width: 100% !important;
+}
+
+.focus {
+    background-color: var(--red);
+    color: white;
+}
+
+ul {
+    padding-left:0;
+}
+
+li {
+    list-style-type: none; 
+}

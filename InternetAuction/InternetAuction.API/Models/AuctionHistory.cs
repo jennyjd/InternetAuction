@@ -15,9 +15,11 @@ namespace InternetAuction.API.Models
 
         public int CreditCardId { get; set; }
 
-        public byte CurrencyId { get; set; }
+        public byte CreditCardCurrencyId { get; set; }
 
-        public decimal Sum { get; set; }
+        public decimal CreditCardSum { get; set; }
+
+        public decimal BetSum { get; set; }
 
         public DateTime Date { get; set; }
     }

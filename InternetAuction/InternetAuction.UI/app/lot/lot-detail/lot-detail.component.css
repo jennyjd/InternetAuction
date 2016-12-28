@@ -1,0 +1,141 @@
+﻿#overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background:  grey;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+    z-index: 50;
+}
+
+.redeem_button {
+    background-color: var(--orange);
+    margin: 0px 15px;
+    color: white;
+}
+
+.close_button {
+    min-width: 24px;
+    padding: 0;
+    position: absolute;
+    right: 16px;
+    top: 16px;
+}
+
+.modal {
+    position: absolute;
+    top: 25%;
+    left: 40%;
+    margin: -28px 0 0 -25px;
+    z-index: 999;
+}
+
+.lot_detail_wrap {
+    margin: 16px auto;
+    padding:0;
+    display: flex;
+    width: 70%;
+    min-width: 940px;
+}
+
+.content {
+    display:flex;
+    min-height: 350px;
+    flex-flow: row wrap;
+}
+
+.images_wrap {
+    width:50%;
+}
+
+.alert {
+    border: 1px solid;
+    border-radius: 0.2em;
+    padding: 5px;
+    font-size: 12px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.alert-warning {
+    border-color: #ffb366;
+    background-color: #ffe6cc;
+}
+
+.update_button {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    background-color: white;
+    width: 30px;
+    height: 30px;
+}
+
+.main_information {
+    width: 100%;
+    height: 375px;
+    display: inline-flex;
+    border-bottom: 1px solid lightgrey;
+}
+
+.bet_wrap {
+    width: 50%;
+    padding: 0px 24px;
+}
+
+.lot_information {
+    width: 75%;
+    margin-right:5px;
+}
+
+.lotname {
+    margin-bottom:3px;
+    padding: 8px 24px;
+    min-height: 50px;
+    font-size: 18px;
+    text-align:end;
+}
+
+.seller_information {
+    width:25%;
+    min-height: 300px;
+}
+
+.separator {
+    margin: 0px 5px 0px 5px;
+    flex-flow: row wrap;
+    text-align: -webkit-center;
+}
+
+.other_images_container {
+    display:inline-flex;
+}
+
+.center_image {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.center_image *{
+    vertical-align: middle;
+}
+
+.center_image img {
+    height: auto;
+    width: auto;
+}
+
+.image_viewer {
+    margin: 0px 50px;
+    height: 267px;
+    width: 267px;
+    border: 1px solid lightgrey;
+    border-radius: 3px;
+}
+
+.image_viewer * {
+    vertical-align: middle;
+}

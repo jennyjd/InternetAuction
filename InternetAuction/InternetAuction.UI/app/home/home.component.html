@@ -1,0 +1,43 @@
+﻿<!--<md-sidenav-layout>
+    <md-sidenav mode="side" opened="true" style="background-color:#424242; color:#FAFAFA;">
+        <!--<ul>
+            <li *ngFor="let menuel of menu" class="parent-list-item">
+                <div *ngIf="isNotSubcategory(menuel)">
+                    <button md-button md-raised md-ink-ripple (click)="toggle(menuel)">
+                        <div flex layout="row" class="menu_list">
+                            {{menuel.Name}}
+                            <md-icon>keyboard_arrow_down</md-icon>
+                        </div>
+                    </button>
+                </div>
+                <ul *ngIf="menuel.status == false">
+                    <li *ngFor="let sub of menuel.SubAuctionCategories">
+                        <button md-button focus md-ink-ripple md-raised class="subcategory" (click)="selectCategory(sub)">
+                            <div flex layout="row">
+                                {{sub.Name}}
+                            </div>
+                        </button>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+        <md2-accordion [multiple]="multiple" *ngFor="let menuel of menu">
+            <md2-accordion-tab *ngIf="isNotSubcategory(menuel)">
+                <md2-accordion-header>{{menuel.Name}}</md2-accordion-header>
+                <li *ngFor="let sub of menuel.SubAuctionCategories">
+                    <button md-button focus md-ink-ripple md-raised class="subcategory" (click)="selectCategory(sub)">
+                        {{sub.Name}}
+                     </button>
+                </li>
+            </md2-accordion-tab>
+        </md2-accordion>
+
+    </md-sidenav>-->
+    <div class="content">
+        <!--[selected]="selected_category"-->
+        <lot-list class="card-container">
+        </lot-list>
+    </div>
+<!--</md-sidenav-layout>-->
+

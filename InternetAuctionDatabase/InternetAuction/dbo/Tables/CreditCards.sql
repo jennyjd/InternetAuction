@@ -8,6 +8,7 @@
 	[OwnerLastName] NVARCHAR(50) NOT NULL,
 	[CurrencyId] TINYINT NULL,
 	[ClientId] INT NOT NULL,
+	[IsRemoved] BIT NULL,
 
 	CONSTRAINT [primaryCreditCardKey] PRIMARY KEY ([Id]),
 	CONSTRAINT [foreignCreditCardsToClientsKey] FOREIGN KEY([ClientId])

@@ -1,0 +1,58 @@
+﻿<md-card class="admin-container">
+    <h3>ИНФОРМАЦИЯ О ЛОТАХ</h3>
+    <md-tab-group>
+        <md-tab *ngFor="let menuel of menu">
+            <template md-tab-label>
+                <div (click)="changeViewLots(menuel)">{{menuel}}</div>
+            </template>
+            <template md-tab-content>
+                <md-card *ngFor="let lot of viewLots" class="lots">
+                    <div class="image_container">
+                        <span></span> <img src="..{{path}}/../assets/images/lot_photo.jpg" class="md-card-image">
+                    </div>
+                    <div class="content_container">
+                        <div class="title_container">
+                            <md-card-title>{{lot.Auction.Name}}</md-card-title>
+                        </div>
+
+                        <div class="information">
+                            <p>Владелец: {{lot.Owner.UserName}}</p>
+                            <p> {{lot.Owner.Email}}</p>
+                            <p>Дата начала: {{lot.Auction.StartDate}}</p>
+                            <div *ngIf="!completedTab">
+                                <p>
+                                    Осталось:
+                                    {{lot.Auction.EndDate | amDifference: today: 'days'}} дн.
+                                    {{(lot.Auction.EndDate | amDifference: today: 'hours') - (lot.Auction.EndDate | amDifference: today: 'days')*24}} ч.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="information">
+                            <div *ngIf="!completedTab">
+                                <div *ngIf="lot.betDone">
+                                    <p>Текущая ставка: {{lot.MaxBet}} {{lot.Auction.currencySign}}</p>
+                                    <p>Пользователь: {{lot.Customer.UserName}}</p>
+                                    <p>{{lot.Customer.Email}}</p>
+                                    <p>Дата последней ставки: {{lot.BetDate}}</p>
+                                </div>
+                                <p *ngIf="!lot.betDone">Ставок нету</p>
+                            </div>
+                            <div *ngIf="completedTab">
+                                <p *ngIf="!lot.betDone">Аукцион не был проведен успешно!</p>
+                                <div *ngIf="lot.betDone">
+                                    <p>Выиграл: {{lot.Customer.UserName}}</p>
+                                    <p>{{lot.Customer.Email}}</p>
+                                    <p>Выкуп: {{lot.MaxBet}} {{lot.Auction.currencySign}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!--<button md-mini-fab class="lot_details red_button" (click)="view_details(lotitem)" tooltip="Подробнее" tooltip-position="below">
+                            <img src="../../assets/icons/visibility-white.svg" />
+                        </button>  -->
+                    </div>
+                </md-card>
+            </template>
+        </md-tab>
+    </md-tab-group>
+</md-card>
