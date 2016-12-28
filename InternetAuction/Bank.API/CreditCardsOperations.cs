@@ -53,9 +53,9 @@ namespace Bank.API
         };
 
 
-        public static bool CheckCreditCard()
+        public static CreditCard GetCreditCard(string number)
         {
-            return true;
+            return creditCards.SingleOrDefault(x => x.Number == number);
         }
 
 
