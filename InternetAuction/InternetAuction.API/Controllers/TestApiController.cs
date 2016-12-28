@@ -16,6 +16,7 @@ using InternetAuction.API.Infrastructure.Swagger;
 using InternetAuction.API.Infrastructure.Swagger.Examples;
 using Swashbuckle.Swagger.Annotations;
 using Microsoft.AspNet.Identity;
+using Bank.API;
 
 namespace InternetAuction.API.Controllers
 {
@@ -39,6 +40,13 @@ namespace InternetAuction.API.Controllers
                 .FindById(HttpContext.Current.User.Identity.GetUserId());
 
             return Ok(user);
+        }
+
+
+        [HttpPost]
+        public IHttpActionResult GetCreditCreditCardFromBank(string number)
+        {
+            return Ok(CreditCardsOperations.GetCreditCard(number));
         }
 
 
