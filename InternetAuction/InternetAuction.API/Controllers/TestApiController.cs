@@ -20,6 +20,7 @@ using Bank.API;
 
 namespace InternetAuction.API.Controllers
 {
+    [RoutePrefix("api/TestApi")]
     public class TestApiController : ApiController
     {
         [Inject]
@@ -44,7 +45,8 @@ namespace InternetAuction.API.Controllers
 
 
         [HttpPost]
-        public IHttpActionResult GetCreditCreditCardFromBank(string number)
+        [Route("GetCreditCardFromBank/{number}")]
+        public IHttpActionResult GetCreditCardFromBank(string number)
         {
             return Ok(CreditCardsOperations.GetCreditCard(number));
         }
