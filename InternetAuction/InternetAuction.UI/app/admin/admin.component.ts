@@ -36,7 +36,7 @@ export class AdminComponent implements AfterViewInit {
     getAllHistory() {
         this.lotService.getAllHistory()
             .subscribe(res => {
-                this.viewLots = res;
+                //this.viewLots = res;
                 for (let lot of res) {
                     if (lot.MaxBet != 0) {
                         lot.betDone = true;

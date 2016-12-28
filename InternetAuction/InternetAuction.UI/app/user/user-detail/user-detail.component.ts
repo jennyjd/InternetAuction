@@ -39,6 +39,8 @@ export class UserDetailsComponent {
     newCardModel: any = {};
     userCreditCards: CreditCard[] = [];
 
+    cantDeleteCard: boolean = false;
+
     pass: any = {};
     lot: any;
 
@@ -118,11 +120,19 @@ export class UserDetailsComponent {
                          }
                      }*/
                 },
-                error => this.errorMessage = <any>error);
+                error => {
+                    //this.errorMessage = <any>error;
+                    this.cantDeleteCard = true;
+                    //this.successNewLotAddedNotif();
+                });
         }
         else {
             this.successNewLotAddedNotif();
         }
+    }
+
+    click() {
+        this.cantDeleteCard = false;
     }
 
     successNewLotAddedNotif() {

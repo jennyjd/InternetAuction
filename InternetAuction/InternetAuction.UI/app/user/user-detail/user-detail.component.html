@@ -103,7 +103,7 @@
                 <div class="content">
                     <div class="card_handler">
                         <md2-accordion *ngFor="let card of userCreditCards">
-                            <md2-accordion-tab>
+                            <md2-accordion-tab (click)="click()">
                                 <md2-accordion-header>
                                     <div class="card-icon">
                                         <img src="../../..{{path}}/assets/icons/payment-black.svg" />
@@ -120,6 +120,9 @@
                                         <div class="mar_divs">{{card.owner}}</div>
                                         <div class="mar_divs">{{card.validMonth}}/{{card.validYear}}</div>
                                     </div>
+                                </div>
+                                <div *ngIf="cantDeleteCard" class="alert alert-error">
+                                    Невозможно удалить карту так как она учавствует в аукционе
                                 </div>
                                 <button md-mini-fab class="delete_card red_button" (click)="deleteCard(card.id)" tooltip="Удалить" tooltip-position="below">
                                     <img src="../../..{{path}}/assets/icons/delete-white-mini.svg" />
